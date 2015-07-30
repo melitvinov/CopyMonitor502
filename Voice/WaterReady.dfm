@@ -1,0 +1,404 @@
+object FWater: TFWater
+  Left = 269
+  Top = 193
+  Width = 353
+  Height = 612
+  Caption = #1042#1086#1076#1086#1087#1086#1076#1075#1086#1090#1086#1074#1082#1072
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object GridWater: TtsGrid
+    Left = 0
+    Top = 233
+    Width = 345
+    Height = 345
+    Align = alClient
+    AlwaysShowEditor = False
+    CellSelectMode = cmNone
+    CheckBoxStyle = stCheck
+    ColMoving = False
+    Cols = 2
+    ColSelectMode = csNone
+    DefaultColWidth = 75
+    DefaultRowHeight = 18
+    DrawOverlap = doDrawRowOnTop
+    ExportDelimiter = ','
+    FixedColCount = 1
+    FixedLineColor = clTeal
+    FixedRowCount = 1
+    FocusBorder = fbNone
+    FocusColor = clInactiveCaptionText
+    FocusBorderColor = clBlack
+    FocusFontColor = clTeal
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial'
+    Font.Style = []
+    GridMode = gmBrowse
+    HeadingHorzAlignment = htaCenter
+    HeadingColor = clInfoBk
+    HeadingFont.Charset = RUSSIAN_CHARSET
+    HeadingFont.Color = clTeal
+    HeadingFont.Height = -12
+    HeadingFont.Name = 'Arial'
+    HeadingFont.Style = [fsBold, fsItalic]
+    HeadingHeight = 50
+    HeadingOn = False
+    HeadingParentFont = False
+    HeadingVertAlignment = vtaCenter
+    HorzAlignment = htaCenter
+    ParentFont = False
+    ParentShowHint = False
+    ResizeColsInGrid = True
+    ResizeRows = rrSingle
+    ResizeRowsInGrid = True
+    RowBarOn = False
+    RowBarWidth = 9
+    Rows = 2
+    RowSelectMode = rsNone
+    SelectionColor = clInactiveCaptionText
+    SelectionFontColor = clTeal
+    SelectionType = sltInvert
+    ShowHint = False
+    StoreData = True
+    TabOrder = 0
+    ThumbTracking = True
+    Version = '3.01.07'
+    VertAlignment = vtaTop
+    WordWrap = wwOn
+    XMLExport.Version = '1.0'
+    XMLExport.DataPacketVersion = '2.0'
+    ColProperties = <
+      item
+        DataCol = 1
+        Col.Color = clInfoBk
+        Col.HorzAlignment = htaLeft
+        Col.Width = 215
+      end>
+    RowProperties = <
+      item
+        DataRow = 1
+        DisplayRow = 1
+        Row.Color = clInfoBk
+        Row.Font.Charset = RUSSIAN_CHARSET
+        Row.Font.Color = clTeal
+        Row.Font.Height = -11
+        Row.Font.Name = 'Arial'
+        Row.Font.Style = [fsBold]
+        Row.Height = 16
+        Row.HorzAlignment = htaCenter
+        Row.ParentFont = False
+        Row.VertAlignment = vtaCenter
+      end>
+    Data = {0000000000000000}
+  end
+  object FPanel1: TFPanel
+    Left = 0
+    Top = 0
+    Width = 345
+    Height = 233
+    Align = alTop
+    ParentBackground = False
+    TabOrder = 1
+    object FBox2: TFBox
+      Tag = 13029
+      Left = 120
+      Top = 34
+      Width = 9
+      Height = 104
+      Memory = True
+      ControlStyle = [csOpaque]
+    end
+    object FBox1: TFBox
+      Tag = 10001
+      Left = 104
+      Top = 16
+      Width = 193
+      Height = 20
+      ControlStyle = [csOpaque]
+    end
+    object FBox3: TFBox
+      Tag = 12009
+      Left = 238
+      Top = 35
+      Width = 9
+      Height = 94
+      ControlStyle = [csOpaque]
+    end
+    object FBox11: TFBox
+      Tag = 13024
+      Left = 49
+      Top = 115
+      Width = 6
+      Height = 30
+      ControlStyle = [csOpaque]
+    end
+    object FBox13: TFBox
+      Tag = 10001
+      Left = 53
+      Top = 115
+      Width = 21
+      Height = 6
+      ControlStyle = [csOpaque]
+    end
+    object FPicLabel11: TFPicLabel
+      Left = 73
+      Top = 95
+      Width = 32
+      Height = 32
+      AutoSize = False
+      Images = FMain.ILTools
+      ImageIndex = 7
+      Transparent = True
+      MargLeft = 0
+      MargTop = 0
+      MargTextTop = 0
+      ParentColor = False
+    end
+    object FBox18: TFBox
+      Tag = 10030
+      Left = 96
+      Top = 115
+      Width = 70
+      Height = 6
+      Memory = True
+      ControlStyle = [csOpaque]
+    end
+    object Gauge3: TGauge
+      Tag = 36
+      Left = 71
+      Top = 74
+      Width = 27
+      Height = 15
+      BackColor = clBtnFace
+      ForeColor = clAqua
+      Kind = gkVerticalBar
+      ParentShowHint = False
+      Progress = 50
+      ShowHint = True
+    end
+    object FBox23: TFBox
+      Tag = 13001
+      Left = 160
+      Top = 82
+      Width = 6
+      Height = 35
+      ControlStyle = [csOpaque]
+    end
+    object FPicLabel8: TFPicLabel
+      Left = 143
+      Top = 65
+      Width = 32
+      Height = 32
+      AutoSize = False
+      Images = FMain.ILTools
+      ImageIndex = 8
+      Transparent = True
+      MargLeft = 0
+      MargTop = 0
+      MargTextTop = 0
+      ParentColor = False
+    end
+    object FBox20: TFBox
+      Tag = 11003
+      Left = 200
+      Top = 120
+      Width = 40
+      Height = 9
+      Memory = True
+      ControlStyle = [csOpaque]
+    end
+    object FBox27: TFBox
+      Tag = 10004
+      Left = 127
+      Top = 67
+      Width = 17
+      Height = 9
+      ControlStyle = [csOpaque]
+    end
+    object FPicLabel13: TFPicLabel
+      Left = 22
+      Top = 145
+      Width = 62
+      Height = 56
+      AutoSize = False
+      Images = FMain.ILTank
+      ImageIndex = 0
+      Transparent = True
+      MargLeft = 0
+      MargTop = 0
+      MargTextTop = 0
+      ParentColor = False
+    end
+    object FPicLabel1: TFPicLabel
+      Left = 166
+      Top = 145
+      Width = 62
+      Height = 56
+      AutoSize = False
+      Images = FMain.ILTank
+      ImageIndex = 0
+      Transparent = True
+      MargLeft = 0
+      MargTop = 0
+      MargTextTop = 0
+      ParentColor = False
+    end
+    object FBox4: TFBox
+      Tag = 12004
+      Left = 186
+      Top = 74
+      Width = 9
+      Height = 72
+      ControlStyle = [csOpaque]
+    end
+    object FBox5: TFBox
+      Tag = 10035
+      Left = 175
+      Top = 67
+      Width = 20
+      Height = 9
+      ControlStyle = [csOpaque]
+    end
+    object FPicLabel3: TFPicLabel
+      Tag = 3
+      Left = 209
+      Top = 95
+      Width = 32
+      Height = 32
+      AutoSize = False
+      Images = FMain.ILTools
+      ImageIndex = 6
+      Transparent = True
+      MargLeft = 0
+      MargTop = 0
+      MargTextTop = 0
+      ParentColor = False
+    end
+    object FBox6: TFBox
+      Tag = 11018
+      Left = 120
+      Top = 184
+      Width = 47
+      Height = 9
+      ControlStyle = [csOpaque]
+    end
+    object FBox7: TFBox
+      Tag = 13003
+      Left = 120
+      Top = 164
+      Width = 9
+      Height = 22
+      Memory = True
+      ControlStyle = [csOpaque]
+    end
+    object FBox8: TFBox
+      Tag = 12003
+      Left = 200
+      Top = 127
+      Width = 9
+      Height = 20
+      ControlStyle = [csOpaque]
+    end
+    object FPicLabel2: TFPicLabel
+      Tag = 23
+      Left = 114
+      Top = 137
+      Width = 32
+      Height = 32
+      AutoSize = False
+      Images = FMain.ILTools
+      ImageIndex = 2
+      HotImageIndex = 3
+      Transparent = True
+      MargLeft = 0
+      MargTop = 0
+      MargTextTop = 0
+      ParentColor = False
+    end
+    object L8: TLabel
+      Tag = 10000000
+      Left = 8
+      Top = 16
+      Width = 97
+      Height = 20
+      Alignment = taCenter
+      AutoSize = False
+      Caption = #1042#1086#1076#1072' '#1076#1083#1103' '#1087#1086#1083#1080#1074#1072
+      Color = clYellow
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      Transparent = False
+      WordWrap = True
+    end
+    object LAcid: TLabel
+      Tag = 10000000
+      Left = 32
+      Top = 168
+      Width = 42
+      Height = 13
+      Alignment = taCenter
+      Caption = #1050#1080#1089#1083#1086#1090#1072
+      Color = clLime
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      Transparent = False
+      WordWrap = True
+    end
+    object StaticText1: TStaticText
+      Tag = 19
+      Left = 256
+      Top = 88
+      Width = 43
+      Height = 28
+      BorderStyle = sbsSunken
+      Caption = '7.00'
+      Color = clSkyBlue
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGreen
+      Font.Height = -19
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 0
+      Transparent = False
+    end
+    object StaticText2: TStaticText
+      Tag = 3
+      Left = 256
+      Top = 44
+      Width = 43
+      Height = 28
+      BorderStyle = sbsSunken
+      Caption = '7.00'
+      Color = clMoneyGreen
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -19
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      TabOrder = 1
+      Transparent = False
+    end
+  end
+end

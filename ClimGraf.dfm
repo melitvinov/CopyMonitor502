@@ -1,0 +1,185 @@
+object FTimer: TFTimer
+  Left = 495
+  Top = 200
+  Width = 611
+  Height = 455
+  Caption = #1055#1088#1086#1075#1088#1072#1084#1084#1072' '#1084#1080#1082#1088#1086#1082#1083#1080#1084#1072#1090#1072
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Chart1: TChart
+    Left = 0
+    Top = 0
+    Width = 603
+    Height = 421
+    BackWall.Brush.Color = clWhite
+    BackWall.Brush.Style = bsClear
+    Gradient.EndColor = 8454143
+    Gradient.Visible = True
+    Title.Text.Strings = (
+      'TChart')
+    Title.Visible = False
+    OnClickLegend = Chart1ClickLegend
+    BottomAxis.DateTimeFormat = 'hh:mm'
+    BottomAxis.Title.Caption = #1042#1088#1077#1084#1103' '#1089#1091#1090#1086#1082
+    LeftAxis.Automatic = False
+    LeftAxis.AutomaticMaximum = False
+    LeftAxis.AutomaticMinimum = False
+    LeftAxis.Maximum = 50.000000000000000000
+    Legend.Alignment = laTop
+    Legend.Color = 8454143
+    Legend.LegendStyle = lsSeries
+    View3D = False
+    View3DWalls = False
+    Align = alClient
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 56
+      Top = 4
+      Width = 164
+      Height = 13
+      Caption = #1044#1077#1084#1086' '#1074#1077#1088#1089#1080#1103' - '#1073#1091#1076#1077#1090' '#1091#1090#1086#1095#1085#1103#1090#1100#1089#1103
+    end
+    object Series1: TFastLineSeries
+      Marks.ArrowLength = 8
+      Marks.Visible = False
+      SeriesColor = clLime
+      LinePen.Color = clLime
+      LinePen.Width = 3
+      XValues.DateTime = True
+      XValues.Name = 'X'
+      XValues.Multiplier = 1.000000000000000000
+      XValues.Order = loAscending
+      YValues.DateTime = False
+      YValues.Name = 'Y'
+      YValues.Multiplier = 1.000000000000000000
+      YValues.Order = loNone
+    end
+    object Series2: TFastLineSeries
+      Marks.ArrowLength = 8
+      Marks.Visible = False
+      SeriesColor = clAqua
+      LinePen.Color = clAqua
+      LinePen.Width = 3
+      XValues.DateTime = True
+      XValues.Name = 'X'
+      XValues.Multiplier = 1.000000000000000000
+      XValues.Order = loAscending
+      YValues.DateTime = False
+      YValues.Name = 'Y'
+      YValues.Multiplier = 1.000000000000000000
+      YValues.Order = loNone
+    end
+    object Series3: TFastLineSeries
+      Marks.ArrowLength = 8
+      Marks.Visible = False
+      SeriesColor = 33023
+      LinePen.Color = 33023
+      LinePen.Width = 3
+      XValues.DateTime = True
+      XValues.Name = 'X'
+      XValues.Multiplier = 1.000000000000000000
+      XValues.Order = loAscending
+      YValues.DateTime = False
+      YValues.Name = 'Y'
+      YValues.Multiplier = 1.000000000000000000
+      YValues.Order = loNone
+    end
+    object Series4: TFastLineSeries
+      Marks.ArrowLength = 8
+      Marks.Visible = False
+      SeriesColor = 12615935
+      LinePen.Color = 12615935
+      LinePen.Width = 2
+      XValues.DateTime = True
+      XValues.Name = 'X'
+      XValues.Multiplier = 1.000000000000000000
+      XValues.Order = loAscending
+      YValues.DateTime = False
+      YValues.Name = 'Y'
+      YValues.Multiplier = 1.000000000000000000
+      YValues.Order = loNone
+    end
+    object Series5: TFastLineSeries
+      Marks.ArrowLength = 8
+      Marks.Visible = False
+      SeriesColor = clBlue
+      LinePen.Color = clBlue
+      LinePen.Width = 2
+      XValues.DateTime = True
+      XValues.Name = 'X'
+      XValues.Multiplier = 1.000000000000000000
+      XValues.Order = loAscending
+      YValues.DateTime = False
+      YValues.Name = 'Y'
+      YValues.Multiplier = 1.000000000000000000
+      YValues.Order = loNone
+    end
+    object Series6: TFastLineSeries
+      Marks.ArrowLength = 8
+      Marks.Visible = False
+      SeriesColor = clTeal
+      LinePen.Color = clTeal
+      LinePen.Width = 2
+      XValues.DateTime = True
+      XValues.Name = 'X'
+      XValues.Multiplier = 1.000000000000000000
+      XValues.Order = loAscending
+      YValues.DateTime = False
+      YValues.Name = 'Y'
+      YValues.Multiplier = 1.000000000000000000
+      YValues.Order = loNone
+    end
+    object Series7: TFastLineSeries
+      Marks.ArrowLength = 8
+      Marks.Visible = False
+      SeriesColor = clBlue
+      LinePen.Color = clBlue
+      LinePen.Width = 2
+      XValues.DateTime = True
+      XValues.Name = 'X'
+      XValues.Multiplier = 1.000000000000000000
+      XValues.Order = loAscending
+      YValues.DateTime = False
+      YValues.Name = 'Y'
+      YValues.Multiplier = 1.000000000000000000
+      YValues.Order = loNone
+    end
+    object Series8: TFastLineSeries
+      Marks.ArrowLength = 8
+      Marks.Visible = False
+      SeriesColor = clMaroon
+      LinePen.Color = clMaroon
+      LinePen.Width = 2
+      XValues.DateTime = True
+      XValues.Name = 'X'
+      XValues.Multiplier = 1.000000000000000000
+      XValues.Order = loAscending
+      YValues.DateTime = False
+      YValues.Name = 'Y'
+      YValues.Multiplier = 1.000000000000000000
+      YValues.Order = loNone
+    end
+    object Series9: TFastLineSeries
+      Marks.ArrowLength = 8
+      Marks.Visible = False
+      SeriesColor = 4194368
+      LinePen.Color = 4194368
+      LinePen.Width = 2
+      XValues.DateTime = True
+      XValues.Name = 'X'
+      XValues.Multiplier = 1.000000000000000000
+      XValues.Order = loAscending
+      YValues.DateTime = False
+      YValues.Name = 'Y'
+      YValues.Multiplier = 1.000000000000000000
+      YValues.Order = loNone
+    end
+  end
+end

@@ -1,0 +1,104 @@
+object HotGraf: THotGraf
+  Left = 387
+  Top = 242
+  Width = 880
+  Height = 227
+  BorderStyle = bsSizeToolWin
+  Caption = 'HotGraf'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDefaultPosOnly
+  PixelsPerInch = 96
+  TextHeight = 13
+  object FloatChart: TChart
+    Left = 0
+    Top = 0
+    Width = 872
+    Height = 193
+    BackWall.Brush.Color = clWhite
+    BackWall.Brush.Style = bsClear
+    Gradient.EndColor = 16444045
+    Gradient.Visible = True
+    MarginTop = 16
+    Title.Text.Strings = (
+      #1043#1088#1072#1092#1080#1082)
+    Title.Visible = False
+    BottomAxis.DateTimeFormat = 'dd.MM.yy'
+    BottomAxis.LabelsFont.Charset = DEFAULT_CHARSET
+    BottomAxis.LabelsFont.Color = clTeal
+    BottomAxis.LabelsFont.Height = -11
+    BottomAxis.LabelsFont.Name = 'Arial'
+    BottomAxis.LabelsFont.Style = []
+    BottomAxis.LabelStyle = talValue
+    BottomAxis.StartPosition = 1.000000000000000000
+    BottomAxis.EndPosition = 99.000000000000000000
+    LeftAxis.LabelsFont.Charset = DEFAULT_CHARSET
+    LeftAxis.LabelsFont.Color = clRed
+    LeftAxis.LabelsFont.Height = -11
+    LeftAxis.LabelsFont.Name = 'Arial'
+    LeftAxis.LabelsFont.Style = []
+    LeftAxis.StartPosition = 2.000000000000000000
+    LeftAxis.EndPosition = 97.000000000000000000
+    Legend.Visible = False
+    View3D = False
+    OnAfterDraw = FloatChartAfterDraw
+    Align = alClient
+    TabOrder = 0
+    OnMouseMove = FloatChartMouseMove
+    object LVal: TLabel
+      Left = 280
+      Top = 10
+      Width = 21
+      Height = 13
+      Caption = 'LVal'
+      Color = clYellow
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clOlive
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = False
+      Transparent = False
+      Visible = False
+    end
+    object GName: TLabel
+      Left = 56
+      Top = 10
+      Width = 36
+      Height = 13
+      Caption = 'GName'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      Transparent = True
+    end
+    object Series13: TLineSeries
+      Marks.ArrowLength = 8
+      Marks.Visible = False
+      SeriesColor = 8388863
+      Pointer.InflateMargins = True
+      Pointer.Style = psRectangle
+      Pointer.Visible = False
+      Stairs = True
+      XValues.DateTime = True
+      XValues.Name = 'X'
+      XValues.Multiplier = 1.000000000000000000
+      XValues.Order = loAscending
+      YValues.DateTime = False
+      YValues.Name = 'Y'
+      YValues.Multiplier = 1.000000000000000000
+      YValues.Order = loNone
+    end
+  end
+end

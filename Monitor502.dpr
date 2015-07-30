@@ -1,0 +1,154 @@
+program Monitor502;
+{$DEFINE VOICESERVIS}
+
+uses
+  Forms,
+  Windows,
+  Dialogs,
+  Controls,
+  inifiles,
+  SysUtils,
+  PicCtr in 'PicCtr.pas' {FPicCtr},
+  FController in 'Voice\FController.pas',
+  Port in 'Voice\Port.pas' {FPort},
+  NewCtr in 'NewCtr.pas' {FNewCtr},
+  SetGrid in 'Voice\SetGrid.pas' {FSetGrid},
+  GGraf in 'GGraf.pas' {FMain},
+  Mixer501 in 'Voice\Mixer501.pas' {FMixer501},
+  About in 'Voice\About.pas' {FAbout},
+  Report in 'Voice\Report.pas' {FReport},
+  Salat in 'Salat.pas' {FSalat},
+  MSiod in 'MSiod.pas',
+  ClimCalc in 'ClimCalc.pas',
+  Climat403 in 'Climat403.pas' {FClimat403},
+  FGrafGrid in 'Voice\FGrafGrid.pas' {FGridGraf},
+  HandClim in 'HandClim.pas' {FHandClim},
+  MessageU in 'MessageU.pas',
+  DefineClim403 in 'DefineClim403.pas',
+  Meteo in 'Voice\Meteo.pas' {FMeteo},
+  FConstType in 'FConstType.pas',
+  audit in 'Voice\Audit.pas',
+  FormulEdit in 'FormulEdit.pas' {FormulForm},
+  FormulUtil in 'FormulUtil.pas',
+  Supplay501 in 'Voice\Supplay501.pas' {FSupplay501},
+  WindSon in 'Voice\WindSon.pas' {FWindSonic},
+  FCDP in 'FCDP.pas',
+  FSetInter in 'Voice\FSetInter.pas' {FSetInternet},
+  WaterReady in 'Voice\WaterReady.pas' {FWater},
+  BoilerIPC in 'BoilerIPC.pas' {FBoilerIPC},
+  Climat65 in 'Climat65.pas' {FClimat65},
+  Mixer04 in 'Mixer04.pas' {FMixer04},
+  DefineBoil in 'DefineBoil.pas',
+  TxtCtr405 in 'TxtCtr405.pas' {FTxtCtr},
+  Desinf in 'Desinf.pas' {FDesinf},
+  Drain501 in 'Voice\Drain501.pas' {FDrain501},
+  DesinfDig in 'Voice\DesinfDig.pas' {FDisinfDig},
+  ServerZ in 'ServerZ.pas' {FServerZ},
+  Voice in 'Voice\Voice.pas' {FVoice},
+  FHotGraf in 'Voice\FHotGraf.pas' {HotGraf},
+  BoilConfig in 'BoilConfig.pas',
+  FTopMes in 'FTopMes.pas' {TopMesForm},
+  FSetChart in 'Voice\FSetChart.pas' {SetChartF},
+  EAbout in 'Voice\EAbout.pas' {FEAbout},
+  PaswordDlg in 'Voice\PaswordDlg.pas' {PasswordDlg},
+  Aphrodite in 'Voice\Aphrodite.pas' {FAphrodite},
+  Drain405 in 'Voice\Drain405.pas' {FDrain405},
+  DefineClim510 in 'DefineClim510.pas',
+  Climat501S in 'Climat501S.pas' {FClimat501S},
+  Mixer403 in 'Voice\Mixer403.pas' {FMixer403},
+  UVDisinf in 'Voice\UVDisinf.pas' {FUVDisinf},
+  DefMeteo in 'Voice\DefMeteo.pas',
+  Climat502 in 'Climat502.pas' {FClimat502: Climat510},
+  Stg in 'Voice\Stg.pas' {StgFrame: TFrame},
+  DefineClim502 in 'DefineClim502.pas',
+  Port502 in 'Voice\Port502.pas',
+  PortStatus in 'Voice\PortStatus.pas' {FPortStatus},
+  CalcStg in 'Voice\CalcStg.pas' {CalcStgFrame: TFrame},
+  StgBlock in 'Voice\StgBlock.pas',
+  Translate502 in 'Voice\Translate502.pas',
+  UnitPasw in 'Voice\UnitPasw.pas',
+  FBlockAccessDlg in 'Voice\FBlockAccessDlg.pas' {FBlockAccess},
+  FActionsDlg in 'Voice\FActionsDlg.pas' {FActionDlg},
+  Subr in 'Voice\Subr.pas',
+  Calc502 in 'Calc502.pas',
+  Climat501U in 'Climat501U.pas' {FClimat501U},
+  DefineClim501S in 'DefineClim501S.pas',
+  Climat510 in 'Climat510.pas' {FClimat510};
+
+{$R *.RES}
+var hwndPrev:HWND;
+  inilng:integer;
+//    s: array[0..40] of Char;//AnsiString;
+//    CopyNumber:integer;
+begin
+  MonCopyNumber:=0;
+  hwndPrev:=FindWindow('TFPort',PORT_FORM_TITLE);
+  if hwndPrev<>0 then
+    begin
+    MonCopyNumber:=1;
+//####    hwndPrev:=FindWindow('TFPort',PORT_FORM_TITLE+'-2');
+//####    if hwndPrev <> 0 then begin SetForegroundWindow(hwndPrev); Halt; end;
+     end;
+  Application.Initialize;
+  inilng:=InitLanguage(INI_FILE_NAME);
+  LoadMessagesLanguage(@ProgMess,SumMessages);
+//  FAbout:=TFAbout.Create(Application);
+//  LoadFormLanguage(FAbout,FAbout.Name);
+//  FAbout.Show;      //!!!
+//  try
+//  FAbout.Update;    //!!!
+  Application.Title := 'Monitor';
+  Application.HelpFile := 'Monitor.hlp'; //HELP_FILE_NAME; //
+  Application.CreateForm(TFMain, FMain);
+  //  Application.CreateForm(TFMixer501, FMixer501);
+//  Application.CreateForm(TFAphrodite, FAphrodite);
+//  Application.CreateForm(TFDrain405, FDrain405);
+  try
+  {if inilng > 1 then
+      begin
+      Application.CreateForm(TFEAbout, FEAbout);
+      FEAbout.Show;
+      FEAbout.Update;
+      end
+  else }begin
+      Application.CreateForm(TFAbout, FAbout);
+      LoadFormLanguage(FAbout,FAbout.Name);
+      FAbout.Show;      //!!!
+      FAbout.Update;    //!!!
+      end;
+   Application.CreateForm(TFPort, FPort);
+  Application.CreateForm(TFNewCtr, FNewCtr);
+  Application.CreateForm(TFSetGrid, FSetGrid);
+  Application.CreateForm(TFReport, FReport);
+  Application.CreateForm(TFGridGraf, FGridGraf);
+  Application.CreateForm(TFHandClim, FHandClim);
+  Application.CreateForm(TFormulForm, FormulForm);
+//  Application.CreateForm(TFProgress, FProgress);
+  Application.CreateForm(TFWindSonic, FWindSonic);
+  Application.CreateForm(TFSetInternet, FSetInternet);
+  Application.CreateForm(TFVoice, FVoice);
+//  Application.CreateForm(TFHandPanel, FHandPanel);
+  Application.CreateForm(THotGraf, HotGraf);
+  Application.CreateForm(TTopMesForm, TopMesForm);
+  Application.CreateForm(TSetChartF, SetChartF);
+  LoadFormLanguage(FMain,FMain.Name);
+  LoadLangsMenu(FMain.mnLanguage);
+  LoadFormLanguage(FPort,FPort.Name);
+  LoadFormLanguage(FNewCtr,FNewCtr.Name);
+  LoadFormLanguage(FSetGrid,FSetGrid.Name);
+  LoadFormLanguage(FReport,FReport.Name);
+//  LoadFormLanguage(FDBSet);
+  LoadFormLanguage(FGridGraf,FGridGraf.Name);
+  LoadFormLanguage(FHandClim,FHandClim.Name);
+  LoadFormLanguage(FormulForm,FormulForm.Name);
+  LoadFormLanguage(FWindSonic,FWindSonic.Name);
+  LoadFormLanguage(FSetInternet,FSetInternet.Name);
+  LoadFormLanguage(FVoice,FVoice.Name);
+  LoadFormLanguage(HotGraf,HotGraf.Name);
+  LoadFormLanguage(TopMesForm,TopMesForm.Name);
+  LoadFormLanguage(SetChartF,SetChartF.Name);
+  FMain.Init(MonCopyNumber);
+  finally {if inilng > 1 then FEAbout.Hide else }FAbout.Hide; end;
+  Application.Run;
+end.
+

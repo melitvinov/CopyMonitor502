@@ -1,0 +1,11 @@
+Flow=4.00
+Tank1=60
+Tank2=50
+UVCell=7.04
+pH1=5.21
+pH2=5.12
+phReg=45
+PumpReg=55
+TaskDoze=8.20
+RealDoze=8.15
+TaskPH=6.22
