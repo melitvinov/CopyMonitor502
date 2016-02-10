@@ -1,8 +1,8 @@
 object FMain: TFMain
-  Left = 254
-  Top = 61
+  Left = 469
+  Top = 138
   Width = 781
-  Height = 765
+  Height = 560
   HelpContext = 1
   HorzScrollBar.Range = 700
   VertScrollBar.Range = 428
@@ -71,7 +71,7 @@ object FMain: TFMain
     Left = 0
     Top = 43
     Width = 765
-    Height = 644
+    Height = 439
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clFuchsia
@@ -98,7 +98,7 @@ object FMain: TFMain
   end
   object MainStatus: TStatusBar
     Left = 0
-    Top = 687
+    Top = 482
     Width = 765
     Height = 19
     Panels = <
@@ -122,7 +122,7 @@ object FMain: TFMain
     Left = 0
     Top = 43
     Width = 765
-    Height = 644
+    Height = 439
     Align = alClient
     Color = clSilver
     Font.Charset = DEFAULT_CHARSET
@@ -135,7 +135,7 @@ object FMain: TFMain
     object VSplitter: TSplitter
       Left = 1
       Top = 1
-      Height = 642
+      Height = 437
       Color = clHighlight
       MinSize = 1
       ParentColor = False
@@ -144,12 +144,12 @@ object FMain: TFMain
       Left = 153
       Top = 1
       Width = 611
-      Height = 642
+      Height = 437
       Align = alClient
       TabOrder = 0
       object HSplitter: TSplitter
         Left = 1
-        Top = 623
+        Top = 418
         Width = 609
         Height = 3
         Cursor = crVSplit
@@ -161,7 +161,7 @@ object FMain: TFMain
         Left = 1
         Top = 63
         Width = 578
-        Height = 536
+        Height = 331
         BackWall.Brush.Color = clWhite
         BackWall.Brush.Style = bsClear
         BackWall.Color = 4194304
@@ -286,7 +286,7 @@ object FMain: TFMain
         OnMouseMove = GChartMouseMove
         DesignSize = (
           578
-          536)
+          331)
         object Gor: TShape
           Left = 2
           Top = 272
@@ -800,7 +800,7 @@ object FMain: TFMain
       end
       object BottomPanel: TPanel
         Left = 1
-        Top = 626
+        Top = 421
         Width = 609
         Height = 15
         Align = alBottom
@@ -811,7 +811,7 @@ object FMain: TFMain
       end
       object Track: TTrackBar
         Left = 1
-        Top = 599
+        Top = 394
         Width = 609
         Height = 24
         Align = alBottom
@@ -831,7 +831,7 @@ object FMain: TFMain
         Left = 579
         Top = 63
         Width = 31
-        Height = 536
+        Height = 331
         Align = alRight
         ButtonHeight = 32
         ButtonWidth = 31
@@ -965,7 +965,7 @@ object FMain: TFMain
         TabOrder = 4
         object CtrCB: TComboBox
           Left = 0
-          Top = 0
+          Top = 3
           Width = 261
           Height = 24
           Style = csDropDownList
@@ -1030,7 +1030,7 @@ object FMain: TFMain
         end
         object CBShowAudit: TComboBox
           Left = 0
-          Top = 30
+          Top = 33
           Width = 110
           Height = 24
           Hint = 'Audit/Analyzer'
@@ -1187,7 +1187,7 @@ object FMain: TFMain
       Left = 4
       Top = 1
       Width = 149
-      Height = 642
+      Height = 437
       Align = alLeft
       DockSite = True
       TabOrder = 1
@@ -1523,7 +1523,7 @@ object FMain: TFMain
     Left = 765
     Top = 43
     Width = 0
-    Height = 644
+    Height = 439
     Align = alRight
     DockSite = True
     TabOrder = 9

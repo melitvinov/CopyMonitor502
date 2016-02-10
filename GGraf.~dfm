@@ -1,8 +1,8 @@
 object FMain: TFMain
-  Left = 254
-  Top = 243
+  Left = 469
+  Top = 138
   Width = 781
-  Height = 765
+  Height = 560
   HelpContext = 1
   HorzScrollBar.Range = 700
   VertScrollBar.Range = 428
@@ -62,7 +62,7 @@ object FMain: TFMain
   object Bevel1: TBevel
     Left = 0
     Top = 0
-    Width = 773
+    Width = 765
     Height = 3
     Align = alTop
     Shape = bsTopLine
@@ -70,8 +70,8 @@ object FMain: TFMain
   object ListCtr: TTabControl
     Left = 0
     Top = 43
-    Width = 773
-    Height = 649
+    Width = 765
+    Height = 439
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clFuchsia
@@ -98,8 +98,8 @@ object FMain: TFMain
   end
   object MainStatus: TStatusBar
     Left = 0
-    Top = 692
-    Width = 773
+    Top = 482
+    Width = 765
     Height = 19
     Panels = <
       item
@@ -121,8 +121,8 @@ object FMain: TFMain
   object P1: TPanel
     Left = 0
     Top = 43
-    Width = 773
-    Height = 649
+    Width = 765
+    Height = 439
     Align = alClient
     Color = clSilver
     Font.Charset = DEFAULT_CHARSET
@@ -135,7 +135,7 @@ object FMain: TFMain
     object VSplitter: TSplitter
       Left = 1
       Top = 1
-      Height = 647
+      Height = 437
       Color = clHighlight
       MinSize = 1
       ParentColor = False
@@ -143,14 +143,14 @@ object FMain: TFMain
     object P2: TPanel
       Left = 153
       Top = 1
-      Width = 619
-      Height = 647
+      Width = 611
+      Height = 437
       Align = alClient
       TabOrder = 0
       object HSplitter: TSplitter
         Left = 1
-        Top = 628
-        Width = 617
+        Top = 418
+        Width = 609
         Height = 3
         Cursor = crVSplit
         Align = alBottom
@@ -160,8 +160,8 @@ object FMain: TFMain
       object GChart: TChart
         Left = 1
         Top = 63
-        Width = 586
-        Height = 541
+        Width = 578
+        Height = 331
         BackWall.Brush.Color = clWhite
         BackWall.Brush.Style = bsClear
         BackWall.Color = 4194304
@@ -285,8 +285,8 @@ object FMain: TFMain
         AutoSize = True
         OnMouseMove = GChartMouseMove
         DesignSize = (
-          586
-          541)
+          578
+          331)
         object Gor: TShape
           Left = 2
           Top = 272
@@ -800,8 +800,8 @@ object FMain: TFMain
       end
       object BottomPanel: TPanel
         Left = 1
-        Top = 631
-        Width = 617
+        Top = 421
+        Width = 609
         Height = 15
         Align = alBottom
         DockSite = True
@@ -811,8 +811,8 @@ object FMain: TFMain
       end
       object Track: TTrackBar
         Left = 1
-        Top = 604
-        Width = 617
+        Top = 394
+        Width = 609
         Height = 24
         Align = alBottom
         BorderWidth = 3
@@ -828,10 +828,10 @@ object FMain: TFMain
         OnChange = TrackChange
       end
       object ToolBar2: TToolBar
-        Left = 587
+        Left = 579
         Top = 63
         Width = 31
-        Height = 541
+        Height = 331
         Align = alRight
         ButtonHeight = 32
         ButtonWidth = 31
@@ -955,7 +955,7 @@ object FMain: TFMain
       object ToolBar3: TToolBar
         Left = 1
         Top = 1
-        Width = 617
+        Width = 609
         Height = 62
         AutoSize = True
         ButtonHeight = 30
@@ -965,7 +965,7 @@ object FMain: TFMain
         TabOrder = 4
         object CtrCB: TComboBox
           Left = 0
-          Top = 0
+          Top = 3
           Width = 261
           Height = 24
           Style = csDropDownList
@@ -1030,7 +1030,7 @@ object FMain: TFMain
         end
         object CBShowAudit: TComboBox
           Left = 0
-          Top = 30
+          Top = 33
           Width = 110
           Height = 24
           Hint = 'Audit/Analyzer'
@@ -1187,7 +1187,7 @@ object FMain: TFMain
       Left = 4
       Top = 1
       Width = 149
-      Height = 647
+      Height = 437
       Align = alLeft
       DockSite = True
       TabOrder = 1
@@ -1235,7 +1235,7 @@ object FMain: TFMain
       ShowHint = False
       StoreData = True
       TabOrder = 0
-      Version = '3.01.07'
+      Version = '2.20.24'
       XMLExport.Version = '1.0'
       XMLExport.DataPacketVersion = '2.0'
       OnClickCell = HotMesGridClickCell
@@ -1442,7 +1442,7 @@ object FMain: TFMain
       ShowHint = False
       StoreData = True
       TabOrder = 0
-      Version = '3.01.07'
+      Version = '2.20.24'
       XMLExport.Version = '1.0'
       XMLExport.DataPacketVersion = '2.0'
       OnCellEdit = SignalGridCellEdit
@@ -1520,10 +1520,10 @@ object FMain: TFMain
     end
   end
   object LeftPanEx: TPanel
-    Left = 773
+    Left = 765
     Top = 43
     Width = 0
-    Height = 649
+    Height = 439
     Align = alRight
     DockSite = True
     TabOrder = 9
@@ -1671,7 +1671,7 @@ object FMain: TFMain
   object ToolBar1: TToolBar
     Left = 0
     Top = 3
-    Width = 773
+    Width = 765
     Height = 40
     AutoSize = True
     ButtonHeight = 38

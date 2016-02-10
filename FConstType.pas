@@ -63,10 +63,11 @@ const
      RW_NOEDIT      = 50;
      RW_INVISIBLE   = 50;
      RW_HARD        = 10;
+     RW_RESERV      = 21;
      RW_SYS         = RW_SUPERVISOR+5;
      START_ACCESS   = RW_SUPERVISOR;//RW_USER;
      R_CONFIG       = RW_GUEST;
-     W_CONFIG       = RW_SUPERVISOR+1;
+     W_CONFIG       = RW_SUPERVISOR;
      
      HIDE_MIN_MAX=-1000;
      NO_MIN_MAX=-1001;

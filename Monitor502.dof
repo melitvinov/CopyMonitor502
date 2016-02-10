@@ -9,7 +9,7 @@ E=0
 F=0
 G=1
 H=1
-I=1
+I=0
 J=0
 K=0
 L=1
@@ -94,7 +94,7 @@ OutputDir=
 UnitOutputDir=
 PackageDLLOutputDir=
 PackageDCPOutputDir=
-SearchPath=D:\DelphiProject\CopyMonitor502\Voice
+SearchPath=D:\DelphiProject\CopyMonitor502\Voice;D:\DelphiProject\TopGrid\System;D:\DelphiProject\TopGrid\Source
 Packages=vcl;rtl;vclx;indy;inet;xmlrtl;vclie;inetdbbde;inetdbxpress;dbrtl;dsnap;dsnapcon;vcldb;soaprtl;VclSmp;dbexpress;dbxcds;inetdb;bdertl;vcldbx;webdsnap;websnap;adortl;ibxpress;teeui;teedb;tee;dss;visualclx;visualdbclx;vclactnband;vclshlctrls;dclOfficeXP;FComponent;osg7220;osdg7220
 Conditionals=
 DebugSourceDirs=
@@ -138,5 +138,7 @@ Comments=Agrocontrol
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 [HistoryLists\hlSearchPath]
-Count=1
-Item0=D:\DelphiProject\CopyMonitor502\Voice
+Count=3
+Item0=D:\DelphiProject\CopyMonitor502\Voice;D:\DelphiProject\TopGrid\System;D:\DelphiProject\TopGrid\Source
+Item1=D:\DelphiProject\CopyMonitor502\Voice;D:\DelphiProject\TopGrid\System
+Item2=D:\DelphiProject\CopyMonitor502\Voice

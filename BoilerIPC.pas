@@ -268,7 +268,7 @@ type
     Label4: TLabel;
     Label3: TLabel;
     Label2: TLabel;
-    Image1: TImage;
+    ImageDistributionBoards: TImage;
     HandPanel: TPanel;
     Panel5: TPanel;
     bbSet: TBitBtn;
@@ -754,6 +754,14 @@ type
     procedure FPanel18DragOver(Sender, Source: TObject; X, Y: Integer;
       State: TDragState; var Accept: Boolean);
     procedure FPanel18DragDrop(Sender, Source: TObject; X, Y: Integer);
+    procedure ImageDistributionBoardsMouseDown(Sender: TObject;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure Image2MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure pcBoilerMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure FPanel18MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
     HotClients:THotClients;
@@ -797,7 +805,7 @@ implementation
 
 {$R *.dfm}
 uses DefineClim65, Port, ClimCalc, HandClim, MessageU, Audit,
-      Climat403, DefineClim403, BoilConfig, SetGrid, HandPanel,FTopMes, Climat510,
+      Climat403, DefineClim403, BoilConfig, SetGrid, HandPanel,FTopMes, Climat510, Climat501U, Climat501S,
   FHotGraf;  //, AddBoiler
 
 var BoilerCountX, BoilerCountY, GroupCountY,CollCountY,
@@ -921,6 +929,7 @@ begin
      pcBoiler.Pages[2].TabVisible:=true;
      pcBoiler.Pages[3].TabVisible:=true;
      pcBoiler.Pages[4].TabVisible:=true;
+
      if (BoilerCountX=0) then
      begin
        pcBoiler.ActivePageIndex:=1;
@@ -933,8 +942,10 @@ begin
        pcBoiler.Pages[3].TabVisible:=false;
        pcBoiler.Pages[4].TabVisible:=false;
      end;
+
      LoadImageSkin(ImageBoilRoom,'BoilerRoomIPC.jpg');
      LoadImageSkin(ImageCoGen,'ElectricRoomIPC.jpg');
+     LoadImageSkin(ImageDistributionBoards,'ElectricRoomIPC.jpg');    //  task 68 !!!
 
      AuditBlock:=TAudit.Create(Self);
 end;
@@ -1049,8 +1060,8 @@ begin
   (blPCArchive as TBoilArxPC).CalcAllArxPC;
   HotClients.CountX:=SumClimatClients+1;
 //  Caption:=DataPath+CtrName+FormatDateTime(LongDateFormat+' '+LongTimeFormat,Block[0].BlDate);
-
   BlockToGrid(HotClients,StringGridClient);    ///killIPC
+
   if (BoilerCountX>0) then
   begin
     BlockToGrid(HotBoilers,StringGridBoiler);
@@ -1209,7 +1220,17 @@ begin
         begin
         vComPower:=vComPower+ZonePower[ClimatClient[nClient].Zone];
         end;
-  end;      
+      if ClimatClient[nClient].Ctr is TFClimat501S then
+       with ClimatClient[nClient].Ctr as TFClimat501S do
+        begin
+        vComPower:=vComPower+ZonePower[ClimatClient[nClient].Zone];
+        end;
+      if ClimatClient[nClient].Ctr is TFClimat501U then
+       with ClimatClient[nClient].Ctr as TFClimat501U do
+        begin
+        vComPower:=vComPower+ZonePower[ClimatClient[nClient].Zone];
+        end;
+  end;
   st:=FloatToStr(vComPower);
   LoadXY(cInBlock,1,posComPower,st);
 //  Ready:=True;
@@ -1269,18 +1290,27 @@ end;
 procedure TFBoilerIPC.pmAutoFormatClick(Sender: TObject);
 begin
 end;
-
+//   ********************************************************************************************************************************
 //*********************************************************************
 //***************** “≈ ”Ÿ»≈ —Œ—“ŒﬂÕ»ﬂ  À»≈Õ“Œ¬ ************************
 //*********************************************************************
 const
       SumClientsData = 25;
+//      ClientsPozY:array[1..SumClientsData] of word=
+//        (21,39,130,22,41,69,70,77,78,85,86,93,94,101,102,111,112,138,   //42
+//        142,146,150,154,158,160,174);
+
       ClientsPozY:array[1..SumClientsData] of word=
         (21,39,130,22,41,69,70,77,78,85,86,93,94,101,102,111,112,138,   //42
         142,146,150,154,158,160,174);
-      ClientsPozY511:array[1..SumClientsData] of word=
-        (21,54,145,27,56,84,85,92,93,100,101,108,109,116,117,126,127,153,   //42
-        157,161,165,169,173,175,189);
+
+      ClientsPozY501S:array[1..SumClientsData] of word=
+        (27,51,138,25,53,77,78,85,86,93,94,101,102,109,110,119,120,146,   //42
+        150,154,158,162,166,168,182);
+
+      ClientsPozY501U:array[1..SumClientsData] of word=
+        (31,58,149,27,60,88,89,96,97,104,105,112,113,120,121,130,131,157,   //42
+        161,165,169,173,177,179,193);
 
 procedure THotClients.Init;
 begin
@@ -1304,7 +1334,6 @@ begin
     Ready:=Ready or ParentCtr.Block[0].Ready;
     AccessW:=RW_NOEDIT;
     Result := 0;
-    //Exit; //????killIPC
     if ValY = 0 then
         begin
         if ValX = 0 then Txt := Pref //ParentCtr.CtrName
@@ -1316,24 +1345,28 @@ begin
               end;
         Exit;
         end;
+
     RealY:=ClientsPozY[ValY];
     if ValX=0 then
-          begin
-          Txt:=DZ_cDefineHot[RealY].Name;
-          Exit;
-          end;
+      begin
+        Txt:=DZ_cDefineHot[RealY].Name;
+        Exit;
+      end;
     if ValX=1 then
-          begin
-          Result:=Convers('',Addr(PByteArray(Adr)^[iClientsData+(ValY-1)*2]),
-            DZ_cDefineHot[RealY].Frm
-            ,vInBlock,ValX,ValY,Txt,DZ_cDefineHot[RealY].Ed);
-          Exit;
-          end;
+      begin
+        Result:=Convers('',Addr(PByteArray(Adr)^[iClientsData+(ValY-1)*2]),
+        DZ_cDefineHot[RealY].Frm ,vInBlock,ValX,ValY,Txt,DZ_cDefineHot[RealY].Ed);
+        Exit;
+      end;
     if SumClimatClients <=0 then Exit;
     nClient:=ValX-1; nZone:=ClimatClient[nClient].Zone;
-    if (ClimatClient[nClient].Ctr is TFClimat510) then
-      if (ClimatClient[nClient].Ctr as TFClimat510).FansHot<>nil then
-         RealY:=ClientsPozY511[ValY];
+
+    if (ClimatClient[nClient].Ctr is TFClimat501U) then
+  //      if (ClimatClient[nClient].Ctr as TFClimat510U).FansHot<>nil then
+         RealY:=ClientsPozY501U[ValY];
+    if (ClimatClient[nClient].Ctr is TFClimat501S) then
+  //      if (ClimatClient[nClient].Ctr as TFClimat510U).FansHot<>nil then
+         RealY:=ClientsPozY501S[ValY];
 
     Result := ClimatClient[nClient].Ctr.Block[0].LoadXY(vInBlock,nZone,RealY,Txt);
 end;
@@ -1390,7 +1423,13 @@ begin
         if ClimatClient[nClient].Ctr is TFClimat510 then
           with ClimatClient[nClient].Ctr as TFClimat510 do
             WarmGroupConfig.FindCO2Max(ClimatClient[nClient].Zone,nBoil,MaxCO2,StMax);
-      end;      
+        if ClimatClient[nClient].Ctr is TFClimat501S then
+          with ClimatClient[nClient].Ctr as TFClimat501S do
+            WarmGroupConfig.FindCO2Max(ClimatClient[nClient].Zone,nBoil,MaxCO2,StMax);
+        if ClimatClient[nClient].Ctr is TFClimat501U then
+          with ClimatClient[nClient].Ctr as TFClimat501U do
+            WarmGroupConfig.FindCO2Max(ClimatClient[nClient].Zone,nBoil,MaxCO2,StMax);
+      end;
 //      StMax:=IntToStr(nBoil*10);   //”·‡Ú¸
       LoadXY(cInBlock,1,posCO2Task+nBoil,StMax);
       end;
@@ -1406,9 +1445,9 @@ var SendCopy:integer;
 begin
   if ParentCtr.DataPath <> '' then Exit;
   with (ParentCtr as TFBoilerIPC) do
-    begin
+    begin                          
     HotGroups.SetGroupTasks;
-    HotClients.CalcMax;
+    //HotClients.CalcMax;
     CommonHot.SetCO2Tasks;
     CommonHot.CalcComPower;
     end;
@@ -2056,6 +2095,21 @@ begin
           Max:=-1;
         vComPower:=vComPower+ZonePower[ClimatClient[nClient].Zone];
         end;
+      if ClimatClient[nClient].Ctr is TFClimat501S then
+       with ClimatClient[nClient].Ctr as TFClimat501S do
+        begin
+        if (not WarmGroupConfig.FindWarmMax(ClimatClient[nClient].Zone,nGroup,Max,st)) and (Max=0) then
+          Max:=-1;
+        vComPower:=vComPower+ZonePower[ClimatClient[nClient].Zone];
+        end;
+      if ClimatClient[nClient].Ctr is TFClimat501U then
+       with ClimatClient[nClient].Ctr as TFClimat501U do
+        begin
+        if (not WarmGroupConfig.FindWarmMax(ClimatClient[nClient].Zone,nGroup,Max,st)) and (Max=0) then
+          Max:=-1;
+        vComPower:=vComPower+ZonePower[ClimatClient[nClient].Zone];
+        end;
+
     end;
     if (Max>=0) then
       LoadXY(cInBlock,nGroup,pozGroupTask,st);
@@ -2864,6 +2918,7 @@ begin
   if (not Accept) then exit;
   HotGraf.Hide;
   if (isDrawing) then
+      //ImageDistributionBoards.Canvas.DrawFocusRect(LastRectangle)
     FPanel18.Canvas.DrawFocusRect(LastRectangle)
   else  with Source as TFPicLabel do
         begin
@@ -2887,27 +2942,52 @@ end;
 procedure TFBoilerIPC.FPanel18DragDrop(Sender, Source: TObject; X,
   Y: Integer);
 var Param:Txy;
-//    ColX:integer;     //,RowY
 begin
 if (isDrawing) then
-begin
+  begin
+    //ImageDistributionBoards.Canvas.DrawFocusRect(LastRectangle);
     FPanel18.Canvas.DrawFocusRect(LastRectangle);
-end;
+  end;
   isDraw:=False;
-Y:=(LastRectangle.Top div 10)*10;//+sy;
-X:=(LastRectangle.Left div 10)*10;//+sx;
-if (Source is TFPicLabel)
+  Y:=(LastRectangle.Top div 10)*10;//+sy;
+  X:=(LastRectangle.Left div 10)*10;//+sx;
+  if (Source is TFPicLabel)
   then
     begin
-    with (Source as TFPicLabel)  do
-      begin
-      Left:=X;
-      Top:=Y;
+      with (Source as TFPicLabel)  do
+        begin
+          Left:=X;
+          Top:=Y;
       end;
     end;
+end;
 
+procedure TFBoilerIPC.ImageDistributionBoardsMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  inherited;
+  pcBoiler.Canvas.DrawFocusRect(Rect(x-5,y-5,x+5,y+5));
+end;
 
+procedure TFBoilerIPC.Image2MouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  inherited;
+  pcBoiler.Canvas.DrawFocusRect(Rect(x-5,y-5,x+5,y+5));
+end;
 
+procedure TFBoilerIPC.pcBoilerMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  inherited;
+  pcBoiler.Canvas.DrawFocusRect(Rect(x-5,y-5,x+5,y+5));
+end;
+
+procedure TFBoilerIPC.FPanel18MouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  inherited;
+  pcBoiler.Canvas.DrawFocusRect(Rect(x-5,y-5,x+5,y+5));
 end;
 
 end.

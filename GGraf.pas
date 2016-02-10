@@ -10,7 +10,8 @@ uses
   FPanel,Translate502,MessageU, UnitPasw, FPicPanel,DateUtils, Grids_ts,
   TSGrid, BubbleCh, AppEvnts, GIFDef, GIFComponent,PaswordDlg, FPicLabel;    //Port,SetGrid,
 
-const MesTest='Only test';
+const MesTest='M 1.00.14';  // 14 - co2 теперь можно поставить 2
+
 type
   TFMain = class(TForm)
     MM1: TMainMenu;
@@ -545,7 +546,7 @@ implementation
 
 uses NewCtr, About,Report, Voice,ShellAPI,{DBSetup,} //SelPar, DefineBoil,
       DefineClim65, FGrafGrid, HandClim, Port, SetGrid, audit, WindSon,Subr,
-      FSetInter, FHotGraf,FSetChart, ClimCalc, EAbout,FDiagnosDlg,FActionsDlg,PortStatus;
+      FSetInter, FHotGraf,FSetChart, ClimCalc, EAbout,FDiagnosDlg,FActionsDlg,PortStatus, Strategy501U;
 
 const
   clnCheck=1;
@@ -1307,6 +1308,7 @@ begin
          ChangeCtrList:=true;
          FSetGrid.AddInBlockTree(ActiveCtr);
          SetClimatClients;
+         SetStrategyClients;
 //###         ActiveCtr.SetPeriod;
          with (ActiveCtr as TFPicCtr) do
            begin

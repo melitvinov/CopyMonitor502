@@ -240,23 +240,23 @@ const DZ_SumConfig=10+46+7+26+11;
 
 var NameConfiguration:array [1..DZ_SumConfig] of TNameConst=(
 (Name:'Система отопления';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:5;Def:0;
-    Index:0;Mech:0;AccessR:R_CONFIG;AccessW:RW_GUEST),
+    Index:0;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Система вентиляции';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:6;
-    Index:1;Mech:0;AccessR:R_CONFIG;AccessW:RW_GUEST),
+    Index:1;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Система зашторивания';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:6;
-    Index:2;Mech:0;AccessR:R_CONFIG;AccessW:RW_GUEST),
+    Index:2;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Система UltraClima';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:6;
-    Index:3;Mech:0;AccessR:R_CONFIG;AccessW:RW_GUEST),
+    Index:3;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Система CO2';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:6;
-    Index:4;Mech:0;AccessR:R_CONFIG;AccessW:RW_GUEST),
+    Index:4;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Система досвечивания';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:6;
-    Index:5;Mech:0;AccessR:R_CONFIG;AccessW:RW_GUEST),
+    Index:5;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Система СИОД';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:6;
-    Index:6;Mech:0;AccessR:R_CONFIG;AccessW:RW_GUEST),
+    Index:6;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Система рециркуляции';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:6;
-    Index:7;Mech:0;AccessR:R_CONFIG;AccessW:RW_GUEST),
+    Index:7;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Воздушный обогреватель';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:1;
-    Index:8;Mech:0;AccessR:R_CONFIG;AccessW:RW_GUEST),
+    Index:8;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Система резерва 2';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:6;
     Index:9;Mech:0;AccessR:RW_INVISIBLE;AccessW:RW_NOEDIT),
 // 11
@@ -372,17 +372,17 @@ var NameConfiguration:array [1..DZ_SumConfig] of TNameConst=(
 (Name:'Авария досвечивания';Frm:CpMpN;Ed:'-вход';TipSens:TipIzm;Min:0;Max:0;
     Index:62;Mech:DZM_SLIGHT;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Температура воздуха 1';Frm:CpMpN;Ed:'-вход';TipSens:TipIzm;Min:0;Max:0;
-    Index:63;Mech:DZM_SENS_TEMP1;AccessR:R_CONFIG;AccessW:RW_SUPERVISOR),
+    Index:63;Mech:0;AccessR:R_CONFIG;AccessW:RW_SUPERVISOR),
 (Name:'Температура воздуха 2';Frm:CpMpN;Ed:'-вход';TipSens:TipIzm;Min:0;Max:0;
-    Index:64;Mech:DZM_SHEATING;AccessR:R_CONFIG;AccessW:W_CONFIG),
+    Index:64;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Температура воздуха 3';Frm:CpMpN;Ed:'-вход';TipSens:TipIzm;Min:0;Max:0;
-    Index:65;Mech:DZM_SHEATING;AccessR:R_CONFIG;AccessW:W_CONFIG),
+    Index:65;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Температура воздуха 4';Frm:CpMpN;Ed:'-вход';TipSens:TipIzm;Min:0;Max:0;
-    Index:66;Mech:DZM_SHEATING;AccessR:R_CONFIG;AccessW:W_CONFIG),
+    Index:66;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Влажность воздуха 1';Frm:CpMpN;Ed:'-вход';TipSens:TipIzm;Min:0;Max:0;
     Index:67;Mech:0;AccessR:R_CONFIG;AccessW:RW_SUPERVISOR),
 (Name:'Влажность воздуха 2';Frm:CpMpN;Ed:'-вход';TipSens:TipIzm;Min:0;Max:0;
-    Index:68;Mech:DZM_SHEATING;AccessR:R_CONFIG;AccessW:W_CONFIG),
+    Index:68;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Внутренний свет';Frm:CpMpN;Ed:'-вход';TipSens:TipIzm;Min:0;Max:0;
     Index:69;Mech:DZM_SLIGHT;AccessR:R_CONFIG;AccessW:W_CONFIG),
 // 71
@@ -2606,7 +2606,7 @@ var DZ_NameParUpr:array [1..DZ_SumParUpr] of TNameConst=(
 (Name:'Т вентиляции - Коэф интегральной поправки';Frm:SSpSS;Ed:'';TipSens:TipCalc;Min:0.1;Max:20;Def:3.5;Index:DZ_iPID;Mech:DZM_SVENTILATION;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
 (Name:'Экран вертикальный - Начало реагирования стороны 1';Frm:SS;Ed:'°';TipSens:TipCalc;Min:0;Max:360;Def:0;Index:DZ_iVScr;Mech:DZM_SCREEN_TV1;AccessR:RW_GUEST;AccessW:RW_GUEST),
 (Name:'Экран вертикальный - Конец реагирования стороны 1';Frm:SS;Ed:'°';TipSens:TipCalc;Min:0;Max:360;Def:90;Index:DZ_iVScr+1;Mech:DZM_SCREEN_TV1;AccessR:RW_GUEST;AccessW:RW_GUEST),
-(Name:'Исполнитель дозации СО2 (0-задвижка, 1-клапан)';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:1;Def:HIDE_MIN_MAX;Index:DZ_iScr+4;Mech:DZM_CO2;AccessR:RW_GUEST;AccessW:RW_GUEST),
+(Name:'Исполнитель дозации СО2 (0-задвижка,1-клапан,2-клапан+задвижка)';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:2;Def:HIDE_MIN_MAX;Index:DZ_iScr+4;Mech:DZM_CO2;AccessR:RW_GUEST;AccessW:RW_GUEST),
 // 21
 (Name:'Количество клапанов CИО';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:8;Index:DZ_iScr+6;Mech:DZM_SIO_PUMP;AccessR:RW_GUEST;AccessW:RW_GUEST),
 (Name:'Кол-во градаций досветки';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:10;Index:DZ_iScr+8;Mech:DZM_LIGHT;AccessR:RW_GUEST;AccessW:RW_GUEST),
@@ -3006,12 +3006,12 @@ var DZ_NameTuneClimate:array [1..DZ_SumParTune] of TNameConst=(
          (Name:'Вентиляторы - время работы';Frm:SSSS;Ed:'мин';TipSens:TipCalc;Min:1;Max:100;Def:10;Index:DZ_iVentil+2;Mech:DZM_VENT;AccessR:RW_GUESTI;AccessW:RW_USER),
          (Name:'Вентиляторы - время паузы';Frm:SSSS;Ed:'мин';TipSens:TipCalc;Min:1;Max:100;Def:10;Index:DZ_iVentil+4;Mech:DZM_VENT;AccessR:RW_GUESTI;AccessW:RW_USER),
          (Name:'Вентиляторы - блокировать, если фрамуги больше';Frm:SSSS;Ed:'%';TipSens:TipCalc;Min:0;Max:200;Def:0;Index:DZ_iSACAlg+4;Mech:DZM_VENT;AccessR:RW_USERI;AccessW:RW_USER),
-         (Name:'Воздушный обогрев - включать,если температура меньше чем';Frm:SSpS0;Ed:'°C';TipSens:TipCalc;Min:0;Max:5;Def:0;Index:DZ_iCalorifer;Mech:DZM_AIR_HEATS;AccessR:RW_GUESTI;AccessW:RW_USER),
-         (Name:'Воздушный обогрев - выключать,если температура больше чем';Frm:SSpS0;Ed:'°C';TipSens:TipCalc;Min:0;Max:5;Def:0;Index:DZ_iCalorifer;Mech:DZM_AIR_HEATS;AccessR:RW_GUESTI;AccessW:RW_USER),
+         (Name:'Воздушный обогрев - включать,если температура меньше чем заданная на';Frm:SSpS0;Ed:'°C';TipSens:TipCalc;Min:0;Max:50;Def:0;Index:DZ_iHeatOnIf;Mech:DZM_AIR_HEATS;AccessR:RW_GUESTI;AccessW:RW_USER),
+         (Name:'Воздушный обогрев - выключать,если температура больше чем заданная на';Frm:SSpS0;Ed:'°C';TipSens:TipCalc;Min:0;Max:50;Def:0;Index:DZ_iHeatOffIf;Mech:DZM_AIR_HEATS;AccessR:RW_GUESTI;AccessW:RW_USER),
          // 125
          (Name:'Воздушный обогрев - время работы минимум';Frm:SSpS0;Ed:'мин';TipSens:TipCalc;Min:0;Max:120;Def:0;Index:DZ_iHeatMinTimeOn;Mech:DZM_AIR_HEATS;AccessR:RW_GUESTI;AccessW:RW_USER),
-         (Name:'Воздушный обогрев - время работы максимум';Frm:SSpS0;Ed:'мин';TipSens:TipCalc;Min:0;Max:10;Def:0;Index:DZ_iHeatMaxTimeOn;Mech:DZM_AIR_HEATS;AccessR:RW_GUESTI;AccessW:RW_USER),
-         (Name:'Воздушный обогрев - пауза между включениями';Frm:SSpS0;Ed:'мин';TipSens:TipCalc;Min:0;Max:5;Def:0;Index:DZ_iCalorifer;Mech:DZM_AIR_HEATS;AccessR:RW_GUESTI;AccessW:RW_USER),
+         (Name:'Воздушный обогрев - время работы максимум';Frm:SSpS0;Ed:'мин';TipSens:TipCalc;Min:0;Max:120;Def:0;Index:DZ_iHeatMaxTimeOn;Mech:DZM_AIR_HEATS;AccessR:RW_GUESTI;AccessW:RW_USER),
+         (Name:'Воздушный обогрев - пауза между включениями';Frm:SSpS0;Ed:'мин';TipSens:TipCalc;Min:0;Max:5;Def:0;Index:DZ_iHeatMinPause;Mech:DZM_AIR_HEATS;AccessR:RW_GUESTI;AccessW:RW_USER),
          (Name:'Кондиционер - включать (фрамуги закрыть),если (Твнеш-Тзад) больше';Frm:SSpS0;Ed:'°C';TipSens:TipCalc;Min:0;Max:5;Def:0;Index:DZ_iSunToClim+8;Mech:DZM_VENT;AccessR:RW_GUESTI;AccessW:RW_USER)
          );
 //===============================================================================
@@ -3244,73 +3244,76 @@ const
         clKonturMax=clFuchsia;
         clKonturMin=$C306A3;//clBlue;
         clNoEff=clAqua;
-        DZ_SUM_DIAGNOS    =31;
+        DZ_SUM_DIAGNOS    =25;
 
 DZ_Diagnos:array [1..DZ_SUM_DIAGNOS] of TDiagnos = (
    (Name:'Нет задания температуры воздуха';ShowPozition:29;LevelAlarm:alFatal;
-      PosInHot:39;Oper:BLE;OperValue:0;Color:clRed;Voice:'NoTask'),
+      PosInHot:51;Oper:BLE;OperValue:0;Color:clRed;Voice:'NoTask'),
    (Name:'Нет измерения температуры воздуха';ShowPozition:25;LevelAlarm:alFatal;
-      PosInHot:21;Oper:BLE;OperValue:0;Color:clRed;Voice:'NoMesAir'),
+      PosInHot:27;Oper:BLE;OperValue:0;Color:clRed;Voice:'NoMesAir'),
    (Name:'Нет измерения температуры воды в контуре 1';ShowPozition:21;LevelAlarm:alFatal;
-      PosInHot:69;Oper:BLE;OperValue:0;Color:clRed;Voice:'NoMesWater1';Mech:DZM_VALVE1),
+      PosInHot:77;Oper:BLE;OperValue:0;Color:clRed;Voice:'NoMesWater1';Mech:DZM_VALVE1),
    (Name:'Нет измерения температуры воды в контуре 2';ShowPozition:15;LevelAlarm:alFatal;
-      PosInHot:77;Oper:BLE;OperValue:0;Color:clRed;Voice:'NoMesWater2';Mech:DZM_VALVE2),
+      PosInHot:85;Oper:BLE;OperValue:0;Color:clRed;Voice:'NoMesWater2';Mech:DZM_VALVE2),
    (Name:'Нет измерения температуры воды в контуре 3';ShowPozition:11;LevelAlarm:alFatal;
-      PosInHot:85;Oper:BLE;OperValue:0;Color:clRed;Voice:'NoMesWater3';Mech:DZM_VALVE3),
+      PosInHot:93;Oper:BLE;OperValue:0;Color:clRed;Voice:'NoMesWater3';Mech:DZM_VALVE3),
    (Name:'Нет измерения температуры воды в контуре 4';ShowPozition:8;LevelAlarm:alFatal;
-      PosInHot:93;Oper:BLE;OperValue:0;Color:clRed;Voice:'NoMesWater4';Mech:DZM_VALVE4),
-   (Name:'Нет измерения температуры воды в контуре 5';ShowPozition:5;LevelAlarm:alFatal;
-      PosInHot:101;Oper:BLE;OperValue:0;Color:clRed;Voice:'NoMesWater5';Mech:DZM_VALVE5),
+      PosInHot:101;Oper:BLE;OperValue:0;Color:clRed;Voice:'NoMesWater4';Mech:DZM_VALVE4),
+   //(Name:'Нет измерения температуры воды в контуре 5';ShowPozition:5;LevelAlarm:alFatal;
+   //   PosInHot:109;Oper:BLE;OperValue:0;Color:clRed;Voice:'NoMesWater5';Mech:DZM_VALVE5),
+
    (Name:'Клапан контура 1 в ручном режиме';ShowPozition:19;LevelAlarm:alHand;
-      PosInHot:137;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_VALVE1;),
+      PosInHot:145;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_VALVE1;),
    (Name:'Насос контура 1 в ручном режиме';ShowPozition:16;LevelAlarm:alHand;
-      PosInHot:139;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_PUMP1;),
+      PosInHot:147;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_PUMP1;),
    (Name:'Клапан контура 2 в ручном режиме';ShowPozition:13;LevelAlarm:alHand;
-      PosInHot:141;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_VALVE2;),
+      PosInHot:149;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_VALVE2;),
    // 11
    (Name:'Насос контура 2 в ручном режиме';ShowPozition:10;LevelAlarm:alHand;
-      PosInHot:143;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_PUMP2;),
+      PosInHot:151;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_PUMP2;),
    (Name:'Клапан контура 3 в ручном режиме';ShowPozition:7;LevelAlarm:alHand;
-      PosInHot:145;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_VALVE3;),
+      PosInHot:153;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_VALVE3;),
    (Name:'Насос контура 3 в ручном режиме';ShowPozition:4;LevelAlarm:alHand;
-      PosInHot:147;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_PUMP3;),
+      PosInHot:155;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_PUMP3;),
    (Name:'Клапан контура 4 в ручном режиме';ShowPozition:2;LevelAlarm:alHand;
-      PosInHot:149;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_VALVE4;),
+      PosInHot:157;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_VALVE4;),
    (Name:'Насос контура 4 в ручном режиме';ShowPozition:-2;LevelAlarm:alHand;
-      PosInHot:151;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_PUMP4;),
-   (Name:'Клапан контура 5 в ручном режиме';ShowPozition:-5;LevelAlarm:alHand;
-      PosInHot:153;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_VALVE5;),
-   (Name:'Насос контура 5 в ручном режиме';ShowPozition:-8;LevelAlarm:alHand;
-      PosInHot:155;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_PUMP5;),
+      PosInHot:159;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_PUMP4;),
+   //(Name:'Клапан контура 5 в ручном режиме';ShowPozition:-5;LevelAlarm:alHand;
+   //   PosInHot:161;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_VALVE5;),
+   //(Name:'Насос контура 5 в ручном режиме';ShowPozition:-8;LevelAlarm:alHand;
+   //   PosInHot:163;Oper:BGT;OperValue:0;Color:clRed;Voice:'HandControl';Mech:DZM_PUMP5;),
+
    (Name:'Т воды в 1-м контуре не регулируется';ShowPozition:-1;LevelAlarm:alAttention;
-      PosInHot:68;Oper:BGT;OperValue:90;Color:clRed;Voice:'NoRegul1';Mech:DZM_VALVE1),
+      PosInHot:76;Oper:BGT;OperValue:90;Color:clRed;Voice:'NoRegul1';Mech:DZM_VALVE1),
    (Name:'Т воды в 2-м контуре не регулируется';ShowPozition:-4;LevelAlarm:alAttention;
-      PosInHot:76;Oper:BGT;OperValue:90;Color:clRed;Voice:'NoRegul2';Mech:DZM_VALVE2),
+      PosInHot:84;Oper:BGT;OperValue:90;Color:clRed;Voice:'NoRegul2';Mech:DZM_VALVE2),
    (Name:'Т воды в 3-м контуре не регулируется';ShowPozition:-7;LevelAlarm:alAttention;
-      PosInHot:84;Oper:BGT;OperValue:90;Color:clRed;Voice:'NoRegul3';Mech:DZM_VALVE3),
+      PosInHot:92;Oper:BGT;OperValue:90;Color:clRed;Voice:'NoRegul3';Mech:DZM_VALVE3),
    // 21
    (Name:'Т воды в 4-м контуре не регулируется';ShowPozition:-10;LevelAlarm:alAttention;
-      PosInHot:92;Oper:BGT;OperValue:90;Color:clRed;Voice:'NoRegul4';Mech:DZM_VALVE4),
-   (Name:'Т воды в 5-м контуре не регулируется';ShowPozition:-13;LevelAlarm:alAttention;
-      PosInHot:100;Oper:BGT;OperValue:90;Color:clRed;Voice:'NoRegul5';Mech:DZM_VALVE5),
+      PosInHot:100;Oper:BGT;OperValue:90;Color:clRed;Voice:'NoRegul4';Mech:DZM_VALVE4),
+   //(Name:'Т воды в 5-м контуре не регулируется';ShowPozition:-13;LevelAlarm:alAttention;
+   //   PosInHot:108;Oper:BGT;OperValue:90;Color:clRed;Voice:'NoRegul5';Mech:DZM_VALVE5),
+
    (Name:'Клапан 1 контура полностью закрыт';ShowPozition:0;LevelAlarm:alBlueAttention;
-      PosInHot:138;Oper:BLE;OperValue:3;Color:clKontur0;Mech:DZM_VALVE1),
+      PosInHot:146;Oper:BLE;OperValue:3;Color:clKontur0;Mech:DZM_VALVE1),
    (Name:'Клапан 1 контура полностью открыт';ShowPozition:-22;LevelAlarm:alBlueAttention;
-      PosInHot:138;Oper:BGT;OperValue:97;Color:clKontur100;Mech:DZM_VALVE1),
+      PosInHot:146;Oper:BGT;OperValue:97;Color:clKontur100;Mech:DZM_VALVE1),
    (Name:'Клапан 2 контура полностью закрыт';ShowPozition:0;LevelAlarm:alBlueAttention;
-      PosInHot:142;Oper:BLE;OperValue:3;Color:clKontur0;Mech:DZM_VALVE2),
+      PosInHot:150;Oper:BLE;OperValue:3;Color:clKontur0;Mech:DZM_VALVE2),
    (Name:'Клапан 2 контура полностью открыт';ShowPozition:-26;LevelAlarm:alBlueAttention;
-      PosInHot:142;Oper:BGT;OperValue:97;Color:clKontur100;Mech:DZM_VALVE2),
+      PosInHot:150;Oper:BGT;OperValue:97;Color:clKontur100;Mech:DZM_VALVE2),
    (Name:'Клапан 3 контура полностью закрыт';ShowPozition:0;LevelAlarm:alBlueAttention;
-      PosInHot:146;Oper:BLE;OperValue:3;Color:clKontur0;Mech:DZM_VALVE3),
+      PosInHot:154;Oper:BLE;OperValue:3;Color:clKontur0;Mech:DZM_VALVE3),
    (Name:'Клапан 3 контура полностью открыт';ShowPozition:-30;LevelAlarm:alBlueAttention;
-      PosInHot:146;Oper:BGT;OperValue:97;Color:clKontur100;Mech:DZM_VALVE3),
+      PosInHot:154;Oper:BGT;OperValue:97;Color:clKontur100;Mech:DZM_VALVE3),
    (Name:'Клапан 4 контура полностью открыт';ShowPozition:-34;LevelAlarm:alBlueAttention;
-      PosInHot:150;Oper:BGT;OperValue:97;Color:clKontur100;Mech:DZM_VALVE4),
-   (Name:'Клапан 5 контура полностью открыт';ShowPozition:-38;LevelAlarm:alBlueAttention;
-      PosInHot:154;Oper:BGT;OperValue:97;Color:clKontur100;Mech:DZM_VALVE4),
-   (Name:'Нет измерения влажности воздуха';ShowPozition:-27;LevelAlarm:alFatal;
-      PosInHot:25;Oper:BLE;OperValue:0;Color:clRed;Voice:'NoMesAir')
+      PosInHot:158;Oper:BGT;OperValue:97;Color:clKontur100;Mech:DZM_VALVE4)
+   //(Name:'Клапан 5 контура полностью открыт';ShowPozition:-38;LevelAlarm:alBlueAttention;
+   //  PosInHot:162;Oper:BGT;OperValue:97;Color:clKontur100;Mech:DZM_VALVE4)
+//   (Name:'Нет измерения влажности воздуха';ShowPozition:-27;LevelAlarm:alFatal;
+//      PosInHot:25;Oper:BLE;OperValue:0;Color:clRed;Voice:'NoMesAir')
 );
 
 // ------- Горячий блок - смещения и индексы ---------------------------
@@ -3350,7 +3353,7 @@ const
              DZ_StTeplScreen=    DZ_EndTeplVent+1;           //в ПК - номер начала контуров экрана
              DZ_EndTeplScreen=   DZ_StTeplScreen+DZ_SumTeplScreen-1;
 
-             DZ_SumTeplOther=   17;
+             DZ_SumTeplOther=   19; //17;
              DZ_StTeplOther=    DZ_EndTeplScreen+1;           //в ПК - номер начала контуров экрана
              DZ_EndTeplOther=   DZ_StTeplOther+DZ_SumTeplOther-1;
 
@@ -3360,7 +3363,7 @@ const
              DZ_SCalcMecan=      DZ_SCalcPump+DZ_SCalcRegul;
              DZ_SASens=20;
 
-             DZ_SumTeplMecan=    52; //56;
+             DZ_SumTeplMecan=    50;// 52   //56;
              DZ_StTeplMecan=     DZ_EndTeplOther+1;              //в ПК - номер начала положений механизмов
              DZ_EndTeplMecan=    DZ_StTeplMecan+DZ_SumTeplMecan-1;
              DZ_StTeplRez=       DZ_EndTeplMecan+1;
@@ -3502,17 +3505,17 @@ const DZ_cDefineHot:array [1..DZ_SumMesHot] of TNameConst=( //TDZDefineHot=(
 (Name:'Абсолютная влажность воздуха';Frm:SSpS0;Ed:'г/м3';TipSens:AbsRH;Min:0;Max:20;Def:HIDE_MIN_MAX;
     Index:0{iRez};Mech:DZM_SENS_HUM1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
 (Name:'Температура для отопления';Frm:SSpS0;Ed:'°C';TipSens:TipGoTask;Min:0;Max:70;Def:HIDE_MIN_MAX;
-    Index:DZ_iZoneStatus+10;Mech:DZM_SENS_TEMP2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
-(Name:'Источник для темпер отопления';Frm:CalcT;Ed:'';TipSens:TipGoTask;Min:0;Max:255;Def:HIDE_MIN_MAX;
-    Index:DZ_iZoneStatus+8;Mech:DZM_SENS_TEMP2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+    Index:DZ_iZoneStatus+10;Mech:DZM_SENS_TEMP1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Источник для темпер отопления';Frm:CalcT;Ed:'';TipSens:TipGoTask;Min:1;Max:255;Def:HIDE_MIN_MAX;
+    Index:DZ_iZoneStatus+8;Mech:DZM_SENS_TEMP1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
 (Name:'Температура для вентиляции';Frm:SSpS0;Ed:'°C';TipSens:TipGoTask;Min:0;Max:70;Def:HIDE_MIN_MAX;
-    Index:DZ_iZoneStatus+12;Mech:DZM_SENS_TEMP2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
-(Name:'Источник для темпер вентиляции';Frm:CalcT;Ed:'';TipSens:TipGoTask;Min:0;Max:255;Def:HIDE_MIN_MAX;
-    Index:DZ_iZoneStatus+9;Mech:DZM_SENS_TEMP2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+    Index:DZ_iZoneStatus+12;Mech:DZM_SENS_TEMP1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Источник для темпер вентиляции';Frm:CalcT;Ed:'';TipSens:TipGoTask;Min:1;Max:255;Def:HIDE_MIN_MAX;
+    Index:DZ_iZoneStatus+9;Mech:DZM_SENS_TEMP1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
 // 31
-(Name:'Воздушный обогреватель Состояние';Frm:SSpS0;Ed:'';TipSens:TipGoTask;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
+(Name:'Воздушный обогреватель Состояние';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
     Index:DZ_iZoneStatus+14;Mech:DZM_AIR_HEATS;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
-(Name:'Воздушный обогреватель Время работы';Frm:SSpS0;Ed:'мин';TipSens:TipGoTask;Min:0;Max:999;Def:HIDE_MIN_MAX;
+(Name:'Воздушный обогреватель Время работы';Frm:SSpS0;Ed:'мин';TipSens:TipTime;Min:0;Max:999;Def:HIDE_MIN_MAX;
     Index:DZ_iZoneStatus+16;Mech:DZM_AIR_HEATS;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
 (Name:'Дефицит водяного пара воздуха';Frm:SSpS0;Ed:'г/м3';TipSens:DDWP;Min:0;Max:20;Def:HIDE_MIN_MAX;
     Index:0{iRez};Mech:DZM_SENS_HUM1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
@@ -4475,7 +4478,7 @@ DZ511_cDefineHot:array [1..DZ511_SumMesHot] of TNameConst=( //TDZ511DefineHot=(
 {);
 }
 
-const SumValYAlarmHot =14;
+const SumValYAlarmHot =13;  //14
 
 var XNamesAlarmC510:array [1..1] of TXNames=(
     (Name:'Зона';Frm:None;Ed:'';Index:DZ_sizeTepl;Cfg:DZ_SumConfig;Kind:0)
@@ -4497,8 +4500,8 @@ var AlarmHotName:array [1..SumValYAlarmHot] of TNameConst=(
         Def:HIDE_MIN_MAX;Index:DZ_itKontur+DZ_size1Kontur*2+18+DZ_iTepl; Mech:DZM_VALVE3; Tag:2; AccessR:RW_GUEST; AccessW:RW_USER),
 (Name:'Контур 4';Frm:ComboSS;Ed:'';TipSens:TipControl;Min:comClim510Stat;Max:comClim510Stat+39;
         Def:HIDE_MIN_MAX;Index:DZ_itKontur+DZ_size1Kontur*3+18+DZ_iTepl; Mech:DZM_VALVE4; Tag:2; AccessR:RW_GUEST; AccessW:RW_USER),
-(Name:'Контур 5';Frm:ComboSS;Ed:'';TipSens:TipControl;Min:comClim510Stat;Max:comClim510Stat+39;
-        Def:HIDE_MIN_MAX;Index:DZ_itKontur+DZ_size1Kontur*4+18+DZ_iTepl; Mech:DZM_VALVE5; Tag:2; AccessR:RW_GUEST; AccessW:RW_USER),
+//(Name:'Контур 5';Frm:ComboSS;Ed:'';TipSens:TipControl;Min:comClim510Stat;Max:comClim510Stat+39;
+//        Def:HIDE_MIN_MAX;Index:DZ_itKontur+DZ_size1Kontur*4+18+DZ_iTepl; Mech:DZM_VALVE5; Tag:2; AccessR:RW_GUEST; AccessW:RW_USER),
 (Name:'Фрамуга подветренная';Frm:ComboSS;Ed:'';TipSens:TipControl;Min:comClim510Stat;Max:comClim510Stat+39;
         Def:HIDE_MIN_MAX;Index:DZ_itKontur+DZ_size1Kontur*6+18+DZ_iTepl; Mech:DZM_FRAM_SOUTH; Tag:2; AccessR:RW_GUEST; AccessW:RW_USER),
 (Name:'Фрамуга наветренная';Frm:ComboSS;Ed:'';TipSens:TipControl;Min:comClim510Stat;Max:comClim510Stat+39;

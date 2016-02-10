@@ -73,7 +73,8 @@ uses
   Calc502 in 'Calc502.pas',
   Climat501U in 'Climat501U.pas' {FClimat501U},
   DefineClim501S in 'DefineClim501S.pas',
-  Climat510 in 'Climat510.pas' {FClimat510};
+  Climat510 in 'Climat510.pas' {FClimat510},
+  Strategy501U in 'Strategy501U.pas' {FStrategy501U};
 
 {$R *.RES}
 var hwndPrev:HWND;
@@ -100,6 +101,7 @@ begin
   Application.Title := 'Monitor';
   Application.HelpFile := 'Monitor.hlp'; //HELP_FILE_NAME; //
   Application.CreateForm(TFMain, FMain);
+  Application.CreateForm(TFStrategy501U, FStrategy501U);
   //  Application.CreateForm(TFMixer501, FMixer501);
 //  Application.CreateForm(TFAphrodite, FAphrodite);
 //  Application.CreateForm(TFDrain405, FDrain405);

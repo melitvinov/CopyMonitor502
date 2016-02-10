@@ -3,13 +3,15 @@ unit Climat501U;
 interface
 
 uses
+
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Buttons, StdCtrls, ExtCtrls,DateUtils, PicCtr, Menus, ImgList, ComCtrls,
   Spin, ToolWin, TeEngine, Series, TeeProcs, Chart,GanttCh, Gauges,//GGraf,
   FConstType, FController, MPlayer, ClimCalc,
-  FBox, FPanel,SetGrid, MessageU,DefineClim510,    //, FPicPanel, FPicLabel
-  GIFDef, GIFComponent, FPicLabel, FPicPanel,TSGrid, Grids_ts,xmldom, XMLIntf, msxmldom, XMLDoc,
-  jpeg;   //,Grids_ts
+  FPicLabel, Grids_ts, TSGrid, GIFDef,
+  FBox, SetGrid, MessageU,DefineClim510,    //, FPicPanel, FPicLabel
+  GIFComponent, FPicPanel, xmldom, XMLIntf, msxmldom, XMLDoc,
+  jpeg, FPanel;
 //---------------------------------------------------
 //       Определения входов
 //S-сумма,T-тепличный,С-общий,
@@ -309,6 +311,9 @@ type  TFClimat501U = class(TFPicCtr)
     Label56: TLabel;
     Label57: TLabel;
     Label39: TLabel;
+    Label58: TLabel;
+    Label59: TLabel;
+    SpeedButton1: TSpeedButton;
     procedure TreeView1Edited(Sender: TObject; Node: TTreeNode;
       var S: String);
 //    procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
@@ -327,6 +332,7 @@ type  TFClimat501U = class(TFPicCtr)
     procedure SpeedButton14Click(Sender: TObject);
     procedure TBZone1Click(Sender: TObject);
     procedure ToolButton1Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
   private
     { Private declarations }
     NowSens,NowTepl,NowSeries:integer;
@@ -542,6 +548,8 @@ end;
 type TStrategy_DZ511=Class(TBlock)
 public
      procedure Init;override;
+     //function LoadXYvirt(vInBlock:Byte;ValX,ValY:Integer;
+     //  var Txt:String):Double;override;
 end;
 
 type TNetMeteo_DZ=Class(TBlock)
@@ -562,14 +570,19 @@ end;
 
 implementation
 uses Port, HandClim, audit, WindSon, FTopMes, BoilerIPC,GGraf,Subr,
-  ConvUtils;
+  ConvUtils, Strategy501U;
 {$R *.DFM}
 
 const
     HOT_ALARM_WAR=20;
     HOT_ALARM_ALR=30;
+    Messa: string[30] = 'Расчет положения клапана UC';
 
 var gRCS:Byte;
+    alarmMessage:Byte;
+    pascalSaveInterval:TDateTime;
+    pascalNameContr:string;
+    pascalCountZone:integer;
 
 function GetColorAlrStatus(x:integer):TColor; //override;
 begin
@@ -607,9 +620,10 @@ begin
      NameIdent:=cNameIdent403;
      SumZone:=IdentCtr[idSubTip];
      IsIPC:=true;
+     pascalSaveInterval := Now;
      if (SumZone<1) or (SumZone> DZ_MAX_SUM_ZONE) then SumZone:=1;
      ActivZone:=1;
-     if (IdentCtr[idModific] and 4)>0 then
+     if (IdentCtr[idModific] and 4) > 0 then
      begin
        THot_511.Create(Self);
        TControl_DZ511.Create(Self);
@@ -620,7 +634,7 @@ begin
        TCalInSens_DZ511.Create(Self);
        TCalOutSens_DZ.Create(Self);
        TParMec_DZ511.Create(Self);
-       TLev_DZ.Create(Self);
+       TLev_DZ.Create(Self);            // task 61
        HandMode:=THandMode_DZ511.Create(Self);
        NetMeteo:=TNetMeteo_DZ.Create(Self);
        AlarmHot:=THotAlarm511.Create(Self);
@@ -637,13 +651,13 @@ begin
        TCalInSens_DZ.Create(Self);
        TCalOutSens_DZ.Create(Self);
        TParMec_DZ.Create(Self);
-       TLev_DZ.Create(Self);
+       TLev_DZ.Create(Self);           // task 61
        HandMode:=THandMode_DZ.Create(Self);
        NetMeteo:=TNetMeteo_DZ.Create(Self);
        AlarmHot:=THotAlarm.Create(Self);
        FansHot:=nil;
      end;
-     BlockArxPC:=TBlArxPC_DZ.Create(Self);
+     BlockArxPC:=TBlArxPC_DZ .Create(Self);
      blPCArchive{BlockNewArxPC}:=TNewArxPC_DZ.Create(Self);
      WarmGroupConfig:=TWarmGroupConfig.Create(Self);
      Settings_DZ:=TSettings_DZ.Create(Self);
@@ -715,7 +729,7 @@ with ParentCtr as TFClimat501U do
        end;
  Result:=0;
  if vInBlock=cOutBlock then Txt:='';
- if ValY = DZ_posZonePower then
+ if ValY = DZ511_posZonePower then
         begin
         if ValX=0 then begin Txt:=ConstNames[ValY].Name; Exit; end;
         if Not Ready then Exit;
@@ -727,7 +741,7 @@ with ParentCtr as TFClimat501U do
         Txt:=FloatToStr(Result)+' '+ConstNames[ValY].Ed;
         Exit;
         end;
- if ValY = DZ_posCalcPower then
+ if ValY = DZ511_posCalcPower then
         begin
         if ValX=0 then begin Txt:=ConstNames[ValY].Name; Exit; end;
         if Not Ready then Exit;
@@ -753,11 +767,11 @@ with ParentCtr as TFClimat501U do
     Exit;
     end;
  tIndex:=0;
- if ValY >= DZ_StTeplSens then
-   tIndex:=DZ_iTepl
+ if ValY >= DZ511_StTeplSens then
+   tIndex:=DZ511_iTepl
    else if ValX > 1 then
     begin Txt:=''; Exit; end;;
- tIndex:=tIndex+(ValX-1)*DZ_sizeTepl;
+ tIndex:=tIndex+(ValX-1)*DZ511_sizeTepl;
  pt:=Addr(tIn);
  pHot:=Adr;
  case ConstNames[ValY].TipSens of
@@ -767,15 +781,14 @@ with ParentCtr as TFClimat501U do
      imNum:=RCSBitToImage(pHot^[ConstNames[ValY].Index+tIndex+2]);
      pt:=Addr(pHot^[ConstNames[ValY].Index+tIndex]);
      end;
-  prognT:tIn:=GetProgn(pHot^[DZ_itTAir+tIndex]+pHot^[DZ_itTAir+tIndex+1]*256);
-  AbsRH: tIn:=GetAbsH(pHot^[DZ_itTAir+tIndex]+pHot^[DZ_itTAir+tIndex+1]*256,pHot^[DZ_itRH+tIndex]+pHot^[DZ_itRH+tIndex+1]*256);
-  DDWP: tIn:=GetDDWP(pHot^[DZ_itTAir+tIndex]+pHot^[DZ_itTAir+tIndex+1]*256,pHot^[DZ_itRH+tIndex]+pHot^[DZ_itRH+tIndex+1]*256);
-  DDWPS: tIn:=GetDDWP(pHot^[DZ_itTSheet+tIndex]+pHot^[DZ_itTSheet+tIndex+1]*256,pHot^[DZ_itRH+tIndex]+pHot^[DZ_itRH+tIndex+1]*256);
-  TR: tIn:=GetTR(pHot^[DZ_itTAir+tIndex]+pHot^[DZ_itTAir+tIndex+1]*256,pHot^[DZ_itRH+tIndex]+pHot^[DZ_itRH+tIndex+1]*256);
+  prognT:tIn:=GetProgn(pHot^[DZ511_itTAir+tIndex]+pHot^[DZ511_itTAir+tIndex+1]*256);
+  AbsRH: tIn:=GetAbsH(pHot^[DZ511_itTAir+tIndex]+pHot^[DZ511_itTAir+tIndex+1]*256,pHot^[DZ511_itRH+tIndex]+pHot^[DZ511_itRH+tIndex+1]*256);
+  DDWP: tIn:=GetDDWP(pHot^[DZ511_itTAir+tIndex]+pHot^[DZ511_itTAir+tIndex+1]*256,pHot^[DZ511_itRH+tIndex]+pHot^[DZ511_itRH+tIndex+1]*256);
+  DDWPS: tIn:=GetDDWP(pHot^[DZ_itTSheet+tIndex]+pHot^[DZ_itTSheet+tIndex+1]*256,pHot^[DZ511_itRH+tIndex]+pHot^[DZ511_itRH+tIndex+1]*256);  //было
+  TR: tIn:=GetTR(pHot^[DZ511_itTAir+tIndex]+pHot^[DZ511_itTAir+tIndex+1]*256,pHot^[DZ511_itRH+tIndex]+pHot^[DZ511_itRH+tIndex+1]*256);
   TipTime: pt:=Addr(pHot^[ConstNames[ValY].Index+tIndex]);
   else pt:=Addr(pHot^[ConstNames[ValY].Index+tIndex]);
   end;
-
   Result:=Convers(ConstNames[ValY].Name,pt,
         ConstNames[ValY].Frm,vInBlock,ValX,ValY,Txt,ConstNames[ValY].Ed);
 {  if (ConstNames[ValY].Frm <> ComboBit)
@@ -786,13 +799,13 @@ with ParentCtr as TFClimat501U do
                end; }
   if (ValX>0) and (ConstNames[ValY].TipSens=TipGoTask) and (ClimGoTask>0) then
      begin
-     tTask:=0.01*GetInt51(Addr(pHot^[DZ_itDoT+tIndex]));
+     tTask:=0.01*GetInt51(Addr(pHot^[DZ511_itDoT+tIndex]));
      tDelt:=(tTask-Result)*(tTask-Result);
      if tDelt>1 then Exit;
      if Result<tTask then tDelt:=-tDelt;
      Result:=tTask+tDelt;
      end;
-  if (ValY>=DZ_StTeplMecan) then
+  if (ValY>=DZ511_StTeplMecan) then
     if (Result>0) then
       imColor := clRed
       else imColor := clGreen;
@@ -800,6 +813,50 @@ with ParentCtr as TFClimat501U do
 end;
 
 function THot_DZ.TestAlarmSens:Boolean;
+var y,x:integer; st:string; st1:string;Color:TColor;
+begin
+  for y:=1 to CountY do
+    begin
+    if ConstNames[y].TipSens <> SensorRCS then continue;
+    for x:=1 to CountX do
+        begin
+        LoadXY(cOutBlock,x,y,st);
+        //if gRCS=0 then continue;
+        if gRCS >= 32 then
+          begin
+            HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Отказ датчика',clNone,clNone,clRed);      // запись в журнал
+            alarmMessage := alDifficulty;//alFatal;
+            continue;
+          end;
+        if gRCS = 1 then    // нет измерений по причине отсутствия связи
+          begin
+            HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Отказ датчика',clNone,clNone,clRed);      // запись в журнал
+            alarmMessage := alDifficulty;//alFatal;
+            continue;
+          end;
+        //if (gRCS and bMinMaxV)>0 then                  //bMinMaxV=        32; //0x20 bMinMaxU=        64; //0x40 bHiAlarm=        4;  //0x04 bLowAlarm=       8;  //0x08
+        //  begin               1
+        //    HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Отказ датчика',clNone,clRed);
+        //    alarmMessage := alFatal;
+        //    continue;
+        //  end;
+        if (gRCS and bHiAlarm)>0 then
+          begin
+            HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Выше допуска',clNone,clFuchsia);
+            alarmMessage := alAttention;
+            continue;
+          end;
+        if (gRCS and bLowAlarm)>0 then
+          begin
+            HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Ниже допуска',clNone,clBlue);
+            alarmMessage := alAttention;
+            continue;
+          end;
+        end;
+    end;
+end;
+
+{function THot_DZ.TestAlarmSens:Boolean;
 var y,x:integer; st:string;
 begin
   for y:=1 to CountY do
@@ -817,7 +874,7 @@ begin
           begin HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Ниже допуска',clNone,clBlue);continue; end;
         end;
     end;
-end;
+end; }
 
 function THot_DZ.GetExist(x,y:integer):TConfigExist;
 begin
@@ -834,7 +891,7 @@ var pHot:PByteArray;
 begin
 
  with ParentCtr as TFClimat501U do
-    for i:=1 to 4 do ZonePower[i]:=LoadXY(cOutBlock,1,DZ_posZonePower,st);;
+    for i:=1 to 4 do ZonePower[i]:=LoadXY(cOutBlock,1,DZ511_posZonePower,st);;
  with ((ParentCtr as TFClimat501U).NetMeteo) as TNetMeteo_DZ do
     CalcNetRegul;
 
@@ -842,29 +899,29 @@ begin
  for i:=0 to DZ_SumOutMeteo-1 do
    begin
 //  младш бит 0x01=выключен;  бит 0x20-вне диапазона
-   if ((pHot^[DZ_iSensOut+i*3+2] and (1+16)) = 0)
+   if ((pHot^[DZ511_iSensOut+i*3+2] and (1+16)) = 0)
       then
 // если датчик подсоединен и измеряет, то его в общие данные
 //--------------------------------------------
       begin
       bNeedMeteo:=true;
       mMeteo[i].UpdateTime:=BlDate;
-      mMeteo[i].Val51[0]:=pHot^[DZ_iSensOut+i*3];
-      mMeteo[i].Val51[1]:=pHot^[DZ_iSensOut+i*3+1];
+      mMeteo[i].Val51[0]:=pHot^[DZ511_iSensOut+i*3];
+      mMeteo[i].Val51[1]:=pHot^[DZ511_iSensOut+i*3+1];
       if (ParentCtr.IsIPC) then
       begin
-        mMeteo[i].Val51[1]:=pHot^[DZ_iSensOut+i*3];
-        mMeteo[i].Val51[0]:=pHot^[DZ_iSensOut+i*3+1];
+        mMeteo[i].Val51[1]:=pHot^[DZ511_iSensOut+i*3];
+        mMeteo[i].Val51[0]:=pHot^[DZ511_iSensOut+i*3+1];
       end;
       mMeteo[i].Source:=ParentCtr.CtrName;
       if i=comSun then
           begin
-          mMeteo[comSumSun].Val51[0]:=pHot^[DZ_iSumSun];
-          mMeteo[comSumSun].Val51[1]:=pHot^[DZ_iSumSun+1];
+          mMeteo[comSumSun].Val51[0]:=pHot^[DZ511_iSumSun];
+          mMeteo[comSumSun].Val51[1]:=pHot^[DZ511_iSumSun+1];
           if (ParentCtr.IsIPC) then
           begin
-            mMeteo[comSumSun].Val51[1]:=pHot^[DZ_iSumSun];
-            mMeteo[comSumSun].Val51[0]:=pHot^[DZ_iSumSun+1];
+            mMeteo[comSumSun].Val51[1]:=pHot^[DZ511_iSumSun];
+            mMeteo[comSumSun].Val51[0]:=pHot^[DZ511_iSumSun+1];
           end;
           mMeteo[comSumSun].UpdateTime:=BlDate;
           mMeteo[comSumSun].Source:=ParentCtr.CtrName;
@@ -880,22 +937,22 @@ begin
       begin
       if TestEquDate(mMeteo[i].UpdateTime,Now,10) then //(Now < mMeteo[i].TimeRes) or (Now > (mMeteo[i].TimeRes+5*cMin)) then
             begin
-            pHot^[DZ_iSensOut+i*3]:=mMeteo[i].Val51[0];
-            pHot^[DZ_iSensOut+i*3+1]:=mMeteo[i].Val51[1];
+            pHot^[DZ511_iSensOut+i*3]:=mMeteo[i].Val51[0];
+            pHot^[DZ511_iSensOut+i*3+1]:=mMeteo[i].Val51[1];
             if (ParentCtr.IsIPC) then
             begin
-              pHot^[DZ_iSensOut+i*3]:=mMeteo[i].Val51[1];
-              pHot^[DZ_iSensOut+i*3+1]:=mMeteo[i].Val51[0];
+              pHot^[DZ511_iSensOut+i*3]:=mMeteo[i].Val51[1];
+              pHot^[DZ511_iSensOut+i*3+1]:=mMeteo[i].Val51[0];
             end;
 //            pHot^[DZ_iSensOut+i*3+2]:=mMeteo[i].RCS;
             if i=comSun then
                 begin
-                pHot^[DZ_iSumSun]:=mMeteo[comSumSun].Val51[0];
-                pHot^[DZ_iSumSun+1]:=mMeteo[comSumSun].Val51[1];
+                pHot^[DZ511_iSumSun]:=mMeteo[comSumSun].Val51[0];
+                pHot^[DZ511_iSumSun+1]:=mMeteo[comSumSun].Val51[1];
                 if (ParentCtr.IsIPC) then
                   begin
-                  pHot^[DZ_iSumSun]:=mMeteo[comSumSun].Val51[1];
-                  pHot^[DZ_iSumSun+1]:=mMeteo[comSumSun].Val51[0];
+                  pHot^[DZ511_iSumSun]:=mMeteo[comSumSun].Val51[1];
+                  pHot^[DZ511_iSumSun+1]:=mMeteo[comSumSun].Val51[0];
                   end;
                 end;
           end;
@@ -906,18 +963,18 @@ begin
    end;
  if WindPortThread.Workeed then
       begin
-      pHot^[DZ_iWind+2]:=0;
-      pHot^[DZ_iDirWind+2]:=0;
-      pHot^[DZ_iWind]:=round(WindPortThread.Wind*100) div 256;
-      pHot^[DZ_iWind+1]:=round(WindPortThread.Wind*100) mod 256;
-      pHot^[DZ_iDirWind]:=round(WindPortThread.Direct) div 256;
-      pHot^[DZ_iDirWind+1]:=round(WindPortThread.Direct) mod 256;
+      pHot^[DZ511_iWind+2]:=0;
+      pHot^[DZ511_iDirWind+2]:=0;
+      pHot^[DZ511_iWind]:=round(WindPortThread.Wind*100) div 256;
+      pHot^[DZ511_iWind+1]:=round(WindPortThread.Wind*100) mod 256;
+      pHot^[DZ511_iDirWind]:=round(WindPortThread.Direct) div 256;
+      pHot^[DZ511_iDirWind+1]:=round(WindPortThread.Direct) mod 256;
       if (ParentCtr.IsIPC) then
         begin
-          pHot^[DZ_iWind]:=round(WindPortThread.Wind*100) mod 256;
-          pHot^[DZ_iWind+1]:=round(WindPortThread.Wind*100) div 256;
-          pHot^[DZ_iDirWind]:=round(WindPortThread.Direct) mod 256;
-          pHot^[DZ_iDirWind+1]:=round(WindPortThread.Direct) div 256;
+          pHot^[DZ511_iWind]:=round(WindPortThread.Wind*100) mod 256;
+          pHot^[DZ511_iWind+1]:=round(WindPortThread.Wind*100) div 256;
+          pHot^[DZ511_iDirWind]:=round(WindPortThread.Direct) mod 256;
+          pHot^[DZ511_iDirWind+1]:=round(WindPortThread.Direct) div 256;
         end;
       end;
 //==================================================
@@ -925,32 +982,32 @@ begin
  // рассчет восхода и захода
  //SunRaiseSet(Now,MeteoLong,MeteoWidth,{MeteoZone}4,SRaise,SSet);
  Minut:=MinuteOfTheDay(GlobSunRaise);
- pHot^[DZ_iVosx]:=Minut div 256;
- pHot^[DZ_iVosx+1]:=Minut mod 256;
+ pHot^[DZ511_iVosx]:=Minut div 256;
+ pHot^[DZ511_iVosx+1]:=Minut mod 256;
  if (ParentCtr.IsIPC) then
  begin
-   pHot^[DZ_iVosx+1]:=Minut div 256;
-   pHot^[DZ_iVosx]:=Minut mod 256;
+   pHot^[DZ511_iVosx+1]:=Minut div 256;
+   pHot^[DZ511_iVosx]:=Minut mod 256;
  end;
  Minut:=MinuteOfTheDay(GlobSunSet);
- pHot^[DZ_iVosx+2]:=Minut div 256;
- pHot^[DZ_iVosx+3]:=Minut mod 256;
+ pHot^[DZ511_iVosx+2]:=Minut div 256;
+ pHot^[DZ511_iVosx+3]:=Minut mod 256;
  if (ParentCtr.IsIPC) then
  begin
-   pHot^[DZ_iVosx+3]:=Minut div 256;
-   pHot^[DZ_iVosx+2]:=Minut mod 256;
+   pHot^[DZ511_iVosx+3]:=Minut div 256;
+   pHot^[DZ511_iVosx+2]:=Minut mod 256;
  end;
- pHot^[DZ_iFeedBack+1]:=0;
- pHot^[DZ_iFeedBack+2]:=0;
+ pHot^[DZ511_iFeedBack+1]:=0;
+ pHot^[DZ511_iFeedBack+2]:=0;
  with FMain.ListCtr do for i:=0 to Tabs.Count-1 do
    if (Tabs.Objects[i] is TFBoilerIPC) then
    begin
      if (Tabs.Objects[i] as TFBoilerIPC).HotPanels.LoadXY(cOutBlock,round((ParentCtr as TFClimat501U).WarmGroupConfig.LoadXY(cOutBlock,1,posLightSource,st1)),1,st)>0 then
-       pHot^[DZ_iFeedBack+1]:=1;
+       pHot^[DZ511_iFeedBack+1]:=1;
      tmpCo2:=round((ParentCtr as TFClimat501U).WarmGroupConfig.LoadXY(cOutBlock,1,posCO2Src,st1));
      if (tmpCo2>0) then
       if (Tabs.Objects[i] as TFBoilerIPC).HotMech.LoadXY(cOutBlock,1,216+(tmpCo2-1)*2,st)>0 then
-        pHot^[DZ_iFeedBack+2]:=1;
+        pHot^[DZ511_iFeedBack+2]:=1;
 
      break;
   end;
@@ -970,8 +1027,8 @@ var pHot:PByteArray;
     i:integer;
 begin
  pHot:=Adr;
- i:=pHot^[DZ_iTime]+pHot^[DZ_iTime+1]*256;
- if (i> ((pHot^[DZ_iVosx]+pHot^[DZ_iVosx+1]*256)+1))and (i<(pHot^[DZ_iVosx+2]+pHot^[DZ_iVosx+3]*256))
+ i:=pHot^[DZ511_iTime]+pHot^[DZ511_iTime+1]*256;
+ if (i> ((pHot^[DZ511_iVosx]+pHot^[DZ511_iVosx+1]*256)+1))and (i<(pHot^[DZ511_iVosx+2]+pHot^[DZ511_iVosx+3]*256))
   then Result:=True else Result:=False;
 end;
 
@@ -983,9 +1040,9 @@ begin
  if FormFalseTime then Exit;
  pHot:=Adr;
  PCTime:=MinuteOfTheDay(Now);
- CtrlTime:=pHot^[DZ_iTime]*256+pHot^[DZ_iTime+1];
+ CtrlTime:=pHot^[DZ511_iTime]*256+pHot^[DZ511_iTime+1];
  if (ParentCtr.IsIPC) then
-  CtrlTime:=pHot^[DZ_iTime+1]*256+pHot^[DZ_iTime];
+  CtrlTime:=pHot^[DZ511_iTime+1]*256+pHot^[DZ511_iTime];
  if (ParentCtr.DataPath <> '')
      or (PCTime<15)
      or (PCTime>(24*60-15))
@@ -995,21 +1052,21 @@ begin
  if FMain.mnAutoSynxTime.Checked or (MessageDlg(Format(ProgMess[iAtten]+ProgMess[321]+ProgMess[322],[ParentCtr.CtrName]),mtWarning,[mbYes, mbNo],0)= mrYes) then
      begin
      pHot^[0]:=$80;
-     pHot^[DZ_iTime+4]:=YearOf(Now)-2000;
+     pHot^[DZ511_iTime+4]:=YearOf(Now)-2000;
 
-     pHot^[DZ_iTime]:=PCTime div 256;
-     pHot^[DZ_iTime+1]:=PCTime mod 256;
-     pHot^[DZ_iTime+2]:=MonthOfTheYear(Now);
-     pHot^[DZ_iTime+3]:=DayOfTheMonth(Now);
+     pHot^[DZ511_iTime]:=PCTime div 256;
+     pHot^[DZ511_iTime+1]:=PCTime mod 256;
+     pHot^[DZ511_iTime+2]:=MonthOfTheYear(Now);
+     pHot^[DZ511_iTime+3]:=DayOfTheMonth(Now);
      if (ParentCtr.IsIPC) then
      begin
-       pHot^[DZ_iTime]:=PCTime mod 256;
-       pHot^[DZ_iTime+1]:=PCTime div 256;
-       pHot^[DZ_iTime+2]:=DayOfTheMonth(Now);
-       pHot^[DZ_iTime+3]:=MonthOfTheYear(Now);
+       pHot^[DZ511_iTime]:=PCTime mod 256;
+       pHot^[DZ511_iTime+1]:=PCTime div 256;
+       pHot^[DZ511_iTime+2]:=DayOfTheMonth(Now);
+       pHot^[DZ511_iTime+3]:=MonthOfTheYear(Now);
      end;
 
-     SendByte:=DZ_SizeSendTime;
+     SendByte:=DZ511_SizeSendTime;
      SendToPort(nil);
      SendByte:=DZ_sizePCSend403;
      HotMessage(ParentCtr.CtrName,ProgMess[23]);
@@ -1038,7 +1095,7 @@ begin
       Param.Block:=Self;
       Node1:=Items.AddChildObject(NodeHead,ProgMess[236],Param.Ptr);      //'Общие данные'
       Param.X:=1;
-      for nSens:=DZ_StCommon to DZ_EndCommon do begin
+      for nSens:=DZ511_StCommon to DZ511_EndCommon do begin
         Param.Y:=nSens;
         if GetReadAccess(1,nSens)>=NowAccess then continue;
         LoadXY(cOutBlock,0,nSens,vSt);
@@ -1054,7 +1111,7 @@ begin
       Param.Block:=Self;
       Node1:=Items.AddChildObject(NodeHead,ProgMess[237]+' '+GetTextZona(i,0),Param.Ptr); //'Измерения '
       Param.X:=i;
-      for nSens:=DZ_StTeplSens to DZ_EndTeplSens do begin
+      for nSens:=DZ511_StTeplSens to DZ511_EndTeplSens do begin
              if (GetExist(i,nSens) = cfExistFalse) or (GetReadAccess(i,nSens)>=NowAccess) then continue;
              Param.Y:=nSens;
              (Items.AddChildObject(Node1,ConstNames[nSens].Name,Param.Ptr)).ImageIndex
@@ -1065,7 +1122,7 @@ begin
       Param.Block:=Self;
       Node1:=Items.AddChildObject(NodeHead,ProgMess[238]+' '+GetTextZona(i,0),Param.Ptr);  //'Расчетный климат '
       Param.X:=i;
-      for nSens:=DZ_StTeplCalc to DZ_EndTeplCalc do begin
+      for nSens:=DZ511_StTeplCalc to DZ511_EndTeplCalc do begin
              Param.Y:=nSens;
              if (GetExist(i,nSens) = cfExistFalse) or (GetReadAccess(i,nSens)>=NowAccess) then continue;
              (Items.AddChildObject(Node1,ConstNames[nSens].Name,Param.Ptr)).ImageIndex
@@ -1076,7 +1133,7 @@ begin
       Param.Block:=Self;
       Node1:=Items.AddChildObject(NodeHead,ProgMess[239]+' '+GetTextZona(i,0),Param.Ptr); //'Обогрев '
       Param.X:=i;
-      for nSens:=DZ_StTeplWarm to DZ_EndTeplWarm do begin
+      for nSens:=DZ511_StTeplWarm to DZ511_EndTeplWarm do begin
              if (GetExist(i,nSens) = cfExistFalse) or (GetReadAccess(i,nSens)>=NowAccess) then continue;
              Param.Y:=nSens;
              nTemp:=TipSensToNumImage(ConstNames[nSens].TipSens);
@@ -1086,9 +1143,11 @@ begin
       if Not Node1.HasChildren  then Node1.Delete;
 
       Param.Block:=Self;
-      Node1:=Items.AddChildObject(NodeHead,ProgMess[240]+' '+GetTextZona(i,0),Param.Ptr);  //'Вентиляция '
+
+      //Node1:=Items.AddChildObject(NodeHead,ProgMess[240]+' '+GetTextZona(i,0),Param.Ptr);  //'Вентиляция '
+      Node1:=Items.AddChildObject(NodeHead,Messa+' '+GetTextZona(i,0),Param.Ptr);  //'Вентиляция '
       Param.X:=i;
-      for nSens:=DZ_StTeplVent to DZ_EndTeplVent do begin
+      for nSens:=DZ511_StTeplVent to DZ511_EndTeplVent do begin
              if (GetExist(i,nSens) = cfExistFalse) or (GetReadAccess(i,nSens)>=NowAccess) then continue;
              Param.Y:=nSens;
              (Items.AddChildObject(Node1,ConstNames[nSens].Name,Param.Ptr)).ImageIndex
@@ -1099,7 +1158,7 @@ begin
       Param.Block:=Self;
       Node1:=Items.AddChildObject(NodeHead,ProgMess[314]+' '+GetTextZona(i,0),Param.Ptr);  //'Экраны'
       Param.X:=i;
-      for nSens:=DZ_StTeplScreen to DZ_EndTeplScreen do begin
+      for nSens:=DZ511_StTeplScreen to DZ511_EndTeplScreen do begin
              if (GetExist(i,nSens) = cfExistFalse) or (GetReadAccess(i,nSens)>=NowAccess) then continue;
              Param.Y:=nSens;
              (Items.AddChildObject(Node1,ConstNames[nSens].Name,Param.Ptr)).ImageIndex
@@ -1110,7 +1169,7 @@ begin
       Param.Block:=Self;
       Node1:=Items.AddChildObject(NodeHead,ProgMess[241]+' '+GetTextZona(i,0),Param.Ptr);  //'Расчет дополнительных систем'
       Param.X:=i;
-      for nSens:=DZ_StTeplOther to DZ_EndTeplOther do begin
+      for nSens:=DZ511_StTeplOther to DZ511_EndTeplOther do begin
              if (GetExist(i,nSens) = cfExistFalse) or (GetReadAccess(i,nSens)>=NowAccess) then continue;
              Param.Y:=nSens;
              (Items.AddChildObject(Node1,ConstNames[nSens].Name,Param.Ptr)).ImageIndex
@@ -1121,7 +1180,7 @@ begin
       Param.Block:=Self;
       Node1:=Items.AddChildObject(NodeHead,ProgMess[242]+' '+GetTextZona(i,0),Param.Ptr);   //'Механизмы '
       Param.X:=i;
-      for nSens:=DZ_StTeplMecan to DZ_EndTeplMecan do begin
+      for nSens:=DZ511_StTeplMecan to DZ511_EndTeplMecan do begin
              if (GetExist(i,nSens) = cfExistFalse) or (GetReadAccess(i,nSens)>=NowAccess) then continue;
              Param.Y:=nSens;
              (Items.AddChildObject(Node1,ConstNames[nSens].Name,Param.Ptr)).ImageIndex
@@ -1170,7 +1229,6 @@ var pHot:pByteArray;
     pt:Pointer;
     tIndex,i:word;
     tTask,tDelt:Double;
-
 begin
 with ParentCtr as TFClimat501U do
  begin
@@ -1178,8 +1236,8 @@ with ParentCtr as TFClimat501U do
  gRCS:=0;
  if ValY=0 then
        begin
-       Txt:=GetTextZona(ValX,ValY);
-       Exit;
+         Txt:=GetTextZona(ValX,ValY);
+         Exit;
        end;
  Result:=0;
  if vInBlock=cOutBlock then Txt:='';
@@ -1225,12 +1283,15 @@ with ParentCtr as TFClimat501U do
     end;
  tIndex:=0;
  if ValY >= DZ511_StTeplSens then
-   tIndex:=DZ_iTepl
+   tIndex:=DZ511_iTepl
    else if ValX > 1 then
     begin Txt:=''; Exit; end;;
  tIndex:=tIndex+(ValX-1)*DZ511_sizeTepl;
  pt:=Addr(tIn);
  pHot:=Adr;
+
+
+
  case ConstNames[ValY].TipSens of
  TipSensor,TipGoTask,SensorRCS:
      begin
@@ -1239,14 +1300,37 @@ with ParentCtr as TFClimat501U do
      pt:=Addr(pHot^[ConstNames[ValY].Index+tIndex]);
      end;
   prognT:tIn:=GetAbsH(pHot^[DZ511_itTAir+tIndex]+pHot^[DZ511_itTAir+tIndex+1]*256,pHot^[DZ511_itRH+tIndex]+pHot^[DZ511_itRH+tIndex+1]*256);
-  AbsRH: tIn:=GetAbsH(pHot^[DZ511_itRH+14*3+tIndex]+pHot^[DZ511_itRH+14*3+tIndex+1]*256,pHot^[DZ511_itRH+2*3+tIndex]+pHot^[DZ511_itRH+2*3+tIndex+1]*256);
+  AbsRH: tIn:=GetAbsH(pHot^[DZ511_itRH+42+tIndex]+pHot^[DZ511_itRH+42+tIndex+1]*256,pHot^[DZ511_itRH+21+tIndex]+pHot^[DZ511_itRH+21+tIndex+1]*256);
   DDWP: tIn:=GetDDWP(pHot^[DZ511_itTAir+tIndex]+pHot^[DZ511_itTAir+tIndex+1]*256,pHot^[DZ511_itRH+tIndex]+pHot^[DZ511_itRH+tIndex+1]*256);
   DDWPS: tIn:=Round((GetAbsH(pHot^[DZ511_itTAir+3*3+tIndex]+pHot^[DZ511_itTAir+3*3+tIndex+1]*256,pHot^[DZ511_itRH+tIndex]+pHot^[DZ511_itRH+tIndex+1]*256)-GetAbsH(pHot^[DZ511_itRH+14*3+tIndex]+pHot^[DZ511_itRH+14*3+tIndex+1]*256,pHot^[DZ511_itRH+2*3+tIndex]+pHot^[DZ511_itRH+2*3+tIndex+1]*256))*40*0.757/10);
-  cdv
-
   TR: tIn:=GetTR(pHot^[DZ511_itTAir+tIndex]+pHot^[DZ511_itTAir+tIndex+1]*256,pHot^[DZ511_itRH+tIndex]+pHot^[DZ511_itRH+tIndex+1]*256);
   TipTime: pt:=Addr(pHot^[ConstNames[ValY].Index+tIndex]);
   else pt:=Addr(pHot^[ConstNames[ValY].Index+tIndex]);
+  end;
+
+  case ConstNames[ValY].Tag of
+  calcTrans: begin tIn:=GetMaxTrans(pHot^[DZ511_itTAir+tIndex]+pHot^[DZ511_itTAir+tIndex+1]*256,
+                          pHot^[DZ511_itRH+tIndex]+pHot^[DZ511_itRH+tIndex+1]*256,
+                          pHot^[DZ511_itRH+42+tIndex]+pHot^[DZ511_itRH+42+tIndex+1]*256,
+                          pHot^[DZ511_itRH+21+tIndex]+pHot^[DZ511_itRH+21+tIndex+1]*256,
+                          Round(((pHot^[DZ511_iMechanic+25+tIndex]+pHot^[DZ511_iMechanic+25+tIndex+1]*256) *
+                          Round(Settings_DZ.LoadXYvirt(cOutBlock,ValX,11,Txt)))/100) );
+                          pt:=Addr(tIn);
+                          //txt := FloatToStr(tIn);
+                          //Result:=LoadXYvirt(cOutTxtBlock,ValX,ValY,txt);
+                          //Exit;
+                          end;
+   // транспирация
+  calcConsumCO2: begin tIn:=GetCO2Consum(pHot^[DZ511_itRH+15+tIndex]+pHot^[DZ511_itRH+15+tIndex+1]*256,
+                          pHot^[DZ511_itRH+9+tIndex]+pHot^[DZ511_itRH+9+tIndex+1]*256,
+                          Round(((pHot^[DZ511_iMechanic+25+tIndex]+pHot^[DZ511_iMechanic+25+tIndex+1]*256) *
+                          Round(Settings_DZ.LoadXYvirt(cOutBlock,ValX,11,Txt)))/100) );
+                          pt:=Addr(tIn);
+                          end;
+   // потребление СО2
+
+  //DDTRANS:  tIn:=GetMaxTrans(pHot^[DZ_itTAir+tIndex]+pHot^[DZ_itTAir+tIndex+1]*256,pHot^[DZ_itRH+tIndex]+pHot^[DZ_itRH+tIndex+1]*256);
+  //DDCONSUM: tIn:=GetCO2Consum(pHot^[DZ_itTAir+tIndex]+pHot^[DZ_itTAir+tIndex+1]*256,pHot^[DZ_itRH+tIndex]+pHot^[DZ_itRH+tIndex+1]*256);
   end;
 
   Result:=Convers(ConstNames[ValY].Name,pt,
@@ -1273,6 +1357,50 @@ with ParentCtr as TFClimat501U do
 end;
 
 function THot_511.TestAlarmSens:Boolean;
+var y,x:integer; st:string; st1:string;Color:TColor;
+begin
+  for y:=1 to CountY do
+    begin
+    if ConstNames[y].TipSens <> SensorRCS then continue;
+    for x:=1 to CountX do
+        begin
+        LoadXY(cOutBlock,x,y,st);
+        if gRCS=0 then continue;
+        if gRCS = 1 then
+          begin
+            HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Датчик не подключен',clNone,clNone,clRed);      // запись в журнал
+            alarmMessage := alFatal;
+            continue;
+          end;
+        if gRCS > 1 then
+          begin
+            HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Отказ датчика',clNone,clNone,clRed);      // запись в журнал
+            alarmMessage := alFatal;
+            continue;
+          end;
+        //if (gRCS and bMinMaxV)>0 then                  //bMinMaxV=        32; //0x20 bMinMaxU=        64; //0x40 bHiAlarm=        4;  //0x04 bLowAlarm=       8;  //0x08
+        //  begin
+        //    HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Отказ датчика',clNone,clRed);
+        //    alarmMessage := alFatal;
+        //    continue;
+        //  end;
+        if (gRCS and bHiAlarm)>0 then
+          begin
+            HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Выше допуска',clNone,clFuchsia);
+            alarmMessage := alAttention;
+            continue;
+          end;
+        if (gRCS and bLowAlarm)>0 then
+          begin
+            HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Ниже допуска',clNone,clBlue);
+            alarmMessage := alAttention;
+            continue;
+          end;
+        end;
+    end;
+end;
+
+{function THot_511.TestAlarmSens:Boolean;
 var y,x:integer; st:string;
 begin
   for y:=1 to CountY do
@@ -1290,7 +1418,7 @@ begin
           begin HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Ниже допуска',clNone,clBlue);continue; end;
         end;
     end;
-end;
+end;  }
 
 function THot_511.GetExist(x,y:integer):TConfigExist;
 begin
@@ -1409,7 +1537,7 @@ begin
    pHot^[DZ511_iVosx+1]:=Minut div 256;
    pHot^[DZ511_iVosx]:=Minut mod 256;
  end;
- Minut:=MinuteOfTheDay(SSet);
+ Minut:=MinuteOfTheDay(GlobSunSet);
  pHot^[DZ511_iVosx+2]:=Minut div 256;
  pHot^[DZ511_iVosx+3]:=Minut mod 256;
  if (ParentCtr.IsIPC) then
@@ -1460,9 +1588,9 @@ begin
  if FormFalseTime then Exit;
  pHot:=Adr;
  PCTime:=MinuteOfTheDay(Now);
- CtrlTime:=pHot^[DZ_iTime]*256+pHot^[DZ_iTime+1];
+ CtrlTime:=pHot^[DZ511_iTime]*256+pHot^[DZ511_iTime+1];
  if (ParentCtr.IsIPC) then
-  CtrlTime:=pHot^[DZ_iTime+1]*256+pHot^[DZ_iTime];
+  CtrlTime:=pHot^[DZ511_iTime+1]*256+pHot^[DZ511_iTime];
  if (ParentCtr.DataPath <> '')
      or (PCTime<15)
      or (PCTime>(24*60-15))
@@ -1472,23 +1600,23 @@ begin
  if FMain.mnAutoSynxTime.Checked or (MessageDlg(Format(ProgMess[iAtten]+ProgMess[321]+ProgMess[322],[ParentCtr.CtrName]),mtWarning,[mbYes, mbNo],0)= mrYes) then
      begin
      pHot^[0]:=$80;
-     pHot^[DZ_iTime+4]:=YearOf(Now)-2000;
+     pHot^[DZ511_iTime+4]:=YearOf(Now)-2000;
 
-     pHot^[DZ_iTime]:=PCTime div 256;
-     pHot^[DZ_iTime+1]:=PCTime mod 256;
-     pHot^[DZ_iTime+2]:=MonthOfTheYear(Now);
-     pHot^[DZ_iTime+3]:=DayOfTheMonth(Now);
+     pHot^[DZ511_iTime]:=PCTime div 256;
+     pHot^[DZ511_iTime+1]:=PCTime mod 256;
+     pHot^[DZ511_iTime+2]:=MonthOfTheYear(Now);
+     pHot^[DZ511_iTime+3]:=DayOfTheMonth(Now);
      if (ParentCtr.IsIPC) then
      begin
-       pHot^[DZ_iTime]:=PCTime mod 256;
-       pHot^[DZ_iTime+1]:=PCTime div 256;
-       pHot^[DZ_iTime+2]:=DayOfTheMonth(Now);
-       pHot^[DZ_iTime+3]:=MonthOfTheYear(Now);
+       pHot^[DZ511_iTime]:=PCTime mod 256;
+       pHot^[DZ511_iTime+1]:=PCTime div 256;
+       pHot^[DZ511_iTime+2]:=DayOfTheMonth(Now);
+       pHot^[DZ511_iTime+3]:=MonthOfTheYear(Now);
      end;
 
-     SendByte:=DZ_SizeSendTime;
+     SendByte:=DZ511_SizeSendTime;
      SendToPort(nil);
-     SendByte:=DZ_sizePCSend403;
+     SendByte:=DZ511_sizePCSend403;
      HotMessage(ParentCtr.CtrName,ProgMess[23]);
      end;
   FormFalseTime:=False;
@@ -1563,7 +1691,8 @@ begin
       if Not Node1.HasChildren  then Node1.Delete;
 
       Param.Block:=Self;
-      Node1:=Items.AddChildObject(NodeHead,ProgMess[240]+' '+GetTextZona(i,0),Param.Ptr);  //'Вентиляция '
+      //Node1:=Items.AddChildObject(NodeHead,ProgMess[240]+' '+GetTextZona(i,0),Param.Ptr);  //'Вентиляция '
+      Node1:=Items.AddChildObject(NodeHead,Messa+' '+GetTextZona(i,0),Param.Ptr);  //'Вентиляция '
       Param.X:=i;
       for nSens:=DZ511_StTeplVent to DZ511_EndTeplVent do begin
              if (GetExist(i,nSens) = cfExistFalse) or (GetReadAccess(i,nSens)>=NowAccess) then continue;
@@ -1614,7 +1743,7 @@ end;
 //--------------------Блок дополнительных настроек ------
 //************************************************************
 const
-    SetupCountY=10;
+    SetupCountY=11;
     cSSRoof=1;
     cSSWall=2;
     cSKRoof=3;
@@ -1625,6 +1754,7 @@ const
     cSPLight=8;
     cSKLight=9;
     cSPay=10;
+    cSAHU=11;
 
 var XNamesSettings:array [1..1] of TXNames=(
     (Name:'Зона';Frm:None;Ed:'';Index:SetupCountY*8;Cfg:0;Kind:0)
@@ -1650,8 +1780,11 @@ var NameSettings:array [1..SetupCountY] of TNameConst=(
     (Name:'КПД ламп';Frm:ffff;Ed:'%';TipSens:TipCalc;Min:0;Max:0;Def:NO_MIN_MAX;
       Index:64;Mech:1;AccessR:RW_GUEST;AccessW:RW_USER),
     (Name:'Стоимоть ГКал';Frm:ffff;Ed:'руб';TipSens:TipCalc;Min:0;Max:0;Def:NO_MIN_MAX;
-      Index:72;Mech:1;AccessR:RW_GUEST;AccessW:RW_USER)
+      Index:72;Mech:1;AccessR:RW_GUEST;AccessW:RW_USER),
+    (Name:'Мощность установки AHU';Frm:ffff;Ed:'м3/ч/м2';TipSens:TipCalc;Min:0;Max:0;Def:NO_MIN_MAX;
+      Index:80;Mech:1;AccessR:RW_GUEST;AccessW:RW_USER)
     );
+    
 procedure TSettings_DZ.Init; //override;
 begin
      CountX:=DZ_MAX_SUM_ZONE; //ParentCtr.SumZone;
@@ -1693,10 +1826,10 @@ const
   numCO2Source=6;
   sumCO2Contur = 1;
   sumWarmCO2Source= sumWarmContur + sumCO2Contur;
-  WarmGroupSource:array[1..sumWarmCO2Source] of word=
-        (70,78,86,94,102,130);  //44
+  //WarmGroupSource:array[1..sumWarmCO2Source] of word=
+  //      (70,78,86,94,102,138);  //44
   WarmGroupSource511:array[1..sumWarmCO2Source] of word=
-        (85,93,101,109,117,145);  //44
+        (89,97,105,113,121,149);  //44
   WarmCountY=28;
 var NameWarmGroup:array [1..WarmCountY] of TNameConst=(
     (Name:'Зона 1 Контур 1';Frm:SS;Ed:'теплогруппа';TipSens:TipCalc;Min:0;Max:10;Def:NO_MIN_MAX;
@@ -1821,8 +1954,8 @@ begin
     if (ParentCtr.DataPath <> '')
      or (DiffTime>5)
      or (DiffTime<-5) then begin Result:=false; exit; end;
-    res:=ParentCtr.Block[0].LoadXYvirt(cOutBlock,vZone,WarmGroupSource[Contur],st);
-    if ((ParentCtr as TFClimat501U).FansHot<>nil) then
+    //res:=ParentCtr.Block[0].LoadXYvirt(cOutBlock,vZone,WarmGroupSource[Contur],st);
+    //if ((ParentCtr as TFClimat501U).FansHot<>nil) then
       res:=ParentCtr.Block[0].LoadXYvirt(cOutBlock,vZone,WarmGroupSource511[Contur],st);
     if res > MaxGroup then begin MaxGroup:=res; vTxt:=st; end;
     end;
@@ -1834,9 +1967,9 @@ var res:double;
     st:string;
 begin
     if vBoil <> round(LoadXYvirt(cOutBlock,1,posCO2Source+vZone-1,st)) then Exit; //continue;
-    res:=ParentCtr.Block[0].LoadXYvirt(cOutBlock,vZone,WarmGroupSource[numCO2Source],st);
-    if ((ParentCtr as TFClimat501U).FansHot<>nil) then
-      res:=ParentCtr.Block[0].LoadXYvirt(cOutBlock,vZone,WarmGroupSource511[numCO2Source],st);
+    //res:=ParentCtr.Block[0].LoadXYvirt(cOutBlock,vZone,WarmGroupSource[numCO2Source],st);
+    //if ((ParentCtr as TFClimat501U).FansHot<>nil) then
+    res:=ParentCtr.Block[0].LoadXYvirt(cOutBlock,vZone,WarmGroupSource511[numCO2Source],st);
     if res > MaxCO2 then begin MaxCO2:=res; vTxt:=st; end;
 end;
 
@@ -1866,14 +1999,14 @@ procedure TControl_DZ.Init; //override;
 begin
      CountX:=ParentCtr.SumZone;
 //     if (CountX<1) or (CountX>5) then CountX:=1;
-     CountY:=DZ_SumParUpr;
-     SizeCol:=DZ_SizeParUpr;
+     CountY:=DZ511_SumParUpr;
+     SizeCol:=DZ511_SizeParUpr;
      FullSize:=SizeCol*CountX+5;
      SendByte:=FullSize;
      Pref:=ProgMess[198];    //'Параметры';
      NameBlock:=ProgMess[199];    //'Параметры управления';
      FixRow:=1;
-     ConstNames:=Addr(DZ_NameParUpr[1]);
+     ConstNames:=Addr(DZ511_NameParUpr[1]);
 //     SavingConstNames:=True;
      Translator:=CountY;
      if (CountX>1) then
@@ -1908,7 +2041,7 @@ end;
 
 procedure TConfig_DZ.Init;//override;
 begin
-     CountY:=DZ_SumConfig;
+     CountY:=DZ511_SumConfig;
      CountX:=ParentCtr.SumZone;
      SizeCol:=CountY;
 //     FullSize:=SizeCol*DZ_MAX_SUM_ZONE;
@@ -1960,14 +2093,14 @@ end;
 procedure TTune_DZ.Init; //override;
 begin
      CountX:=1;
-     CountY:=DZ_SumParTune;
-     SizeCol:=DZ_EndTune;
+     CountY:=DZ511_SumParTune;
+     SizeCol:=DZ511_EndTune;
      FullSize:=SizeCol*CountX+5;
      SendByte:=FullSize;
      Pref:=ProgMess[229];   //'Настройка';
      NameBlock:=ProgMess[230];   //'Точная настройка';
      FixRow:=1;
-     ConstNames:=Addr(DZ_NameTuneClimate[1]);
+     ConstNames:=Addr(DZ511_NameTuneClimate[1]);
 //     SavingConstNames:=True;
      Translator:=CountY;
 end;
@@ -1998,8 +2131,8 @@ end;
 procedure TParMec_DZ.Init; //override;
 begin
      CountX:=ParentCtr.SumZone;
-     CountY:=DZ_SumVisualRegs*DZ_SumParsMech;
-     SizeCol:=DZ_SizeParMech*DZ_SumRegs;
+     CountY:=DZ_SumVisualRegs*DZ511_SumParsMech;
+     SizeCol:=DZ511_SizeParMech*DZ_SumRegs;
      FullSize:=SizeCol*DZ_MAX_SUM_ZONE;
      SendByte:=FullSize;
      Pref:=ProgMess[227];         //'Механизмы';
@@ -2026,8 +2159,7 @@ begin
      NameBlock:=ProgMess[228];    //'Параметры механизмов';
      FixRow:=1;
      //DZ511_cDefineHot
-     ConstNames:=Addr(DZ511_cDefineHot[1]);
-     //ConstNames:=Addr(NameMechC511[1]);
+     ConstNames:=Addr(NameMechC511[1]);
      Translator:=0;//CountY;
      if (CountX>1) then
      begin
@@ -2044,16 +2176,16 @@ end;
 
 procedure THandMode_DZ.Init;//override;
 begin
-     CountY:=DZ_SumTeplMecan;
+     CountY:=DZ511_SumTeplMecan;
      CountX:=ParentCtr.SumZone*2;
-     SizeCol:=DZ_sizeHand;
+     SizeCol:=DZ511_sizeHand;
      FullSize:=ParentCtr.Block[0].FullSize;
-     StartSend:=DZ_iMechanic;
-     SendByte:=DZ_sizeHand;       //*DZ_MAX_SUM_ZONE;
+     StartSend:=DZ511_iMechanic;
+     SendByte:=DZ511_sizeHand;       //*DZ_MAX_SUM_ZONE;
      Pref:=ProgMess[226];         //'Ручное';
      NameBlock:=ProgMess[213];    //'Ручное управление';
      FixRow:=1;
-     ConstNames:=Addr(DZ_cDefineHot[DZ_StTeplMecan]); //Addr(NameConfigOutputs[1]);
+     ConstNames:=Addr(DZ511_cDefineHot[DZ511_StTeplMecan]); //Addr(NameConfigOutputs[1]);
      Sort := srHowHot;
      EnableXML:=False;
      ActHandZone:=0;
@@ -2071,7 +2203,7 @@ begin
         begin
         if (ActHandZone > ParentCtr.SumZone) or (ActHandZone < 1)
          then ActHandZone:=1;
-        StartSend:=DZ_iTepl+DZ_iMechanic+DZ_sizeTepl*(ActHandZone-1);    //DZ_iTepl+
+        StartSend:=DZ511_iTepl+DZ511_iMechanic+DZ511_sizeTepl*(ActHandZone-1);    //DZ_iTepl+
         CopyMemory(Addr(DZ_CopyHand),Addr(PByteArray(Adr)^[StartSend]),SendByte);
         end;
      Result:=0;
@@ -2085,9 +2217,9 @@ begin
           else Txt:=Txt+' '+ProgMess[249];   //'Установить';
         Exit;
         end;
-      pModeOutputs:=Addr(pModeOutputs^[DZ_iTepl+DZ_sizeTepl*(nZone-1)+ConstNames[ValY].Index]);
+      pModeOutputs:=Addr(pModeOutputs^[DZ511_iTepl+DZ511_sizeTepl*(nZone-1)+ConstNames[ValY].Index]);
       if (Mode1_Hand0=0) and (ActHandZone=nZone)
-        then pModeOutputs:=Addr(DZ_CopyHand[ConstNames[ValY].Index - DZ_iMechanic]);
+        then pModeOutputs:=Addr(DZ_CopyHand[ConstNames[ValY].Index - DZ511_iMechanic]);
       GetExist(nZone,ValY);
       Result:=Convers(ConstNames[ValY].Name,
             pModeOutputs,ConstNames[ValY].Frm,vInBlock,nZone,ValY,Txt,ConstNames[ValY].Ed);
@@ -2113,7 +2245,7 @@ begin
      CountX:=ParentCtr.SumZone*2;
      SizeCol:=DZ511_sizeHand;
      FullSize:=ParentCtr.Block[0].FullSize;
-     StartSend:=DZ511_iMechanic;
+     StartSend:=DZ511_iMechanic;                        
      SendByte:=DZ511_sizeHand;       //*DZ_MAX_SUM_ZONE;
      Pref:=ProgMess[226];         //'Ручное';
      NameBlock:=ProgMess[213];    //'Ручное управление';
@@ -2125,40 +2257,59 @@ begin
      Translator:=CountY;
 end;
 
+
+
 function THandMode_DZ511.LoadXYvirt(vInBlock:Byte;ValX,ValY:Integer;
        var Txt:String):Double;
 var pModeOutputs:PByteArray;
     Mode1_Hand0, nZone:Byte;
-
 begin
      pModeOutputs:=Adr;
-     if (ValX=0) and (ValY=0) then
-        begin
-        if (ActHandZone > ParentCtr.SumZone) or (ActHandZone < 1)
-         then ActHandZone:=1;
-        StartSend:=DZ511_iTepl+DZ511_iMechanic+DZ511_sizeTepl*(ActHandZone-1);    //DZ_iTepl+
-        CopyMemory(Addr(DZ511_CopyHand),Addr(PByteArray(Adr)^[StartSend]),SendByte);
-        end;
-     Result:=0;
+     //if (ActHandZone <> (ValX div 2)) then
+     //  SendToPort(nil);
+       //MessageDlg("Запишите блок данных в контроллер перед переходом в другую зону",
+
+
+     ActHandZone := ValX div 2;
      Mode1_Hand0:=ValX mod 2;
      nZone:=(ValX+1) div 2;
+
+
+     if (ValX=0) and (ValY=0) then
+       begin
+         if (ActHandZone > ParentCtr.SumZone) or (ActHandZone < 1)
+         then ActHandZone:=1;
+         //StartSend:=DZ511_iTepl+DZ511_iMechanic+DZ511_sizeTepl*(ActHandZone-1);
+         //CopyMemory(Addr(DZ511_CopyHand),Addr(PByteArray(Adr)^[StartSend]),SendByte);
+       end;
+
+     StartSend:=DZ511_iTepl+DZ511_iMechanic+DZ511_sizeTepl*(ActHandZone-1);
+     CopyMemory(Addr(DZ511_CopyHand),Addr(PByteArray(Adr)^[StartSend]),SendByte);
+
+     Result:=0;
+
+//     Mode1_Hand0:=ValX mod 2;
+//     nZone:=(ValX+1) div 2;
+//StratMess
      if ValY=0 then
         begin
         Txt:=ParentCtr.GetTextZona(nZone,ValY);
         if ValX > 0 then
-         if Mode1_Hand0=1 then Txt:=Txt+' '+ProgMess[250]  //'Состояние'
+         //if Mode1_Hand0=1 then Txt:=Txt+' '+ProgMess[250]  //'Состояние'
+         if Mode1_Hand0 = 0 then Txt:=Txt+' '+ProgMess[250]  //'Состояние'
           else Txt:=Txt+' '+ProgMess[249];   //'Установить';
         Exit;
         end;
       pModeOutputs:=Addr(pModeOutputs^[DZ511_iTepl+DZ511_sizeTepl*(nZone-1)+ConstNames[ValY].Index]);
-      if (Mode1_Hand0=0) and (ActHandZone=nZone)
+      if (Mode1_Hand0 = 0) and (ActHandZone=nZone)
         then pModeOutputs:=Addr(DZ511_CopyHand[ConstNames[ValY].Index - DZ511_iMechanic]);
       GetExist(nZone,ValY);
       Result:=Convers(ConstNames[ValY].Name,
             pModeOutputs,ConstNames[ValY].Frm,vInBlock,nZone,ValY,Txt,ConstNames[ValY].Ed);
       if nZone > 0 then if Result>0 then imColor:=clRed else imColor:=clGreen;
-      if Mode1_Hand0 >0 then AccessW:=RW_NOEDIT;
+      if Mode1_Hand0 = 0 then AccessW:=RW_NOEDIT;
 end;
+
 
 function THandMode_DZ511.SendToPort(EndMethod: TEndPortMethod):Boolean;
 begin
@@ -2205,8 +2356,8 @@ var
 begin
   sunRise := MinuteOfTheDay(GlobSunRaise);
   sunSet := MinuteOfTheDay(GlobSunSet);
-  dbTypeStart := pTimerArray^[(ValX-1)*SizeCol+DZ_iStartType];
-  dbStart:=(pTimerArray^[(ValX-1)*SizeCol+DZ_iTimeStart+1]*256+pTimerArray^[(ValX-1)*SizeCol+DZ_iTimeStart]);
+  dbTypeStart := pTimerArray^[(ValX-1)*SizeCol+DZ511_iStartType];
+  dbStart:=(pTimerArray^[(ValX-1)*SizeCol+DZ511_iTimeStart+1]*256+pTimerArray^[(ValX-1)*SizeCol+DZ511_iTimeStart]);
   case dbTypeStart of
     0:  //START_OFF
     begin
@@ -2269,7 +2420,7 @@ begin
   if ValX > 0 then
      begin
      ConfigExist:=GetRowExist(Self,ValY);//+GetExist(pTimer^[ValX][DZ_iTimerZone],ValY);
-     GridCellColor:=GetZoneColor(pTimer^[ValX][DZ_iTimerZone],ValY);
+     GridCellColor:=GetZoneColor(pTimer^[ValX][DZ511_iTimerZone],ValY);
      end;
   if ConstNames[ValY].Index = -1 then
   begin
@@ -2282,16 +2433,16 @@ begin
   case ConstNames[ValY].TipSens of
     DDWP:
         begin
-          tIn:=GetDDWP(pTimer^[ValX][DZ_iTaskTemper+1]*256+pTimer^[ValX][DZ_iTaskTemper],
-                  pTimer^[ValX][DZ_iTaskHumin]*100);
+          tIn:=GetDDWP(pTimer^[ValX][DZ511_iTaskTemper+1]*256+pTimer^[ValX][DZ511_iTaskTemper],
+                  pTimer^[ValX][DZ511_iTaskHumin]*100);
         Result:=Convers(ConstNames[ValY].Name,
          Addr(tIn),SSpS0,vInBlock,ValX,ValY,Txt,ConstNames[ValY].Ed);
         if(ValX>0) and (vInBlock=cInBlock) then
              begin
-             NewRH:=GetRH_DDWP(pTimer^[ValX][DZ_iTaskTemper+1]*256+pTimer^[ValX][DZ_iTaskTemper],
+             NewRH:=GetRH_DDWP(pTimer^[ValX][DZ511_iTaskTemper+1]*256+pTimer^[ValX][DZ511_iTaskTemper],
                           tIn) div 100;
-             if (NewRH > 0) and (NewRH <> pTimer^[ValX][DZ_iTaskHumin]) then
-                pTimer^[ValX][DZ_iTaskHumin]:=NewRH;
+             if (NewRH > 0) and (NewRH <> pTimer^[ValX][DZ511_iTaskHumin]) then
+                pTimer^[ValX][DZ511_iTaskHumin]:=NewRH;
              end;
         end
     else
@@ -2433,20 +2584,20 @@ begin
  if (Row<4) or(Row >=CountY) then Row:=4;
  with ChartBl do
   begin
-  ActiveZone:=pTimer^[(Col-1)*SizeCol+DZ_iTimerZone];
+  ActiveZone:=pTimer^[(Col-1)*SizeCol+DZ511_iTimerZone];
   if (ActiveZone < 1) or (ActiveZone > SumZone) then ActiveZone:=-1;
   iY:=0;
   for iX:=1 to CountX do
       begin
-      nZone:=pTimer^[(iX-1)*SizeCol+DZ_iTimerZone];
+      nZone:=pTimer^[(iX-1)*SizeCol+DZ511_iTimerZone];
       if (nZone<=0) or (nZone > SumZone) then continue;
-      dbTypeStart:=pTimer^[(iX-1)*SizeCol+DZ_iStartType];
-      dbTypeStartNext:=pTimer^[(iX)*SizeCol+DZ_iStartType];
-      dbStartNext:=(pTimer^[(iX)*SizeCol+DZ_iTimeStart+1]*256+pTimer^[(iX)*SizeCol+DZ_iTimeStart])*cMin;
-      dbStart:=(pTimer^[(iX-1)*SizeCol+DZ_iTimeStart+1]*256+pTimer^[(iX-1)*SizeCol+DZ_iTimeStart])*cMin;
+      dbTypeStart:=pTimer^[(iX-1)*SizeCol+DZ511_iStartType];
+      dbTypeStartNext:=pTimer^[(iX)*SizeCol+DZ511_iStartType];
+      dbStartNext:=(pTimer^[(iX)*SizeCol+DZ511_iTimeStart+1]*256+pTimer^[(iX)*SizeCol+DZ511_iTimeStart])*cMin;
+      dbStart:=(pTimer^[(iX-1)*SizeCol+DZ511_iTimeStart+1]*256+pTimer^[(iX-1)*SizeCol+DZ511_iTimeStart])*cMin;
       dbEnd:=dbStart+cMin;
       dbDan:=LoadXY(cOutBlock,iX,Row,st);
-      tsk.valDt:=(pTimer^[(iX-1)*SizeCol+DZ_iTaskTemper+1]*256+pTimer^[(iX-1)*SizeCol+DZ_iTaskTemper])/100;
+      tsk.valDt:=(pTimer^[(iX-1)*SizeCol+DZ511_iTaskTemper+1]*256+pTimer^[(iX-1)*SizeCol+DZ511_iTaskTemper])/100;
       if (dbStart=dbEnd) or (tsk.valDt=0) then continue;
       if dbEnd=0 then dbEnd:=24*60*cMin;
 //--------------------------------------------
@@ -2853,8 +3004,8 @@ begin
             AccessW:=RW_NOEDIT;
             if Result=0 then imColor:=clRed else imColor:=clGreen;
             if ConstNames[RealPozY].Ed = '°' then
-                Txt:=Txt+' '+GetWindDirect(Result,PByteArray(ParentCtr.Block[0].Adr)^[DZ_iSensOut+6]
-                + PByteArray(ParentCtr.Block[0].Adr)^[DZ_iSensOut+7]); //[pHot^[-3]+pHot^[-2]);
+                Txt:=Txt+' '+GetWindDirect(Result,PByteArray(ParentCtr.Block[0].Adr)^[DZ511_iSensOut+6]
+                + PByteArray(ParentCtr.Block[0].Adr)^[DZ511_iSensOut+7]); //[pHot^[-3]+pHot^[-2]);
             end;
         X_POZ_Y: if (ValY>=DZ_Y_START_REGUL) then
             begin
@@ -2875,7 +3026,7 @@ begin
         X_STATE_REG:  if (ValY>=DZ_Y_START_REGUL) then
                   begin
                   Result:=Convers('',
-                    Addr(pHot^[DZ_iPulRegul+ValY-DZ_Y_START_REGUL]),SS,vInBlock,ValX,ValY,Txt,'%');
+                    Addr(pHot^[DZ511_iPulRegul+ValY-DZ_Y_START_REGUL]),SS,vInBlock,ValX,ValY,Txt,'%');
                   AccessW:=RW_NOEDIT;
                   end;
         X_N_REGUL:  if (ValY>=DZ_Y_START_REGUL) then
@@ -2955,7 +3106,7 @@ begin
   for x:=1 to SumClimatClients do
       begin
       with ClimatClient[x] do
-      vData:=Ctr.Block[0].LoadXY(cOutBlock,Zone,DZ_posZoneMaxWater,Txt);
+      vData:=Ctr.Block[0].LoadXY(cOutBlock,Zone,DZ511_posZoneMaxWater,Txt);
       if vData > MaxData then
                 begin
                 MaxData:=vData;
@@ -2963,7 +3114,7 @@ begin
                 TxtMax:=Txt;
                 end;
       end;
-  ParentCtr.Block[0].LoadXY(cInBlock,1,DZ_posAbsMaxWater,TxtMax);
+  ParentCtr.Block[0].LoadXY(cInBlock,1,DZ511_posAbsMaxWater,TxtMax);
 //=============== end поиск максимума воды ==========
 
   for y:=1 to CountY do
@@ -3020,17 +3171,17 @@ type mLev=array[0..0] of eALev;
 procedure TLev_DZ.Init;
 begin
   CountX := ParentCtr.SumZone;
-  CountY := DZ_SumVisibleInSens*DZ_SumParsLevs;
-  SizeCol := 8*DZ_SumInSens;//sizeFullCalibr;  //eMAX_SUM_SENS * sizeCalibrSensor;
+  CountY := DZ511_SumVisibleInSens*DZ_SumParsLevs;
+  SizeCol := 8*DZ511_SumInSens;//sizeFullCalibr;  //eMAX_SUM_SENS * sizeCalibrSensor;
   FullSize := SizeCol*DZ_MAX_SUM_ZONE;
   SendByte := FullSize;
   Pref:=ProgMess[275];   //'Допуски';
   NameBlock:=ProgMess[276];   //'Контрольные допуски';
   EnableXML:=False;
-  ConstNames:=Addr(NameInSensorsLevsC510[1]);
+  ConstNames:=Addr(NameInSensorsLevsC511[1]);
   if (CountX>1) then
   begin
-   XNames:=Addr(XNamesLevsC510[1]);
+   XNames:=Addr(XNamesLevsC511[1]);
    XNamesCount:=1;
   end;
   Translator:=CountY;
@@ -3041,8 +3192,8 @@ end;
 procedure TCalInSens_DZ.Init;//override;
 begin
   CountX := ParentCtr.SumZone;
-  CountY := DZ_SumVisibleInSens*DZ_SumParsSens;
-  SizeCol := 12*DZ_SumInSens;//sizeFullCalibr;  //eMAX_SUM_SENS * sizeCalibrSensor;
+  CountY := DZ511_SumVisibleInSens*DZ511_SumParsSens;
+  SizeCol := 12*DZ511_SumInSens;//sizeFullCalibr;  //eMAX_SUM_SENS * sizeCalibrSensor;
   FullSize := SizeCol*DZ_MAX_SUM_ZONE;
   SendByte := FullSize;
   Pref :=ProgMess[610];   // 'Калибровки тепл';
@@ -3077,8 +3228,8 @@ end;
 procedure TCalOutSens_DZ.Init;//override;
 begin
   CountX := 1;
-  CountY := DZ_SumOutSens*DZ_SumParsSens;
-  SizeCol := 12*DZ_SumOutSens;//sizeFullCalibr;  //eMAX_SUM_SENS * sizeCalibrSensor;
+  CountY := DZ511_SumOutSens*DZ511_SumParsSens;
+  SizeCol := 12*DZ511_SumOutSens;//sizeFullCalibr;  //eMAX_SUM_SENS * sizeCalibrSensor;
   FullSize := SizeCol;
   SendByte := FullSize;
   Pref :=ProgMess[607];   //  'Калибровки метео';
@@ -3097,10 +3248,14 @@ end;
 //--------- START ARXIV PC ---------------
 const
     cSumListVal=7;
+    cSumListVal511=9;
+
     ListValues:array[1..cSumListVal] of word= (1,13,21,22,39,41,46);
-    ListValues511:array[1..cSumListVal] of word= (1,13,21,27,54,56,62);
+
+    ListValues511:array[1..cSumListVal511] of word= (1,13,31,36,58,27,60,66,67);
+
     cSumStat=11;
-    cCountNameAchivePC=cSumStat+4;
+    cCountNameAchivePC=cSumStat+4+2;
     iMidl=1;          iMidlDay=2;       iMidlNight=3;
     iMaxDay=4;        iTimeMaxDay=5;
     iMinDay=6;        iTimeMinDay=7;
@@ -3112,8 +3267,11 @@ TPCArx=record
   Tic:word;
   TicDay:word;
   SumSun:word;
+  SumTrans:Double;
+  SumCO2:Double;
+
 //  StatVal:array[0..1] of Double; //TStatVal;
-  StatValues:array[1..4,1..cSumListVal,1..cSumStat] of Double; //TStatVal;
+  StatValues:array[1..4,1..cSumListVal511,1..cSumStat] of Double; //TStatVal;
   end;
 
 var NameAchivePC:array [1..cCountNameAchivePC] of TNameConst=(
@@ -3125,6 +3283,10 @@ var NameAchivePC:array [1..cCountNameAchivePC] of TNameConst=(
       Index:4;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
     (Name:'Сумма солнечной радиации';Frm:SSSS;Ed:'Дж/см2';TipSens:TipCalc;Min:0;Max:0;
       Index:6;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
+    (Name:'Суммарная интенсивность транспирации';Frm:SSSS;Ed:'г/ч/м2';TipSens:TipCalc;Min:0;Max:0;
+      Index:8;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
+    (Name:'Суммарное потребление CO2';Frm:SSSS;Ed:'м3/ч/м2';TipSens:TipCalc;Min:0;Max:0;
+      Index:10;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
 
     (Name:'Среднее за сутки';Frm:SSpS0;Ed:'';TipSens:TipCalc;Min:0;Max:0;
       Index:0;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
@@ -3155,7 +3317,7 @@ begin
      CountX:=ParentCtr.SumZone;
 //     SumListVal:=cSumListVal;
 //     CountComY:=SumStat+4;        //Сколько строк не выводить в зоне Б
-     CountY:=cSumListVal*cSumStat+4;
+     CountY:=cSumListVal511*cSumStat+4;
      SizeCol:=CountY*SizeOf(Double);
      FullSize:=SizeOf(TPCArx);  //SizeCol*CountX;
      SendByte:=0;
@@ -3205,10 +3367,20 @@ begin
         if ValX=0 then  Txt:=ConstNames[ValY].Name //Txt:='Накопленное солнце'
         else Txt:=IntToStr(pPCArx^.SumSun)+ConstNames[ValY].Ed;
         Result:=pPCArx^.SumSun;
+        end;
+    5:  begin
+        if ValX=0 then  Txt:=ConstNames[ValY].Name // Транспирация
+        else Txt:=FloatToStr(pPCArx^.SumTrans)+ConstNames[ValY].Ed;
+        Result:=pPCArx^.SumTrans;
+        end;
+    6:  begin
+        if ValX=0 then  Txt:=ConstNames[ValY].Name // Потребление СО2
+        else Txt:=FloatToStr(pPCArx^.SumCO2)+ConstNames[ValY].Ed;
+        Result:=pPCArx^.SumCO2;
         end
   else
   begin
-  ValY:=ValY-5;
+  ValY:=ValY-7;  //5
   nVal:=ValY div cSumStat+1;
   nStat:=ValY mod cSumStat+1;
   if ValX=0 then
@@ -3217,14 +3389,14 @@ begin
           Result:=ParentCtr.Block[0].LoadXY(cOutBlock,0,ListValues511[nVal],Txt)
         else
           Result:=ParentCtr.Block[0].LoadXY(cOutBlock,0,ListValues[nVal],Txt);
-        Txt:=Txt+' '+ConstNames[nStat+4].Name;
+        Txt:=Txt+' '+ConstNames[nStat+6].Name; //4
         end
   else
         begin
         Result:=pPCArx^.StatValues[ValX][nVal][nStat];
         if Result = 0 then Txt:='' else
           begin
-          case ConstNames[nStat+4].Frm of
+          case ConstNames[nStat+6].Frm of   // 4
             SSpS0: Txt:=Format('%3.1f',[Result]);
             SShSSm:
               begin
@@ -3242,10 +3414,6 @@ begin
     AccessW:=RW_NOEDIT;
   end;
 end;
-
-
-
-
 
 const ClimSelParSum=14;
 ClimSelPar:array[1..ClimSelParSum] of word=
@@ -3299,18 +3467,20 @@ var
  vVal:Double;
  st:string;
  NowDay:Boolean;
+ tempTrans:Double;
+ tempCO2:Double;
 begin
 pPCArx:=Adr;
 Result:=False;
 with ParentCtr do
   begin
-  if not Block[0].LoadFileCycle(ArxDate) then Exit;
+  if not Block[0].LoadFileCycle(ArxDate) then Exit;       // есть файл данных на на заданный день ArxDate
   Result:=True;
   Ready:=True;
   ClearData;
   BlDate:=int(ArxDate)+1-cMin;
   for nZone:=1 to CountX do
-  for nVal:=1 to cSumListVal do
+  for nVal:=1 to cSumListVal511 do
       begin
 //      iStatVal:=i*SumStat;
       pPCArx^.StatValues[nZone][nVal][iMaxDay]:=-1000;
@@ -3321,6 +3491,8 @@ with ParentCtr do
       pPCArx^.StatValues[nZone][nVal][iTimeMinDay]:=0;
       pPCArx^.StatValues[nZone][nVal][iMinNight]:=1000;
       pPCArx^.StatValues[nZone][nVal][iTimeMinNight]:=0;
+      pPCArx^.SumTrans := 0;
+      pPCArx^.SumCO2  := 0;
       end;
   repeat
     if (Block[0] is THot_DZ) then
@@ -3330,19 +3502,28 @@ with ParentCtr do
     if NowDay then pPCArx^.TicDay:=pPCArx^.TicDay+1;
     if NowDay and (HourOf(Block[0].BlDate) > 12) then
         begin
-        vVal:=Block[0].LoadXY(cOutBlock,1,DZ_SSumSun,st);
-        if round(vVal) > pPCArx^.SumSun then pPCArx^.SumSun:=round(vVal);
+          vVal:=Block[0].LoadXY(cOutBlock,1,DZ511_SSumSun,st);
+          if round(vVal) > pPCArx^.SumSun then pPCArx^.SumSun:=round(vVal);
         end;
     pPCArx^.Tic:=pPCArx^.Tic+1;
     for nZone:=1 to CountX do
-    for nVal:=1 to cSumListVal do
+    for nVal:=1 to cSumListVal511 do
       begin
+      if Block[0].LoadXY(cOutBlock,1,DZ511_CO2task,st) > 0 then
+        NowDay := true;
+
 //      iStatVal:=i*SumStat;
       if ((ParentCtr as TFClimat501U).FansHot<>nil) then
-        vVal:=Block[0].LoadXY(cOutBlock,nZone,ListValues511[nVal],st)
+      begin
+        vVal:=Block[0].LoadXY(cOutBlock,nZone,ListValues511[nVal],st);
+        tempTrans :=Block[0].LoadXY(cOutBlock,1,DZ511_SumTrans,st);
+        tempCO2 :=Block[0].LoadXY(cOutBlock,1,DZ511_SumCO2,st);
+      end
       else
         vVal:=Block[0].LoadXY(cOutBlock,nZone,ListValues[nVal],st);
       pPCArx^.StatValues[nZone][nVal][iMidl]:=pPCArx^.StatValues[nZone][nVal][iMidl]+vVal;
+      pPCArx^.SumTrans := pPCArx^.SumTrans + tempTrans;
+      pPCArx^.SumCO2 := pPCArx^.SumCO2 + tempCO2;
       if NowDay then
           begin
           pPCArx^.StatValues[nZone][nVal][iMidlDay]:=pPCArx^.StatValues[nZone][nVal][iMidlDay]+vVal;
@@ -3374,16 +3555,20 @@ with ParentCtr do
       end;
   until Not Block[0].LoadFileCycle(ArxDate);
   for nZone:=1 to CountX do
-  for nVal:=1 to cSumListVal do
+  for nVal:=1 to cSumListVal511 do
     begin
-//      iStatVal:=i*SumStat;
+    //      iStatVal:=i*SumStat;
     if(pPCArx^.StatValues[nZone][nVal][iMaxDay]=-1000) then pPCArx^.StatValues[nZone][nVal][iMaxDay]:=0;
     if(pPCArx^.StatValues[nZone][nVal][iMaxNight]=-1000) then pPCArx^.StatValues[nZone][nVal][iMaxNight]:=0;
     if(pPCArx^.StatValues[nZone][nVal][iMinDay]=1000) then  pPCArx^.StatValues[nZone][nVal][iMinDay]:=0;
     if(pPCArx^.StatValues[nZone][nVal][iMinNight]=1000) then  pPCArx^.StatValues[nZone][nVal][iMinNight]:=0;
 
     if pPCArx^.Tic>0 then
+    begin
         pPCArx^.StatValues[nZone][nVal][iMidl]:=pPCArx^.StatValues[nZone][nVal][iMidl]/pPCArx^.Tic;
+        pPCArx^.SumTrans := pPCArx^.SumTrans * pPCArx^.Tic;
+        pPCArx^.SumCO2 := pPCArx^.SumCO2 * pPCArx^.Tic;
+    end;
     if pPCArx^.TicDay>0 then
         pPCArx^.StatValues[nZone][nVal][iMidlDay]:=pPCArx^.StatValues[nZone][nVal][iMidlDay]/pPCArx^.TicDay;
     if (pPCArx^.Tic-pPCArx^.TicDay)>0 then
@@ -3902,9 +4087,9 @@ end;
 
 procedure TStrategy_DZ.Init;//override;
 begin
-     CountY:=DZ_SumKStrategy*DZ_SupParStrategy;
+     CountY:=DZ511_SumKStrategy*DZ511_SupParStrategy;
      CountX:=ParentCtr.SumZone; //SNameStrategy;
-     SizeCol:=DZ_SizeStrateg*DZ_SumFullStrategy;
+     SizeCol:=DZ511_SizeStrateg*DZ511_SumFullStrategy;
      FullSize:=SizeCol*DZ_MAX_SUM_ZONE;
      SendByte:=FullSize;
      Pref:=ProgMess[233];   //'Стратегия';
@@ -3940,6 +4125,53 @@ begin
        XNamesCount:=1;
      end;
 end;
+
+{function TStrategy_DZ511.LoadXYvirt(vInBlock:Byte;ValX,ValY:Integer;
+       var Txt:String):Double;
+var
+    pModeOutputs:PByteArray;
+    Mode1_Hand0, nZone:Byte;
+begin
+//     pModeOutputs:=Adr;
+     //if (ActHandZone <> (ValX div 2)) then
+     //  SendToPort(nil);
+       //MessageDlg("Запишите блок данных в контроллер перед переходом в другую зону",
+     ActHandZone := ValX div 2;
+     Mode1_Hand0:=ValX mod 2;
+     nZone:=(ValX+1) div 2;
+     if (ValX=0) and (ValY=0) then
+       begin
+         if (ActHandZone > ParentCtr.SumZone) or (ActHandZone < 1)
+         then ActHandZone:=1;
+         //StartSend:=DZ511_iTepl+DZ511_iMechanic+DZ511_sizeTepl*(ActHandZone-1);
+         //CopyMemory(Addr(DZ511_CopyHand),Addr(PByteArray(Adr)^[StartSend]),SendByte);
+       end;
+
+
+//     StartSend:=DZ511_iTepl+DZ511_iMechanic+DZ511_sizeTepl*(ActHandZone-1);
+     //CopyMemory(Addr(DZ511_CopyHand),Addr(PByteArray(Adr)^[StartSend]),SendByte);   // remove
+//     Result:=0;
+      //     Mode1_Hand0:=ValX mod 2;
+    //     nZone:=(ValX+1) div 2;
+     if ValY=0 then
+        begin
+          Txt:=ParentCtr.GetTextZona(nZone,ValY);
+          if ValX > 0 then
+          //if Mode1_Hand0=1 then Txt:=Txt+' '+ProgMess[250]  //'Состояние'
+          if Mode1_Hand0 = 0 then Txt:=Txt+' '+ProgMess[250]  //'Состояние'
+            else Txt:=Txt+' '+ProgMess[249];   //'Установить';
+          Exit;
+        end;
+      pModeOutputs:=Addr(pModeOutputs^[DZ511_iTepl+DZ511_sizeTepl*(nZone-1)+ConstNames[ValY].Index]);
+      //if (Mode1_Hand0 = 0) and (ActHandZone=nZone)                                          remove
+      //  then pModeOutputs:=Addr(DZ511_CopyHand[ConstNames[ValY].Index - DZ511_iMechanic]);
+      GetExist(nZone,ValY);
+      Result:=Convers(ConstNames[ValY].Name,
+            pModeOutputs,ConstNames[ValY].Frm,vInBlock,nZone,ValY,Txt,ConstNames[ValY].Ed);
+      if nZone > 0 then if Result>0 then imColor:=clRed else imColor:=clGreen;
+      if Mode1_Hand0 = 0 then AccessW:=RW_NOEDIT;
+
+end; }
 
 {procedure TStrategy.GetProperGrid( x, y:integer);
 var st:string;
@@ -4099,7 +4331,7 @@ procedure THotAlarm.Init;
 begin
      CountX := ParentCtr.SumZone; //sumGroups;
      CountY := SumValYAlarmHot;
-     SizeCol := DZ_sizeTepl;
+     SizeCol := DZ511_sizeTepl;
      FullSize := ParentCtr.Block[0].FullSize;//DZ_iTepl+SizeCol*DZ_MAX_SUM_ZONE;
      SendByte := 1;
 //     Pref := 'Alarm';
@@ -4152,8 +4384,58 @@ var    temp:double;
 begin
     Result := inherited LoadXYvirt(vInBlock,ValX,ValY,Txt);
     if ((ValX=0)or(ValY=0)) then exit;
-
     GridCellColor:=GetColorAlrStatus(round(Result));
+end;
+
+const
+//    pascalWeaterClimate = 5;
+    pascalCMPclimate = 6;
+    pascalListVal = 13;
+    pascalListValues:array[1..pascalListVal] of word= (1,2,12,3,4,31,27,36,130,88,104,181,183);
+
+var pascalName:array [1..pascalListVal] of TNameConst=(
+    // Weather
+    (Name:'"Outside temp"';Frm:ffff;Ed:'°C';
+    TipSens:TipCalc;Min:0;Max:0;Def:NO_MIN_MAX; Index:0;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
+    (Name:'"Radiation"';Frm:ffff;Ed:'W/m2';
+    TipSens:TipCalc;Min:0;Max:0;Def:NO_MIN_MAX; Index:0;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
+    (Name:'"Radiation sum"';Frm:ffff;Ed:'J/cm2';
+    TipSens:TipCalc;Min:0;Max:0;Def:NO_MIN_MAX; Index:0;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
+    (Name:'"Wind speed"';Frm:ffff;Ed:'m/s';
+    TipSens:TipCalc;Min:0;Max:0;Def:NO_MIN_MAX; Index:0;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
+    (Name:'"Wind direction"';Frm:ffff;Ed:'';
+    TipSens:TipCalc;Min:0;Max:0;Def:NO_MIN_MAX; Index:0;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
+    //  CMP climate
+    (Name:'"Temp greenhouse"';Frm:ffff;Ed:'°C';
+    TipSens:TipCalc;Min:0;Max:0;Def:NO_MIN_MAX; Index:0;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
+    (Name:'"RH greenhouse"';Frm:ffff;Ed:'%';
+    TipSens:TipCalc;Min:0;Max:0;Def:NO_MIN_MAX; Index:0;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
+//    (Name:'"Vapour deficit"';Frm:ffff;Ed:'g/m3';
+//    TipSens:TipCalc;Min:0;Max:0;Def:NO_MIN_MAX; Index:0;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
+    (Name:'"CO2"';Frm:ffff;Ed:'ppm/10';
+    TipSens:TipCalc;Min:0;Max:0;Def:NO_MIN_MAX; Index:0;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
+    (Name:'"Vent lee"';Frm:ffff;Ed:'%';
+    TipSens:TipCalc;Min:0;Max:0;Def:NO_MIN_MAX; Index:0;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
+    (Name:'"Lower circuit"';Frm:ffff;Ed:'°C';
+    TipSens:TipCalc;Min:0;Max:0;Def:NO_MIN_MAX; Index:0;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
+    (Name:'"Growth circuit"';Frm:ffff;Ed:'°C';
+    TipSens:TipCalc;Min:0;Max:0;Def:NO_MIN_MAX; Index:0;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
+    (Name:'"Energy curtain"';Frm:ffff;Ed:'%';
+    TipSens:TipCalc;Min:0;Max:0;Def:NO_MIN_MAX; Index:0;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
+    (Name:'"Shading curtain"';Frm:ffff;Ed:'%';
+    TipSens:TipCalc;Min:0;Max:0;Def:NO_MIN_MAX; Index:0;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER)
+);
+
+procedure DeleteLineFromFile(FileName:string);
+var F:TStringList;
+begin
+ F:=TStringList.Create;
+ F.LoadFromFile(FileName);
+ F.Delete(F.Count-1);
+ F.Delete(F.Count-1);
+ F.Add( '},');
+ F.SaveToFile(FileName);
+ F.Free;
 end;
 
 procedure TFClimat501U.SetPicCtr;
@@ -4161,6 +4443,14 @@ var
   ZoneLevAlarm,MaxLevAlarm,iY,iX,vLevel,PozY:integer;
   Color:TColor;
   st,stName,stZone:string;
+
+  res:Double;
+  file_txt: TextFile;
+  file_txt_name:string;
+  dir_name:string;
+  tempDT:TDateTime;
+  count:integer;
+  countZone:integer;
 begin
 //  inherited;
   //ListView1.Clear;
@@ -4178,6 +4468,52 @@ begin
   STZone4.Visible:=False;  }
   BlockToGrid(AlarmHot,StringGridAlarm);
 
+// ---------------------------------------------------------------- NEW
+{  for countZone:=1 to (Block[0] as THot_511).CountX do
+  begin
+    stZone:=GetTextZona(countZone,0);
+  tempDT := Now;
+  file_txt_name :=   (Block[0] as THot_511).ParentCtr.CtrName +' '+stZone+' '+DateToStr(tempDT)+'.json';
+  dir_name := 'Exports';
+  file_txt_name := dir_name +'\'+ file_txt_name;
+  if not DirectoryExists(dir_name)
+  then CreateDir(dir_name);
+  if FileExists(file_txt_name) then
+    DeleteLineFromFile(file_txt_name);
+  AssignFile(file_txt, file_txt_name);
+  {$IoChecks Off}
+{    Append(file_txt);
+  {$IoChecks On}
+{  if IOResult <> 0 then
+  begin
+    Rewrite(file_txt);
+    writeln(file_txt, '{');
+  end;
+  writeln(file_txt, '"'+DateToStr(tempDT)+' '+TimeToStr(tempDT)+'":{');
+  for count:=1 to pascalListVal do
+  begin
+    if count = 1 then
+      writeln(file_txt, '"Weather":{');
+    if count = pascalCMPclimate then
+    begin
+//      writeln(file_txt, '}//,');
+{      writeln(file_txt, '"CMP climate":{');
+    end;
+    //Block[0].LoadXY(cOutBlock,1, pascalListValues[count],stName);
+    res := (Block[0] as THot_511).LoadXYvirt(cOutBlock,countZone,pascalListValues[count],stName);
+    if (count = pascalCMPclimate-1) or (count = pascalListVal) then
+      writeln(file_txt, ''+pascalName[count].Name+': "'+ FloatToStr(res)+' '+pascalName[count].Ed+'"')
+    else
+      writeln(file_txt, ''+pascalName[count].Name+': "'+ FloatToStr(res)+' '+pascalName[count].Ed+'",');
+  end;
+//  writeln(file_txt, '//}//');
+//  writeln(file_txt, '//}//');
+//  writeln(file_txt, '//}//');   // завершающие скобки всего файла
+//  CloseFile(file_txt);
+//  end;
+// }
+// ---------------------------------------------------------------- NEW
+
   with Block[0] do
   for iX:=1 to CountX do
   begin
@@ -4192,6 +4528,8 @@ begin
           HotMessage(CtrName,st,clNone,Color);
           end;}
 
+
+
     for iY:=1 to AlarmHot.CountY do
     begin
       AlarmHot.LoadXYvirt(cOutBlock,0,iY,stName);
@@ -4204,12 +4542,16 @@ begin
         HotMessage(CtrName,stZone+' '+stName+' - '+st,clNone,GetColorAlrStatus(vLevel));
       end;
     end;
+
     vLevel:=ZoneLevAlarm;
     ZoneLevAlarm:=0;
     if (vLevel>=HOT_ALARM_WAR) then ZoneLevAlarm:=alAttention;
     if (vLevel>=HOT_ALARM_ALR) then ZoneLevAlarm:=alFatal;
+    alarmMessage:=ZoneLevAlarm;
+  end;
 
-    if ZoneLevAlarm  > MaxLevAlarm then MaxLevAlarm:=ZoneLevAlarm;
+
+    {if ZoneLevAlarm  > alarmMessage then alarmMessage:=ZoneLevAlarm;
     case iX of
       1: begin
          //STZone1.Caption:=GetTextFromAlarm(ZoneLevAlarm,Color);
@@ -4252,7 +4594,7 @@ begin
          //STZone8.Visible:=True;
          end;
       end;
-    end;
+    end;                                      }
 {  with ListView1 do
      begin
        if Items.Count>0 then
@@ -4269,7 +4611,7 @@ begin
    ListView1.Items.EndUpdate;     }
 //##   BlockArxPC.CalcAllArxPC(Now);
 //##   (blPCArchive as TNewArxPC_DZ).CalcAllArxPC(Now);
-   PSost.Caption:=GetTextFromAlarm(MaxLevAlarm,Color);
+   PSost.Caption:=GetTextFromAlarm(alarmMessage,Color);
    PSost.Color:=Color;
 end;
 
@@ -4446,7 +4788,7 @@ end;
 }
 procedure TFClimat501U.SpeedButton14Click(Sender: TObject);
 begin
- FHandClim.Exec(Self);
+  FHandClim.Exec(Self);
 end;
 
 {function TFClimat510.GetTemp(fTask:integer;fDo:integer;ValX:integer;inDate:TDateTime):integer;
@@ -4490,6 +4832,12 @@ begin
   SetHints;
   SetPicValue;
 
+end;
+
+procedure TFClimat501U.SpeedButton1Click(Sender: TObject);
+begin
+//  FStrategy501U.Exec(Self);
+  FStrategy501U.Exec((Block[0] as THot_511).ParentCtr);
 end;
 
 end.

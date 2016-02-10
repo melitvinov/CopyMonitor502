@@ -988,6 +988,7 @@ CommonHotName:array [1..SumValYCommonHot] of TNameConst=(
         Def:HIDE_MIN_MAX;Index:iFullPower+2; Mech:0; Tag:2; AccessR:RW_GUEST; AccessW:RW_USER),
   (Name:'Мощность котельной - ПРИРАЩЕНИЕ';Frm:SSpSS;Ed:'МВт';TipSens:TipCalc;Min:0;Max:130;
         Def:HIDE_MIN_MAX; Index:iDeltaP; Mech:0; AccessR:RW_GUEST; AccessW:RW_USER),
+//8
   (Name:'Температура прямой воды - ДЕРЖАТЬ';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:130;
         Def:HIDE_MIN_MAX; Index:iKeepSupply; Mech:0; AccessR:RW_GUEST; AccessW:RW_USER),
   (Name:'Температура прямой воды - ИЗМЕРЕНА';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:130;
@@ -1004,15 +1005,13 @@ CommonHotName:array [1..SumValYCommonHot] of TNameConst=(
         Def:HIDE_MIN_MAX;Index:iFullElPower; Mech:0; Tag:2; AccessR:RW_GUEST; AccessW:RW_USER),
   (Name:'Потребленная электрическая мощность';Frm:SSpSS;Ed:'МВт*ч';TipSens:TipCalc;Min:0;Max:99;
         Def:HIDE_MIN_MAX;Index:iBurnElToday; Mech:0; Tag:2; AccessR:RW_GUEST; AccessW:RW_USER),
-
+// 16
   (Name:'Расход воды на теплицы';Frm:SSSpS;Ed:'м3/ч*10';TipSens:TipCalc;Min:0;Max:2000;
         Def:HIDE_MIN_MAX;Index:iSensFlows+2; Mech:0; Tag:2; AccessR:RW_GUEST; AccessW:RW_USER),
   (Name:'Расход воды на котлы';Frm:SSSpS;Ed:'м3/ч*10';TipSens:TipCalc;Min:0;Max:2000;
         Def:HIDE_MIN_MAX;Index:iSensFlows; Mech:0; Tag:2; AccessR:RW_GUEST; AccessW:RW_USER),
-
   (Name:'Температура в котельной';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:5000;
         Def:HIDE_MIN_MAX;Index:iSensInTemp; Mech:0; Tag:2; AccessR:RW_GUEST; AccessW:RW_USER),
-
   (Name:'БАГВ - Максимум при подаче СО2';Frm:SSSpS;Ed:'%';TipSens:TipCalc;Min:0;Max:100;
         Def:HIDE_MIN_MAX; Index:iMaxFillingYD; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
   (Name:'БАГВ - Миниимум при подаче СО2';Frm:SSSpS;Ed:'%';TipSens:TipCalc;Min:0;Max:90;
@@ -1021,22 +1020,17 @@ CommonHotName:array [1..SumValYCommonHot] of TNameConst=(
         Def:HIDE_MIN_MAX; Index:iCurrFilling+2; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
   (Name:'БАГВ - Минимум без СО2';Frm:SSSpS;Ed:'%';TipSens:TipCalc;Min:0;Max:80;
         Def:HIDE_MIN_MAX; Index:iMaxFillingYD+2; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
-
   (Name:'БАГВ - Текущее заполнение';Frm:SSSpS;Ed:'%';TipSens:TipCalc;Min:0;Max:100;
         Def:HIDE_MIN_MAX; Index:iCurrFilling; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
-
+// 24
   (Name:'БАГВ - Расчитана скорость заполнения';Frm:SSSpS;Ed:'%/ч';TipSens:TipCalc;Min:-40;Max:40;
         Def:HIDE_MIN_MAX; Index:iCalcFSpeed; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
-
   (Name:'БАГВ - Температура крыши';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:130;
         Def:HIDE_MIN_MAX; Index:iSensTTTemp; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
   (Name:'БАГВ - Температура дна';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:130;
         Def:HIDE_MIN_MAX; Index:iSensTTTemp+2; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
-
   (Name:'БАГВ - Уровень';Frm:SSSpS;Ed:'дм';TipSens:TipCalc;Min:0;Max:2000;
         Def:HIDE_MIN_MAX;Index:iSensLevel; Mech:0; Tag:2; AccessR:RW_GUEST; AccessW:RW_USER),
-
-
   (Name:'БАГВ - Температура 1';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:130;
         Def:HIDE_MIN_MAX; Index:iSensTnkTemp; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
   (Name:'БАГВ - Температура 2';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:130;
@@ -1075,9 +1069,12 @@ CommonHotName:array [1..SumValYCommonHot] of TNameConst=(
         Def:HIDE_MIN_MAX; Index:iSensTnkTemp+34; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
   (Name:'БАГВ - Температура 19';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:130;
         Def:HIDE_MIN_MAX; Index:iSensTnkTemp+36; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
+
+// 47
   (Name:'БАГВ - Температура 20';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:130;
         Def:HIDE_MIN_MAX; Index:iSensTnkTemp+38; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
 
+// 48
   (Name:'Запрос СО2 для вентилятора 1';Frm:SSSpS;Ed:'ppm/10';TipSens:TipSun;Min:0;Max:1500;
         Def:HIDE_MIN_MAX; Index:27; Mech:DZM_COVENT1; AccessR:RW_GUEST; AccessW:RW_USER),
   (Name:'Запрос СО2 для вентилятора 2';Frm:SSSpS;Ed:'ppm/10';TipSens:TipSun;Min:0;Max:150;
@@ -2906,7 +2903,7 @@ const
     (Name:'Датчик света 10';Frm:SSSS;Ed:'Вт/м2';TipSens:TipSensor;Min:0;Max:2000;
         Def:NO_MIN_MAX; Index:iCalInLight+9*sizeCalibrSensor; Mech:0; AccessR:RW_GUEST; AccessW:RW_USER),
 
-    (Name:'БАГВ - Уровнь';Frm:SSSS;Ed:'см';TipSens:TipSensor;Min:0;Max:2000;
+    (Name:'БАГВ - Уровнь';Frm:SSSpS;Ed:'дм';TipSens:TipSensor;Min:0;Max:200;
         Def:NO_MIN_MAX; Index:iCalLev; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
 
     (Name:'Температура воздуха';Frm:SSSpS;Ed:'°C';TipSens:TipSensor;Min:-5;Max:130;
@@ -3374,7 +3371,7 @@ DefBoilersMech:array [1..SumValBoilMech] of TNameConst=(
       end;
 }
 const
-  sumValYControl=58;
+  sumValYControl=61;
 
   iContBoilPrior=0;
   iContBoilPower=iContBoilPrior+eSumBoilers*2;
@@ -3503,7 +3500,7 @@ const
         Def:10; Index:iContTSetTemp+4; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
     (Name:'БАГВ - Зона нечувствительности';Frm:SSSpS;Ed:'%';TipSens:TipProg;Min:0;Max:15;
         Def:10; Index:iContTSetTemp+6; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
-    (Name:'БАГВ - начать утилизацию выше максимума на';Frm:SSSpS;Ed:'%';TipSens:TipProg;Min:2;Max:50;
+    (Name:'БАГВ - начать утилизацию ниже максимума на';Frm:SSSpS;Ed:'%';TipSens:TipProg;Min:-30;Max:50;
         Def:10; Index:iContUtilDeadBand; Mech:DZM_COLLZERO; AccessR:RW_GUEST; AccessW:RW_USER),
     (Name:'БАГВ - Емкость бака';Frm:SSSS;Ed:'м3';TipSens:TipProg;Min:0;Max:8000;
         Def:2000; Index:iContFillTime+4; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
@@ -3519,6 +3516,12 @@ const
         Def:0.01; Index:iContIntTank; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
     (Name:'БАГВ - Усреднение графика заполнения';Frm:SSpSSS;Ed:'';TipSens:TipProg;Min:0;Max:1;
         Def:0.9; Index:iContKAvTank; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
+    (Name:'БАГВ - Уровень включения подпитки';Frm:SSSpS;Ed:'дм';TipSens:TipProg;Min:80;Max:120;
+        Def:90; Index:iContMaxNetPower+6; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
+    (Name:'БАГВ - Уровень выключения подпитки';Frm:SSSpS;Ed:'дм';TipSens:TipProg;Min:80;Max:120;
+        Def:95; Index:iContMaxNetPower+8; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
+    (Name:'БАГВ - Аварийно низкий уровень';Frm:SSSpS;Ed:'дм';TipSens:TipProg;Min:50;Max:120;
+        Def:80; Index:iContMaxNetPower+10; Mech:DZM_STORAGE; AccessR:RW_GUEST; AccessW:RW_USER),
 
     (Name:'ГПУ - ТЕМПЕРАТУРА ПОДАЧИ';Frm:SSSpS;Ed:'°C';TipSens:TipProg;Min:60;Max:100;
         Def:90; Index:iContMidlSens+2; Mech:DZM_HPON1; AccessR:RW_GUEST; AccessW:RW_USER),
@@ -3712,3 +3715,452 @@ DefBoilersArx:array [1..SumValYBoilArx] of TNameConst=(
 implementation
 
 end.
+
+
+
+
+
+
+
+
+7(Name:'Температура воды прямой';Frm:SSSpS;Ed:'°C';TipSens:SensorRCS;Min:0;Max:150;Def:HIDE_MIN_MAX;
+    Index:DZ511_iSensOut+18;Mech:DZM511_SHEATING;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+8(Name:'Температура воды обратной';Frm:SSSpS;Ed:'°C';TipSens:SensorRCS;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iSensOut+21;Mech:DZM511_SHEATING;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+9(Name:'Давление воды прямой';Frm:SSpSS;Ed:'Кг';TipSens:SensorRCS;Min:0;Max:16;Def:HIDE_MIN_MAX;
+    Index:DZ511_iSensOut+24;Mech:DZM511_SHEATING;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+10(Name:'Давление воды обратной';Frm:SSpSS;Ed:'Кг';TipSens:SensorRCS;Min:0;Max:14;Def:HIDE_MIN_MAX;
+    Index:DZ511_iSensOut+27;Mech:DZM511_SHEATING;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+11(Name:'Расход воды';Frm:SSSS;Ed:'м3/час';TipSens:SensorRCS;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iSensOut+30;Mech:DZM511_SHEATING;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+27(Name:'Относит влажность воздуха 1';Frm:SSpS0;Ed:'%';TipSens:SensorRCS;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRH;Mech:DZM511_SENS_HUM1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+28(Name:'Относит влажность воздуха 2';Frm:SSpS0;Ed:'%';TipSens:SensorRCS;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRH+3;Mech:DZM511_SENS_HUM2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+29(Name:'Относит влажность воздуха 3';Frm:SSpS0;Ed:'%';TipSens:SensorRCS;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRH+6;Mech:DZM511_SENS_HUM3;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+30(Name:'Датчик СО2 в рукаве';Frm:SSSpS;Ed:'ppm/10';TipSens:SensorRCS;Min:0;Max:3000;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRH+9;Mech:DZM511_SENS_CO_2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+35(Name:'Внутренняя освещенность';Frm:SSSS;Ed:'Вт/м2';TipSens:SensorRCS;Min:0;Max:1400;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRH+12;Mech:DZM511_SENS_INLIGHT;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+36(Name:'Датчик СО2 в теплице';Frm:SSSpS;Ed:'ppm/10';TipSens:SensorRCS;Min:0;Max:3000;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRH+15;Mech:DZM511_SENS_CO_1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+37(Name:'Температура панели 1';Frm:SSpS0;Ed:'°C';TipSens:SensorRCS;Min:0;Max:60;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRH+18;Mech:DZM511_SENS_EVAP1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+38(Name:'Относит влажность воздуха в рукаве';Frm:SSpS0;Ed:'%';TipSens:SensorRCS;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRH+21;Mech:DZM511_SENS_HUMAHU;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+39(Name:'Температура охлаждения';Frm:SSpS0;Ed:'°C';TipSens:SensorRCS;Min:0;Max:60;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRH+24;Mech:DZM511_SENS_COOL;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+40(Name:'Избыточное давление';Frm:SSpS0;Ed:'Па';TipSens:SensorRCS;Min:0;Max:60;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRH+27;Mech:DZM511_SENS_OP;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+42(Name:'Температура почвы';Frm:SSpS0;Ed:'°C';TipSens:SensorRCS;Min:0;Max:60;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRH+33;Mech:DZM511_SENS_SOIL;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+43(Name:'Температура стекла';Frm:SSpS0;Ed:'°C';TipSens:SensorRCS;Min:-20;Max:70;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRH+36;Mech:DZM511_SENS_GLASS;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+44(Name:'Температура на входе AHU';Frm:SSpS0;Ed:'°C';TipSens:SensorRCS;Min:0;Max:60;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRH+39;Mech:DZM511_SENS_INAHU;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+45(Name:'Температура на выходе AHU';Frm:SSpS0;Ed:'°C';TipSens:SensorRCS;Min:0;Max:60;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRH+42;Mech:DZM511_SENS_OUTAHU;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+46(Name:'Положение фрамуги СЕВЕР';Frm:SSSpS;Ed:'%';TipSens:SensorRCS;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRH+45;Mech:DZM511_SENS_FRAM_N;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+47(Name:'Положение фрамуги ЮГ';Frm:SSSpS;Ed:'%';TipSens:SensorRCS;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRH+48;Mech:DZM511_SENS_FRAM_S;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+48(Name:'Положение ЭКРАНА';Frm:SSSpS;Ed:'%';TipSens:SensorRCS;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRH+51;Mech:DZM511_SENS_SCR;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+49(Name:'Вода прямая контур 1';Frm:SSSpS;Ed:'°C';TipSens:SensorRCS;Min:-1;Max:150;Def:FATAL_MIN_MAX;
+    Index:DZ511_itWater+3;Mech:DZM511_SENS_WATER1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+50(Name:'Вода прямая контур 2';Frm:SSSpS;Ed:'°C';TipSens:SensorRCS;Min:-1;Max:150;Def:FATAL_MIN_MAX;
+    Index:DZ511_itWater+6;Mech:DZM511_SENS_WATER2;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+51(Name:'Вода прямая контур 3';Frm:SSSpS;Ed:'°C';TipSens:SensorRCS;Min:-1;Max:150;Def:FATAL_MIN_MAX;
+    Index:DZ511_itWater+9;Mech:DZM511_SENS_WATER3;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+52(Name:'Вода прямая контур 4';Frm:SSSpS;Ed:'°C';TipSens:SensorRCS;Min:-1;Max:150;Def:FATAL_MIN_MAX;
+    Index:DZ511_itWater+12;Mech:DZM511_SENS_WATER4;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+53(Name:'Вода прямая контур 5';Frm:SSSpS;Ed:'°C';TipSens:SensorRCS;Min:-1;Max:150;Def:FATAL_MIN_MAX;
+    Index:DZ511_itWater+15;Mech:DZM511_SENS_WATER5;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+54(Name:'Вода прямая контур AHU';Frm:SSSpS;Ed:'°C';TipSens:SensorRCS;Min:-1;Max:150;Def:FATAL_MIN_MAX;
+    Index:DZ511_itWater+18;Mech:DZM511_SENS_WATAHU;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+
+    
+//55
+(Name:'Состояние досветки';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_itTeplDSens+1;Mech:DZM511_LIGHT ;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Состояние полива';Frm:ComboBit;Ed:'1';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_itTeplDSens+1;AccessR:RW_INVISIBLE;AccessW:RW_SUPERVISOR),
+// ------- РАСЧИТАННЫЕ ПАРАМЕТРЫ ТЕПЛИЦЫ ---------------------------
+(Name:'Температура воздуха - Задана';Frm:SSpS0;Ed:'°C';TipSens:TipTimer;Min:-1;Max:35;Def:FATAL_MIN_MAX;
+    Index:DZ511_itTaskT;Mech:DZM511_SENS_TEMP1;AccessR:RW_GUESTI;AccessW:RW_SUPERVISOR),
+(Name:'Температура воздуха - ДЕРЖАТЬ';Frm:SSpS0;Ed:'°C';TipSens:TipSun;Min:-1;Max:35;Def:FATAL_MIN_MAX;
+    Index:DZ511_itTaskT+2;Mech:DZM511_SENS_TEMP1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Влажность воздуха - Задана по програм';Frm:SSpS0;Ed:'%';TipSens:TipTimer;Min:0;Max:95;Def:HIDE_MIN_MAX;
+    Index:DZ511_itTaskT+10;Mech:DZM511_SENS_HUM1;AccessR:RW_GUESTI;AccessW:RW_SUPERVISOR),
+// 60
+(Name:'Влажность воздуха - ДЕРЖАТЬ';Frm:SSpS0;Ed:'%';TipSens:TipSun;Min:0;Max:95;Def:HIDE_MIN_MAX;
+    Index:DZ511_itTaskT+12;Mech:DZM511_SENS_HUM1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Температура вентиляции - Расчитана';Frm:SSpS0;Ed:'°C';TipSens:TipCalc;Min:-1;Max:40;Def:FATAL_MIN_MAX;
+    Index:DZ511_itTaskT+4;Mech:DZM511_SENS_TEMP1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'СО2 - Задано по программе';Frm:SSSpS;Ed:'ppm/10';TipSens:TipTimer;Min:0;Max:1500;Def:HIDE_MIN_MAX;
+    Index:DZ511_itTaskT+14;Mech:DZM511_CO2;AccessR:RW_GUESTI;AccessW:RW_SUPERVISOR),
+(Name:'СО2 - ДЕРЖАТЬ концентрацию';Frm:SSSpS;Ed:'ppm/10';TipSens:TipSun;Min:0;Max:1500;Def:HIDE_MIN_MAX;
+    Index:DZ511_itTaskT+16;Mech:DZM511_CO2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Абсолютная влажность рукава';Frm:SSpS0;Ed:'г/м3';TipSens:AbsRH;Min:0;Max:200;Def:HIDE_MIN_MAX;
+    Index:0{iRez};Mech:DZM511_SENS_HUM1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+//65
+(Name:'Абсолютная влажность воздуха';Frm:SSpS0;Ed:'г/м3';TipSens:prognT;Min:0;Max:200;Def:HIDE_MIN_MAX;
+    Index:0{iRez};Mech:DZM511_SENS_HUM1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Интенсивность транспирации';Frm:SSpS0;Ed:'г/ч/м2';TipSens:TipIzm;Min:0;Max:1000;Def:HIDE_MIN_MAX;
+    Index:0;Mech:DZM511_SENS_HUM1;Tag:calcTrans;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Потребление СО2';Frm:SSpS0;Ed:'м3/ч/м2';TipSens:TipIzm;Min:0;Max:1000;Def:HIDE_MIN_MAX;
+    Index:0;Mech:DZM511_SENS_HUM1;Tag:calcConsumCO2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+//64             DZ511_iMaxWater
+//(Name:'Прогноз задания температуры';Frm:SSpS0;Ed:'°C';TipSens:TipCalc;Min:3;Max:35;Def:HIDE_MIN_MAX;
+//    Index:DZ511_itTaskT+6;AccessR:RW_GUESTI;AccessW:RW_SUPERVISOR),
+//  68
+(Name:'Надо теплоноситель';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:135;Def:HIDE_MIN_MAX;
+    Index:DZ511_iZoneMaxWater;Mech:DZM511_SENS_TEMP1;AccessR:RW_GUESTI;AccessW:RW_SUPERVISOR),
+(Name:'Т отопления - Солнце повышает на';Frm:SSpSS;Ed:'°C';TipSens:TipSun;Min:-200;Max:200;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRaisedCritery+2;Mech:DZM511_SENS_TEMP1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Т отопления - (Тзад-Твнеш) понижает на';Frm:SSpSS;Ed:'°C';TipSens:TipAdd;Min:-200;Max:200;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRaisedCritery+6;Mech:DZM511_SENS_TEMP1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Т отопления - (Тзад-Тстекла) понижает на';Frm:SSpSS;Ed:'°C';TipSens:TipAdd;Min:-200;Max:200;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRaisedCritery+4;Mech:DZM511_SENS_GLASS;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Т отопления - Досветка повышает на';Frm:SSpSS;Ed:'°C';TipSens:TipAdd;Min:0;Max:200;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRaisedCritery+8;Mech:DZM511_LIGHT;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Т отопления - Экран повышает на';Frm:SSpSS;Ed:'°C';TipSens:TipAdd;Min:0;Max:20;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRaisedCritery+16;Mech:DZM511_SCREEN_TG;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Т отопления - Сумма внешних изменяет(х10)';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-300;Max:300;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRaisedCritery+24;Mech:DZM511_SENS_TEMP1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Т вентиляции - Сумма внешних изменяет(х10)';Frm:SSpSS;Ed:'°C';TipSens:TipAdd;Min:-300;Max:300;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRaisedCritery+12;Mech:DZM511_SENS_TEMP1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+//76
+(Name:'Т отопления - (П) изменяет на';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-1000;Max:1000;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRaisedCritery+18;Mech:DZM511_SENS_TEMP1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Т отопления - (И) изменяет на';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-1000;Max:1000;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRaisedCritery+10;Mech:DZM511_SENS_TEMP1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Т вентиляции - (П) изменяет на ';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-1000;Max:1000;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRaisedCritery+26;Mech:DZM511_SENS_TEMP1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Т вентиляции - (И) изменяет на ';Frm:SSpSS;Ed:'°C';TipSens:TipAdd;Min:-1000;Max:1000;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRaisedCritery+22;Mech:DZM511_SENS_TEMP1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Цель - изменить теплоноситель на';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-400;Max:400;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRaisedCritery+20;Mech:DZM511_SENS_TEMP1;AccessR:RW_USER;AccessW:RW_SUPERVISOR),
+(Name:'Цель - распределить на фрамуги';Frm:SSpSS;Ed:'°C';TipSens:TipAdd;Min:-400;Max:400;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRaisedCritery+16;Mech:DZM511_SENS_TEMP1;AccessR:RW_USER;AccessW:RW_SUPERVISOR),
+// 82
+(Name:'Контур 1 - Максимум Задан в Параметрах';Frm:SSSpS;Ed:'°C';TipSens:TipProg;Min:0;Max:130;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+2;Mech:DZM511_VALVE1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Контур 1 - Минимум Задан в Программе';Frm:SSSpS;Ed:'°C';TipSens:TipTimer;Min:0;Max:50;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+4;Mech:DZM511_VALVE1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Контур 1 - Минимум Рассчитан';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:50;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+6;Mech:DZM511_VALVE1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Контур 1 - Оптимум задан в Программе';Frm:SSSpS;Ed:'°C';TipSens:TipTimer;Min:0;Max:70;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur;Mech:DZM511_VALVE1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Контур 1 - Приоритет работы (Твозд,RH,Топт)';Frm:SSSS;Ed:'';TipSens:TipCalc;Min:-200;Max:200;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+10;Mech:DZM511_VALVE1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Контур 1 - Нерегулируемость теплоносителя';Frm:SS;Ed:'%';TipSens:TipCalc;Min:-100;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+8;Mech:DZM511_VALVE1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+{(Name:'Контур 1 - Приоритет с экономичностью';Frm:SSSpS;Ed:'';TipSens:TipCalc;Min:-200;Max:200;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+12;Mech:DZM511_VALVE1;AccessR:RW_USER;AccessW:RW_SUPERVISOR),
+(Name:'Контур 1 - Приоритет с возможностями';Frm:SSSpS;Ed:'';TipSens:TipCalc;Min:-200;Max:200;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+14;Mech:DZM511_VALVE1;AccessR:RW_USER;AccessW:RW_SUPERVISOR),   }
+(Name:'Контур 1 - Температура воды';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:10;Max:150;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+12;Mech:DZM511_VALVE1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Контур 1 - ДЕРЖАТЬ температуру воды';Frm:SSSpS;Ed:'°C';TipSens:TipDo;Min:-1;Max:130;Def:FATAL_MIN_MAX;
+      Index:DZ511_itKontur+14;Mech:DZM511_VALVE1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+// 90
+(Name:'Контур 2 - Максимум Задан в Параметрах';Frm:SSSpS;Ed:'°C';TipSens:TipProg;Min:0;Max:130;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur+2;Mech:DZM511_VALVE2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Контур 2 - Минимум Задан в Программе';Frm:SSSpS;Ed:'°C';TipSens:TipTimer;Min:0;Max:50;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur+4;Mech:DZM511_VALVE2;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Контур 2 - Минимум Рассчитан';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:50;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur+6;Mech:DZM511_VALVE2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Контур 2 - Оптимум задан в Программе';Frm:SSSpS;Ed:'°C';TipSens:TipTimer;Min:0;Max:70;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur;Mech:DZM511_VALVE2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Контур 2 - Приоритет работы (Твозд,RH,Топт)';Frm:SSSS;Ed:'';TipSens:TipCalc;Min:-200;Max:200;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur+10;Mech:DZM511_VALVE2;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Контур 2 - Нерегулируемость теплоносителя';Frm:SSSS;Ed:'%';TipSens:TipCalc;Min:-100;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur+8;Mech:DZM511_VALVE2;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+{(Name:'Контур 2 - Приоритет с экономичностью';Frm:SSSpS;Ed:'';TipSens:TipCalc;Min:-200;Max:200;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur+12;Mech:DZM511_VALVE2;AccessR:RW_USER;AccessW:RW_SUPERVISOR),
+(Name:'Контур 2 - Приоритет с возможностями';Frm:SSSpS;Ed:'';TipSens:TipCalc;Min:-200;Max:200;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur+14;Mech:DZM511_VALVE2;AccessR:RW_USER;AccessW:RW_SUPERVISOR),}
+(Name:'Контур 2 - Температура воды';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:150;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur+12;Mech:DZM511_VALVE2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Контур 2 - ДЕРЖАТЬ температуру воды';Frm:SSSpS;Ed:'°C';TipSens:TipDo;Min:-1;Max:130;Def:FATAL_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur+14;Mech:DZM511_VALVE2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+// 98
+(Name:'Контур 3 - Максимум Задан в Параметрах';Frm:SSSpS;Ed:'°C';TipSens:TipProg;Min:0;Max:130;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*2+2;Mech:DZM511_VALVE3;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Контур 3 - Минимум Задан в Параметрах';Frm:SSSpS;Ed:'°C';TipSens:TipProg;Min:0;Max:50;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*2+4;Mech:DZM511_VALVE3;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Контур 3 - Минимум Рассчитан';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:50;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*2+6;Mech:DZM511_VALVE3;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Контур 3 - Оптимум задан в Параметрах';Frm:SSSpS;Ed:'°C';TipSens:TipProg;Min:0;Max:70;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*2;Mech:DZM511_VALVE3;AccessR:RW_USER;AccessW:RW_SUPERVISOR),
+(Name:'Контур 3 - Приоритет работы (Твозд,RH,Топт)';Frm:SSSpS;Ed:'';TipSens:TipCalc;Min:-300;Max:300;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*2+10;Mech:DZM511_VALVE3;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Контур 3 - Нерегулируемость теплоносителя';Frm:SSSS;Ed:'%';TipSens:TipCalc;Min:-100;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*2+8;Mech:DZM511_VALVE3;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+{(Name:'Контур 3 - Приоритет с экономичностью';Frm:SSSpS;Ed:'';TipSens:TipCalc;Min:-300;Max:300;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*2+12;Mech:DZM511_VALVE3;AccessR:RW_USER;AccessW:RW_SUPERVISOR),
+(Name:'Контур 3 - Приоритет с возможностями';Frm:SSSpS;Ed:'';TipSens:TipCalc;Min:-300;Max:300;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*2+14;Mech:DZM511_VALVE3;AccessR:RW_USER;AccessW:RW_SUPERVISOR),}
+(Name:'Контур 3 - Температура воды';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:150;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*2+12;Mech:DZM511_VALVE3;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Контур 3 - ДЕРЖАТЬ температуру воды';Frm:SSSpS;Ed:'°C';TipSens:TipDo;Min:-1;Max:130;Def:FATAL_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*2+14;Mech:DZM511_VALVE3;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+// 106
+(Name:'Контур 4 - Максимум Задан в Параметрах';Frm:SSSpS;Ed:'°C';TipSens:TipProg;Min:0;Max:130;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*3+2;Mech:DZM511_PUMP4;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Контур 4 - Минимум Задан в Параметрах';Frm:SSSpS;Ed:'°C';TipSens:TipProg;Min:0;Max:50;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*3+4;Mech:DZM511_PUMP4;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Контур 4 - Минимум Рассчитан';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:50;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*3+6;Mech:DZM511_PUMP4;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Контур 4 - Оптимум задан в Параметрах';Frm:SSSpS;Ed:'°C';TipSens:TipProg;Min:0;Max:70;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*3;Mech:DZM511_PUMP4;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Контур 4 - Приоритет работы (Твозд,RH,Топт)';Frm:SSSpS;Ed:'';TipSens:TipCalc;Min:-300;Max:300;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*3+10;Mech:DZM511_PUMP4;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Контур 4 - Нерегулируемость теплоносителя';Frm:SS;Ed:'%';TipSens:TipCalc;Min:-100;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*3+8;Mech:DZM511_PUMP4;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+{(Name:'Регулятор давления - ИЗМЕРЕНА разность';Frm:SSpSS;Ed:'Кг';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*3+12;Mech:DZM511_PRES_REG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Регулятор давления - ДЕРЖАТЬ разность';Frm:SSpSS;Ed:'Кг';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*3+14;Mech:DZM511_PRES_REG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),  }
+(Name:'Контур 4 - Температура воды';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:150;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*3+12;Mech:DZM511_PUMP4;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Контур 4 - ДЕРЖАТЬ температуру воды';Frm:SSSpS;Ed:'°C';TipSens:TipDo;Min:-1;Max:130;Def:FATAL_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*3+14;Mech:DZM511_PUMP4;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+// 114
+(Name:'Контур 5 - Максимум Задан в Параметрах';Frm:SSSpS;Ed:'°C';TipSens:TipProg;Min:0;Max:130;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*4+2;Mech:DZM511_VALVE5;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Контур 5 - Минимум Задан в Параметрах';Frm:SSSpS;Ed:'°C';TipSens:TipProg;Min:0;Max:50;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*4+4;Mech:DZM511_VALVE5;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Контур 5 - Минимум Рассчитан';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:50;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*4+6;Mech:DZM511_VALVE5;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Контур 5 - Оптимум задан в Параметрах';Frm:SSSpS;Ed:'°C';TipSens:TipProg;Min:0;Max:70;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*4;Mech:DZM511_VALVE5;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Контур 5 - Приоритет работы (Твозд,RH,Топт)';Frm:SSSpS;Ed:'';TipSens:TipCalc;Min:-300;Max:300;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*4+10;Mech:DZM511_VALVE5;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Контур 5 - Нерегулируемость теплоносителя';Frm:SS;Ed:'%';TipSens:TipCalc;Min:-100;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*4+8;Mech:DZM511_VALVE5;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+{(Name:'Контур 5 - Приоритет с экономичностью';Frm:SSSpS;Ed:'';TipSens:TipCalc;Min:-300;Max:300;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*4+12;Mech:DZM511_VALVE5;AccessR:RW_USER;AccessW:RW_SUPERVISOR),
+(Name:'Контур 5 - Приоритет с возможностями';Frm:SSSpS;Ed:'';TipSens:TipCalc;Min:-300;Max:300;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*4+14;Mech:DZM511_VALVE5;AccessR:RW_USER;AccessW:RW_SUPERVISOR),      }
+(Name:'Контур 5 - Температура воды';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:150;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*4+12;Mech:DZM511_VALVE5;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Контур 5 - ДЕРЖАТЬ температуру воды';Frm:SSSpS;Ed:'°C';TipSens:TipDo;Min:-1;Max:130;Def:FATAL_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*4+14;Mech:DZM511_VALVE5;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+// 122
+(Name:'Фрамуги - Режим работы по программе';Frm:ComboSS;Ed:'';TipSens:TipTimer;Min:comFram;Max:comFram+2;Def:HIDE_MIN_MAX;
+    Index:DZ511_itClimTask+18;Mech:DZM511_FRAM_SOUTH;AccessR:RW_GUESTI;AccessW:RW_SUPERVISOR),
+(Name:'Фрамуги - Макс Наветренной Расчитан';Frm:SSSS;Ed:'%';TipSens:TipCalc;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*7+2;Mech:DZM511_FRAM_SOUTH;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Фрамуги - Макс Подветренной Расчитан';Frm:SSSS;Ed:'%';TipSens:TipCalc;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*6+2;Mech:DZM511_FRAM_SOUTH;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Фрамуги - Минимум Задан в программе';Frm:SSSS;Ed:'%';TipSens:TipTimer;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*6+4;Mech:DZM511_FRAM_SOUTH;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Фрамуги - Минимум Рассчитан по солнцу';Frm:SSSS;Ed:'%';TipSens:TipSun;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*6+6;Mech:DZM511_FRAM_SOUTH;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Фрамуги - Рассчетный минимальный шаг';Frm:SSSS;Ed:'%';TipSens:TipProg;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*6;Mech:DZM511_FRAM_SOUTH;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Фрамуги - Приоритет работы';Frm:SSSpS;Ed:'';TipSens:TipCalc;Min:-300;Max:300;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*6+10;Mech:DZM511_FRAM_SOUTH;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Фрамуги - Коэффициент увеличения';Frm:SS;Ed:'раз';TipSens:TipCalc;Min:0;Max:5;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*6+8;Mech:DZM511_FRAM_SOUTH;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+{(Name:'Фрамуги - Приоритет с экономичностью';Frm:SSSpS;Ed:'';TipSens:TipAdd;Min:-300;Max:300;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*5+12;Mech:DZM511_FRAM_SOUTH;AccessR:RW_USER;AccessW:RW_SUPERVISOR),
+(Name:'Фрамуги - Приоритет с возможностями';Frm:SSSpS;Ed:'';TipSens:TipAdd;Min:-300;Max:300;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*5+14;Mech:DZM511_FRAM_SOUTH;AccessR:RW_USER;AccessW:RW_SUPERVISOR),
+(Name:'Фрамуги - Принятая часть цели';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-100;Max:200;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*5+14;Mech:DZM511_FRAM_SOUTH;AccessR:RW_USER;AccessW:RW_SUPERVISOR),   }
+// 130
+(Name:'Фрамуги - ДЕРЖАТЬ Подветренную';Frm:SSSS;Ed:'%';TipSens:TipDo;Min:-1;Max:100;Def:FATAL_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*6+14;Mech:DZM511_FRAM_SOUTH;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Фрамуги - ДЕРЖАТЬ Наветренную';Frm:SSSS;Ed:'%';TipSens:TipDo;Min:-1;Max:100;Def:FATAL_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*7+14;Mech:DZM511_FRAM_SOUTH;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Экран термический - Режим работы по программе';Frm:ComboSS;Ed:'';TipSens:TipTimer;Min:comScreen;Max:comScreen+2;Def:HIDE_MIN_MAX;
+    Index:DZ511_itClimTask+24;Mech:DZM511_SCREEN_TG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Экран термический - Максимамальное приоткрытие';Frm:SSSS;Ed:'%';TipSens:TipCalc;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*7+2;Mech:DZM511_SCREEN_TG;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Экран термический - Минимамальное приоткрытие';Frm:SSSS;Ed:'%';TipSens:TipTimer;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*7+4;Mech:DZM511_SCREEN_TG;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Экран термический - Приоритет работы';Frm:SSSpS;Ed:'';TipSens:TipCalc;Min:-300;Max:300;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*7+10;Mech:DZM511_SCREEN_TG;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Экран термический - приоткрыть на';Frm:SSSS;Ed:'%';TipSens:TipCalc;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_itKontur+DZ511_size1Kontur*7+14;Mech:DZM511_SCREEN_TG;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+(Name:'Экран затеняющий - Режим работы по программе';Frm:ComboSS;Ed:'';TipSens:TipTimer;Min:comScreen;Max:comScreen+2;Def:HIDE_MIN_MAX;
+    Index:DZ511_itClimTask+25;Mech:DZM511_SCREEN_HG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Экран вертикальный - Режим работы по программе';Frm:ComboSS;Ed:'';TipSens:TipTimer;Min:comScreen;Max:comScreen+2;Def:HIDE_MIN_MAX;
+    Index:DZ511_itClimTask+26;Mech:DZM511_SCREEN_TV1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+// 139
+(Name:'Вентиляторы - Режим работы по программе';Frm:ComboSS;Ed:'';TipSens:TipTimer;Min:comOnOff;Max:comOnOff+2;Def:HIDE_MIN_MAX;
+    Index:DZ511_itClimTask+23;Mech:DZM511_VENT;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Вентиляторы - Задана разница для вкл';Frm:SSpS0;Ed:'°C';TipSens:TipProg;Min:0;Max:10;Def:HIDE_MIN_MAX;
+    Index:DZ511_itOtherCalc+2;Mech:DZM511_VENT;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Вентиляторы - Сейчас разница';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:0;Max:10;Def:HIDE_MIN_MAX;
+    Index:DZ511_itOtherCalc+4;Mech:DZM511_VENT;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Регулятор давления - ИЗМЕРЕНА разность';Frm:SSpSS;Ed:'Кг/см2';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
+    Index:DZ511_itOtherCalc+8;Mech:DZM511_PRES_REG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Регулятор давления - ДЕРЖАТЬ разность';Frm:SSpSS;Ed:'Кг/см2';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
+    Index:DZ511_itClimTask+21;Mech:DZM511_PRES_REG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+// 144
+(Name:'Измерено для регулятора 1';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
+    Index:DZ511_itOtherCalc;Mech:DZM511_EXTREG1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Измерено для регулятора 2';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
+    Index:DZ511_itClimTask;Mech:DZM511_EXTREG1+1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Измерено для регулятора 3';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
+    Index:DZ511_itOtherCalc;Mech:DZM511_EXTREG1+2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Измерено для регулятора 4';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
+    Index:DZ511_itClimTask;Mech:DZM511_EXTREG1+3;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Измерено для регулятора 5';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
+    Index:DZ511_itOtherCalc;Mech:DZM511_EXTREG1+4;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+// 149
+(Name:'Запрос СО2 (разница зад и измер)';Frm:SSSpS;Ed:'ppm/10';TipSens:TipSun;Min:0;Max:1500;Def:HIDE_MIN_MAX;
+    Index:DZ511_itRaisedCritery+14;Mech:DZM511_CO2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Тепловая мощность';Frm:SSpS0;Ed:'Вт';TipSens:TipCalc;Min:0;Max:20;Def:NO_MIN_MAX;
+    Index:0;Mech:0;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+//(Name:'Резерв7';Frm:SSpSS;Ed:'';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
+//    Index:DZ511_itOtherCalc;AccessR:RW_INVISIBLE;AccessW:RW_SUPERVISOR),
+(Name:'Мощность теплосъема';Frm:SSpSS;Ed:'';TipSens:TipCalc;Min:0;Max:0;Def:HIDE_MIN_MAX;
+    Index:0;Mech:0;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'СИОД - Текущее задание распыления';Frm:SSSS;Ed:'сек';TipSens:TipTimer;Min:0;Max:30;Def:HIDE_MIN_MAX;
+    Index:DZ511_itClimTask+19;Mech:DZM511_SIO_PUMP;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'СИОД - Время работы с начала суток';Frm:SSSS;Ed:'сек';TipSens:TipCalc;Min:0;Max:1000;Def:HIDE_MIN_MAX;
+    Index:DZ511_itOtherCalc+6;Mech:DZM511_SIO_PUMP;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Досвет - Режим работы по программе';Frm:ComboSS;Ed:'';TipSens:TipTimer;Min:comOnOff;Max:comOnOff+2;Def:HIDE_MIN_MAX;
+    Index:DZ511_itClimTask+27;Mech:DZM511_LIGHT;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Обработка - Режим работы по программе';Frm:ComboSS;Ed:'';TipSens:TipTimer;Min:comOnOff;Max:comOnOff+2;Def:HIDE_MIN_MAX;
+    Index:DZ511_itClimTask+29;Mech:0;AccessR:RW_INVISIBLE;AccessW:RW_SUPERVISOR),
+
+//============================= Contnrol and status ========================================
+// 156
+(Name:'Смесительный клапан 1 Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+0;Mech:DZM511_VALVE1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Смесительный клапан 1 Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+1;Mech:DZM511_VALVE1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Насос контура 1 Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+48;Mech:DZM511_PUMP1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Насос контура 1 Состояние';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+49;Mech:DZM511_PUMP1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+//160
+(Name:'Смесительный клапан 2 Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+2;Mech:DZM511_VALVE2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Смесительный клапан 2 Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+3;Mech:DZM511_VALVE2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Насос контура 2 Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+50;Mech:DZM511_PUMP2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Насос контура 2 Состояние';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+51;Mech:DZM511_PUMP2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Смесительный клапан 3 Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+4;Mech:DZM511_VALVE3;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Смесительный клапан 3 Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+5;Mech:DZM511_VALVE3;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Насос контура 3 Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+52;Mech:DZM511_PUMP3;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Насос контура 3 Состояние';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+53;Mech:DZM511_PUMP3;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+//168
+(Name:'Смесительный клапан 4 Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+6;Mech:DZM511_VALVE4;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Смесительный клапан 4 Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+7;Mech:DZM511_VALVE4;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Насос контура 4 Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+54;Mech:DZM511_PUMP4;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Насос контура 4 Состояние';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+55;Mech:DZM511_PUMP4;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Смесительный клапан 5 Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+8;Mech:DZM511_VALVE5;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Смесительный клапан 5 Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+9;Mech:DZM511_VALVE5;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Насос контура 5 Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+56;Mech:DZM511_PUMP5;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Насос контура 5 Состояние';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+57;Mech:DZM511_PUMP5;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+// 176
+(Name:'Фрамуги Север Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+12;Mech:DZM511_FRAM_NORTH;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Фрамуги Север Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+13;Mech:DZM511_FRAM_NORTH;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Фрамуги Юг Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+14;Mech:DZM511_FRAM_SOUTH;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Фрамуги Юг Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+15;Mech:DZM511_FRAM_SOUTH;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Экран термический Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+28;Mech:DZM511_SCREEN_TG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Экран термический Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+29;Mech:DZM511_SCREEN_TG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Экран затеняющий Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+30;Mech:DZM511_SCREEN_HG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Экран затеняющий Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+31;Mech:DZM511_SCREEN_HG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Экран вертикальный сторона Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+32;Mech:DZM511_SCREEN_TV1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Экран вертикальный сторона Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+33;Mech:DZM511_SCREEN_TV1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+// 186
+(Name:'Фрамуги Север 2 Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+16;Mech:DZM511_FRAM_NORTH2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Фрамуги Север 2 Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+17;Mech:DZM511_FRAM_NORTH2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Фрамуги Север 3 Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+18;Mech:DZM511_FRAM_NORTH3;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Фрамуги Север 3 Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+19;Mech:DZM511_FRAM_NORTH3;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Фрамуги Север 4 Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+20;Mech:DZM511_FRAM_NORTH4;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Фрамуги Север 4 Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+21;Mech:DZM511_FRAM_NORTH4;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Дозатор СО2 Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+34;Mech:DZM511_CO2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Дозатор СО2 Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+35;Mech:DZM511_CO2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Вентиляторы Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+60;Mech:DZM511_VENT;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Вентиляторы Состояние';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+61;Mech:DZM511_VENT;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+// 196
+(Name:'Воздушный обогрев Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+62;Mech:DZM511_VAG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Воздушный обогрев Состояние';Frm:SS;Ed:'';TipSens:TipIzm;Min:0;Max:2;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+63;Mech:DZM511_VAG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'СИО Насос Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+66;Mech:DZM511_SIO_PUMP;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'СИО Насос Состояние';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+67;Mech:DZM511_SIO_PUMP;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'CИО клапан  Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+68;Mech:DZM511_SIO_VALVES;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'CИО клапан  Состояние';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+69;Mech:DZM511_SIO_VALVES;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Регулятор давления Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+36;Mech:DZM511_PRES_REG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Регулятор давления Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+37;Mech:DZM511_PRES_REG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+// 204
+(Name:'Досвечивание Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+38;Mech:DZM511_LIGHT;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Досвечивание Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+39;Mech:DZM511_LIGHT;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Смесительный клапан AHU Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+10;Mech:DZM511_VALVEAHU;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Смесительный клапан AHU Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+11;Mech:DZM511_VALVEAHU;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Насос контура AHU Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+58;Mech:DZM511_PUMPAHU;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Насос контура AHU Состояние';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+5;Mech:DZM511_PUMPAHU;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Клапан UC Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+22;Mech:DZM511_FRAM_UC;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Клапан UC Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+23;Mech:DZM511_FRAM_UC;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Скорость AHU 1 Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+24;Mech:DZM511_SPEED_AHU1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Скорость AHU 1 Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+25;Mech:DZM511_SPEED_AHU1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+// 214
+(Name:'Скорость AHU 2 Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+26;Mech:DZM511_SPEED_AHU2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Скорость AHU 2 Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+27;Mech:DZM511_SPEED_AHU2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Авария Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+72;Mech:DZM511_ALARM;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Авария Состояние';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+73;Mech:DZM511_ALARM;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR)

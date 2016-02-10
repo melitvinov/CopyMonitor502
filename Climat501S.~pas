@@ -623,7 +623,7 @@ begin
        TCalInSens_DZ.Create(Self);
        TCalOutSens_DZ.Create(Self);
        TParMec_DZ.Create(Self);
-       TLev_DZ.Create(Self);
+       TLev_DZ.Create(Self);           // task 61
        HandMode:=THandMode_DZ.Create(Self);
        NetMeteo:=TNetMeteo_DZ.Create(Self);
        AlarmHot:=THotAlarm.Create(Self);
@@ -723,12 +723,13 @@ with ParentCtr as TFClimat501S do
         Txt:=FloatToStr(Result)+' '+ConstNames[ValY].Ed;
         Exit;
         end;
+
  if (ValY <= DZ_SUM_METEO) then
     begin
-      if ValX <= 1 then
+      if ValX <= 3 then
           begin
-          if ValX = 1 then ValX:=X_MAX;
-          Result:=NetMeteo.LoadXY(vInBlock,ValX,ValY,Txt);
+            if (ValX <> 0) and (ValX < 9) then ValX:=X_MAX;
+            Result:=NetMeteo.LoadXY(vInBlock,ValX,ValY,Txt);
           end
       else imNum:=imNoConnect;
     Exit;
@@ -740,11 +741,11 @@ with ParentCtr as TFClimat501S do
         SS,vInBlock,ValX,ValY,Txt,'');
     Exit;
     end;
+  if ValY < 21 then
+    ValX := 1;
  tIndex:=0;
  if ValY >= DZ_StTeplSens then
-   tIndex:=DZ_iTepl
-   else if ValX > 1 then
-    begin Txt:=''; Exit; end;;
+   tIndex:=DZ_iTepl;
  tIndex:=tIndex+(ValX-1)*DZ_sizeTepl;
  pt:=Addr(tIn);
  pHot:=Adr;
@@ -789,6 +790,7 @@ end;
 function THot_DZ.TestAlarmSens:Boolean;
 var y,x:integer; st:string; st1:string;Color:TColor;
 begin
+  alarmMessage := 0;
   for y:=1 to CountY do
     begin
     if ConstNames[y].TipSens <> SensorRCS then continue;
@@ -796,7 +798,13 @@ begin
         begin
         LoadXY(cOutBlock,x,y,st);
         if gRCS=0 then continue;
-        if gRCS > 32 then
+        if gRCS = 1 then
+          begin
+            HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Отказ датчика',clNone,clNone,clRed);      // запись в журнал
+            alarmMessage := alFatal;
+            continue;
+          end;
+        if gRCS >= 32 then
           begin
             HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Отказ датчика',clNone,clNone,clRed);      // запись в журнал
             alarmMessage := alFatal;
@@ -1697,9 +1705,7 @@ const
   sumCO2Contur = 1;
   sumWarmCO2Source= sumWarmContur + sumCO2Contur;
   WarmGroupSource:array[1..sumWarmCO2Source] of word=
-        (70,78,86,94,102,130);  //44
-  WarmGroupSource511:array[1..sumWarmCO2Source] of word=
-        (85,93,101,109,117,145);  //44
+        (78,86,94,102,110,138);  //44
   WarmCountY=28;
 var NameWarmGroup:array [1..WarmCountY] of TNameConst=(
     (Name:'Зона 1 Контур 1';Frm:SS;Ed:'теплогруппа';TipSens:TipCalc;Min:0;Max:10;Def:NO_MIN_MAX;
@@ -2051,7 +2057,7 @@ begin
      FullSize:=0;
      NameBlock:=ProgMess[213];    //'Ручное управление';
 
-Exit;
+//Exit;
 
      CountY:=DZ_SumTeplMecan;
      CountX:=ParentCtr.SumZone*2;
@@ -4209,17 +4215,20 @@ begin
         HotMessage(CtrName,stZone+' '+stName+' - '+st,clNone,GetColorAlrStatus(vLevel));
       end;
     end;
-
-
-
-
-
     vLevel:=ZoneLevAlarm;
     ZoneLevAlarm:=0;
-    if (vLevel>=HOT_ALARM_WAR) then ZoneLevAlarm:=alAttention;
-    if (vLevel>=HOT_ALARM_ALR) then ZoneLevAlarm:=alFatal;
-
-    if ZoneLevAlarm  > alarmMessage then alarmMessage:=ZoneLevAlarm;
+    alarmMessage:=0;
+    if (vLevel>=HOT_ALARM_WAR) then
+    begin
+      ZoneLevAlarm:=alAttention;
+      alarmMessage := alAttention;
+    end;
+    if (vLevel>=HOT_ALARM_ALR) then
+    begin
+      ZoneLevAlarm:=alFatal;
+      alarmMessage:=alFatal;
+    end;
+    
     case iX of
       1: begin
          //STZone1.Caption:=GetTextFromAlarm(ZoneLevAlarm,Color);

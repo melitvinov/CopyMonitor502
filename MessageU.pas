@@ -7,14 +7,14 @@ uses  Translate502;
 
 const
   //SumMessages=661;//652;
-  SumMessages=668;//652;
+  SumMessages=668;//668;
   ST_COMBO_TEXT=32;
   ST_LOG_CONTR=24;
   comFram=ST_COMBO_TEXT;
   comScreen=3+ST_COMBO_TEXT;
   comOnOff=6+ST_COMBO_TEXT;
 
-  comAutoHand=8+ST_COMBO_TEXT;               
+  comAutoHand=8+ST_COMBO_TEXT;
   comNord=10+ST_COMBO_TEXT;
   comNoYes=330;
   boxTest=327;
@@ -762,8 +762,12 @@ var  ProgMess:array [1..SumMessages] of TranslateStr=
 //662
       'Температура воздуха 1','Температура воздуха 2','Температура воздуха 3','Температура воздуха 4',
       'По минимальному','По максимальному','По средней'
+//669
+//      'Tзад > Tизм; RHзад > RHизм','Tзад > Tизм; RHзад < RHизм','Tзад < Tизм; RHзад > RHизм','Tзад < Tизм; RHзад < RHизм',
+//      'Увеличение','Уменьшение'     //675
 
 );
 implementation
+
 
 end.

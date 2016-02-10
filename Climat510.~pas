@@ -626,7 +626,7 @@ begin
        TCalInSens_DZ511.Create(Self);
        TCalOutSens_DZ.Create(Self);
        TParMec_DZ511.Create(Self);
-       TLev_DZ.Create(Self);
+       TLev_DZ.Create(Self);         // task 61
        HandMode:=THandMode_DZ511.Create(Self);
        NetMeteo:=TNetMeteo_DZ.Create(Self);
        AlarmHot:=THotAlarm511.Create(Self);
@@ -643,7 +643,7 @@ begin
        TCalInSens_DZ.Create(Self);
        TCalOutSens_DZ.Create(Self);
        TParMec_DZ.Create(Self);
-       TLev_DZ.Create(Self);
+       TLev_DZ.Create(Self);       // task 61
        HandMode:=THandMode_DZ.Create(Self);
        NetMeteo:=TNetMeteo_DZ.Create(Self);
        AlarmHot:=THotAlarm.Create(Self);
@@ -1200,8 +1200,8 @@ with ParentCtr as TFClimat510 do
  gRCS:=0;
  if ValY=0 then
        begin
-       Txt:=GetTextZona(ValX,ValY);
-       Exit;
+         Txt:=GetTextZona(ValX,ValY);
+         Exit;
        end;
  Result:=0;
  if vInBlock=cOutBlock then Txt:='';
@@ -1716,7 +1716,7 @@ const
   WarmGroupSource:array[1..sumWarmCO2Source] of word=
         (70,78,86,94,102,130);  //44
   WarmGroupSource511:array[1..sumWarmCO2Source] of word=
-        (85,93,101,109,117,145);  //44
+        (89,97,105,113,121,149);  //44
   WarmCountY=28;
 var NameWarmGroup:array [1..WarmCountY] of TNameConst=(
     (Name:'Зона 1 Контур 1';Frm:SS;Ed:'теплогруппа';TipSens:TipCalc;Min:0;Max:10;Def:NO_MIN_MAX;

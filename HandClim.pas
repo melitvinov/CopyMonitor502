@@ -163,7 +163,7 @@ function SetClimatClients:Integer;
 implementation
 
 {$R *.dfm}
-uses  PicCtr, GGraf, Climat403, Climat510, Climat501S;
+uses  PicCtr, GGraf, Climat403, Climat510, Climat501S, Climat501U;
 
 function SetClimatClients:Integer;
 var k,i,iCtr: integer;
@@ -174,7 +174,7 @@ begin
   for iCtr:=0 to Tabs.Count-1 do
     with Tabs.Objects[iCtr] as TFController do
      begin
-     if (CtrTip>60) and (CtrTip < 75) then
+     if (CtrTip>64) and (CtrTip < 75) then
         for i:=1 to SumZone do
           begin
           k:=k+1;
@@ -205,7 +205,7 @@ end;
 procedure  TFHandClim.Exec(vCtr:TFController);
 var i:integer;
 begin
-   Exit; // ручное управление отключено
+   //Exit; // ручное управление отключено           NEW !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    if ListClimCtr.Tabs.Count = 0 then Exit;
    with ListClimCtr do
     for i:=0 to Tabs.Count-1 do
@@ -233,7 +233,6 @@ begin
   with ClimatClient[ListClimCtr.TabIndex+1].Ctr do
     begin
     HandMode.SetEndRecord;
-//    HandMode.LoadFileByDate(Now,dEnd);
     BlockToGrid(HandMode, HandGrid);
     HandGrid.GridMode:=gmBrowse;
     end;
@@ -257,7 +256,10 @@ begin
       end;
 end;
 
-const MAX_TAG_403=1000000;
+const MAX_TAG_403  = 1000000;
+const MAX_TAG_501S = 1000000;
+const MAX_TAG_501U = 1000000;
+
 
 function TFHandClim.GetPozFromTag(vCtr:TFController; vTag:integer):integer;
 begin
@@ -268,8 +270,9 @@ begin
    if  vCtr is TFClimat510 then
       Result:=(vTag mod MAX_TAG_403) div 100;
    if  vCtr is TFClimat501S then
-      Result:=(vTag mod MAX_TAG_403) div 10000;
-
+      Result:=(vTag mod MAX_TAG_501S) div 100;
+   if  vCtr is TFClimat501U then
+      Result:=(vTag mod MAX_TAG_501U) div 100;
 end;
 
 procedure TFHandClim.SetControl;
@@ -373,7 +376,6 @@ begin
    if MessageDlg(Format(ProgMess[iAtten]+ProgMess[106]+ProgMess[iContin],[Ctr.CtrName])
        ,mtWarning,[mbYes, mbNo],0)= mrYes
     then Ctr.HandMode.SendToPort(ReCalc);
-
 end;
 
 procedure TFHandClim.TBShowCtrClick(Sender: TObject);
