@@ -2844,11 +2844,11 @@ var NameMechC511:array [1..(DZ511_SumRegs-4)*DZ511_SumParsMech] of TNameConst=(
 (Name:'Клапан CO2 - И-коэффициент';Frm:SSpSSS;Ed:'% на 1';TipSens:TipIzm;Min:0;Max:10;
     Index:17*DZ511_SizeParMech+4;Mech:DZM511_CO2;AccessR:R_CONFIG;AccessW:W_CONFIG),
 
-(Name:'Регулятор давления - Время хода';Frm:SSSS;Ed:'сек';TipSens:TipIzm;Min:0;Max:4000;
+(Name:'Регулятор увлажнения - Время хода';Frm:SSSS;Ed:'сек';TipSens:TipIzm;Min:0;Max:4000;
     Index:18*DZ511_SizeParMech+0;Mech:DZM511_PRES_REG;AccessR:RW_INVISIBLE;AccessW:RW_INVISIBLE),
-(Name:'Регулятор давления - П-коэффициент';Frm:SSpSSS;Ed:'% на 1';TipSens:TipIzm;Min:0;Max:10;
+(Name:'Регулятор увлажнения - П-коэффициент';Frm:SSpSSS;Ed:'% на 1';TipSens:TipIzm;Min:0;Max:10;
     Index:18*DZ511_SizeParMech+2;Mech:DZM511_PRES_REG;AccessR:RW_INVISIBLE;AccessW:RW_INVISIBLE),
-(Name:'Регулятор давления - И-коэффициент';Frm:SSpSSS;Ed:'% на 1';TipSens:TipIzm;Min:0;Max:10;
+(Name:'Регулятор увлажнения - И-коэффициент';Frm:SSpSSS;Ed:'% на 1';TipSens:TipIzm;Min:0;Max:10;
     Index:18*DZ511_SizeParMech+4;Mech:DZM511_PRES_REG;AccessR:RW_INVISIBLE;AccessW:RW_INVISIBLE),
 
 (Name:'Досвечивание - Время хода';Frm:SSSS;Ed:'сек';TipSens:TipIzm;Min:0;Max:4000;
@@ -2948,7 +2948,7 @@ var DZ511_NameParUpr:array [1..DZ511_SumParUpr] of TNameConst=(
          (Name:'Контур AHU - Оптимальная температура';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:90;Def:0;Index:DZ511_iOptTPipe;Mech:DZM511_VALVE3;AccessR:RW_GUESTI;AccessW:RW_USER),
          (Name:'Контур боковой - Минимальная температура';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:40;Def:0;Index:DZ511_iMinTPipe+2;Mech:DZM511_VALVE4;AccessR:RW_GUESTI;AccessW:RW_USER),
          (Name:'Контур боковой - Оптимальная температура';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:90;Def:0;Index:DZ511_iOptTPipe+2;Mech:DZM511_VALVE4;AccessR:RW_GUESTI;AccessW:RW_USER),
-         (Name:'Регулятор давления - Держать разность';Frm:SSpSS;Ed:'Кг/см2';TipSens:TipCalc;Min:0;Max:3;Def:0;Index:DZ511_iMinTPipe+4;Mech:DZM511_PRES_REG;AccessR:RW_GUESTI;AccessW:RW_USER),
+         (Name:'Регулятор давления - Держать разность';Frm:SSpSS;Ed:'Кг/см2';TipSens:TipCalc;Min:0;Max:3;Def:0;Index:DZ511_iMinTPipe+4;Mech:DZM511_PRES_REG;AccessR:RW_INVISIBLE;AccessW:RW_INVISIBLE),
 //         (Name:'Контур подлотковый - Оптимальная температура';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:90;Def:0;Index:DZ_iOptTPipe+4;Mech:DZM_VALVE5;AccessR:RW_GUESTI;AccessW:RW_USER),
 
          (Name:'Т отопления - Коэф пропорциональной поправки';Frm:SSpSS;Ed:'';TipSens:TipCalc;Min:0.1;Max:20;Def:2.45;Index:DZ511_iPID+2;Mech:DZM511_SHEATING;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
@@ -4985,9 +4985,9 @@ DZ511_cDefineHot:array [1..DZ511_SumMesHot] of TNameConst=( //TDZ511DefineHot=(
 (Name:'Вентиляторы - Сейчас разница';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:0;Max:10;Def:HIDE_MIN_MAX;
     Index:DZ511_itOtherCalc+4;Mech:DZM511_VENT;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
 (Name:'Регулятор давления - ИЗМЕРЕНА разность';Frm:SSpSS;Ed:'Кг/см2';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
-    Index:DZ511_itOtherCalc+8;Mech:DZM511_PRES_REG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+    Index:DZ511_itOtherCalc+8;Mech:DZM511_PRES_REG;AccessR:RW_INVISIBLE;AccessW:RW_INVISIBLE),
 (Name:'Регулятор давления - ДЕРЖАТЬ разность';Frm:SSpSS;Ed:'Кг/см2';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
-    Index:DZ511_itClimTask+21;Mech:DZM511_PRES_REG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+    Index:DZ511_itClimTask+21;Mech:DZM511_PRES_REG;AccessR:RW_INVISIBLE;AccessW:RW_INVISIBLE),
 // 144
 (Name:'Измерено для регулятора 1';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
     Index:DZ511_itOtherCalc;Mech:DZM511_EXTREG1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
@@ -5117,9 +5117,9 @@ DZ511_cDefineHot:array [1..DZ511_SumMesHot] of TNameConst=( //TDZ511DefineHot=(
 (Name:'CИО клапан  Состояние';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
     Index:DZ511_iMechanic+69;Mech:DZM511_SIO_VALVES;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
 (Name:'Регулятор давления Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
-    Index:DZ511_iMechanic+36;Mech:DZM511_PRES_REG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+    Index:DZ511_iMechanic+36;Mech:DZM511_PRES_REG;AccessR:RW_INVISIBLE;AccessW:RW_INVISIBLE),
 (Name:'Регулятор давления Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
-    Index:DZ511_iMechanic+37;Mech:DZM511_PRES_REG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+    Index:DZ511_iMechanic+37;Mech:DZM511_PRES_REG;AccessR:RW_INVISIBLE;AccessW:RW_INVISIBLE),
 // 204
 (Name:'Досвечивание Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
     Index:DZ511_iMechanic+38;Mech:DZM511_LIGHT;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
