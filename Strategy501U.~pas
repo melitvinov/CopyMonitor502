@@ -274,8 +274,8 @@ var
       DefStrategy: array [1..56] of integer = (
         //st  way
           10,	1, 	8, 	1,	8, 	0, 	10,	0,    // AHU valve
-          9, 	0, 	10,	0,	10,	0, 	9, 	0,		// RailPipe
-          10, 0, 	9,	0,	9,	0, 	10,	0,		// HeadPipe
+          9, 	0, 	10,	0,	10,	1, 	9, 	1,		// RailPipe
+          10, 0, 	9,	0,	9,	1, 	10,	1,		// HeadPipe
           8,	0, 	10,	0,	9,	1, 	8,	1,		// AHUPipe
           9,	1, 	7,	1,	7,	0, 	9,	0,		// Screen
           6,	1, 	6,	1,	6,	0, 	6,	0,		// AHUSpeed
@@ -314,6 +314,7 @@ begin
    Show;
    ReCalc;
 }
+  if vCtr.SumZone = 0 then Exit;
   for i:=1 to vCtr.SumZone do
   begin
     StrategyClient[i].Ctr:=vCtr;
@@ -353,6 +354,7 @@ end;
 procedure  TFStrategy501U.SetTabs;
 var j:integer;
 begin
+  if SumStrategyClients > 0 then
   ComboBox29.Items.Clear;
   for j:=1 to SumStrategyClients do
     ComboBox29.Items.Add('Зона '+ IntToStr(StrategyClient[j].Zone));

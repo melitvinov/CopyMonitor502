@@ -7,7 +7,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Buttons, StdCtrls, ExtCtrls,DateUtils, PicCtr, Menus, ImgList, ComCtrls,
   Spin, ToolWin, TeEngine, Series, TeeProcs, Chart,GanttCh, Gauges,//GGraf,
-  FConstType, FController, MPlayer, ClimCalc,
+  FConstType, FController, MPlayer,// ClimCalc,
   FPicLabel, Grids_ts, TSGrid, GIFDef,
   FBox, SetGrid, MessageU,DefineClim510,    //, FPicPanel, FPicLabel
   GIFComponent, FPicPanel, xmldom, XMLIntf, msxmldom, XMLDoc,
@@ -47,6 +47,8 @@ const
   X_SUM_I=3;
   X_PRED=4;
   SUM_KOF=5;
+
+type T2Byte=integer;//SmallInt;
 
 type TWarmGroupConfig=Class(TBlock)
 public
@@ -333,6 +335,7 @@ type  TFClimat501U = class(TFPicCtr)
     procedure TBZone1Click(Sender: TObject);
     procedure ToolButton1Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+
   private
     { Private declarations }
     NowSens,NowTepl,NowSeries:integer;
@@ -355,6 +358,11 @@ type  TFClimat501U = class(TFPicCtr)
 //    function CtrFromFile(const NameFile:string):Boolean;override;
     function TagToZone(vTag:Longint):Integer;override;
     function BeforeCellSelect(Grid:TtsGrid; ComboBox:TObject):integer; override;
+
+    //function GetCO2Consum(vCO,vCOr,Speed:T2Byte):T2Byte;
+    //function GetMaxTrans(vT,vH,vTr,vHr,Speed:T2Byte):T2Byte;
+
+
   end;
 
 {***********************************************************
@@ -570,7 +578,7 @@ end;
 
 implementation
 uses Port, HandClim, audit, WindSon, FTopMes, BoilerIPC,GGraf,Subr,
-  ConvUtils, Strategy501U;
+  ConvUtils, Strategy501U, ClimCalc;
 {$R *.DFM}
 
 const
@@ -583,6 +591,25 @@ var gRCS:Byte;
     pascalSaveInterval:TDateTime;
     pascalNameContr:string;
     pascalCountZone:integer;
+
+function GetCO2Consum(vCO,vCOr,Speed:T2Byte):T2Byte;
+begin
+    Result := (vCOr - vCO)*Speed;
+    // разница между датчиком в теплице и датчиком в рукаве и умноженное на скорость вращения вентиляторов
+end;
+
+function GetMaxTrans(vT,vH,vTr,vHr,Speed:T2Byte):T2Byte;
+var
+absHruk:integer;
+absH:integer;
+res:integer;
+begin
+    absHruk := AbsHum(vTr, vHr);
+    absH    := AbsHum(vT, vH);
+    res := (absH - absHruk)*Speed;
+    Result := res;
+    // разница между датчиком в теплице и датчиком в рукаве и умноженное на скорость вращения вентиляторов
+end;
 
 function GetColorAlrStatus(x:integer):TColor; //override;
 begin
@@ -4837,7 +4864,12 @@ end;
 procedure TFClimat501U.SpeedButton1Click(Sender: TObject);
 begin
 //  FStrategy501U.Exec(Self);
-  FStrategy501U.Exec((Block[0] as THot_511).ParentCtr);
+//  (Block[0] as THot_511).P
+  try
+    FStrategy501U.Exec((Block[0] as THot_511).ParentCtr);
+  except
+  end;
+
 end;
 
 end.

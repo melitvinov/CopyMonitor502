@@ -6,8 +6,8 @@ uses Math,SysUtils, Graphics, FConstType, FController,  MessageU, Registry,
      Windows, StrUtils; 
 
 const
-    calcTrans = 1;
-    calcConsumCO2 = 2;
+//     calcTrans = 1;
+//     calcConsumCO2 = 2;
 
 
 //* номера бит в регистре состояния */
@@ -56,8 +56,8 @@ type TMeteo=record
 //     function GetValid(vDate:TdateTime):Boolean;
      end;
 
-function GetCO2Consum(vCO,vCOr,Speed:T2Byte):T2Byte;
-function GetMaxTrans(vT,vH,vTr,vHr,Speed:T2Byte):T2Byte;
+//function GetCO2Consum(vCO,vCOr,Speed:T2Byte):T2Byte;
+//function GetMaxTrans(vT,vH,vTr,vHr,Speed:T2Byte):T2Byte;
 
 function GetMaxH(vmT:T2Byte):T2Byte;
 function GetAbsH(vT,vH:T2Byte):T2Byte;
@@ -332,7 +332,7 @@ begin
  //Result:=vH*GetMaxH(vT) div 10000; //АВ=ОВ*МаксН/100
 end;
 
-function GetCO2Consum(vCO,vCOr,Speed:T2Byte):T2Byte;
+{function GetCO2Consum(vCO,vCOr,Speed:T2Byte):T2Byte;
 begin
     Result := (vCOr - vCO)*Speed;
     // разница между датчиком в теплице и датчиком в рукаве и умноженное на скорость вращения вентиляторов
@@ -347,9 +347,10 @@ begin
     absHruk := AbsHum(vTr, vHr);
     absH    := AbsHum(vT, vH);
     res := (absH - absHruk)*Speed;
-    Result := res;    // потом надо рпзделить результат еще на 100 или нет
+    Result := res;
     // разница между датчиком в теплице и датчиком в рукаве и умноженное на скорость вращения вентиляторов
-end;
+end;      }
+
 
 {function GetMaxTrans(vT,vH,vTr,vHr,Speed:T2Byte):T2Byte;
 var

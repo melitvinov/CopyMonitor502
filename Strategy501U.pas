@@ -314,14 +314,15 @@ begin
    Show;
    ReCalc;
 }
+  if vCtr.SumZone = 0 then Exit;
   for i:=1 to vCtr.SumZone do
   begin
     StrategyClient[i].Ctr:=vCtr;
     StrategyClient[i].Zone:=i;
   end;
+  Show;
   SumStrategyClients:=vCtr.SumZone;
   FStrategy501U.SetTabs;
-  Show;
   ReCalc;
 
 end;
@@ -353,6 +354,7 @@ end;
 procedure  TFStrategy501U.SetTabs;
 var j:integer;
 begin
+  if SumStrategyClients > 0 then
   ComboBox29.Items.Clear;
   for j:=1 to SumStrategyClients do
     ComboBox29.Items.Add('Зона '+ IntToStr(StrategyClient[j].Zone));
