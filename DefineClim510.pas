@@ -829,7 +829,7 @@ const
 
 
 var  DZ511_NameTimer:array [1..DZ511_SumTimer] of TNameConst=(
- (Name:'Номер зоны';Frm:SS;Ed:'-зона';TipSens:TipCalc;Min:0;Max:4;Def:HIDE_MIN_MAX;
+ (Name:'Номер зоны';Frm:SS;Ed:'-зона';TipSens:TipCalc;Min:0;Max:8;Def:HIDE_MIN_MAX;
     Index:0;GridColor:$ff0f00;AccessR:RW_GUEST;AccessW:RW_GUEST),
  (Name:'Время начала действия программы (если 0 - прогр не активна)';Frm:SShSSm;Ed:'час:мин';TipSens:TipCalc;Min:0;Max:0;Def:0;
     Index:1;GridColor:$ffef00;AccessR:RW_GUEST;AccessW:RW_GUEST),
@@ -865,10 +865,10 @@ var  DZ511_NameTimer:array [1..DZ511_SumTimer] of TNameConst=(
     Index:DZ511_iMinPipe3;GridColor:clYellow;Mech:DZM511_VALVE3;AccessR:RW_GUEST;AccessW:RW_GUEST ),
  (Name:'Минимум подлоткового контура (если 0, то насос может выключаться)';Frm:SS;Ed:'°C';TipSens:TipCalc;Min:0;Max:90;Def:0;
     Index:DZ511_iOpt1Temp+4;GridColor:$af0fef;Mech:DZM511_VALVE5;AccessR:RW_GUEST;AccessW:RW_GUEST),
- (Name:'Режим работы клапана UC (закрыт,в минимуме,авто)';Frm:ComboSS;Ed:'';TipSens:TipCombo;Min:comFram;Max:comFram+2;Def:0;
+ (Name:'Режим работы клапана AHU (закрыт,в минимуме,авто)';Frm:ComboSS;Ed:'';TipSens:TipCombo;Min:comFram;Max:comFram+2;Def:0;
     Index:DZ511_iWinYes;GridColor:$ff0f00;Mech:DZM511_FRAM_UC;AccessR:RW_GUEST;AccessW:RW_GUEST),
 //16
- (Name:'Минимальное положение клапана UC ';Frm:SS;Ed:'%';TipSens:TipCalc;Min:0;Max:90;Def:0;
+ (Name:'Минимальное положение клапана AHU ';Frm:SS;Ed:'%';TipSens:TipCalc;Min:0;Max:90;Def:0;
     Index:DZ511_iMinOpenWin;GridColor:$ff0faf;Mech:DZM511_FRAM_UC;AccessR:RW_GUEST;AccessW:RW_GUEST),
  (Name:'Время распыления СИОД (если 0,то запрещено)';Frm:SSSS;Ed:'сек';TipSens:TipCalc;Min:0;Max:0;Def:0;
     Index:DZ511_iTimeSiod;GridColor:$ffaf0f;Mech:DZM511_SIO_PUMP;AccessR:RW_GUEST;AccessW:RW_GUEST),
@@ -2788,11 +2788,11 @@ var NameMechC511:array [1..(DZ511_SumRegs-4)*DZ511_SumParsMech] of TNameConst=(
 (Name:'Фрамуги Ряд 4 - И-коэффициент';Frm:SSpSSS;Ed:'% на 1';TipSens:TipIzm;Min:0;Max:10;
     Index:10*DZ511_SizeParMech+4;Mech:DZM511_FRAM_NORTH4;AccessR:R_CONFIG;AccessW:W_CONFIG),
 
-(Name:'Клапан камеры смешения - Время хода';Frm:SSSS;Ed:'сек';TipSens:TipIzm;Min:0;Max:4000;
+(Name:'Клапан AHU - Время хода';Frm:SSSS;Ed:'сек';TipSens:TipIzm;Min:0;Max:4000;
     Index:11*DZ511_SizeParMech+0;Mech:DZM511_FRAM_UC;AccessR:R_CONFIG;AccessW:W_CONFIG),
-(Name:'Клапан камеры смешения - П-коэффициент';Frm:SSpSSS;Ed:'% на 1';TipSens:TipIzm;Min:0;Max:10;
+(Name:'Клапан AHU - П-коэффициент';Frm:SSpSSS;Ed:'% на 1';TipSens:TipIzm;Min:0;Max:10;
     Index:11*DZ511_SizeParMech+2;Mech:DZM511_FRAM_UC;AccessR:R_CONFIG;AccessW:W_CONFIG),
-(Name:'Клапан камеры смешения - И-коэффициент';Frm:SSpSSS;Ed:'% на 1';TipSens:TipIzm;Min:0;Max:10;
+(Name:'Клапан AHU - И-коэффициент';Frm:SSpSSS;Ed:'% на 1';TipSens:TipIzm;Min:0;Max:10;
     Index:11*DZ511_SizeParMech+4;Mech:DZM511_FRAM_UC;AccessR:R_CONFIG;AccessW:W_CONFIG),
 
 (Name:'Скорость AHU 1 - Время хода';Frm:SSSS;Ed:'сек';TipSens:TipIzm;Min:0;Max:4000;
@@ -3131,8 +3131,8 @@ var NameStrategy511:array [1..DZ511_SumKStrategy*DZ511_SupParStrategy] of TNameC
 //===============================================================================
 const DZ511_SumKStrategy=7;
       DZ511_SupParStrategy=8;
-      DZ511_SumFullStrategy=7;
-      DZ511_SizeStrateg=4;//7;
+      DZ511_SumFullStrategy=8;
+      DZ511_SizeStrateg=7;//4;
 
 var XNamesStrategyC511:array [1..1] of TXNames=(
     (Name:'Зона';Frm:None;Ed:'';Index:DZ511_SumFullStrategy*DZ511_SizeStrateg;Cfg:DZ511_SumConfig;Kind:0)
@@ -3141,129 +3141,122 @@ var XNamesStrategyC511:array [1..1] of TXNames=(
 var NameStrategy511:array [1..DZ511_SumKStrategy*DZ511_SupParStrategy] of TNameConst=(
  (Name:'T>Tset, RH>RHset. Клапан AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
     Index:0;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T>Tset, RH<RHset. Клапан AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
+ (Name:'T>Tset, RH>RHset. Клапан AHU.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
     Index:1;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH>RHset. Клапан AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:100;Def:HIDE_MIN_MAX;
+ (Name:'T>Tset, RH<RHset. Клапан AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
     Index:2;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH<RHset. Клапан AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
+ (Name:'T>Tset, RH<RHset. Клапан AHU.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
     Index:3;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH>RHset. Клапан AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
+    Index:4;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH>RHset. Клапан AHU.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:5;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH<RHset. Клапан AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
+    Index:6;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH<RHset. Клапан AHU.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:7;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
 
  (Name:'T>Tset, RH>RHset. Контур нижний';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:4;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:8;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T>Tset, RH>RHset. Контур нижний.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:9;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
  (Name:'T>Tset, RH<RHset. Контур нижний';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:5;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:10;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T>Tset, RH<RHset. Контур нижний.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:11;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
  (Name:'T<Tset, RH>RHset. Контур нижний';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:6;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:12;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH>RHset. Контур нижний.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:13;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
  (Name:'T<Tset, RH<RHset. Контур нижний';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:7;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:14;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH<RHset. Контур нижний.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:15;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
 
  (Name:'T>Tset, RH>RHset. Контур верхний';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:8;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:16;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T>Tset, RH>RHset. Контур верхний.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:17;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
  (Name:'T>Tset, RH<RHset. Контур верхний';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:9;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:18;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T>Tset, RH<RHset. Контур верхний.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:19;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
  (Name:'T<Tset, RH>RHset. Контур верхний';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:10;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:20;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH>RHset. Контур верхний.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:21;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
  (Name:'T<Tset, RH<RHset. Контур верхний';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:11;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:22;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH<RHset. Контур верхний.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:23;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
 
  (Name:'T>Tset, RH>RHset. Контур AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:12;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:24;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T>Tset, RH>RHset. Контур AHU.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:25;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
  (Name:'T>Tset, RH<RHset. Контур AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:13;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH>RHset. Контур AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:14;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH<RHset. Контур AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:15;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
-
- (Name:'T>Tset, RH>RHset. Экран термический';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:16;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T>Tset, RH<RHset. Экран термический';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:17;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH>RHset. Экран термический';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:18;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH<RHset. Экран термический';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:19;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
-
- (Name:'T>Tset, RH>RHset. Скорость AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:20;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T>Tset, RH<RHset. Скорость AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:21;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH>RHset. Скорость AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:22;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH<RHset. Скорость AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:23;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
-
- (Name:'T>Tset, RH>RHset. Регулятор давления';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:24;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T>Tset, RH<RHset. Регулятор давления';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:25;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH>RHset. Регулятор давления';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
     Index:26;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH<RHset. Регулятор давления';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
+ (Name:'T>Tset, RH<RHset. Контур AHU.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
     Index:27;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
-
- (Name:'T>Tset, RH>RHset. Клапан AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:0;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T>Tset, RH<RHset. Клапан AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:1;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH>RHset. Клапан AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:100;Def:HIDE_MIN_MAX;
-    Index:2;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH<RHset. Клапан AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:3;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
-
- (Name:'T>Tset, RH>RHset. Контур 1';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:4;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T>Tset, RH<RHset. Контур 1';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:5;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH>RHset. Контур 1';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:6;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH<RHset. Контур 1';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:7;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
-
- (Name:'T>Tset, RH>RHset. Контур 2';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:8;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T>Tset, RH<RHset. Контур 2';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:9;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH>RHset. Контур 2';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:10;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH<RHset. Контур 2';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:11;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
-
- (Name:'T>Tset, RH>RHset. Контур 3';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:12;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T>Tset, RH<RHset. Контур 3';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:13;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH>RHset. Контур 3';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:14;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH<RHset. Контур 3';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:15;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH>RHset. Контур AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
+    Index:28;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH>RHset. Контур AHU.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:29;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH<RHset. Контур AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
+    Index:30;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH<RHset. Контур AHU.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:31;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
 
  (Name:'T>Tset, RH>RHset. Экран термический';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:16;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:32;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T>Tset, RH>RHset. Экран термический.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:33;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
  (Name:'T>Tset, RH<RHset. Экран термический';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:17;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:34;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T>Tset, RH<RHset. Экран термический.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:35;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
  (Name:'T<Tset, RH>RHset. Экран термический';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:18;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:36;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH>RHset. Экран термический.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:37;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
  (Name:'T<Tset, RH<RHset. Экран термический';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:19;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:38;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH<RHset. Экран термический.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:39;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
 
  (Name:'T>Tset, RH>RHset. Скорость AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:20;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:40;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T>Tset, RH>RHset. Скорость AHU.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:41;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
  (Name:'T>Tset, RH<RHset. Скорость AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:21;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:42;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T>Tset, RH<RHset. Скорость AHU.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:43;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
  (Name:'T<Tset, RH>RHset. Скорость AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:22;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:44;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH>RHset. Скорость AHU.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:45;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
  (Name:'T<Tset, RH<RHset. Скорость AHU';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:23;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:46;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH<RHset. Скорость AHU.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:47;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
 
  (Name:'T>Tset, RH>RHset. Регулятор давления';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:24;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:48;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T>Tset, RH>RHset. Регулятор давления.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:49;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
  (Name:'T>Tset, RH<RHset. Регулятор давления';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:25;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:50;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T>Tset, RH<RHset. Регулятор давления.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:51;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
  (Name:'T<Tset, RH>RHset. Регулятор давления';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:26;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+    Index:52;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH>RHset. Регулятор давления.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:53;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
  (Name:'T<Tset, RH<RHset. Регулятор давления';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
-    Index:27;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER)
+    Index:54;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH<RHset. Регулятор давления.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:55;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER)
 
  );
 
@@ -4733,7 +4726,7 @@ DZ511_cDefineHot:array [1..DZ511_SumMesHot] of TNameConst=( //TDZ511DefineHot=(
     Index:DZ511_itRH+42;Mech:DZM511_SENS_OUTAHU;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
 (Name:'Положение фрамуги Ряд 1';Frm:SSSpS;Ed:'%';TipSens:SensorRCS;Min:0;Max:100;Def:HIDE_MIN_MAX;
     Index:DZ511_itRH+45;Mech:DZM511_SENS_FRAM_N;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
-(Name:'Положение фрамуги ЮГ';Frm:SSSpS;Ed:'%';TipSens:SensorRCS;Min:0;Max:100;Def:HIDE_MIN_MAX;
+(Name:'Положение клапана AHU';Frm:SSSpS;Ed:'%';TipSens:SensorRCS;Min:0;Max:100;Def:HIDE_MIN_MAX;
     Index:DZ511_itRH+48;Mech:DZM511_SENS_FRAM_S;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
 (Name:'Положение ЭКРАНА';Frm:SSSpS;Ed:'%';TipSens:SensorRCS;Min:0;Max:100;Def:HIDE_MIN_MAX;
     Index:DZ511_itRH+51;Mech:DZM511_SENS_SCR;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
