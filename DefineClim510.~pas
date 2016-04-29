@@ -102,17 +102,28 @@ DZM_SENS_WATER3 = 86;
 DZM_SENS_WATER4 = 87;
 DZM_SENS_WATER5 = 88;
 
-DZM_SENS_OUT    = 90;
-DZM_SENS_SUN    = 91;
-DZM_SENS_WIND   = 92;
-DZM_SENS_WINDD  = 93;
-DZM_SENS_RAIN   = 94;
-DZM_SENS_OUTHUM = 95;
-DZM_SENS_TSUP   = 96;
-DZM_SENS_TRET   = 97;
-DZM_SENS_PSUP   = 98;
-DZM_SENS_PRET   = 99;
-DZM_SENS_VOL    = 100;
+//DZM_SENS_OUT    = 90;
+//DZM_SENS_SUN    = 91;
+//DZM_SENS_WIND   = 92;
+//DZM_SENS_WINDD  = 93;
+//DZM_SENS_RAIN   = 94;
+//DZM_SENS_OUTHUM = 95;
+//DZM_SENS_TSUP   = 96;
+//DZM_SENS_TRET   = 97;
+//DZM_SENS_PSUP   = 98;
+//DZM_SENS_PRET   = 99;
+//DZM_SENS_VOL    = 100;
+DZM_SENS_OUT    = 94;
+DZM_SENS_SUN    = 95;
+DZM_SENS_WIND   = 96;
+DZM_SENS_WINDD  = 97;
+DZM_SENS_RAIN   = 98;
+DZM_SENS_OUTHUM = 99;
+DZM_SENS_TSUP   = 100;
+DZM_SENS_TRET   = 101;
+DZM_SENS_PSUP   = 102;
+DZM_SENS_PRET   = 103;
+DZM_SENS_VOL    = 104;
 
 
 {***********************************************************
@@ -829,7 +840,7 @@ const
 
 
 var  DZ511_NameTimer:array [1..DZ511_SumTimer] of TNameConst=(
- (Name:'Номер зоны';Frm:SS;Ed:'-зона';TipSens:TipCalc;Min:0;Max:4;Def:HIDE_MIN_MAX;
+ (Name:'Номер зоны';Frm:SS;Ed:'-зона';TipSens:TipCalc;Min:0;Max:8;Def:HIDE_MIN_MAX;
     Index:0;GridColor:$ff0f00;AccessR:RW_GUEST;AccessW:RW_GUEST),
  (Name:'Время начала действия программы (если 0 - прогр не активна)';Frm:SShSSm;Ed:'час:мин';TipSens:TipCalc;Min:0;Max:0;Def:0;
     Index:1;GridColor:$ffef00;AccessR:RW_GUEST;AccessW:RW_GUEST),
@@ -2845,11 +2856,11 @@ var NameMechC511:array [1..(DZ511_SumRegs-4)*DZ511_SumParsMech] of TNameConst=(
     Index:17*DZ511_SizeParMech+4;Mech:DZM511_CO2;AccessR:R_CONFIG;AccessW:W_CONFIG),
 
 (Name:'Регулятор увлажнения - Время хода';Frm:SSSS;Ed:'сек';TipSens:TipIzm;Min:0;Max:4000;
-    Index:18*DZ511_SizeParMech+0;Mech:DZM511_PRES_REG;AccessR:RW_INVISIBLE;AccessW:RW_INVISIBLE),
+    Index:18*DZ511_SizeParMech+0;Mech:DZM511_PRES_REG;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Регулятор увлажнения - П-коэффициент';Frm:SSpSSS;Ed:'% на 1';TipSens:TipIzm;Min:0;Max:10;
-    Index:18*DZ511_SizeParMech+2;Mech:DZM511_PRES_REG;AccessR:RW_INVISIBLE;AccessW:RW_INVISIBLE),
+    Index:18*DZ511_SizeParMech+2;Mech:DZM511_PRES_REG;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Регулятор увлажнения - И-коэффициент';Frm:SSpSSS;Ed:'% на 1';TipSens:TipIzm;Min:0;Max:10;
-    Index:18*DZ511_SizeParMech+4;Mech:DZM511_PRES_REG;AccessR:RW_INVISIBLE;AccessW:RW_INVISIBLE),
+    Index:18*DZ511_SizeParMech+4;Mech:DZM511_PRES_REG;AccessR:R_CONFIG;AccessW:W_CONFIG),
 
 (Name:'Досвечивание - Время хода';Frm:SSSS;Ed:'сек';TipSens:TipIzm;Min:0;Max:4000;
     Index:19*DZ511_SizeParMech+0;Mech:DZM511_LIGHT;AccessR:RW_INVISIBLE;AccessW:W_CONFIG),
@@ -3241,21 +3252,21 @@ var NameStrategy511:array [1..DZ511_SumKStrategy*DZ511_SupParStrategy] of TNameC
  (Name:'T<Tset, RH<RHset. Скорость AHU.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
     Index:47;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
 
- (Name:'T>Tset, RH>RHset. Регулятор давления';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
+ (Name:'T>Tset, RH>RHset. Увлажнение';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
     Index:48;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T>Tset, RH>RHset. Регулятор давления.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+ (Name:'T>Tset, RH>RHset. Увлажнение.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
     Index:49;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T>Tset, RH<RHset. Регулятор давления';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
+ (Name:'T>Tset, RH<RHset. Увлажнение';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
     Index:50;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T>Tset, RH<RHset. Регулятор давления.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+ (Name:'T>Tset, RH<RHset. Увлажнение.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
     Index:51;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH>RHset. Регулятор давления';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
+ (Name:'T<Tset, RH>RHset. Увлажнение';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
     Index:52;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH>RHset. Регулятор давления.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+ (Name:'T<Tset, RH>RHset. Увлажнение.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
     Index:53;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH<RHset. Регулятор давления';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
+ (Name:'T<Tset, RH<RHset. Увлажнение';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
     Index:54;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
- (Name:'T<Tset, RH<RHset. Регулятор давления.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+ (Name:'T<Tset, RH<RHset. Увлажнение.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
     Index:55;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER)
 
  );
@@ -5109,10 +5120,10 @@ DZ511_cDefineHot:array [1..DZ511_SumMesHot] of TNameConst=( //TDZ511DefineHot=(
     Index:DZ511_iMechanic+68;Mech:DZM511_SIO_VALVES;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
 (Name:'CИО клапан  Состояние';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
     Index:DZ511_iMechanic+69;Mech:DZM511_SIO_VALVES;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
-(Name:'Регулятор давления Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
-    Index:DZ511_iMechanic+36;Mech:DZM511_PRES_REG;AccessR:RW_INVISIBLE;AccessW:RW_INVISIBLE),
-(Name:'Регулятор давления Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
-    Index:DZ511_iMechanic+37;Mech:DZM511_PRES_REG;AccessR:RW_INVISIBLE;AccessW:RW_INVISIBLE),
+(Name:'Регулятор увлажнения Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+36;Mech:DZM511_PRES_REG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Регулятор увлажнения Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+37;Mech:DZM511_PRES_REG;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
 // 204
 (Name:'Досвечивание Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
     Index:DZ511_iMechanic+38;Mech:DZM511_LIGHT;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),

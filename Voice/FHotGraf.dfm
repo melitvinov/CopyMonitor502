@@ -1,6 +1,6 @@
 object HotGraf: THotGraf
-  Left = 387
-  Top = 242
+  Left = 466
+  Top = 446
   Width = 880
   Height = 227
   BorderStyle = bsSizeToolWin
@@ -37,6 +37,8 @@ object HotGraf: THotGraf
     BottomAxis.LabelStyle = talValue
     BottomAxis.StartPosition = 1.000000000000000000
     BottomAxis.EndPosition = 99.000000000000000000
+    LeftAxis.Automatic = False
+    LeftAxis.AutomaticMinimum = False
     LeftAxis.LabelsFont.Charset = DEFAULT_CHARSET
     LeftAxis.LabelsFont.Color = clRed
     LeftAxis.LabelsFont.Height = -11
@@ -44,10 +46,13 @@ object HotGraf: THotGraf
     LeftAxis.LabelsFont.Style = []
     LeftAxis.StartPosition = 2.000000000000000000
     LeftAxis.EndPosition = 97.000000000000000000
+    LeftAxis.TickInnerLength = 2
+    LeftAxis.TickOnLabelsOnly = False
     Legend.Visible = False
     View3D = False
     OnAfterDraw = FloatChartAfterDraw
     Align = alClient
+    Color = clNavy
     TabOrder = 0
     OnMouseMove = FloatChartMouseMove
     object LVal: TLabel

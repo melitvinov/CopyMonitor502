@@ -1,8 +1,8 @@
 object FMain: TFMain
-  Left = 469
-  Top = 138
-  Width = 781
-  Height = 560
+  Left = 233
+  Top = 229
+  Width = 1214
+  Height = 765
   HelpContext = 1
   HorzScrollBar.Range = 700
   VertScrollBar.Range = 428
@@ -62,7 +62,7 @@ object FMain: TFMain
   object Bevel1: TBevel
     Left = 0
     Top = 0
-    Width = 765
+    Width = 1206
     Height = 3
     Align = alTop
     Shape = bsTopLine
@@ -70,8 +70,8 @@ object FMain: TFMain
   object ListCtr: TTabControl
     Left = 0
     Top = 43
-    Width = 765
-    Height = 439
+    Width = 1206
+    Height = 649
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clFuchsia
@@ -98,8 +98,8 @@ object FMain: TFMain
   end
   object MainStatus: TStatusBar
     Left = 0
-    Top = 482
-    Width = 765
+    Top = 692
+    Width = 1206
     Height = 19
     Panels = <
       item
@@ -121,8 +121,8 @@ object FMain: TFMain
   object P1: TPanel
     Left = 0
     Top = 43
-    Width = 765
-    Height = 439
+    Width = 1206
+    Height = 649
     Align = alClient
     Color = clSilver
     Font.Charset = DEFAULT_CHARSET
@@ -135,7 +135,7 @@ object FMain: TFMain
     object VSplitter: TSplitter
       Left = 1
       Top = 1
-      Height = 437
+      Height = 647
       Color = clHighlight
       MinSize = 1
       ParentColor = False
@@ -143,14 +143,14 @@ object FMain: TFMain
     object P2: TPanel
       Left = 153
       Top = 1
-      Width = 611
-      Height = 437
+      Width = 1052
+      Height = 647
       Align = alClient
       TabOrder = 0
       object HSplitter: TSplitter
         Left = 1
-        Top = 418
-        Width = 609
+        Top = 628
+        Width = 1050
         Height = 3
         Cursor = crVSplit
         Align = alBottom
@@ -159,9 +159,9 @@ object FMain: TFMain
       end
       object GChart: TChart
         Left = 1
-        Top = 63
-        Width = 578
-        Height = 331
+        Top = 33
+        Width = 1019
+        Height = 571
         BackWall.Brush.Color = clWhite
         BackWall.Brush.Style = bsClear
         BackWall.Color = 4194304
@@ -285,8 +285,8 @@ object FMain: TFMain
         AutoSize = True
         OnMouseMove = GChartMouseMove
         DesignSize = (
-          578
-          331)
+          1019
+          571)
         object Gor: TShape
           Left = 2
           Top = 272
@@ -304,7 +304,7 @@ object FMain: TFMain
           OnMouseMove = VerMouseMove
         end
         object LTime: TLabel
-          Left = 537
+          Left = 970
           Top = 2
           Width = 27
           Height = 13
@@ -322,7 +322,7 @@ object FMain: TFMain
           Visible = False
         end
         object LAxisR: TLabel
-          Left = 760
+          Left = 1193
           Top = 50
           Width = 27
           Height = 13
@@ -339,7 +339,7 @@ object FMain: TFMain
           Transparent = True
         end
         object LAxisL: TLabel
-          Left = -9
+          Left = 424
           Top = 50
           Width = 27
           Height = 13
@@ -364,6 +364,15 @@ object FMain: TFMain
           Color = clBlack
           ParentColor = False
           Transparent = False
+        end
+        inline FrCellChart1: TFrCellChart
+          Left = 216
+          Top = 326
+          Width = 320
+          Height = 240
+          DragKind = dkDock
+          DragMode = dmAutomatic
+          TabOrder = 0
         end
         object Series9: TGanttSeries
           ColorEachPoint = True
@@ -800,8 +809,8 @@ object FMain: TFMain
       end
       object BottomPanel: TPanel
         Left = 1
-        Top = 421
-        Width = 609
+        Top = 631
+        Width = 1050
         Height = 15
         Align = alBottom
         DockSite = True
@@ -811,8 +820,8 @@ object FMain: TFMain
       end
       object Track: TTrackBar
         Left = 1
-        Top = 394
-        Width = 609
+        Top = 604
+        Width = 1050
         Height = 24
         Align = alBottom
         BorderWidth = 3
@@ -828,10 +837,10 @@ object FMain: TFMain
         OnChange = TrackChange
       end
       object ToolBar2: TToolBar
-        Left = 579
-        Top = 63
+        Left = 1020
+        Top = 33
         Width = 31
-        Height = 331
+        Height = 571
         Align = alRight
         ButtonHeight = 32
         ButtonWidth = 31
@@ -955,8 +964,7 @@ object FMain: TFMain
       object ToolBar3: TToolBar
         Left = 1
         Top = 1
-        Width = 609
-        Height = 62
+        Width = 1050
         AutoSize = True
         ButtonHeight = 30
         ButtonWidth = 31
@@ -1024,13 +1032,12 @@ object FMain: TFMain
           Grouped = True
           ImageIndex = 4
           ParentShowHint = False
-          Wrap = True
           ShowHint = True
           OnClick = SelectPClick
         end
         object CBShowAudit: TComboBox
-          Left = 0
-          Top = 33
+          Left = 572
+          Top = 3
           Width = 110
           Height = 24
           Hint = 'Audit/Analyzer'
@@ -1050,8 +1057,8 @@ object FMain: TFMain
         end
         object FPPLong: TFPicPanel
           Tag = 10000000
-          Left = 110
-          Top = 30
+          Left = 682
+          Top = 0
           Width = 138
           Height = 30
           Hint = #1044#1083#1080#1090#1077#1083#1100#1085#1086#1089#1090#1100' '#1087#1088#1086#1089#1084#1086#1090#1088#1072
@@ -1112,16 +1119,16 @@ object FMain: TFMain
           end
         end
         object ToolButton4: TToolButton
-          Left = 248
-          Top = 30
+          Left = 820
+          Top = 0
           Width = 12
           Caption = 'ToolButton4'
           Style = tbsSeparator
         end
         object FPPFreq: TFPicPanel
           Tag = 10000000
-          Left = 260
-          Top = 30
+          Left = 832
+          Top = 0
           Width = 144
           Height = 30
           Hint = #1055#1077#1088#1080#1086#1076' '#1087#1088#1080#1077#1084#1072' '#1076#1072#1085#1085#1099#1093
@@ -1187,7 +1194,7 @@ object FMain: TFMain
       Left = 4
       Top = 1
       Width = 149
-      Height = 437
+      Height = 647
       Align = alLeft
       DockSite = True
       TabOrder = 1
@@ -1235,7 +1242,7 @@ object FMain: TFMain
       ShowHint = False
       StoreData = True
       TabOrder = 0
-      Version = '2.20.24'
+      Version = '3.01.07'
       XMLExport.Version = '1.0'
       XMLExport.DataPacketVersion = '2.0'
       OnClickCell = HotMesGridClickCell
@@ -1442,7 +1449,7 @@ object FMain: TFMain
       ShowHint = False
       StoreData = True
       TabOrder = 0
-      Version = '2.20.24'
+      Version = '3.01.07'
       XMLExport.Version = '1.0'
       XMLExport.DataPacketVersion = '2.0'
       OnCellEdit = SignalGridCellEdit
@@ -1474,8 +1481,8 @@ object FMain: TFMain
     TabOrder = 7
   end
   object TreePanel: TFPanel
-    Left = 984
-    Top = 320
+    Left = 536
+    Top = 368
     Width = 185
     Height = 201
     UseDockManager = False
@@ -1492,11 +1499,11 @@ object FMain: TFMain
     OnClick = SelectPClick
     object TreeViewGraf: TTreeView
       Left = 1
-      Top = 24
+      Top = 1
       Width = 183
-      Height = 176
-      Align = alBottom
-      Anchors = [akLeft, akTop, akRight, akBottom]
+      Height = 199
+      Cursor = crHandPoint
+      Align = alClient
       Color = 16777167
       DragMode = dmAutomatic
       Font.Charset = DEFAULT_CHARSET
@@ -1514,164 +1521,25 @@ object FMain: TFMain
       TabOrder = 0
       OnChange = TreeViewGrafChange
       OnCustomDrawItem = TreeViewGrafCustomDrawItem
-      OnDblClick = TreeViewGrafDblClick
+      OnMouseMove = TreeViewGrafMouseMove
       OnMouseUp = TreeViewGrafMouseUp
-      OnStartDrag = TreeViewGrafStartDrag
     end
   end
   object LeftPanEx: TPanel
-    Left = 765
+    Left = 1206
     Top = 43
     Width = 0
-    Height = 439
+    Height = 649
     Align = alRight
     DockSite = True
     TabOrder = 9
     OnDockDrop = RightPanExDockDrop
     OnUnDock = RightPanExUnDock
   end
-  object HotGrafPanel: TPanel
-    Left = 888
-    Top = 376
-    Width = 300
-    Height = 121
-    UseDockManager = False
-    DragKind = dkDock
-    DragMode = dmAutomatic
-    TabOrder = 10
-    object FloatChart: TChart
-      Left = 1
-      Top = 1
-      Width = 298
-      Height = 119
-      BackWall.Brush.Color = clWhite
-      BackWall.Brush.Style = bsClear
-      Gradient.EndColor = 16444045
-      Gradient.Visible = True
-      MarginTop = 16
-      Title.Text.Strings = (
-        '')
-      Title.Visible = False
-      BottomAxis.DateTimeFormat = 'dd.MM.yy'
-      BottomAxis.LabelsFont.Charset = DEFAULT_CHARSET
-      BottomAxis.LabelsFont.Color = clTeal
-      BottomAxis.LabelsFont.Height = -11
-      BottomAxis.LabelsFont.Name = 'Arial'
-      BottomAxis.LabelsFont.Style = []
-      BottomAxis.LabelStyle = talValue
-      BottomAxis.StartPosition = 1.000000000000000000
-      BottomAxis.EndPosition = 99.000000000000000000
-      LeftAxis.LabelsFont.Charset = DEFAULT_CHARSET
-      LeftAxis.LabelsFont.Color = clRed
-      LeftAxis.LabelsFont.Height = -11
-      LeftAxis.LabelsFont.Name = 'Arial'
-      LeftAxis.LabelsFont.Style = []
-      LeftAxis.StartPosition = 2.000000000000000000
-      LeftAxis.EndPosition = 97.000000000000000000
-      LeftAxis.Title.Caption = 'Value 1'
-      LeftAxis.Title.Font.Charset = DEFAULT_CHARSET
-      LeftAxis.Title.Font.Color = clRed
-      LeftAxis.Title.Font.Height = -11
-      LeftAxis.Title.Font.Name = 'Arial'
-      LeftAxis.Title.Font.Style = []
-      Legend.Visible = False
-      RightAxis.LabelsFont.Charset = DEFAULT_CHARSET
-      RightAxis.LabelsFont.Color = clBlue
-      RightAxis.LabelsFont.Height = -11
-      RightAxis.LabelsFont.Name = 'Arial'
-      RightAxis.LabelsFont.Style = []
-      RightAxis.StartPosition = 2.000000000000000000
-      RightAxis.EndPosition = 97.000000000000000000
-      RightAxis.Title.Angle = 90
-      RightAxis.Title.Caption = 'Value 2'
-      RightAxis.Title.Font.Charset = DEFAULT_CHARSET
-      RightAxis.Title.Font.Color = clBlue
-      RightAxis.Title.Font.Height = -11
-      RightAxis.Title.Font.Name = 'Arial'
-      RightAxis.Title.Font.Style = []
-      View3D = False
-      OnAfterDraw = FloatChartAfterDraw
-      Align = alClient
-      UseDockManager = False
-      TabOrder = 0
-      OnMouseMove = FloatChartMouseMove
-      object LVal: TLabel
-        Left = 280
-        Top = 10
-        Width = 19
-        Height = 13
-        Caption = 'LVal'
-        Color = clYellow
-        Font.Charset = RUSSIAN_CHARSET
-        Font.Color = clOlive
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = False
-        Transparent = True
-        Visible = False
-      end
-      object GName: TLabel
-        Tag = 10000000
-        Left = 1
-        Top = 1
-        Width = 296
-        Height = 13
-        Align = alTop
-        Alignment = taCenter
-        Caption = #1044#1074#1086#1081#1085#1086#1081' '#1097#1077#1083#1095#1086#1082' '#1074' '#1076#1077#1088#1077#1074#1077
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clMaroon
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-      end
-      object Series13: TLineSeries
-        Marks.ArrowLength = 8
-        Marks.Visible = False
-        SeriesColor = 8388863
-        Pointer.InflateMargins = True
-        Pointer.Style = psRectangle
-        Pointer.Visible = False
-        Stairs = True
-        XValues.DateTime = True
-        XValues.Name = 'X'
-        XValues.Multiplier = 1.000000000000000000
-        XValues.Order = loAscending
-        YValues.DateTime = False
-        YValues.Name = 'Y'
-        YValues.Multiplier = 1.000000000000000000
-        YValues.Order = loNone
-      end
-      object Series14: TLineSeries
-        Marks.ArrowLength = 8
-        Marks.Visible = False
-        SeriesColor = 16744448
-        VertAxis = aRightAxis
-        Pointer.InflateMargins = True
-        Pointer.Style = psRectangle
-        Pointer.Visible = False
-        Stairs = True
-        XValues.DateTime = False
-        XValues.Name = 'X'
-        XValues.Multiplier = 1.000000000000000000
-        XValues.Order = loAscending
-        YValues.DateTime = False
-        YValues.Name = 'Y'
-        YValues.Multiplier = 1.000000000000000000
-        YValues.Order = loNone
-      end
-    end
-  end
   object ToolBar1: TToolBar
     Left = 0
     Top = 3
-    Width = 765
+    Width = 1206
     Height = 40
     AutoSize = True
     ButtonHeight = 38
@@ -1680,7 +1548,7 @@ object FMain: TFMain
     Flat = True
     Images = IL1
     ParentColor = False
-    TabOrder = 11
+    TabOrder = 10
     Transparent = True
     object TB9: TToolButton
       Left = 0
@@ -1978,7 +1846,6 @@ object FMain: TFMain
       object mnActiveTree: TMenuItem
         AutoCheck = True
         Caption = #1040#1082#1090#1080#1074#1085#1086#1077' '#1076#1077#1088#1077#1074#1086
-        Checked = True
       end
       object mnColorGrid: TMenuItem
         AutoCheck = True

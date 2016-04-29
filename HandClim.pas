@@ -233,6 +233,7 @@ begin
   with ClimatClient[ListClimCtr.TabIndex+1].Ctr do
     begin
     HandMode.SetEndRecord;
+//    HandMode.LoadFileByDate(Now,dEnd);
     BlockToGrid(HandMode, HandGrid);
     HandGrid.GridMode:=gmBrowse;
     end;
@@ -376,6 +377,7 @@ begin
    if MessageDlg(Format(ProgMess[iAtten]+ProgMess[106]+ProgMess[iContin],[Ctr.CtrName])
        ,mtWarning,[mbYes, mbNo],0)= mrYes
     then Ctr.HandMode.SendToPort(ReCalc);
+
 end;
 
 procedure TFHandClim.TBShowCtrClick(Sender: TObject);

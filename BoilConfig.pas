@@ -51,8 +51,8 @@ const
   iConfHPStart            =iConfElGroupLight+eSumElGroups;
   iConfRlLightOK          =iConfHPStart+eSumHPUnits;
 
-  iConfFeedPump           =iConfRlLightOK+eSumHPUnits;
-  iConfFatalAlarm         =iConfFeedPump+1;
+  iConfControlOK          =iConfRlLightOK+eSumHPUnits;
+  iConfFatalAlarm         =iConfControlOK+1;
   iConfCommonAlarm        =iConfFatalAlarm+1;
 
   iConfBoilLev            =iConfGrPump+eMAX_SUM_PUMP;
@@ -958,8 +958,8 @@ var BoilNameConfig:array [1..cSumValYConfig] of TNameConst=(
 (Name:'Общая авария';Frm:CpMpN;Ed:'-реле';TipSens:TipControl;Min:0;Max:MAX_SUM_RELAY;Def:0;
     Index:iConfCommonAlarm; Mech:0; AccessR:R_CONFIG;AccessW:W_CONFIG),
 
-(Name:'Насос подпитки';Frm:CpMpN;Ed:'-реле';TipSens:TipControl;Min:0;Max:MAX_SUM_RELAY;Def:0;
-    Index:iConfFeedPump; Mech:0; AccessR:R_CONFIG;AccessW:W_CONFIG),
+(Name:'Идет управление';Frm:CpMpN;Ed:'-реле';TipSens:TipControl;Min:0;Max:MAX_SUM_RELAY;Def:0;
+    Index:iConfControlOK; Mech:0; AccessR:R_CONFIG;AccessW:W_CONFIG),
 
 (Name:'Фатальная авария бака (закрыт)';Frm:CpMpN;Ed:'-вход';TipSens:TipControl;Min:0;Max:MAX_SUM_INPUT;Def:0;
     Index:iConfTankAlarm; Mech:0; AccessR:R_CONFIG;AccessW:W_CONFIG),

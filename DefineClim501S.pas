@@ -3333,15 +3333,15 @@ const
              DZ_S1TASens=        14;
 
              DZ_StTeplSens=      DZ_EndCommon+1;
-             DZ_SumTeplSens=     19;//15; //cSInTeplSens;
+             DZ_SumTeplSens=     21;//15; //cSInTeplSens;
              DZ_SumTeplDSens=    2;
              DZ_EndTeplSens=     DZ_StTeplSens+DZ_SumTeplSens+DZ_SumTeplDSens-1;                   //в ПК - номер начала датчиков
 
-             DZ_SumTeplCalc=     14;//10+STVirtSens;
+             DZ_SumTeplCalc=     12;//14;//10+STVirtSens;
              DZ_StTeplCalc=      DZ_EndTeplSens+1;                   //в ПК - номер начала расчета клим
              DZ_EndTeplCalc=     DZ_StTeplCalc+DZ_SumTeplCalc-1;                  //в ПК - номер окончания расчета клим
 
-             DZ_SumTeplWarm=     15+8*5;//13+8*5;//11+10*5;//51;
+             DZ_SumTeplWarm=     13+8*5;//11+10*5;//51;
              DZ_StTeplWarm=      DZ_EndTeplCalc+1;       //в ПК - номер начала контуров обогрева
              DZ_EndTeplWarm=     DZ_StTeplWarm+DZ_SumTeplWarm-1;       //в ПК - номер окончания контуров обогрева
 
@@ -3353,7 +3353,7 @@ const
              DZ_StTeplScreen=    DZ_EndTeplVent+1;           //в ПК - номер начала контуров экрана
              DZ_EndTeplScreen=   DZ_StTeplScreen+DZ_SumTeplScreen-1;
 
-             DZ_SumTeplOther=   17; //17;
+             DZ_SumTeplOther=   19; //17;
              DZ_StTeplOther=    DZ_EndTeplScreen+1;           //в ПК - номер начала контуров экрана
              DZ_EndTeplOther=   DZ_StTeplOther+DZ_SumTeplOther-1;
 
@@ -3363,7 +3363,7 @@ const
              DZ_SCalcMecan=      DZ_SCalcPump+DZ_SCalcRegul;
              DZ_SASens=20;
 
-             DZ_SumTeplMecan=    50;//52;// 52   //56;
+             DZ_SumTeplMecan=    50;// 52   //56;
              DZ_StTeplMecan=     DZ_EndTeplOther+1;              //в ПК - номер начала положений механизмов
              DZ_EndTeplMecan=    DZ_StTeplMecan+DZ_SumTeplMecan-1;
              DZ_StTeplRez=       DZ_EndTeplMecan+1;

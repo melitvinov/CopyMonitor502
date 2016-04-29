@@ -73,8 +73,9 @@ uses
   Calc502 in 'Calc502.pas',
   Climat501U in 'Climat501U.pas' {FClimat501U},
   DefineClim501S in 'DefineClim501S.pas',
-  Climat510 in 'Climat510.pas' {FClimat510},
-  Strategy501U in 'Strategy501U.pas' {FStrategy501U};
+  Cloud502 in 'Voice\Cloud502.pas' {FSetCloud},
+  Strategy501U in 'Strategy501U.pas' {FStrategy501U},
+  CellChart in 'Voice\CellChart.pas' {FrCellChart: TFrame};
 
 {$R *.RES}
 var hwndPrev:HWND;

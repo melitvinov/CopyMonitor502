@@ -318,14 +318,15 @@ type  TFClimat502 = class(TFPicCtr)
 //    BlockNewArxPC:TNewArxPC_DZ;//TBlock;
     HotBlock:THot502;
     BlockArxPC:TAchivePC502;//TBlock;
-    StrategyBlock:TStrategyIrrig502;
-    CalcStrategyBlock:TCalcStrategy502;
     SensorsBlock:TCalSensIrrig502;
     RegBlock:TRegIrrig502;
     TimerBlock:TTimer502;
     NowTimer:T1Timer;
 
   public
+    KoefStgBlock:TKoefStgBlock502;
+    HotStgBlock:THotStgBlock502;
+    CalcStgBlock:TCalcStgBlock502;
     WarmGroupConfig:TWarmGroupConfig;
     Tasks:array [1..6] of integer;
     TaskCount:integer;
@@ -377,10 +378,11 @@ begin
      Is502:=True;
      HotBlock:=THot502.Create(Self);
      ConfigBlock:=TConfig502.Create(Self);
-     StrategyBlock:=TStrategyIrrig502.Create(Self);
+     KoefStgBlock:=TKoefStgBlock502.Create(Self);
      TimerBlock:=TTimer502.Create(Self);
-     CalcStrategyBlock:=TCalcStrategy502.Create(Self);
-     CalcStrategyBlock.CountY:=StrategyBlock.CountY;
+     HotStgBlock:=THotStgBlock502.Create(Self);
+     CalcStgBlock:=TCalcStgBlock502.Create(Self);
+     CalcStgBlock.CountY:=KoefStgBlock.CountY;
      SensorsBlock:=TCalSensIrrig502.Create(Self);
      RegBlock:=TRegIrrig502.Create(Self);
 //##     HandMode:=THandMode_DZ.Create(Self);
@@ -1161,7 +1163,7 @@ begin
   SensCount:=SensorsBlock.DoCalibr;
   TimerBlock.GetTimer(Now,NowTimer);
 //CalcStrategy Hot
-  CalcStrategyBlock.CalcStg;
+  CalcStgBlock.CalcStg;
   //CalcDeltas
   //CalcStrategy SybSystem
   //CalcExcept

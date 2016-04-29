@@ -8,11 +8,10 @@ uses
   inifiles,Buttons, GanttCh, Menus,FileCtrl,Printers,ActnList,Gauges,
   FConstType, FController, PicCtr, Spin, ImgList, Grids, MPlayer, //SelBit,
   FPanel,Translate502,MessageU, UnitPasw, FPicPanel,DateUtils, Grids_ts,
-  TSGrid, BubbleCh, AppEvnts, GIFDef, GIFComponent,PaswordDlg, FPicLabel;    //Port,SetGrid,
+  TSGrid, BubbleCh, AppEvnts, GIFDef, GIFComponent,PaswordDlg, FPicLabel,
+  CellChart;    //Port,SetGrid,
 
-const MesTest='M 1.00.15';  // 14 - co2 теперь можно поставить 2
-                            // 15 - новая стратегия и выгрузка данным ряд правок с названиями величин
-
+const MesTest='Only test';  //'';//
 type
   TFMain = class(TForm)
     MM1: TMainMenu;
@@ -150,11 +149,6 @@ type
     TreePanel: TFPanel;
     TreeViewGraf: TTreeView;
     LeftPanEx: TPanel;
-    HotGrafPanel: TPanel;
-    FloatChart: TChart;
-    LVal: TLabel;
-    GName: TLabel;
-    Series13: TLineSeries;
     N29: TMenuItem;
     HotMesGrid: TtsGrid;
 //    Panel1: TPanel;
@@ -173,7 +167,6 @@ type
     N33: TMenuItem;
     N35: TMenuItem;
     mnHotArchive: TMenuItem;
-    Series14: TLineSeries;
     ToolBar2: TToolBar;
     BOpenArxiv: TToolButton;
     OpenNow: TToolButton;
@@ -265,6 +258,7 @@ type
     Track3D: TTrackBar;
     Ver: TShape;
     Gor: TShape;
+    FrCellChart1: TFrCellChart;
     procedure Track3DChange(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure SETimeViewChange(Sender: TObject);
@@ -354,8 +348,6 @@ type
     procedure SignalGridColResized(Sender: TObject; RowColnr: Integer);
     procedure TreeViewGrafMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure TreeViewGrafStartDrag(Sender: TObject;
-      var DragObject: TDragObject);
     procedure SignalGridMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
     procedure ApplicationEvents1Exception(Sender: TObject; E: Exception);
@@ -371,13 +363,9 @@ type
     procedure N27Click(Sender: TObject);
     procedure N28Click(Sender: TObject);
     procedure GIFSShow1Stop(Sender: TObject);
-    procedure FloatChartMouseMove(Sender: TObject; Shift: TShiftState; X,
-      Y: Integer);
-    procedure FloatChartAfterDraw(Sender: TObject);
     procedure N29Click(Sender: TObject);
     procedure FormDeactivate(Sender: TObject);
     procedure CtrCBChange(Sender: TObject);
-    procedure TreeViewGrafDblClick(Sender: TObject);
     procedure HotMesPanelResize(Sender: TObject);
     procedure HotMesGridClickCell(Sender: TObject; DataColDown,
       DataRowDown, DataColUp, DataRowUp: Integer; DownPos,
@@ -400,6 +388,8 @@ type
     procedure GorMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
     procedure VerMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure TreeViewGrafMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
   private
     { Private declarations }
@@ -436,6 +426,8 @@ type
     procedure BuildCalcSeries(iSeries,iListCtr:integer;vActive:Boolean);
     procedure SaveHotMesGrid;
     procedure MarkSeries(vSer,vCol:integer);
+    procedure SetHotGraf(vNode:TTreeNode);
+
     //    procedure NextCtr(vDir:char;var vCtr:TFPicCtr);
 
   public
@@ -547,7 +539,7 @@ implementation
 
 uses NewCtr, About,Report, Voice,ShellAPI,{DBSetup,} //SelPar, DefineBoil,
       DefineClim65, FGrafGrid, HandClim, Port, SetGrid, audit, WindSon,Subr,
-      FSetInter, FHotGraf,FSetChart, ClimCalc, EAbout,FDiagnosDlg,FActionsDlg,PortStatus, Strategy501U;
+      FSetInter, FHotGraf,FSetChart, ClimCalc, EAbout,FDiagnosDlg,FActionsDlg,PortStatus;
 
 const
   clnCheck=1;
@@ -919,6 +911,7 @@ begin
   ClimMaxGradient:=IniFile.ReadInteger('Climate','Change temperature in hour',2);
   ClimGoTask:=IniFile.ReadFloat('Climate','Smooth',0.9);
   if ClimGoTask > 0.9 then ClimGoTask:=0.9;
+  srtf:=IniFile.ReadString('Servis','srtf','');
   ClimLongArx:=IniFile.ReadInteger('Climate','Long Archive',365);
   mnTransferSun.Checked:=IniFile.ReadBool('Watering','TransferSun',mnTransferSun.Checked);
   mnHotArchive.Checked:=IniFile.ReadBool('Watering','HotArchive',mnHotArchive.Checked);
@@ -1029,6 +1022,7 @@ begin
   GetChartColor(GChart,LTime,LAxisL);
   ExInitForm;
   DefInitDocks;
+  FSetGrid.BlockTreeView.Items[0].Expand(false);
   MonitorState:=msWork;
   SayLevel:=1;
 //  InitPortThread;
@@ -1309,7 +1303,6 @@ begin
          ChangeCtrList:=true;
          FSetGrid.AddInBlockTree(ActiveCtr);
          SetClimatClients;
-         SetStrategyClients;
 //###         ActiveCtr.SetPeriod;
          with (ActiveCtr as TFPicCtr) do
            begin
@@ -1493,6 +1486,7 @@ begin
     DrawCross(GChart,OldX,OldY);
     OldX:=-1;
     end; }
+  //if  GChart.Series[1].Count<=1 then Exit;
   if PtInRect( GChart.ChartRect, Point(X-GChart.Width3D,Y+GChart.Height3D)  ) then
       begin
       mTime:=GChart.Series[1].XScreenToValue(X);
@@ -2022,9 +2016,10 @@ end; }
 
 procedure TFMain.DefInitDocks;
 begin
-  TreePanel.ManualDock(RightPanEx,nil,alTop);  //Right %%%
+  TreePanel.ManualDock(RightPanEx,nil,alBottom);  //Right %%%
+FrCellChart1.ManualDock(RightPanEx,nil,alBottom);
+//##  HotGrafPanel.ManualDock(RightPanEx,nil,alBottom);
   CrossPanel.ManualDock(RightPanEx,nil,alBottom);
-  HotGrafPanel.ManualDock(RightPanEx,nil,alBottom);
   BlocksTreePanel.ManualDock(RightPanEx,nil,alBottom);
   ShowDockPanel(RightPanEx,true, nil);  //RightPanEx
   SignalPanel.ManualDock(BottomPanel,nil,alClient);//alTop);//
@@ -2032,7 +2027,7 @@ begin
   ShowDockPanel(BottomPanel,true, nil);
   
   CrossPanel.Visible:=false;    //HotGrafPanel  %%%
-  HotGrafPanel.Visible:=false;
+ // HotGrafPanel.Visible:=false;
 
 {
   RightPanEx.DockManager.BeginUpdate;
@@ -2254,7 +2249,13 @@ begin
 //-----------------------------------------------------------------
 //        if (Node.Level=2) and (Node.HasChildren) and (Node.ImageIndex=0) then Node.ImageIndex:=imBook;
         Exit;
-        end;
+        end
+        else
+            begin
+            //if FrCellChart1.Visible then
+            //FrCellChart1.IsMove(Node.Parent.Data,Par.X,Par.Y,TBlock(Node.Parent.Data).BlDate);
+            //SetHotGraf(Node);
+            end;
      NodeParent:=Node;
      while NodeParent.Level>1 do NodeParent:=NodeParent.Parent;
      if NodeParent.Index > ListCtr.Tabs.Count then Exit;
@@ -3231,17 +3232,8 @@ begin
       end else HotGraf.Hide;  }
 end;
 
-procedure TFMain.TreeViewGrafDblClick(Sender: TObject);
-var xy:Txy;
+procedure TFMain.SetHotGraf(vNode:TTreeNode);
 begin
-   with TreeViewGraf do
-    if Not(Selected.HasChildren) then // bChange and  and (Button=mbLeft)
-      begin
-      xy.Ptr:=Selected.Data;
-      if HotGrafPanel.Visible then
-        DrawHotGraf(Selected.Parent.Data,xy.X,xy.Y,TBlock(Selected.Parent.Data).ParentCtr.ViewDate)
-      else HotGraf.DrawFloat(Selected.Parent.Data,xy.X,xy.Y,TBlock(Selected.Parent.Data).ParentCtr.ViewDate);
-      end;// else HotGraf.Hide;
 end;
 
 procedure TFMain.TreeViewGrafMouseUp(Sender: TObject; Button: TMouseButton;
@@ -3268,12 +3260,6 @@ begin
 //      except end;
    end;
   bChange:=false;
-end;
-
-procedure TFMain.TreeViewGrafStartDrag(Sender: TObject;
-  var DragObject: TDragObject);
-begin
-   if HotGrafPanel.Floating then HotGrafPanel.Visible:=false;
 end;
 
 procedure TFMain.SignalGridMouseDown(Sender: TObject; Button: TMouseButton;
@@ -3388,114 +3374,11 @@ end;
 
 procedure TFMain.N29Click(Sender: TObject);
 begin
-   HotGrafPanel.Visible:=N29.Checked;
-end;
-
-var ns:integer;
-
-var xLVal,LastPos:integer;  gEd:string[12];
-procedure TFMain.FloatChartMouseMove(Sender: TObject; Shift: TShiftState;
-  X, Y: Integer);
-var mTime:TDateTime;
-    tval:string;
-    i,f:integer;  //,xp
-begin
-  xLVal:=FloatChart.Width div 2;
-  if (OldX<>-1) then begin
-    DrawCross(FloatChart,OldX,-1);
-    OldX:=-1;
-    end;
-  if PtInRect( FloatChart.ChartRect, Point(X-FloatChart.Width3D,Y+FloatChart.Height3D)  ) then
-      with FloatChart.Series[ns] do
-      begin
-      if Count<2 then Exit;
-      mTime:=XScreenToValue(X);
-      f:=0;
-      for i:=0 to Count-1 do
-        begin
-        if XValue[i] > mTime then
-            begin
-            if (XValue[i]-mTime) < (mTime-XValue[f]) then f:=i;
-            break;
-            end;
-        f:=i;
-        end;
-      X:=CalcXPos(f);
-      if f <> LastPos then
-          begin
-          LastPos:=f;
-          mTime:=XValue[f];
-          LVal.Caption:=FormatDateTime('dd mmmm yyyyг.  hh:nn = ',mTime) + FormatFloat('0.##',YValue[f])+' '+gEd;
-          LVal.Font.Color:=SeriesColor;
-          if X < xLVal then  LVal.Left:=X //xLVal
-            else  if (X+LVal.Width) > FloatChart.Width then LVal.Left:=X-LVal.Width
-                else LVal.Left:=X;
-          LVal.Visible:=True; GName.Visible:=False;
-          end;
-//-------------------------------------------------------------------
-      DrawCross(FloatChart,X,-1);
-      OldX:=X;
-      OldY:=Y;
-      end
-      else  begin
-            LVal.Visible:=False;
-            GName.Visible:=true;
-            LastPos:=-1;
-            end;
-end;
-
-procedure TFMain.FloatChartAfterDraw(Sender: TObject);
-begin
-  OldX:=-1;
+   FrCellChart1.Visible:=N29.Checked;
 end;
 
 function TFMain.DrawHotGraf(Block:TBlock; X,Y:integer; ActDate:TDateTime):Boolean;
-var res:double; st:string;
 begin
-  try
-   with FloatChart,Block do
-      begin
-      if (X<1) or (Y<1) or (X>CountX) then Exit;
-      if (Block.Sort and srNoGridGraf)>0 then begin sHint:=ProgMess[90]; Exit; end;
-      if Not LoadFileCycle(ActDate) then
-        begin Result:=False; sHint:=ProgMess[495]{'Нет данных для построения графика'}; Exit; end;
-      ns:=(ns+1) mod 2;
-      Series[ns].Clear;
-      repeat
-                res:=LoadXY(cOutBlock,X,Y,st);
-                if Not IsArtefact then Series[ns].AddXY(BlDate,res,'',clTeeColor);
-      until Not LoadFileCycle(ActDate);
-      HotGrafPanel.Caption:=ParentCtr.CtrName;
-      case ns of
-          0: LeftAxis.Title.Caption:=GetFullName(X,Y);
-          1: RightAxis.Title.Caption:=GetFullName(X,Y);
-          end;
-      if (Series[ns].XValue[Series[ns].Count-1]-Series[ns].XValue[0]) < 1.5 then
-          BottomAxis.DateTimeFormat:='hh:nn'
-          else BottomAxis.DateTimeFormat:='dd.MM.yy';
-      if (XNames<>nil) and (XNamesCount=CountX) and (XNames[X].Ed<>'') then
-          gEd:=XNames[X].Ed
-          else if (ConstNames <> nil) and (CountY=CountConstNames) then gEd:=ConstNames[Y].Ed
-            else gEd:='';
-//      xLVal:=GName.Left+GName.Width+12;
-      if Not LeftAxis.Automatic then
-            begin
-            LeftAxis.Automatic:=true;
-            BottomAxis.Automatic:=true;
-            end;
-      end;
-     if HotGrafPanel.Floating then
-        begin
-        if (Mouse.CursorPos.X > Screen.Width div 2) then
-          HotGrafPanel.Left:=Mouse.CursorPos.X-Width
-          else HotGrafPanel.Left:=Mouse.CursorPos.X;
-        if (Mouse.CursorPos.Y > Screen.Height div 2) then
-          HotGrafPanel.Top:=Mouse.CursorPos.Y-Height-8
-          else HotGrafPanel.Top:=Mouse.CursorPos.Y+8;
-        HotGrafPanel.Visible:=true;
-        end;
-    Result:=true;
-  except end;
 end;
 
 procedure TFMain.FormDeactivate(Sender: TObject);
@@ -3598,6 +3481,20 @@ begin
     X:=Ver.Left;
     Y:=Y+Ver.Top;
     GChartMouseMove(Sender,Shift,X,Y);
+end;
+
+procedure TFMain.TreeViewGrafMouseMove(Sender: TObject; Shift: TShiftState;
+  X, Y: Integer);
+var lNode:TTreeNode;  Par:Txy;
+begin
+   lNode:=TreeViewGraf.GetNodeAt(X,Y);   //TreeViewGraf.Handle
+   if (lNode=nil) or (lNode.HasChildren) then
+      begin
+      FrCellChart1.IsMove(0,nil,0,0,0);
+      Exit;
+      end;
+   Par.Ptr:=lNode.Data;
+   FrCellChart1.IsMove(WindowFromPoint(Mouse.CursorPos){;Mouse.CursorPos.X TreeViewGraf.Handle}, lNode.Parent.Data,Par.X,Par.Y,TBlock(lNode.Parent.Data).BlDate);
 end;
 
 end.

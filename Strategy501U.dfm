@@ -73,7 +73,7 @@ object FStrategy501U: TFStrategy501U
       ShowHint = False
       StoreData = True
       TabOrder = 0
-      Version = '2.20.24'
+      Version = '3.01.07'
       VertAlignment = vtaCenter
       WordWrap = wwOff
       XMLExport.Version = '1.0'
@@ -91,7 +91,7 @@ object FStrategy501U: TFStrategy501U
   object TBCtr: TToolBar
     Left = 0
     Top = 0
-    Width = 1120
+    Width = 1128
     Height = 42
     ButtonHeight = 38
     ButtonWidth = 39
@@ -139,15 +139,15 @@ object FStrategy501U: TFStrategy501U
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 370
-    Width = 1120
+    Top = 375
+    Width = 1128
     Height = 27
     Panels = <>
   end
   object ToolBar1: TToolBar
     Left = 0
     Top = 42
-    Width = 1120
+    Width = 1128
     Height = 31
     ButtonHeight = 25
     Caption = 'ToolBar1'
@@ -165,7 +165,7 @@ object FStrategy501U: TFStrategy501U
   object Panel1: TPanel
     Left = 0
     Top = 73
-    Width = 1120
+    Width = 1128
     Height = 288
     Align = alTop
     TabOrder = 4
@@ -352,7 +352,7 @@ object FStrategy501U: TFStrategy501U
         Align = alTop
         BorderStyle = bsSingle
         TabOrder = 7
-        object ComboBox29: TComboBox
+        object ComboBox291: TComboBox
           Tag = 29
           Left = 0
           Top = 0
@@ -366,8 +366,8 @@ object FStrategy501U: TFStrategy501U
           ItemHeight = 20
           ParentFont = False
           TabOrder = 0
-          Text = 'ComboBox29'
-          OnChange = ComboBox29Change
+          Text = 'ComboBox291'
+          OnChange = ComboBox291Change
         end
       end
     end
@@ -1973,14 +1973,14 @@ object FStrategy501U: TFStrategy501U
     object Panel12: TPanel
       Left = 1001
       Top = 1
-      Width = 118
+      Width = 126
       Height = 286
       Align = alClient
       TabOrder = 8
       object Panel20: TPanel
         Left = 1
         Top = 166
-        Width = 116
+        Width = 124
         Height = 33
         Align = alTop
         BorderStyle = bsSingle
@@ -2004,7 +2004,7 @@ object FStrategy501U: TFStrategy501U
       object Panel29: TPanel
         Left = 1
         Top = 133
-        Width = 116
+        Width = 124
         Height = 33
         Align = alTop
         BorderStyle = bsSingle
@@ -2028,7 +2028,7 @@ object FStrategy501U: TFStrategy501U
       object Panel38: TPanel
         Left = 1
         Top = 100
-        Width = 116
+        Width = 124
         Height = 33
         Align = alTop
         BorderStyle = bsSingle
@@ -2052,7 +2052,7 @@ object FStrategy501U: TFStrategy501U
       object Panel47: TPanel
         Left = 1
         Top = 67
-        Width = 116
+        Width = 124
         Height = 33
         Align = alTop
         BorderStyle = bsSingle
@@ -2076,7 +2076,7 @@ object FStrategy501U: TFStrategy501U
       object Panel56: TPanel
         Left = 1
         Top = 252
-        Width = 116
+        Width = 124
         Height = 33
         Align = alBottom
         BorderStyle = bsSingle
@@ -2100,7 +2100,7 @@ object FStrategy501U: TFStrategy501U
       object Panel65: TPanel
         Left = 1
         Top = 219
-        Width = 116
+        Width = 124
         Height = 33
         Align = alBottom
         BorderStyle = bsSingle
@@ -2124,7 +2124,7 @@ object FStrategy501U: TFStrategy501U
       object Panel74: TPanel
         Left = 1
         Top = 34
-        Width = 116
+        Width = 124
         Height = 33
         Align = alTop
         BorderStyle = bsSingle
@@ -2148,7 +2148,7 @@ object FStrategy501U: TFStrategy501U
       object Panel83: TPanel
         Left = 1
         Top = 1
-        Width = 116
+        Width = 124
         Height = 33
         Align = alTop
         BorderStyle = bsSingle
@@ -2156,7 +2156,7 @@ object FStrategy501U: TFStrategy501U
         object StaticText8: TStaticText
           Left = 1
           Top = 1
-          Width = 110
+          Width = 118
           Height = 27
           Align = alClient
           Caption = 'StaticText8'

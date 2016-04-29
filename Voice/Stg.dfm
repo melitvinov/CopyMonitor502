@@ -2,21 +2,21 @@ object StgFrame: TStgFrame
   Left = 0
   Top = 0
   Width = 1141
-  Height = 222
+  Height = 224
   TabOrder = 0
   object StgP: TPanel
     Left = 585
     Top = 0
     Width = 556
-    Height = 222
+    Height = 224
     Align = alClient
     Caption = 'StgP'
     TabOrder = 0
     object RuleChart: TChart
-      Left = 321
+      Left = 329
       Top = 33
-      Width = 234
-      Height = 188
+      Width = 226
+      Height = 190
       Cursor = crCross
       BackWall.Brush.Color = clWhite
       BackWall.Brush.Style = bsClear
@@ -115,38 +115,10 @@ object StgFrame: TStgFrame
     object Panel1: TPanel
       Left = 1
       Top = 33
-      Width = 320
-      Height = 188
+      Width = 328
+      Height = 190
       Align = alLeft
       TabOrder = 1
-      object Label4: TLabel
-        Left = 240
-        Top = 16
-        Width = 70
-        Height = 13
-        Caption = #1055#1088#1080' '#1079#1085#1072#1095#1077#1085#1080#1080
-      end
-      object Label5: TLabel
-        Left = 240
-        Top = 104
-        Width = 70
-        Height = 13
-        Caption = #1055#1088#1080' '#1079#1085#1072#1095#1077#1085#1080#1080
-      end
-      object Label6: TLabel
-        Left = 240
-        Top = 64
-        Width = 58
-        Height = 13
-        Caption = #1052#1085#1086#1078#1080#1090#1077#1083#1100
-      end
-      object Label7: TLabel
-        Left = 240
-        Top = 144
-        Width = 58
-        Height = 13
-        Caption = #1052#1085#1086#1078#1080#1090#1077#1083#1100
-      end
       object Label3: TLabel
         Left = 2
         Top = 16
@@ -155,47 +127,11 @@ object StgFrame: TStgFrame
         Caption = #1042#1083#1080#1103#1102#1097#1080#1077' '#1092#1072#1082#1090#1086#1088#1099
       end
       object Label8: TLabel
-        Left = 8
-        Top = 112
+        Left = 48
+        Top = 120
         Width = 146
         Height = 13
         Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1074#1083#1080#1103#1102#1097#1080#1081' '#1092#1072#1082#1090#1086#1088
-      end
-      object Y2Ed: TEdit
-        Tag = 1
-        Left = 240
-        Top = 157
-        Width = 65
-        Height = 21
-        TabOrder = 0
-        OnExit = X1EdChange
-      end
-      object X1Ed: TEdit
-        Tag = 1
-        Left = 240
-        Top = 32
-        Width = 73
-        Height = 21
-        TabOrder = 1
-        OnExit = X1EdChange
-      end
-      object X2Ed: TEdit
-        Tag = 1
-        Left = 240
-        Top = 117
-        Width = 64
-        Height = 21
-        TabOrder = 2
-        OnExit = X1EdChange
-      end
-      object Y1Ed: TEdit
-        Tag = 1
-        Left = 240
-        Top = 77
-        Width = 64
-        Height = 21
-        TabOrder = 3
-        OnExit = X1EdChange
       end
       object RuleListLB: TListBox
         Left = 1
@@ -203,29 +139,153 @@ object StgFrame: TStgFrame
         Width = 232
         Height = 73
         ItemHeight = 13
-        TabOrder = 4
+        TabOrder = 0
         OnClick = RuleListLBClick
       end
       object FactorListCB: TComboBox
         Left = 8
-        Top = 128
+        Top = 136
         Width = 225
         Height = 21
         ItemHeight = 13
-        TabOrder = 5
+        TabOrder = 1
         Text = 'FactorListCB'
         OnClick = FactorListCBClick
       end
       object AddFactorB: TBitBtn
         Left = 168
-        Top = 136
+        Top = 152
         Width = 57
         Height = 25
         Caption = '&Add'
-        TabOrder = 6
+        TabOrder = 2
         Visible = False
         OnClick = AddFactorBClick
         Kind = bkYes
+      end
+      object BitBtn1: TBitBtn
+        Left = 184
+        Top = 8
+        Width = 25
+        Height = 21
+        ModalResult = 3
+        TabOrder = 3
+        Glyph.Data = {
+          DE010000424DDE01000000000000760000002800000024000000120000000100
+          0400000000006801000000000000000000001000000000000000000000000000
+          80000080000000808000800000008000800080800000C0C0C000808080000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+          333333333333333333333333000033338833333333333333333F333333333333
+          0000333911833333983333333388F333333F3333000033391118333911833333
+          38F38F333F88F33300003339111183911118333338F338F3F8338F3300003333
+          911118111118333338F3338F833338F3000033333911111111833333338F3338
+          3333F8330000333333911111183333333338F333333F83330000333333311111
+          8333333333338F3333383333000033333339111183333333333338F333833333
+          00003333339111118333333333333833338F3333000033333911181118333333
+          33338333338F333300003333911183911183333333383338F338F33300003333
+          9118333911183333338F33838F338F33000033333913333391113333338FF833
+          38F338F300003333333333333919333333388333338FFF830000333333333333
+          3333333333333333333888330000333333333333333333333333333333333333
+          0000}
+        NumGlyphs = 2
+      end
+      object Panel5: TPanel
+        Left = 240
+        Top = 1
+        Width = 87
+        Height = 188
+        Align = alRight
+        BevelInner = bvLowered
+        Color = clMoneyGreen
+        TabOrder = 4
+        object Label4: TLabel
+          Left = 11
+          Top = 16
+          Width = 70
+          Height = 13
+          Caption = #1055#1088#1080' '#1079#1085#1072#1095#1077#1085#1080#1080
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clGray
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label6: TLabel
+          Left = 15
+          Top = 64
+          Width = 58
+          Height = 13
+          Caption = #1052#1085#1086#1078#1080#1090#1077#1083#1100
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clGray
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label5: TLabel
+          Left = 11
+          Top = 104
+          Width = 70
+          Height = 13
+          Caption = #1055#1088#1080' '#1079#1085#1072#1095#1077#1085#1080#1080
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clGray
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label7: TLabel
+          Left = 15
+          Top = 144
+          Width = 58
+          Height = 13
+          Caption = #1052#1085#1086#1078#1080#1090#1077#1083#1100
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clGray
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object X1Ed: TEdit
+          Tag = 1
+          Left = 8
+          Top = 32
+          Width = 73
+          Height = 21
+          TabOrder = 0
+          OnExit = X1EdChange
+        end
+        object Y1Ed: TEdit
+          Tag = 1
+          Left = 9
+          Top = 77
+          Width = 64
+          Height = 21
+          TabOrder = 1
+          OnExit = X1EdChange
+        end
+        object X2Ed: TEdit
+          Tag = 1
+          Left = 9
+          Top = 117
+          Width = 72
+          Height = 21
+          TabOrder = 2
+          OnExit = X1EdChange
+        end
+        object Y2Ed: TEdit
+          Tag = 1
+          Left = 8
+          Top = 156
+          Width = 65
+          Height = 21
+          TabOrder = 3
+          OnExit = X1EdChange
+        end
       end
     end
     object Panel4: TPanel
@@ -238,10 +298,17 @@ object StgFrame: TStgFrame
       TabOrder = 2
       object Label2: TLabel
         Left = 13
-        Top = 4
+        Top = 7
         Width = 139
         Height = 13
         Caption = #1050#1086#1088#1088#1077#1082#1090#1080#1088#1091#1077#1084#1099#1081' '#1087#1072#1088#1072#1084#1077#1090#1088
+      end
+      object Label9: TLabel
+        Left = 444
+        Top = 6
+        Width = 6
+        Height = 13
+        Caption = '='
       end
       object ValNameCB: TComboBox
         Left = 159
@@ -252,12 +319,11 @@ object StgFrame: TStgFrame
         AutoCloseUp = True
         ItemHeight = 13
         TabOrder = 0
-        OnSelect = ValNameCBSelect
       end
       object ValEdit: TEdit
-        Left = 440
+        Left = 456
         Top = 3
-        Width = 105
+        Width = 89
         Height = 21
         TabOrder = 1
         OnExit = ValEditExit
@@ -268,55 +334,19 @@ object StgFrame: TStgFrame
     Left = 0
     Top = 0
     Width = 225
-    Height = 222
+    Height = 224
     Align = alLeft
     TabOrder = 1
-    object PrioriChart: TChart
-      Left = 1
-      Top = 65
-      Width = 223
-      Height = 156
-      AllowPanning = pmNone
-      AllowZoom = False
-      BackWall.Brush.Color = clWhite
-      BackWall.Brush.Style = bsClear
-      BackWall.Pen.Visible = False
-      Title.Text.Strings = (
-        '')
-      AxisVisible = False
-      ClipPoints = False
-      Frame.Visible = False
-      Legend.Alignment = laTop
-      View3DOptions.Elevation = 315
-      View3DOptions.Orthogonal = False
-      View3DOptions.Perspective = 0
-      View3DOptions.Rotation = 360
-      View3DWalls = False
-      Align = alClient
-      TabOrder = 0
-      OnClick = PrioriChartClick
-      object Series2: TPieSeries
-        Marks.ArrowLength = 8
-        Marks.Visible = False
-        SeriesColor = clRed
-        Circled = True
-        OtherSlice.Text = 'Other'
-        PieValues.DateTime = False
-        PieValues.Name = 'Pie'
-        PieValues.Multiplier = 1.000000000000000000
-        PieValues.Order = loNone
-      end
-    end
     object Panel3: TPanel
       Left = 1
       Top = 1
       Width = 223
-      Height = 64
+      Height = 184
       Align = alTop
-      TabOrder = 1
+      TabOrder = 0
       object Label1: TLabel
         Left = 16
-        Top = 16
+        Top = 8
         Width = 78
         Height = 16
         Caption = #1057#1090#1088#1072#1090#1077#1075#1080#1103
@@ -329,8 +359,8 @@ object StgFrame: TStgFrame
       end
       object StgNameCB: TComboBox
         Left = 8
-        Top = 33
-        Width = 201
+        Top = 25
+        Width = 209
         Height = 24
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clMaroon
@@ -340,26 +370,63 @@ object StgFrame: TStgFrame
         ItemHeight = 16
         ParentFont = False
         TabOrder = 0
+        OnChange = StgNameCBChange
         OnSelect = StgNameCBSelect
       end
-      object SaveStgB: TBitBtn
-        Left = 150
-        Top = 8
-        Width = 59
-        Height = 25
-        Caption = '&Save'
-        Enabled = False
+      object PrioriChart: TChart
+        Left = 1
+        Top = 56
+        Width = 221
+        Height = 127
+        AllowPanning = pmNone
+        AllowZoom = False
+        BackWall.Brush.Color = clWhite
+        BackWall.Brush.Style = bsClear
+        BackWall.Pen.Visible = False
+        Title.Text.Strings = (
+          '')
+        AxisVisible = False
+        ClipPoints = False
+        Frame.Visible = False
+        Legend.Alignment = laTop
+        View3DOptions.Elevation = 315
+        View3DOptions.Orthogonal = False
+        View3DOptions.Perspective = 0
+        View3DOptions.Rotation = 360
+        View3DWalls = False
+        Align = alBottom
         TabOrder = 1
-        OnClick = SaveStgBClick
-        Kind = bkYes
+        OnClick = PrioriChartClick
+        object Series2: TPieSeries
+          Marks.ArrowLength = 8
+          Marks.Visible = False
+          SeriesColor = clRed
+          Circled = True
+          OtherSlice.Text = 'Other'
+          PieValues.DateTime = False
+          PieValues.Name = 'Pie'
+          PieValues.Multiplier = 1.000000000000000000
+          PieValues.Order = loNone
+        end
       end
     end
+    object SaveStgB: TBitBtn
+      Left = 86
+      Top = 192
+      Width = 59
+      Height = 25
+      Caption = '&Save'
+      Enabled = False
+      TabOrder = 1
+      OnClick = SaveStgBClick
+      Kind = bkYes
+    end
   end
-  object HotCorsGrid: TtsGrid
+  object HotCorsGrid1: TtsGrid
     Left = 225
     Top = 0
     Width = 360
-    Height = 222
+    Height = 224
     Align = alLeft
     CheckBoxStyle = stCheck
     Cols = 2
@@ -374,10 +441,11 @@ object StgFrame: TStgFrame
     ShowHint = False
     StoreData = True
     TabOrder = 2
-    Version = '3.01.07'
+    Version = '2.20.24'
+    Visible = False
     XMLExport.Version = '1.0'
     XMLExport.DataPacketVersion = '2.0'
-    OnCellChanged = HotCorsGridCellChanged
+    OnCellChanged = HotCorsGrid1CellChanged
     ColProperties = <
       item
         DataCol = 1

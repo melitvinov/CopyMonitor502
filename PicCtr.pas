@@ -639,6 +639,8 @@ begin
                 Block[0].LoadXY(cOutBlock,0,nSens,st);
                 TControl(Components[i]).Hint:=GetTextZona(nTepl,nSens)+' '+st;
                 TControl(Components[i]).ShowHint:=True;
+//                FrCellChart1.IsMove(WindowFromPoint(Mouse.CursorPos), Block[0],nTepl,nSens,Block[0].BlDate);
+
 //                (Components[i] as TControl).OnMouseDown:=FormMouseDown;
                 end;
 

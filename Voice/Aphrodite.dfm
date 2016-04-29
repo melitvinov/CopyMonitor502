@@ -73,7 +73,7 @@ object FAphrodite: TFAphrodite
           Width = 70
           Height = 30
           Animate = True
-          FrameIndex = 160
+          FrameIndex = 226
           Image.Data = {
             F4F5000047494638396146001E00F70000FFFFFF00990000CC0080C08040B040
             0033660000000099FF006AB100A00000660070C07000B000666666109010C0E6
@@ -3456,6 +3456,7 @@ object FAphrodite: TFAphrodite
           Width = 30
           Height = 30
           Animate = True
+          FrameIndex = 12
           Image.Data = {
             B43600004749463839611E001E00F70300FFFFFFF0F0F0B0B0B0585858484848
             A0A0A0A8A8A8505050B8B8B8E0E0E0484444E8E7E7000000292828302F2F5857

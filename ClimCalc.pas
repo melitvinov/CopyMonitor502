@@ -6,10 +6,6 @@ uses Math,SysUtils, Graphics, FConstType, FController,  MessageU, Registry,
      Windows, StrUtils; 
 
 const
-//     calcTrans = 1;
-//     calcConsumCO2 = 2;
-
-
 //* номера бит в регистре состояния */
         bNoWork=         1;  //0x01
         bMinMaxV=        32; //0x20
@@ -55,11 +51,6 @@ type TMeteo=record
      Source:string[50];
 //     function GetValid(vDate:TdateTime):Boolean;
      end;
-
-//function GetCO2Consum(vCO,vCOr,Speed:T2Byte):T2Byte;
-//function GetMaxTrans(vT,vH,vTr,vHr,Speed:T2Byte):T2Byte;
-
-function AbsHum(fTemp,fRH:T2Byte):T2Byte;
 function GetMaxH(vmT:T2Byte):T2Byte;
 function GetAbsH(vT,vH:T2Byte):T2Byte;
 function GetDDWP(vT,vH:T2Byte):T2Byte;
@@ -77,6 +68,7 @@ function GetTextFromAlarm(vLevAlarm:integer; var vColor:TColor):string;
 procedure SetCalibrDigit(Txt:string;Dest:PByteArray);
 function GetDayBitFromTxt(const txt:string):Byte;
 function GetPowerContur(Temp,Length,Diam:double):double;
+function AbsHum(fTemp,fRH:T2Byte):T2Byte;
 //function TemCalcTypeToStr(vCalcType:integer):string;
 //function StrToTemCalcType(str:string):integer;
 //function FindTimeZone:integer;
@@ -222,6 +214,16 @@ begin
     end;
 end;
 
+function AbsHum(fTemp,fRH:T2Byte):T2Byte;
+var
+	tT,tRH,tRez:integer;
+begin
+	tT:=fTemp div 100;
+	tRH:=fRH div 100;
+	tRez:=Round( ((0.000002*tT*tT*tT*tT)+(0.0002*tT*tT*tT)+(0.0095*tT*tT)+( 0.337*tT)+4.9034)*tRH );
+	Result :=  tRez;
+end;
+
 procedure SetCalibrDigit(Txt:string;Dest:PByteArray);
 var i, posTire, posStart, SumTriade:word;
   ResByte:array[1..8] of Byte;
@@ -279,8 +281,6 @@ begin
 //    end;
 end;
 
-
-// ****************************************************************************************************************
 function RCSBitToImage(rs:Byte):Byte;
 begin
   Result:=imNorm;
@@ -308,16 +308,6 @@ begin
      end;
 end;
 
-function AbsHum(fTemp,fRH:T2Byte):T2Byte;
-var
-	tT,tRH,tRez:integer;
-begin
-	tT:=fTemp div 100;
-	tRH:=fRH div 100;
-	tRez:=Round( ((0.000002*tT*tT*tT*tT)+(0.0002*tT*tT*tT)+(0.0095*tT*tT)+( 0.337*tT)+4.9034)*tRH );
-	Result :=  tRez;
-end;
-
 function GetMaxH(vmT:T2Byte):T2Byte;
 var sot:integer;
 begin
@@ -329,40 +319,8 @@ end;
 
 function GetAbsH(vT,vH:T2Byte):T2Byte;
 begin
-  Result:=AbsHum(vT,vH);
- //Result:=vH*GetMaxH(vT) div 10000; //АВ=ОВ*МаксН/100
+ Result:=vH*GetMaxH(vT) div 10000; //АВ=ОВ*МаксН/100
 end;
-
-{function GetCO2Consum(vCO,vCOr,Speed:T2Byte):T2Byte;
-begin
-    Result := (vCOr - vCO)*Speed;
-    // разница между датчиком в теплице и датчиком в рукаве и умноженное на скорость вращения вентиляторов
-end;
-
-function GetMaxTrans(vT,vH,vTr,vHr,Speed:T2Byte):T2Byte;
-var
-absHruk:integer;
-absH:integer;
-res:integer;
-begin
-    absHruk := AbsHum(vTr, vHr);
-    absH    := AbsHum(vT, vH);
-    res := (absH - absHruk)*Speed;
-    Result := res;
-    // разница между датчиком в теплице и датчиком в рукаве и умноженное на скорость вращения вентиляторов
-end;      }
-
-
-{function GetMaxTrans(vT,vH,vTr,vHr,Speed:T2Byte):T2Byte;
-var
-absHruk:integer;
-absH:integer;
-begin
-    absHruk := vHr*GetMaxH(vTr) div 10000;
-    absH    := vH*GetMaxH(vT) div 10000;
-    Result:= (absHruk - absH)*Speed;
-    // разница между абсолютной влажностью в рукове и абс влажностью в тепл и умноженное на скорость вращения вентиляторов
-end;}
 
 function GetDDWP(vT,vH:T2Byte):T2Byte;
 begin
@@ -391,7 +349,6 @@ begin
       Exit;
       end;
 end;
-
 var
     PrevTemp:T2Byte;
     PrevSumDifr,sr:Double;
