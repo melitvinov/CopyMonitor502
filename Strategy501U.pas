@@ -204,6 +204,11 @@ type
     Edit26: TEdit;
     Edit27: TEdit;
     Edit28: TEdit;
+    Panel2: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Panel84: TPanel;
+    Label3: TLabel;
     procedure ListClimCtrChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure TBSendToCtrClick(Sender: TObject);

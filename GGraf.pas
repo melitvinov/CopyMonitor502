@@ -11,7 +11,7 @@ uses
   TSGrid, BubbleCh, AppEvnts, GIFDef, GIFComponent,PaswordDlg, FPicLabel,
   CellChart;    //Port,SetGrid,
 
-const MesTest='Only test';  //'';//
+const MesTest='1.00.18';
 type
   TFMain = class(TForm)
     MM1: TMainMenu;

@@ -1386,6 +1386,7 @@ end;
 function THot_511.TestAlarmSens:Boolean;
 var y,x:integer; st:string; st1:string;Color:TColor;
 begin
+  alarmMessage := 0;
   for y:=1 to CountY do
     begin
     if ConstNames[y].TipSens <> SensorRCS then continue;
@@ -1393,12 +1394,13 @@ begin
         begin
         LoadXY(cOutBlock,x,y,st);
         if gRCS=0 then continue;
-        if gRCS = 1 then
-          begin
-            HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Датчик не подключен',clNone,clNone,clRed);      // запись в журнал
-            alarmMessage := alFatal;
-            continue;
-          end;
+        //if gRCS = 1 then
+        //  begin
+        //    HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Датчик не подключен',clNone,clNone,clRed);      // запись в журнал
+        //    alarmMessage := alAttention;
+        //    continue;
+        //  end;
+
         if gRCS > 1 then
           begin
             HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Отказ датчика',clNone,clNone,clRed);      // запись в журнал
@@ -2393,27 +2395,27 @@ begin
     end;
     1:  //START_BEFORE_SUNSET
     begin
-      if sunSet >= dbStart then
-        tempTime := sunSet - dbStart;
-    end;
-    2:  //START_AFTER_SUNSET
-    begin
-      if sunSet + dbStart > 1440 then
-        tempTime := (sunSet + dbStart) mod 1440
-      else
-        tempTime := sunSet + dbStart;
-    end;
-    3:  //START_BEFORE_SUNRISE
-    begin
       if sunRise >= dbStart then
         tempTime := sunRise - dbStart;
     end;
-    4:  //START_AFTER_SUNRISE
+    2:  //START_AFTER_SUNSET
     begin
       if sunRise + dbStart > 1440 then
         tempTime := (sunRise + dbStart) mod 1440
       else
         tempTime := sunRise + dbStart;
+    end;
+    3:  //START_BEFORE_SUNRISE
+    begin
+      if sunSet >= dbStart then
+        tempTime := sunSet - dbStart;
+    end;
+    4:  //START_AFTER_SUNRISE
+    begin
+      if sunSet + dbStart > 1440 then
+        tempTime := (sunSet + dbStart) mod 1440
+      else
+        tempTime := sunSet + dbStart;
     end;
   end;
   Result := TimeToStr(tempTime*cMin);
@@ -2555,7 +2557,7 @@ begin
       end;
     1:  //START_BEFORE_SUNSET
       begin
-        tempTime := (sunSet * cMin) - time;
+        tempTime := (sunRise * cMin) - time;
         if tempTime <= cMin then
           Result := cMin
         else
@@ -2563,7 +2565,7 @@ begin
       end;
     2:  //START_AFTER_SUNSET
       begin
-        tempTime := (sunSet * cMin) + time;
+        tempTime := (sunRise * cMin) + time;
         if tempTime > (24*60*cMin) then
           Result := tempTime - (24*60*cMin)
         else
@@ -2571,7 +2573,7 @@ begin
       end;
     3:  //START_BEFORE_SUNRISE
       begin
-        tempTime := (sunRise * cMin) - time;
+        tempTime := (sunSet * cMin) - time;
         if tempTime <= cMin then
           Result := cMin
         else
@@ -2579,7 +2581,7 @@ begin
       end;
     4:  //START_AFTER_SUNRISE
       begin
-        tempTime := (sunRise * cMin) + time;
+        tempTime := (sunSet * cMin) + time;
         if tempTime > (24*60*cMin) then
           Result := tempTime - (24*60*cMin)
         else
@@ -4541,6 +4543,7 @@ begin
 // }
 // ---------------------------------------------------------------- NEW
 
+
   with Block[0] do
   for iX:=1 to CountX do
   begin
@@ -4571,10 +4574,13 @@ begin
     end;
 
     vLevel:=ZoneLevAlarm;
-    ZoneLevAlarm:=0;
-    if (vLevel>=HOT_ALARM_WAR) then ZoneLevAlarm:=alAttention;
-    if (vLevel>=HOT_ALARM_ALR) then ZoneLevAlarm:=alFatal;
-    alarmMessage:=ZoneLevAlarm;
+    if (vLevel>=HOT_ALARM_WAR) then
+      ZoneLevAlarm:=alAttention;
+    if (vLevel>=HOT_ALARM_ALR) then
+      ZoneLevAlarm:=alFatal;
+    if alarmMessage < ZoneLevAlarm then
+      alarmMessage := ZoneLevAlarm;
+
   end;
 
 
