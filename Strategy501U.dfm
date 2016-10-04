@@ -2,7 +2,7 @@ object FStrategy501U: TFStrategy501U
   Left = 311
   Top = 110
   Width = 1136
-  Height = 608
+  Height = 436
   Caption = #1057#1090#1088#1072#1090#1077#1075#1080#1103' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -73,7 +73,7 @@ object FStrategy501U: TFStrategy501U
       ShowHint = False
       StoreData = True
       TabOrder = 0
-      Version = '2.20.24'
+      Version = '3.01.07'
       VertAlignment = vtaCenter
       WordWrap = wwOff
       XMLExport.Version = '1.0'
@@ -91,7 +91,7 @@ object FStrategy501U: TFStrategy501U
   object TBCtr: TToolBar
     Left = 0
     Top = 0
-    Width = 1120
+    Width = 1128
     Height = 42
     ButtonHeight = 38
     ButtonWidth = 39
@@ -139,19 +139,18 @@ object FStrategy501U: TFStrategy501U
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 542
-    Width = 1120
+    Top = 375
+    Width = 1128
     Height = 27
     Panels = <>
   end
   object ToolBar1: TToolBar
     Left = 0
     Top = 42
-    Width = 1120
+    Width = 1128
     Height = 31
     ButtonHeight = 25
     Caption = 'ToolBar1'
-    EdgeBorders = [ebTop, ebBottom]
     TabOrder = 3
     object BitBtn1: TBitBtn
       Left = 0
@@ -165,16 +164,16 @@ object FStrategy501U: TFStrategy501U
   end
   object Panel1: TPanel
     Left = 0
-    Top = 113
-    Width = 1120
-    Height = 360
+    Top = 73
+    Width = 1128
+    Height = 288
     Align = alTop
     TabOrder = 4
     object Panel3: TPanel
       Left = 1
       Top = 1
       Width = 144
-      Height = 358
+      Height = 286
       Align = alLeft
       TabOrder = 0
       object Panel4: TPanel
@@ -275,7 +274,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel48: TPanel
         Left = 1
-        Top = 324
+        Top = 252
         Width = 142
         Height = 33
         Align = alBottom
@@ -299,7 +298,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel57: TPanel
         Left = 1
-        Top = 291
+        Top = 219
         Width = 142
         Height = 33
         Align = alBottom
@@ -376,7 +375,7 @@ object FStrategy501U: TFStrategy501U
       Left = 145
       Top = 1
       Width = 136
-      Height = 358
+      Height = 286
       Align = alLeft
       TabOrder = 1
       object Panel13: TPanel
@@ -505,7 +504,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel49: TPanel
         Left = 1
-        Top = 324
+        Top = 252
         Width = 134
         Height = 33
         Align = alBottom
@@ -536,7 +535,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel58: TPanel
         Left = 1
-        Top = 291
+        Top = 219
         Width = 134
         Height = 33
         Align = alBottom
@@ -624,7 +623,7 @@ object FStrategy501U: TFStrategy501U
       Left = 281
       Top = 1
       Width = 104
-      Height = 358
+      Height = 286
       Align = alLeft
       TabOrder = 2
       object Panel14: TPanel
@@ -725,7 +724,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel50: TPanel
         Left = 1
-        Top = 324
+        Top = 252
         Width = 102
         Height = 33
         Align = alBottom
@@ -749,7 +748,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel59: TPanel
         Left = 1
-        Top = 291
+        Top = 219
         Width = 102
         Height = 33
         Align = alBottom
@@ -828,7 +827,7 @@ object FStrategy501U: TFStrategy501U
       Left = 385
       Top = 1
       Width = 136
-      Height = 358
+      Height = 286
       Align = alLeft
       TabOrder = 3
       object Panel15: TPanel
@@ -957,7 +956,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel51: TPanel
         Left = 1
-        Top = 324
+        Top = 252
         Width = 134
         Height = 33
         Align = alBottom
@@ -988,7 +987,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel60: TPanel
         Left = 1
-        Top = 291
+        Top = 219
         Width = 134
         Height = 33
         Align = alBottom
@@ -1077,7 +1076,7 @@ object FStrategy501U: TFStrategy501U
       Left = 521
       Top = 1
       Width = 104
-      Height = 358
+      Height = 286
       Align = alLeft
       TabOrder = 4
       object Panel16: TPanel
@@ -1178,7 +1177,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel52: TPanel
         Left = 1
-        Top = 324
+        Top = 252
         Width = 102
         Height = 33
         Align = alBottom
@@ -1202,7 +1201,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel61: TPanel
         Left = 1
-        Top = 291
+        Top = 219
         Width = 102
         Height = 33
         Align = alBottom
@@ -1277,7 +1276,7 @@ object FStrategy501U: TFStrategy501U
       Left = 625
       Top = 1
       Width = 136
-      Height = 358
+      Height = 286
       Align = alLeft
       TabOrder = 5
       object Panel17: TPanel
@@ -1406,7 +1405,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel53: TPanel
         Left = 1
-        Top = 324
+        Top = 252
         Width = 134
         Height = 33
         Align = alBottom
@@ -1437,7 +1436,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel62: TPanel
         Left = 1
-        Top = 291
+        Top = 219
         Width = 134
         Height = 33
         Align = alBottom
@@ -1526,7 +1525,7 @@ object FStrategy501U: TFStrategy501U
       Left = 761
       Top = 1
       Width = 104
-      Height = 358
+      Height = 286
       Align = alLeft
       TabOrder = 6
       object Panel18: TPanel
@@ -1627,7 +1626,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel54: TPanel
         Left = 1
-        Top = 324
+        Top = 252
         Width = 102
         Height = 33
         Align = alBottom
@@ -1651,7 +1650,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel63: TPanel
         Left = 1
-        Top = 291
+        Top = 219
         Width = 102
         Height = 33
         Align = alBottom
@@ -1726,7 +1725,7 @@ object FStrategy501U: TFStrategy501U
       Left = 865
       Top = 1
       Width = 136
-      Height = 358
+      Height = 286
       Align = alLeft
       TabOrder = 7
       object Panel19: TPanel
@@ -1855,7 +1854,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel55: TPanel
         Left = 1
-        Top = 324
+        Top = 252
         Width = 134
         Height = 33
         Align = alBottom
@@ -1886,7 +1885,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel64: TPanel
         Left = 1
-        Top = 291
+        Top = 219
         Width = 134
         Height = 33
         Align = alBottom
@@ -1974,14 +1973,14 @@ object FStrategy501U: TFStrategy501U
     object Panel12: TPanel
       Left = 1001
       Top = 1
-      Width = 118
-      Height = 358
+      Width = 126
+      Height = 286
       Align = alClient
       TabOrder = 8
       object Panel20: TPanel
         Left = 1
         Top = 166
-        Width = 116
+        Width = 124
         Height = 33
         Align = alTop
         BorderStyle = bsSingle
@@ -2005,7 +2004,7 @@ object FStrategy501U: TFStrategy501U
       object Panel29: TPanel
         Left = 1
         Top = 133
-        Width = 116
+        Width = 124
         Height = 33
         Align = alTop
         BorderStyle = bsSingle
@@ -2029,7 +2028,7 @@ object FStrategy501U: TFStrategy501U
       object Panel38: TPanel
         Left = 1
         Top = 100
-        Width = 116
+        Width = 124
         Height = 33
         Align = alTop
         BorderStyle = bsSingle
@@ -2053,7 +2052,7 @@ object FStrategy501U: TFStrategy501U
       object Panel47: TPanel
         Left = 1
         Top = 67
-        Width = 116
+        Width = 124
         Height = 33
         Align = alTop
         BorderStyle = bsSingle
@@ -2076,8 +2075,8 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel56: TPanel
         Left = 1
-        Top = 324
-        Width = 116
+        Top = 252
+        Width = 124
         Height = 33
         Align = alBottom
         BorderStyle = bsSingle
@@ -2100,8 +2099,8 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel65: TPanel
         Left = 1
-        Top = 291
-        Width = 116
+        Top = 219
+        Width = 124
         Height = 33
         Align = alBottom
         BorderStyle = bsSingle
@@ -2125,7 +2124,7 @@ object FStrategy501U: TFStrategy501U
       object Panel74: TPanel
         Left = 1
         Top = 34
-        Width = 116
+        Width = 124
         Height = 33
         Align = alTop
         BorderStyle = bsSingle
@@ -2149,7 +2148,7 @@ object FStrategy501U: TFStrategy501U
       object Panel83: TPanel
         Left = 1
         Top = 1
-        Width = 116
+        Width = 124
         Height = 33
         Align = alTop
         BorderStyle = bsSingle
@@ -2157,7 +2156,7 @@ object FStrategy501U: TFStrategy501U
         object StaticText8: TStaticText
           Left = 1
           Top = 1
-          Width = 110
+          Width = 118
           Height = 27
           Align = alClient
           Caption = 'StaticText8'
@@ -2170,54 +2169,6 @@ object FStrategy501U: TFStrategy501U
           TabOrder = 0
         end
       end
-    end
-  end
-  object Panel2: TPanel
-    Left = 0
-    Top = 73
-    Width = 1120
-    Height = 40
-    Align = alTop
-    TabOrder = 5
-    object Label1: TLabel
-      Left = 8
-      Top = 8
-      Width = 3
-      Height = 13
-    end
-    object Label2: TLabel
-      Left = 8
-      Top = 16
-      Width = 392
-      Height = 16
-      Caption = #1057#1090#1088#1072#1090#1077#1075#1080#1103' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103' '#1090#1077#1084#1087#1077#1088#1072#1090#1091#1088#1086#1081' '#1080' '#1074#1083#1072#1078#1085#1086#1089#1090#1100#1102' '#1088#1091#1082#1072#1074#1072
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'MS Sans Serif'
-      Font.Style = []
-      ParentFont = False
-    end
-  end
-  object Panel84: TPanel
-    Left = 0
-    Top = 473
-    Width = 1120
-    Height = 32
-    Align = alTop
-    TabOrder = 6
-    object Label3: TLabel
-      Left = 8
-      Top = 8
-      Width = 401
-      Height = 16
-      Caption = #1057#1090#1088#1072#1090#1077#1075#1080#1103' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103' '#1090#1077#1084#1087#1077#1088#1072#1090#1091#1088#1086#1081' '#1080' '#1074#1083#1072#1078#1085#1086#1089#1090#1100#1102' '#1090#1077#1087#1083#1080#1094#1099
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'MS Sans Serif'
-      Font.Style = []
-      ParentFont = False
     end
   end
   object ImageTumbler: TImageList

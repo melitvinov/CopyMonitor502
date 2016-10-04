@@ -6,7 +6,7 @@ uses
 
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Buttons, StdCtrls, ExtCtrls,DateUtils, PicCtr, Menus, ImgList, ComCtrls,
-  Spin, ToolWin, TeEngine, Series, TeeProcs, Chart,GanttCh, Gauges,//GGraf,
+  Spin, ToolWin, TeEngine, Series, TeeProcs, Chart,GanttCh, Gauges, GGraf,
   FConstType, FController, MPlayer,// ClimCalc,
   FPicLabel, Grids_ts, TSGrid, GIFDef,
   FBox, SetGrid, MessageU,DefineClim510,    //, FPicPanel, FPicLabel
@@ -577,7 +577,7 @@ end;
 //=============================================================================
 
 implementation
-uses Port, HandClim, audit, WindSon, FTopMes, BoilerIPC,GGraf,Subr,
+uses Port, HandClim, audit, WindSon, FTopMes, BoilerIPC, Subr, //GGraf,
   ConvUtils, Strategy501U, ClimCalc;
 {$R *.DFM}
 
@@ -1224,6 +1224,38 @@ end;
 {***********************************************************
 --------------------Инициализация блока Hot-----------------
 ************************************************************}
+procedure GetOutIndex(var blockName:TNameBlock; blocks:array of TNameConst; count:Integer; offset:Integer);
+var
+  FileDir:String;
+  f:TextFile;
+  str:string;
+  strUTF:UTF8String;
+  i,j:integer;
+begin
+//  <row Offset="75">Температура наружная</row>
+  FileDir:=blockName+'.txt';
+  AssignFile(f,FileDir);
+  if not FileExists(FileDir) then
+  begin
+    Rewrite(f);
+    CloseFile(f);
+  end;
+  Append(f);
+  for i:=0 to count-1 do
+  begin
+    str := '<row Offset="'+ IntToStr(offset+blocks[i].Index) +'">'+blocks[i].Name+'</row>';
+    strUTF := AnsiToUtf8(str);
+
+
+    for j:=1 to Length(strUTF) do
+    begin
+      Write(f,strUTF[j]);
+    end;
+  end;
+  Flush(f);
+  CloseFile(f);
+end;
+
 
 
 procedure THot_511.Init;
@@ -1238,6 +1270,10 @@ begin
      Pref:=ProgMess[231];    //'Состояние';
      NameBlock:=ProgMess[232];    //'Состояние климата';
      ConstNames:=Addr(DZ511_cDefineHot[1]);
+
+
+     GetOutIndex(NameBlock, DZ511_cDefineHot, DZ511_SumMesHot, 73);
+
 //     SavingConstNames:=True;
      Diagnosis:=Addr(DZ_Diagnos[1]);
      CountDiagnosis:=DZ_SUM_DIAGNOS;
@@ -1386,7 +1422,6 @@ end;
 function THot_511.TestAlarmSens:Boolean;
 var y,x:integer; st:string; st1:string;Color:TColor;
 begin
-  alarmMessage := 0;
   for y:=1 to CountY do
     begin
     if ConstNames[y].TipSens <> SensorRCS then continue;
@@ -1394,13 +1429,12 @@ begin
         begin
         LoadXY(cOutBlock,x,y,st);
         if gRCS=0 then continue;
-        //if gRCS = 1 then
-        //  begin
-        //    HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Датчик не подключен',clNone,clNone,clRed);      // запись в журнал
-        //    alarmMessage := alAttention;
-        //    continue;
-        //  end;
-
+        if gRCS = 1 then
+          begin
+            HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Датчик не подключен',clNone,clNone,clRed);      // запись в журнал
+            alarmMessage := alFatal;
+            continue;
+          end;
         if gRCS > 1 then
           begin
             HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Отказ датчика',clNone,clNone,clRed);      // запись в журнал
@@ -2395,27 +2429,27 @@ begin
     end;
     1:  //START_BEFORE_SUNSET
     begin
-      if sunRise >= dbStart then
-        tempTime := sunRise - dbStart;
-    end;
-    2:  //START_AFTER_SUNSET
-    begin
-      if sunRise + dbStart > 1440 then
-        tempTime := (sunRise + dbStart) mod 1440
-      else
-        tempTime := sunRise + dbStart;
-    end;
-    3:  //START_BEFORE_SUNRISE
-    begin
       if sunSet >= dbStart then
         tempTime := sunSet - dbStart;
     end;
-    4:  //START_AFTER_SUNRISE
+    2:  //START_AFTER_SUNSET
     begin
       if sunSet + dbStart > 1440 then
         tempTime := (sunSet + dbStart) mod 1440
       else
         tempTime := sunSet + dbStart;
+    end;
+    3:  //START_BEFORE_SUNRISE
+    begin
+      if sunRise >= dbStart then
+        tempTime := sunRise - dbStart;
+    end;
+    4:  //START_AFTER_SUNRISE
+    begin
+      if sunRise + dbStart > 1440 then
+        tempTime := (sunRise + dbStart) mod 1440
+      else
+        tempTime := sunRise + dbStart;
     end;
   end;
   Result := TimeToStr(tempTime*cMin);
@@ -2557,7 +2591,7 @@ begin
       end;
     1:  //START_BEFORE_SUNSET
       begin
-        tempTime := (sunRise * cMin) - time;
+        tempTime := (sunSet * cMin) - time;
         if tempTime <= cMin then
           Result := cMin
         else
@@ -2565,7 +2599,7 @@ begin
       end;
     2:  //START_AFTER_SUNSET
       begin
-        tempTime := (sunRise * cMin) + time;
+        tempTime := (sunSet * cMin) + time;
         if tempTime > (24*60*cMin) then
           Result := tempTime - (24*60*cMin)
         else
@@ -2573,7 +2607,7 @@ begin
       end;
     3:  //START_BEFORE_SUNRISE
       begin
-        tempTime := (sunSet * cMin) - time;
+        tempTime := (sunRise * cMin) - time;
         if tempTime <= cMin then
           Result := cMin
         else
@@ -2581,7 +2615,7 @@ begin
       end;
     4:  //START_AFTER_SUNRISE
       begin
-        tempTime := (sunSet * cMin) + time;
+        tempTime := (sunRise * cMin) + time;
         if tempTime > (24*60*cMin) then
           Result := tempTime - (24*60*cMin)
         else
@@ -4543,7 +4577,6 @@ begin
 // }
 // ---------------------------------------------------------------- NEW
 
-
   with Block[0] do
   for iX:=1 to CountX do
   begin
@@ -4574,13 +4607,10 @@ begin
     end;
 
     vLevel:=ZoneLevAlarm;
-    if (vLevel>=HOT_ALARM_WAR) then
-      ZoneLevAlarm:=alAttention;
-    if (vLevel>=HOT_ALARM_ALR) then
-      ZoneLevAlarm:=alFatal;
-    if alarmMessage < ZoneLevAlarm then
-      alarmMessage := ZoneLevAlarm;
-
+    ZoneLevAlarm:=0;
+    if (vLevel>=HOT_ALARM_WAR) then ZoneLevAlarm:=alAttention;
+    if (vLevel>=HOT_ALARM_ALR) then ZoneLevAlarm:=alFatal;
+    alarmMessage:=ZoneLevAlarm;
   end;
 
 

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Buttons, StdCtrls, ExtCtrls,DateUtils, PicCtr, Menus, ImgList, ComCtrls,
-  Spin, ToolWin, TeEngine, Series, TeeProcs, Chart,GanttCh, Gauges,//GGraf,
+  Spin, ToolWin, TeEngine, Series, TeeProcs, Chart,GanttCh, Gauges, GGraf,
   FConstType, FController, MPlayer, ClimCalc,
   FBox, FPanel,SetGrid,MessageU,DefineClim501S,    //, FPicPanel, FPicLabel
   GIFDef, GIFComponent, FPicLabel, FPicPanel,TSGrid, Grids_ts,xmldom, XMLIntf, msxmldom, XMLDoc;   //,Grids_ts
@@ -565,7 +565,7 @@ end;
 //=============================================================================
 
 implementation
-uses Port, HandClim, audit, WindSon, FTopMes, BoilerIPC,GGraf,Subr,
+uses Port, HandClim, audit, WindSon, FTopMes, BoilerIPC,Subr, //GGraf,
   ConvUtils;
 {$R *.DFM}
 
@@ -2230,27 +2230,27 @@ begin
     end;
     1:  //START_BEFORE_SUNSET
     begin
-      if sunRise >= dbStart then
-        tempTime := sunRise - dbStart;
-    end;
-    2:  //START_AFTER_SUNSET
-    begin
-      if sunRise + dbStart > 1440 then
-        tempTime := (sunRise + dbStart) mod 1440
-      else
-        tempTime := sunRise + dbStart;
-    end;
-    3:  //START_BEFORE_SUNRISE
-    begin
       if sunSet >= dbStart then
         tempTime := sunSet - dbStart;
     end;
-    4:  //START_AFTER_SUNRISE
+    2:  //START_AFTER_SUNSET
     begin
       if sunSet + dbStart > 1440 then
         tempTime := (sunSet + dbStart) mod 1440
       else
         tempTime := sunSet + dbStart;
+    end;
+    3:  //START_BEFORE_SUNRISE
+    begin
+      if sunRise >= dbStart then
+        tempTime := sunRise - dbStart;
+    end;
+    4:  //START_AFTER_SUNRISE
+    begin
+      if sunRise + dbStart > 1440 then
+        tempTime := (sunRise + dbStart) mod 1440
+      else
+        tempTime := sunRise + dbStart;
     end;
   end;
   Result := TimeToStr(tempTime*cMin);
@@ -2392,7 +2392,7 @@ begin
       end;
     1:  //START_BEFORE_SUNSET
       begin
-        tempTime := (sunRise * cMin) - time;
+        tempTime := (sunSet * cMin) - time;
         if tempTime <= cMin then
           Result := cMin
         else
@@ -2400,7 +2400,7 @@ begin
       end;
     2:  //START_AFTER_SUNSET
       begin
-        tempTime := (sunRise * cMin) + time;
+        tempTime := (sunSet * cMin) + time;
         if tempTime > (24*60*cMin) then
           Result := tempTime - (24*60*cMin)
         else
@@ -2408,7 +2408,7 @@ begin
       end;
     3:  //START_BEFORE_SUNRISE
       begin
-        tempTime := (sunSet * cMin) - time;
+        tempTime := (sunRise * cMin) - time;
         if tempTime <= cMin then
           Result := cMin
         else
@@ -2416,7 +2416,7 @@ begin
       end;
     4:  //START_AFTER_SUNRISE
       begin
-        tempTime := (sunSet * cMin) + time;
+        tempTime := (sunRise * cMin) + time;
         if tempTime > (24*60*cMin) then
           Result := tempTime - (24*60*cMin)
         else

@@ -85,6 +85,8 @@ type
     UpDown1: TUpDown;
     IL1: TImageList;
     pmTransp: TMenuItem;
+    pmChart: TMenuItem;
+    N1: TMenuItem;
     procedure TBSetGridClick(Sender: TObject);
     procedure ValueTimerTimer(Sender: TObject);
     procedure PicTimerTimer(Sender: TObject);
@@ -114,6 +116,7 @@ type
     procedure UpDown1ChangingEx(Sender: TObject; var AllowChange: Boolean;
       NewValue: Smallint; Direction: TUpDownDirection);
     procedure pmTranspClick(Sender: TObject);
+    procedure pmChartClick(Sender: TObject);
   private
     { Private declarations }
     LastPicTime:TDateTime;
@@ -1143,6 +1146,12 @@ pmChangeName.Enabled:=((PMSetLabels.PopupComponent is TLabel)
 pmOutName.Enabled:=(PMSetLabels.PopupComponent is TLabel);
 pmTransp.Enabled:=(PMSetLabels.PopupComponent is TLabel);
 pmTransp.Checked:=(PMSetLabels.PopupComponent is TLabel) and (PMSetLabels.PopupComponent as TLabel).Transparent;
+pmChart.Enabled:=(PMSetLabels.PopupComponent.Tag > 0);
+end;
+
+procedure TFPicCtr.pmChartClick(Sender: TObject);
+begin
+       HotGraf.DrawFloat(Block[0],TagToZone(PMSetLabels.PopupComponent.Tag),TagToSens(PMSetLabels.PopupComponent.Tag),Block[0].BlDate);
 end;
 
 procedure TFPicCtr.pmChColorClick(Sender: TObject);

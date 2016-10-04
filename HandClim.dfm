@@ -1,6 +1,6 @@
 object FHandClim: TFHandClim
-  Left = 1783
-  Top = 1
+  Left = 960
+  Top = 85
   Width = 1088
   Height = 876
   Caption = #1056#1091#1095#1085#1086#1077' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1077
@@ -11,13 +11,14 @@ object FHandClim: TFHandClim
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poMainFormCenter
   PixelsPerInch = 96
   TextHeight = 13
   object ListClimCtr: TTabControl
     Left = 0
     Top = 42
-    Width = 1072
-    Height = 795
+    Width = 1080
+    Height = 800
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
@@ -38,7 +39,7 @@ object FHandClim: TFHandClim
       Left = 4
       Top = 27
       Width = 437
-      Height = 764
+      Height = 769
       ActivePage = TabSheet3
       Align = alLeft
       Font.Charset = DEFAULT_CHARSET
@@ -2033,8 +2034,8 @@ object FHandClim: TFHandClim
     object HandGrid: TtsGrid
       Left = 441
       Top = 27
-      Width = 627
-      Height = 764
+      Width = 635
+      Height = 769
       Align = alClient
       CellSelectMode = cmNone
       CheckBoxStyle = stCheck
@@ -2071,7 +2072,7 @@ object FHandClim: TFHandClim
       ShowHint = False
       StoreData = True
       TabOrder = 1
-      Version = '2.20.24'
+      Version = '3.01.07'
       VertAlignment = vtaCenter
       WordWrap = wwOff
       XMLExport.Version = '1.0'
@@ -2089,7 +2090,7 @@ object FHandClim: TFHandClim
   object TBCtr: TToolBar
     Left = 0
     Top = 0
-    Width = 1072
+    Width = 1080
     Height = 42
     ButtonHeight = 38
     ButtonWidth = 39

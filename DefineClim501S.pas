@@ -2606,7 +2606,7 @@ var DZ_NameParUpr:array [1..DZ_SumParUpr] of TNameConst=(
 (Name:'Т вентиляции - Коэф интегральной поправки';Frm:SSpSS;Ed:'';TipSens:TipCalc;Min:0.1;Max:20;Def:3.5;Index:DZ_iPID;Mech:DZM_SVENTILATION;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
 (Name:'Экран вертикальный - Начало реагирования стороны 1';Frm:SS;Ed:'°';TipSens:TipCalc;Min:0;Max:360;Def:0;Index:DZ_iVScr;Mech:DZM_SCREEN_TV1;AccessR:RW_GUEST;AccessW:RW_GUEST),
 (Name:'Экран вертикальный - Конец реагирования стороны 1';Frm:SS;Ed:'°';TipSens:TipCalc;Min:0;Max:360;Def:90;Index:DZ_iVScr+1;Mech:DZM_SCREEN_TV1;AccessR:RW_GUEST;AccessW:RW_GUEST),
-(Name:'Исполнитель дозации СО2 (0-задвижка,1-клапан,2-клапан+задвижка)';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:2;Def:HIDE_MIN_MAX;Index:DZ_iScr+4;Mech:DZM_CO2;AccessR:RW_GUEST;AccessW:RW_GUEST),
+(Name:'Исполнитель дозации СО2 (0-задвижка,1-клапан,2-клапан+задвижка)';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:4;Def:HIDE_MIN_MAX;Index:DZ_iScr+4;Mech:DZM_CO2;AccessR:RW_GUEST;AccessW:RW_GUEST),
 // 21
 (Name:'Количество клапанов CИО';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:8;Index:DZ_iScr+6;Mech:DZM_SIO_PUMP;AccessR:RW_GUEST;AccessW:RW_GUEST),
 (Name:'Кол-во градаций досветки';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:10;Index:DZ_iScr+8;Mech:DZM_LIGHT;AccessR:RW_GUEST;AccessW:RW_GUEST),
@@ -2827,7 +2827,7 @@ var NameStrategy511:array [1..DZ511_SumKStrategy*DZ511_SupParStrategy] of TNameC
 // ------- НАСТРОЙКА КЛИМАТА КОНТРОЛЛЕРА 510 ---------
 //===============================================================================
 
-const        DZ_SumParTune=          128;
+const        DZ_SumParTune=          132;
              DZ_iSunToClim=          0;
              DZ_iSunToMinFram=       DZ_iSunToClim+24;
              DZ_iTfram=              DZ_iSunToClim+15*2;
@@ -2859,6 +2859,11 @@ const        DZ_SumParTune=          128;
              DZ_iHeatMinTimeOn=      DZ_iMinKontRH+8*2;     // NEW
              DZ_iHeatMaxTimeOn=      DZ_iMinKontRH+9*2;     // NEW
              DZ_iHeatMinPause=       DZ_iMinKontRH+10*2;    // NEW
+
+             DZ_iCo2_1=              DZ_iMinKontRH+11*2;    // NEW
+             DZ_iCo2_2=              DZ_iMinKontRH+12*2;    // NEW
+             DZ_iCo2_3=              DZ_iMinKontRH+13*2;    // NEW
+             DZ_iCo2_4=              DZ_iMinKontRH+14*2;    // NEW
 
              //DZ_EndTune=DZ_iRezTune+17*2;
              DZ_EndTune=DZ_iRezTune+22*2;
@@ -3012,7 +3017,12 @@ var DZ_NameTuneClimate:array [1..DZ_SumParTune] of TNameConst=(
          (Name:'Воздушный обогрев - время работы минимум';Frm:SSpS0;Ed:'мин';TipSens:TipCalc;Min:0;Max:120;Def:0;Index:DZ_iHeatMinTimeOn;Mech:DZM_AIR_HEATS;AccessR:RW_GUESTI;AccessW:RW_USER),
          (Name:'Воздушный обогрев - время работы максимум';Frm:SSpS0;Ed:'мин';TipSens:TipCalc;Min:0;Max:120;Def:0;Index:DZ_iHeatMaxTimeOn;Mech:DZM_AIR_HEATS;AccessR:RW_GUESTI;AccessW:RW_USER),
          (Name:'Воздушный обогрев - пауза между включениями';Frm:SSpS0;Ed:'мин';TipSens:TipCalc;Min:0;Max:5;Def:0;Index:DZ_iHeatMinPause;Mech:DZM_AIR_HEATS;AccessR:RW_GUESTI;AccessW:RW_USER),
-         (Name:'Кондиционер - включать (фрамуги закрыть),если (Твнеш-Тзад) больше';Frm:SSpS0;Ed:'°C';TipSens:TipCalc;Min:0;Max:5;Def:0;Index:DZ_iSunToClim+8;Mech:DZM_VENT;AccessR:RW_GUESTI;AccessW:RW_USER)
+         (Name:'Кондиционер - включать (фрамуги закрыть),если (Твнеш-Тзад) больше';Frm:SSpS0;Ed:'°C';TipSens:TipCalc;Min:0;Max:5;Def:0;Index:DZ_iSunToClim+8;Mech:DZM_VENT;AccessR:RW_GUESTI;AccessW:RW_USER),
+          // 130
+         (Name:'Клапан СО2 - включать при CO2зад - СО2изм меньше';Frm:SSSS;Ed:'ppm';TipSens:TipCalc;Min:0;Max:1000;Def:400;Index:DZ_iCo2_1;Mech:DZM_CO2;AccessR:RW_GUESTI;AccessW:RW_USER),
+         (Name:'Клапан СО2 - фрамуги влияют на СО2 при';Frm:SSSS;Ed:'%';TipSens:TipCalc;Min:0;Max:200;Def:0;Index:DZ_iCo2_2;Mech:DZM_CO2;AccessR:RW_GUESTI;AccessW:RW_USER),
+         (Name:'Клапан СО2 - фрамуги влияют на СО2 до';Frm:SSSS;Ed:'%';TipSens:TipCalc;Min:0;Max:200;Def:0;Index:DZ_iCo2_3;Mech:DZM_CO2;AccessR:RW_GUESTI;AccessW:RW_USER),
+         (Name:'Клапан СО2 - концентрация СО2 уменьшается на';Frm:SSSS;Ed:'ppm';TipSens:TipCalc;Min:0;Max:1000;Def:0;Index:DZ_iCo2_4;Mech:DZM_CO2;AccessR:RW_GUESTI;AccessW:RW_USER)
          );
 //===============================================================================
 
@@ -3333,11 +3343,11 @@ const
              DZ_S1TASens=        14;
 
              DZ_StTeplSens=      DZ_EndCommon+1;
-             DZ_SumTeplSens=     21;//15; //cSInTeplSens;
+             DZ_SumTeplSens=     20; //21;//15; //cSInTeplSens;
              DZ_SumTeplDSens=    2;
              DZ_EndTeplSens=     DZ_StTeplSens+DZ_SumTeplSens+DZ_SumTeplDSens-1;                   //в ПК - номер начала датчиков
 
-             DZ_SumTeplCalc=     12;//14;//10+STVirtSens;
+             DZ_SumTeplCalc=     15; //12;//14;//10+STVirtSens;
              DZ_StTeplCalc=      DZ_EndTeplSens+1;                   //в ПК - номер начала расчета клим
              DZ_EndTeplCalc=     DZ_StTeplCalc+DZ_SumTeplCalc-1;                  //в ПК - номер окончания расчета клим
 
@@ -3353,7 +3363,7 @@ const
              DZ_StTeplScreen=    DZ_EndTeplVent+1;           //в ПК - номер начала контуров экрана
              DZ_EndTeplScreen=   DZ_StTeplScreen+DZ_SumTeplScreen-1;
 
-             DZ_SumTeplOther=   19; //17;
+             DZ_SumTeplOther=   17;//17; // 19; //17;  // было 19
              DZ_StTeplOther=    DZ_EndTeplScreen+1;           //в ПК - номер начала контуров экрана
              DZ_EndTeplOther=   DZ_StTeplOther+DZ_SumTeplOther-1;
 
@@ -3363,12 +3373,12 @@ const
              DZ_SCalcMecan=      DZ_SCalcPump+DZ_SCalcRegul;
              DZ_SASens=20;
 
-             DZ_SumTeplMecan=    50;// 52   //56;
+             DZ_SumTeplMecan=    53;//61;// 50
              DZ_StTeplMecan=     DZ_EndTeplOther+1;              //в ПК - номер начала положений механизмов
              DZ_EndTeplMecan=    DZ_StTeplMecan+DZ_SumTeplMecan-1;
              DZ_StTeplRez=       DZ_EndTeplMecan+1;
              DZ_SumTeplRez=      0;
-             DZ_EndTeplRez=      DZ_StTeplRez+DZ_SumTeplRez-1+    2; // new
+             DZ_EndTeplRez=      DZ_StTeplRez+DZ_SumTeplRez-1;// +2// new
              DZ_SumMesTepl=      DZ_EndTeplRez-DZ_SumCommon;
              DZ_SumMesHot=       DZ_EndTeplRez;//SumMesTepl+SumCommon;
 //             DZ_SumMesHot=       182;
@@ -3402,7 +3412,7 @@ const
               DZ_itSensorIn=      2;
               DZ_itTAir=          2;
               DZ_itRH=            14;
-              DZ_itTSheet=        26;
+              DZ_itTSheet=        28;
               DZ_sizeSensorIn=    26*3;
               DZ_itTeplDSens=     DZ_itSensorIn+DZ_sizeSensorIn;
               DZ_itTeplRCS=       DZ_itTeplDSens+4;
@@ -3411,19 +3421,19 @@ const
               DZ_itClimTask=      DZ_itTeplRCS+2;
               DZ_itTaskT=         DZ_itClimTask;
               DZ_itDoT=           DZ_itTaskT+2;
-              DZ_sizeClimTask=    50;//29;//22;
+              DZ_sizeClimTask=    50;//50;//29;//22;
               DZ_itOtherCalc=     DZ_itClimTask+DZ_sizeClimTask;
-              DZ_sizeOtherCalc=   30;
+              DZ_sizeOtherCalc=   32;//30;
               DZ_itWaterCalc=     DZ_itOtherCalc+DZ_sizeOtherCalc;
               DZ_itRaisedCritery= DZ_itWaterCalc;
-              DZ_sizeWaterCalc=   48;
+              DZ_sizeWaterCalc=   46;//48;
               DZ_itKontur=        DZ_itWaterCalc+DZ_sizeWaterCalc;
               DZ_itKonturRCS=     DZ_itKontur+20;
-              DZ_size1Kontur=     24;
+              DZ_size1Kontur=     24;//24;
               DZ_SizeContur=      DZ_size1Kontur;
               DZ_cSumKontur=      8;
               DZ_iZoneStatus=     DZ_itKontur+(DZ_cSumKontur)*DZ_size1Kontur;
-              DZ_iZoneMaxWater=   DZ_iZoneStatus+36*2;
+              DZ_iZoneMaxWater=   DZ_iZoneStatus+37*2;//36*2;
 
               DZ_iMechanic=       DZ_iZoneMaxWater+10*2;
               DZ_size1Mec=        2;
@@ -3860,7 +3870,9 @@ const DZ_cDefineHot:array [1..DZ_SumMesHot] of TNameConst=( //TDZDefineHot=(
 (Name:'Авария Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
     Index:DZ_iMechanic+72;Mech:DZM_ALARM;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
 (Name:'Авария Состояние';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
-    Index:DZ_iMechanic+73;Mech:DZM_ALARM;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR)
+    Index:DZ_iMechanic+73;Mech:DZM_ALARM;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'CO2 клапан ДЕРЖАТЬ';Frm:SSSS;Ed:'ppm';TipSens:TipBit;Min:0;Max:1000;Def:HIDE_MIN_MAX;
+    Index:DZ_iZoneStatus+18;Mech:DZM_CO2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR)
 );
 
 
