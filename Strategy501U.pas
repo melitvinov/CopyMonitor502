@@ -204,6 +204,28 @@ type
     Edit26: TEdit;
     Edit27: TEdit;
     Edit28: TEdit;
+    Panel2: TPanel;
+    Panel84: TPanel;
+    Panel85: TPanel;
+    Panel86: TPanel;
+    Panel87: TPanel;
+    Panel88: TPanel;
+    Panel89: TPanel;
+    Panel90: TPanel;
+    Panel91: TPanel;
+    StaticText16: TStaticText;
+    Edit29: TEdit;
+    UpDown6: TUpDown;
+    ComboBox29: TComboBox;
+    Edit30: TEdit;
+    UpDown30: TUpDown;
+    ComboBox30: TComboBox;
+    Edit31: TEdit;
+    UpDown31: TUpDown;
+    ComboBox31: TComboBox;
+    Edit32: TEdit;
+    UpDown32: TUpDown;
+    ComboBox32: TComboBox;
     procedure ListClimCtrChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure TBSendToCtrClick(Sender: TObject);
@@ -235,7 +257,7 @@ type
 const
       MAX_CLIENTS=100;
       SumStrategyX = 8;
-      SumStrategyY = 7;
+      SumStrategyY = 8;
       SumNameCombo = 2;
 
 type TStrategyClient=record
@@ -265,13 +287,14 @@ var
       'AHUPipe',
       'Termo Screen',
       'AHU speed',
-      'Mist');
+      'Mist',
+      'Internal RH');
 
       NameCombo :array [1..SumNameCombo] of string[80]=(
       'Вниз',
       'Вверх');
 
-      DefStrategy: array [1..56] of integer = (
+      DefStrategy: array [1..64] of integer = (
         //st  way
           10,	1, 	8, 	1,	8, 	0, 	10,	0,    // AHU valve
           9, 	0, 	10,	0,	10,	1, 	9, 	1,		// RailPipe
@@ -279,7 +302,8 @@ var
           8,	0, 	10,	0,	9,	1, 	8,	1,		// AHUPipe
           9,	1, 	7,	1,	7,	0, 	9,	0,		// Screen
           6,	1, 	6,	1,	6,	0, 	6,	0,		// AHUSpeed
-          7,	1, 	9,	1,	10,	0, 	7,	0 );	// Mist
+          7,	1, 	9,	1,	10,	0, 	7,	0,  	// Mist
+          5,	1, 	9,	1,	10,	0, 	5,	0 );	// InRH
 
       WarningMesReset: string = 'Восстановить стратегии по умолчания ?';
       WarningMesSend: string = 'Передать в контроллер блок "Старатегии" ?';
@@ -292,7 +316,7 @@ implementation
 
 uses  PicCtr, GGraf, Climat501U;
 
-type GDStrategy=array[0..55] of Byte;
+type GDStrategy=array[0..63] of Byte;
 type StrategyArray=array[1..8] of GDStrategy;
 
 procedure  TFStrategy501U.Exec(vCtr:TFController);
@@ -446,6 +470,15 @@ begin
         Edit28.Text := IntToStr(pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][54]);
         ComboBox28.ItemIndex := pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][55];
 
+        Edit29.Text := IntToStr(pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][56]);
+        ComboBox29.ItemIndex := pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][57];
+        Edit30.Text := IntToStr(pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][58]);
+        ComboBox30.ItemIndex := pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][59];
+        Edit31.Text := IntToStr(pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][60]);
+        ComboBox31.ItemIndex := pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][61];
+        Edit32.Text := IntToStr(pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][62]);
+        ComboBox32.ItemIndex := pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][63];
+
 
         //pStrategy:=(Tabs.Objects[ListClimCtr.TabIndex] as TFController).Block[4].Adr;
         //pStrategy:=(StrategyClient[ListClimCtr.TabIndex].Ctr).Block[4].Adr; //(Tabs.Objects[ListClimCtr.TabIndex] as TFController).Block[4].Adr;
@@ -521,6 +554,7 @@ for i:=1 to FStrategy501U.ComponentCount-1 do
   StaticText13.Caption := NameStrategyY[5];
   StaticText14.Caption := NameStrategyY[6];
   StaticText15.Caption := NameStrategyY[7];
+  StaticText16.Caption := NameStrategyY[8];
 LoadStrategy();
 
 end;
@@ -589,6 +623,16 @@ begin
   pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][53] := ComboBox27.ItemIndex;
   pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][54] := StrToInt(Edit28.Text);
   pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][55] := ComboBox28.ItemIndex;
+
+  pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][56] := StrToInt(Edit29.Text);
+  pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][57] := ComboBox29.ItemIndex;
+  pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][58] := StrToInt(Edit30.Text);
+  pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][59] := ComboBox30.ItemIndex;
+  pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][60] := StrToInt(Edit31.Text);
+  pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][61] := ComboBox31.ItemIndex;
+  pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][62] := StrToInt(Edit32.Text);
+  pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][63] := ComboBox32.ItemIndex;
+  
   StrategyClient[ComboBox291.ItemIndex+1].Ctr.Block[4].SendToPort(nil);
   end;
 end;
@@ -661,6 +705,17 @@ begin
   pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][53] := DefStrategy[54];
   pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][54] := DefStrategy[55];
   pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][55] := DefStrategy[56];
+
+  pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][56] := DefStrategy[57];
+  pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][57] := DefStrategy[58];
+  pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][58] := DefStrategy[59];
+  pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][59] := DefStrategy[60];
+  pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][60] := DefStrategy[61];
+  pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][61] := DefStrategy[62];
+  pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][62] := DefStrategy[63];
+  pStrategy^[StrategyClient[ComboBox291.ItemIndex+1].Zone][63] := DefStrategy[64];
+
+
   ReCalc();
   end;
 end;

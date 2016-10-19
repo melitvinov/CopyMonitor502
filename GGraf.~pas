@@ -11,7 +11,7 @@ uses
   TSGrid, BubbleCh, AppEvnts, GIFDef, GIFComponent,PaswordDlg, FPicLabel,
   CellChart;    //Port,SetGrid,
 
-const MesTest='';//'Only test';
+const MesTest='M_01_00_20';
 type
   TFMain = class(TForm)
     MM1: TMainMenu;
@@ -3251,7 +3251,7 @@ begin
 //      if HotGrafPanel.Visible then
 //        DrawHotGraf(Selected.Parent.Data,xy.X,xy.Y,TBlock(Selected.Parent.Data).ParentCtr.ViewDate)
 //      else
-       HotGraf.DrawFloat(Selected.Parent.Data,xy.X,xy.Y,TBlock(Selected.Parent.Data).BlDate;//.ParentCtr.ViewDate);
+       HotGraf.DrawFloat(Selected.Parent.Data,xy.X,xy.Y,TBlock(Selected.Parent.Data).BlDate);//.ParentCtr.ViewDate);
       end;// else HotGraf.Hide;
 {  with GridData do
     if (CurrentDataCol > 1) and (CurrentDataRow > 1) then

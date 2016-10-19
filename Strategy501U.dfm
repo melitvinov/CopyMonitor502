@@ -2,7 +2,7 @@ object FStrategy501U: TFStrategy501U
   Left = 311
   Top = 110
   Width = 1136
-  Height = 436
+  Height = 505
   Caption = #1057#1090#1088#1072#1090#1077#1075#1080#1103' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -73,7 +73,7 @@ object FStrategy501U: TFStrategy501U
       ShowHint = False
       StoreData = True
       TabOrder = 0
-      Version = '3.01.07'
+      Version = '2.20.24'
       VertAlignment = vtaCenter
       WordWrap = wwOff
       XMLExport.Version = '1.0'
@@ -91,7 +91,7 @@ object FStrategy501U: TFStrategy501U
   object TBCtr: TToolBar
     Left = 0
     Top = 0
-    Width = 1128
+    Width = 1120
     Height = 42
     ButtonHeight = 38
     ButtonWidth = 39
@@ -139,15 +139,15 @@ object FStrategy501U: TFStrategy501U
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 375
-    Width = 1128
+    Top = 439
+    Width = 1120
     Height = 27
     Panels = <>
   end
   object ToolBar1: TToolBar
     Left = 0
     Top = 42
-    Width = 1128
+    Width = 1120
     Height = 31
     ButtonHeight = 25
     Caption = 'ToolBar1'
@@ -165,15 +165,15 @@ object FStrategy501U: TFStrategy501U
   object Panel1: TPanel
     Left = 0
     Top = 73
-    Width = 1128
-    Height = 288
+    Width = 1120
+    Height = 352
     Align = alTop
     TabOrder = 4
     object Panel3: TPanel
       Left = 1
       Top = 1
       Width = 144
-      Height = 286
+      Height = 350
       Align = alLeft
       TabOrder = 0
       object Panel4: TPanel
@@ -274,7 +274,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel48: TPanel
         Left = 1
-        Top = 252
+        Top = 316
         Width = 142
         Height = 33
         Align = alBottom
@@ -298,7 +298,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel57: TPanel
         Left = 1
-        Top = 219
+        Top = 283
         Width = 142
         Height = 33
         Align = alBottom
@@ -370,12 +370,36 @@ object FStrategy501U: TFStrategy501U
           OnChange = ComboBox291Change
         end
       end
+      object Panel2: TPanel
+        Left = 1
+        Top = 199
+        Width = 142
+        Height = 33
+        Align = alTop
+        BorderStyle = bsSingle
+        TabOrder = 8
+        object StaticText16: TStaticText
+          Left = 1
+          Top = 1
+          Width = 136
+          Height = 27
+          Align = alClient
+          Caption = #1042#1085#1091#1090#1088'. '#1091#1074#1083#1072#1078#1085#1077#1085#1080#1077
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+        end
+      end
     end
     object Panel5: TPanel
       Left = 145
       Top = 1
       Width = 136
-      Height = 286
+      Height = 350
       Align = alLeft
       TabOrder = 1
       object Panel13: TPanel
@@ -504,7 +528,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel49: TPanel
         Left = 1
-        Top = 252
+        Top = 316
         Width = 134
         Height = 33
         Align = alBottom
@@ -535,7 +559,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel58: TPanel
         Left = 1
-        Top = 219
+        Top = 283
         Width = 134
         Height = 33
         Align = alBottom
@@ -618,12 +642,43 @@ object FStrategy501U: TFStrategy501U
           TabOrder = 0
         end
       end
+      object Panel84: TPanel
+        Left = 1
+        Top = 199
+        Width = 134
+        Height = 33
+        Align = alTop
+        BorderStyle = bsSingle
+        TabOrder = 8
+        object Edit29: TEdit
+          Left = 0
+          Top = 0
+          Width = 121
+          Height = 24
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clMaroon
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          Text = '0'
+        end
+        object UpDown6: TUpDown
+          Left = 121
+          Top = 0
+          Width = 16
+          Height = 24
+          Associate = Edit29
+          TabOrder = 1
+        end
+      end
     end
     object Panel6: TPanel
       Left = 281
       Top = 1
       Width = 104
-      Height = 286
+      Height = 350
       Align = alLeft
       TabOrder = 2
       object Panel14: TPanel
@@ -724,7 +779,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel50: TPanel
         Left = 1
-        Top = 252
+        Top = 316
         Width = 102
         Height = 33
         Align = alBottom
@@ -748,7 +803,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel59: TPanel
         Left = 1
-        Top = 219
+        Top = 283
         Width = 102
         Height = 33
         Align = alBottom
@@ -822,12 +877,36 @@ object FStrategy501U: TFStrategy501U
           TabOrder = 0
         end
       end
+      object Panel85: TPanel
+        Left = 1
+        Top = 199
+        Width = 102
+        Height = 33
+        Align = alTop
+        BorderStyle = bsSingle
+        TabOrder = 8
+        object ComboBox29: TComboBox
+          Left = -43
+          Top = 8
+          Width = 145
+          Height = 24
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clMaroon
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ItemHeight = 16
+          ParentFont = False
+          TabOrder = 0
+          Text = 'ComboBox25'
+        end
+      end
     end
     object Panel7: TPanel
       Left = 385
       Top = 1
       Width = 136
-      Height = 286
+      Height = 350
       Align = alLeft
       TabOrder = 3
       object Panel15: TPanel
@@ -956,7 +1035,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel51: TPanel
         Left = 1
-        Top = 252
+        Top = 316
         Width = 134
         Height = 33
         Align = alBottom
@@ -987,7 +1066,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel60: TPanel
         Left = 1
-        Top = 219
+        Top = 283
         Width = 134
         Height = 33
         Align = alBottom
@@ -1071,12 +1150,43 @@ object FStrategy501U: TFStrategy501U
           TabOrder = 0
         end
       end
+      object Panel86: TPanel
+        Left = 1
+        Top = 199
+        Width = 134
+        Height = 33
+        Align = alTop
+        BorderStyle = bsSingle
+        TabOrder = 8
+        object Edit30: TEdit
+          Left = 0
+          Top = 8
+          Width = 121
+          Height = 24
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clLime
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          Text = '0'
+        end
+        object UpDown30: TUpDown
+          Left = 121
+          Top = 8
+          Width = 16
+          Height = 24
+          Associate = Edit30
+          TabOrder = 1
+        end
+      end
     end
     object Panel8: TPanel
       Left = 521
       Top = 1
       Width = 104
-      Height = 286
+      Height = 350
       Align = alLeft
       TabOrder = 4
       object Panel16: TPanel
@@ -1177,7 +1287,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel52: TPanel
         Left = 1
-        Top = 252
+        Top = 316
         Width = 102
         Height = 33
         Align = alBottom
@@ -1201,7 +1311,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel61: TPanel
         Left = 1
-        Top = 219
+        Top = 283
         Width = 102
         Height = 33
         Align = alBottom
@@ -1271,12 +1381,36 @@ object FStrategy501U: TFStrategy501U
           TabOrder = 0
         end
       end
+      object Panel87: TPanel
+        Left = 1
+        Top = 199
+        Width = 102
+        Height = 33
+        Align = alTop
+        BorderStyle = bsSingle
+        TabOrder = 8
+        object ComboBox30: TComboBox
+          Left = -43
+          Top = 8
+          Width = 145
+          Height = 24
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clLime
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ItemHeight = 16
+          ParentFont = False
+          TabOrder = 0
+          Text = 'ComboBox26'
+        end
+      end
     end
     object Panel9: TPanel
       Left = 625
       Top = 1
       Width = 136
-      Height = 286
+      Height = 350
       Align = alLeft
       TabOrder = 5
       object Panel17: TPanel
@@ -1405,7 +1539,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel53: TPanel
         Left = 1
-        Top = 252
+        Top = 316
         Width = 134
         Height = 33
         Align = alBottom
@@ -1436,7 +1570,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel62: TPanel
         Left = 1
-        Top = 219
+        Top = 283
         Width = 134
         Height = 33
         Align = alBottom
@@ -1520,12 +1654,43 @@ object FStrategy501U: TFStrategy501U
           TabOrder = 0
         end
       end
+      object Panel88: TPanel
+        Left = 1
+        Top = 199
+        Width = 134
+        Height = 33
+        Align = alTop
+        BorderStyle = bsSingle
+        TabOrder = 8
+        object Edit31: TEdit
+          Left = 0
+          Top = 0
+          Width = 121
+          Height = 24
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlue
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          Text = '0'
+        end
+        object UpDown31: TUpDown
+          Left = 121
+          Top = 0
+          Width = 16
+          Height = 24
+          Associate = Edit31
+          TabOrder = 1
+        end
+      end
     end
     object Panel10: TPanel
       Left = 761
       Top = 1
       Width = 104
-      Height = 286
+      Height = 350
       Align = alLeft
       TabOrder = 6
       object Panel18: TPanel
@@ -1626,7 +1791,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel54: TPanel
         Left = 1
-        Top = 252
+        Top = 316
         Width = 102
         Height = 33
         Align = alBottom
@@ -1650,7 +1815,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel63: TPanel
         Left = 1
-        Top = 219
+        Top = 283
         Width = 102
         Height = 33
         Align = alBottom
@@ -1720,12 +1885,36 @@ object FStrategy501U: TFStrategy501U
           TabOrder = 0
         end
       end
+      object Panel89: TPanel
+        Left = 1
+        Top = 199
+        Width = 102
+        Height = 33
+        Align = alTop
+        BorderStyle = bsSingle
+        TabOrder = 8
+        object ComboBox31: TComboBox
+          Left = -43
+          Top = 8
+          Width = 145
+          Height = 24
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlue
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ItemHeight = 16
+          ParentFont = False
+          TabOrder = 0
+          Text = 'ComboBox27'
+        end
+      end
     end
     object Panel11: TPanel
       Left = 865
       Top = 1
       Width = 136
-      Height = 286
+      Height = 350
       Align = alLeft
       TabOrder = 7
       object Panel19: TPanel
@@ -1854,7 +2043,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel55: TPanel
         Left = 1
-        Top = 252
+        Top = 316
         Width = 134
         Height = 33
         Align = alBottom
@@ -1885,7 +2074,7 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel64: TPanel
         Left = 1
-        Top = 219
+        Top = 283
         Width = 134
         Height = 33
         Align = alBottom
@@ -1969,18 +2158,49 @@ object FStrategy501U: TFStrategy501U
           TabOrder = 0
         end
       end
+      object Panel90: TPanel
+        Left = 1
+        Top = 199
+        Width = 134
+        Height = 33
+        Align = alTop
+        BorderStyle = bsSingle
+        TabOrder = 8
+        object Edit32: TEdit
+          Left = 0
+          Top = 0
+          Width = 121
+          Height = 24
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clTeal
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          Text = '0'
+        end
+        object UpDown32: TUpDown
+          Left = 121
+          Top = 0
+          Width = 16
+          Height = 24
+          Associate = Edit32
+          TabOrder = 1
+        end
+      end
     end
     object Panel12: TPanel
       Left = 1001
       Top = 1
-      Width = 126
-      Height = 286
+      Width = 118
+      Height = 350
       Align = alClient
       TabOrder = 8
       object Panel20: TPanel
         Left = 1
         Top = 166
-        Width = 124
+        Width = 116
         Height = 33
         Align = alTop
         BorderStyle = bsSingle
@@ -2004,7 +2224,7 @@ object FStrategy501U: TFStrategy501U
       object Panel29: TPanel
         Left = 1
         Top = 133
-        Width = 124
+        Width = 116
         Height = 33
         Align = alTop
         BorderStyle = bsSingle
@@ -2028,7 +2248,7 @@ object FStrategy501U: TFStrategy501U
       object Panel38: TPanel
         Left = 1
         Top = 100
-        Width = 124
+        Width = 116
         Height = 33
         Align = alTop
         BorderStyle = bsSingle
@@ -2052,7 +2272,7 @@ object FStrategy501U: TFStrategy501U
       object Panel47: TPanel
         Left = 1
         Top = 67
-        Width = 124
+        Width = 116
         Height = 33
         Align = alTop
         BorderStyle = bsSingle
@@ -2075,8 +2295,8 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel56: TPanel
         Left = 1
-        Top = 252
-        Width = 124
+        Top = 316
+        Width = 116
         Height = 33
         Align = alBottom
         BorderStyle = bsSingle
@@ -2099,8 +2319,8 @@ object FStrategy501U: TFStrategy501U
       end
       object Panel65: TPanel
         Left = 1
-        Top = 219
-        Width = 124
+        Top = 283
+        Width = 116
         Height = 33
         Align = alBottom
         BorderStyle = bsSingle
@@ -2124,7 +2344,7 @@ object FStrategy501U: TFStrategy501U
       object Panel74: TPanel
         Left = 1
         Top = 34
-        Width = 124
+        Width = 116
         Height = 33
         Align = alTop
         BorderStyle = bsSingle
@@ -2148,7 +2368,7 @@ object FStrategy501U: TFStrategy501U
       object Panel83: TPanel
         Left = 1
         Top = 1
-        Width = 124
+        Width = 116
         Height = 33
         Align = alTop
         BorderStyle = bsSingle
@@ -2156,7 +2376,7 @@ object FStrategy501U: TFStrategy501U
         object StaticText8: TStaticText
           Left = 1
           Top = 1
-          Width = 118
+          Width = 110
           Height = 27
           Align = alClient
           Caption = 'StaticText8'
@@ -2167,6 +2387,30 @@ object FStrategy501U: TFStrategy501U
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+        end
+      end
+      object Panel91: TPanel
+        Left = 1
+        Top = 199
+        Width = 116
+        Height = 33
+        Align = alTop
+        BorderStyle = bsSingle
+        TabOrder = 8
+        object ComboBox32: TComboBox
+          Left = -29
+          Top = 8
+          Width = 145
+          Height = 24
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clTeal
+          Font.Height = -13
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ItemHeight = 16
+          ParentFont = False
+          TabOrder = 0
+          Text = 'ComboBox28'
         end
       end
     end

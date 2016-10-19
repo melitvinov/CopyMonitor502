@@ -857,8 +857,8 @@ begin
           end;
         if gRCS = 1 then    // нет измерений по причине отсутствия связи
           begin
-            HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Отказ датчика',clNone,clNone,clRed);      // запись в журнал
-            alarmMessage := alDifficulty;//alFatal;
+            //HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Отказ датчика',clNone,clNone,clRed);      // запись в журнал
+            //alarmMessage := alDifficulty;//alFatal;
             continue;
           end;
         //if (gRCS and bMinMaxV)>0 then                  //bMinMaxV=        32; //0x20 bMinMaxU=        64; //0x40 bHiAlarm=        4;  //0x04 bLowAlarm=       8;  //0x08
@@ -1431,8 +1431,8 @@ begin
         if gRCS=0 then continue;
         if gRCS = 1 then
           begin
-            HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Датчик не подключен',clNone,clNone,clRed);      // запись в журнал
-            alarmMessage := alFatal;
+            //HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Датчик не подключен',clNone,clNone,clRed);      // запись в журнал
+            //alarmMessage := alFatal;
             continue;
           end;
         if gRCS > 1 then

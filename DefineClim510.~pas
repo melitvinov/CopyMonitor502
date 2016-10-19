@@ -185,7 +185,7 @@ DZM511_EXTREG3     = 50;
 DZM511_EXTREG4     = 51;
 DZM511_EXTREG5     = 52;
 
-DZM511_REZ1        = 53;
+DZM511_INRH_MECH   = 53;
 DZM511_REZ2        = 54;
 DZM511_REZ3        = 55;
 DZM511_REZ4        = 56;
@@ -270,7 +270,7 @@ var NameConfiguration:array [1..DZ_SumConfig] of TNameConst=(
     Index:6;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Система рециркуляции';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:6;
     Index:7;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
-(Name:'Система резерва 1';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:6;
+(Name:'Система резерва 1';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:1;
     Index:8;Mech:0;AccessR:RW_INVISIBLE;AccessW:RW_NOEDIT),
 (Name:'Система резерва 2';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:6;
     Index:9;Mech:0;AccessR:RW_INVISIBLE;AccessW:RW_NOEDIT),
@@ -503,8 +503,8 @@ var NameConfiguration511:array [1..DZ511_SumConfig] of TNameConst=(
     Index:6;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Система рециркуляции';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:6;
     Index:7;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
-(Name:'Система резерва 1';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:6;
-    Index:8;Mech:0;AccessR:RW_INVISIBLE;AccessW:RW_NOEDIT),
+(Name:'Система внутреннего увлажнения';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:6;
+    Index:8;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Система резерва 2';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:6;
     Index:9;Mech:0;AccessR:RW_INVISIBLE;AccessW:RW_NOEDIT),
 
@@ -548,8 +548,8 @@ var NameConfiguration511:array [1..DZ511_SumConfig] of TNameConst=(
     Index:28;Mech:DZM_SHEATING;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Досвечивание';Frm:CpMpN;Ed:'-реле';TipSens:TipIzm;Min:0;Max:0;
     Index:29;Mech:DZM_SLIGHT;AccessR:R_CONFIG;AccessW:W_CONFIG),
-(Name:'Резерв 1';Frm:CpMpN;Ed:'-реле';TipSens:TipIzm;Min:0;Max:0;
-    Index:30;Mech:DZM_SREZ1;AccessR:R_CONFIG;AccessW:W_CONFIG),
+(Name:'Клапан Внутреннее увлажнение';Frm:CpMpN;Ed:'-реле';TipSens:TipIzm;Min:0;Max:0;
+    Index:30;Mech:DZM511_INRH;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Резерв 2';Frm:CpMpN;Ed:'-реле';TipSens:TipIzm;Min:0;Max:0;
     Index:31;Mech:DZM_SREZ1;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Резерв 3';Frm:CpMpN;Ed:'-реле';TipSens:TipIzm;Min:0;Max:0;
@@ -2710,7 +2710,7 @@ var NameMechC510:array [1..DZ_SumVisualRegs*DZ_SumParsMech] of TNameConst=(
 
 const
       DZ511_SumParsMech=3;
-      DZ511_SumRegs=24;
+      DZ511_SumRegs=25;
       DZ511_SizeParMech=8;
 
 
@@ -2867,7 +2867,15 @@ var NameMechC511:array [1..(DZ511_SumRegs-4)*DZ511_SumParsMech] of TNameConst=(
 (Name:'Досвечивание - П-коэффициент';Frm:SSpSSS;Ed:'% на 1';TipSens:TipIzm;Min:0;Max:10;
     Index:19*DZ511_SizeParMech+2;Mech:DZM511_LIGHT;AccessR:RW_INVISIBLE;AccessW:W_CONFIG),
 (Name:'Досвечивание - И-коэффициент';Frm:SSpSSS;Ed:'% на 1';TipSens:TipIzm;Min:0;Max:10;
-    Index:19*DZ511_SizeParMech+4;Mech:DZM511_LIGHT;AccessR:RW_INVISIBLE;AccessW:W_CONFIG)
+    Index:19*DZ511_SizeParMech+4;Mech:DZM511_LIGHT;AccessR:RW_INVISIBLE;AccessW:W_CONFIG),
+
+(Name:'Клапан Внутреннего увлажнения - Время хода';Frm:SSSS;Ed:'сек';TipSens:TipIzm;Min:0;Max:4000;
+    Index:20*DZ511_SizeParMech+0;Mech:DZM511_INRH;AccessR:R_CONFIG;AccessW:W_CONFIG),
+(Name:'Клапан Внутреннего увлажнения - П-коэффициент';Frm:SSpSSS;Ed:'% на 1';TipSens:TipIzm;Min:0;Max:10;
+    Index:20*DZ511_SizeParMech+2;Mech:DZM511_INRH;AccessR:R_CONFIG;AccessW:W_CONFIG),
+(Name:'Клапан Внутреннего увлажнения - И-коэффициент';Frm:SSpSSS;Ed:'% на 1';TipSens:TipIzm;Min:0;Max:10;
+    Index:20*DZ511_SizeParMech+4;Mech:DZM511_INRH;AccessR:R_CONFIG;AccessW:W_CONFIG)
+
 
 //(Name:'Скорость насоса AHU';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;
 //    Index:19;Mech:DZM_S_PUMP_AHU;AccessR:R_CONFIG;AccessW:W_CONFIG),
@@ -2929,7 +2937,7 @@ var DZ_NameParUpr:array [1..DZ_SumParUpr] of TNameConst=(
 //===============================================================================
 
 
-const        DZ511_SumParUpr=           25;
+const        DZ511_SumParUpr=           27;
              DZ511_iMaxTPipe=           5;
              DZ511_iMinTPipe=           DZ511_iMaxTPipe+8*2;
              DZ511_iOptTPipe=           DZ511_iMinTPipe+3*2;
@@ -2973,7 +2981,9 @@ var DZ511_NameParUpr:array [1..DZ511_SumParUpr] of TNameConst=(
          (Name:'Кол-во градаций досветки';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:10;Index:DZ511_iScr+8;Mech:DZM511_LIGHT;AccessR:RW_GUEST;AccessW:RW_GUEST),
          (Name:'Держать Т отпления по датчику';Frm:CalcT;Ed:'';TipSens:TipCalc;Min:1;Max:255;Def:0;Index:DZ511_iScr+10;GridColor:$ffdf00;Mech:0;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
          (Name:'Держать Т вентил по датчику';Frm:CalcT;Ed:'';TipSens:TipCalc;Min:1;Max:255;Def:0;Index:DZ511_iScr+11;GridColor:$ffdf00;Mech:DZM_SHEATING;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
-         (Name:'Температура рукава выше температуры задания';Frm:SSSS;Ed:'°C';TipSens:TipCalc;Min:0;Max:20;Def:0;Index:DZ511_iScr+12;GridColor:$ffdf00;Mech:DZM_SHEATING;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR)
+         (Name:'Температура рукава выше температуры задания';Frm:SSSS;Ed:'°C';TipSens:TipCalc;Min:0;Max:20;Def:0;Index:DZ511_iScr+12;GridColor:$ffdf00;Mech:DZM_SHEATING;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+         (Name:'Внутреннее увлажнение - Максимальное открытие';Frm:SSSS;Ed:'°C';TipSens:TipCalc;Min:0;Max:100;Def:0;Index:DZ511_iScr+14;GridColor:$ffdf00;Mech:DZM511_INRH;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+         (Name:'Внутреннее увлажнение - Минимальное открытие';Frm:SSSS;Ed:'°C';TipSens:TipCalc;Min:0;Max:100;Def:0;Index:DZ511_iScr+16;GridColor:$ffdf00;Mech:DZM511_INRH;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR)
          );
 
 
@@ -3140,7 +3150,7 @@ var NameStrategy511:array [1..DZ511_SumKStrategy*DZ511_SupParStrategy] of TNameC
 //===============================================================================
 //--------- START STRATEGY 511------------------
 //===============================================================================
-const DZ511_SumKStrategy=7;
+const DZ511_SumKStrategy=8;
       DZ511_SupParStrategy=8;
       DZ511_SumFullStrategy=8;
       DZ511_SizeStrateg=7;//4;
@@ -3267,7 +3277,24 @@ var NameStrategy511:array [1..DZ511_SumKStrategy*DZ511_SupParStrategy] of TNameC
  (Name:'T<Tset, RH<RHset. Увлажнение';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
     Index:54;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
  (Name:'T<Tset, RH<RHset. Увлажнение.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
-    Index:55;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER)
+    Index:55;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+
+ (Name:'T>Tset, RH>RHset. Внутренние увлажнение';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
+    Index:56;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T>Tset, RH>RHset. Внутренние увлажнение.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:57;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T>Tset, RH<RHset. Внутренние увлажнение';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
+    Index:58;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T>Tset, RH<RHset. Внутренние увлажнение.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:59;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH>RHset. Внутренние увлажнение';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
+    Index:60;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH>RHset. Внутренние увлажнение.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:61;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH<RHset. Внутренние увлажнение';Frm:SS;Ed:'';TipSens:TipControl;Min:-10;Max:100;Def:HIDE_MIN_MAX;
+    Index:62;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER),
+ (Name:'T<Tset, RH<RHset. Внутренние увлажнение.Way';Frm:SS;Ed:'';TipSens:TipControl;Min:0;Max:1;Def:HIDE_MIN_MAX;
+    Index:63;GridColor:$0030df;Mech:DZM511_PUMP2; AccessR:RW_GUEST;AccessW:RW_USER)
 
  );
 
@@ -4524,7 +4551,7 @@ const
              DZ511_SumTeplDSens=    2;
              DZ511_EndTeplSens=     DZ511_StTeplSens+DZ511_SumTeplSens+DZ511_SumTeplDSens-1; //в ПК - номер начала датчиков
 
-             DZ511_SumTeplCalc=     16;//14;//10+STVirtSens;
+             DZ511_SumTeplCalc=     14; //16;
              DZ511_StTeplCalc=      DZ511_EndTeplSens+1;                   //в ПК - номер начала расчета клим
              DZ511_EndTeplCalc=     DZ511_StTeplCalc+DZ511_SumTeplCalc-1;                  //в ПК - номер окончания расчета клим
 
@@ -4545,7 +4572,7 @@ const
              DZ511_EndTeplOther=   DZ511_StTeplOther+DZ511_SumTeplOther-1;
 
 
-             DZ511_SumTeplMecan=    62;         // было 62 !!!!
+             DZ511_SumTeplMecan=    66; //64;         // было 62 !!!!
              DZ511_StTeplMecan=     DZ511_EndTeplOther+1;              //в ПК - номер начала положений механизмов
              DZ511_EndTeplMecan=    DZ511_StTeplMecan+DZ511_SumTeplMecan-1;
              DZ511_StTeplRez=       DZ511_EndTeplMecan+1;
@@ -5153,7 +5180,13 @@ DZ511_cDefineHot:array [1..DZ511_SumMesHot] of TNameConst=( //TDZ511DefineHot=(
 (Name:'Авария Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
     Index:DZ511_iMechanic+72;Mech:DZM511_ALARM;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
 (Name:'Авария Состояние';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
-    Index:DZ511_iMechanic+73;Mech:DZM511_ALARM;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR)
+    Index:DZ511_iMechanic+73;Mech:DZM511_ALARM;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+// 218
+(Name:'Клапан Внутренние увлажнение Режим';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comAutoHand;Max:comAutoHand+1;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+40;Mech:DZM511_INRH;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Клапан Внутренние увлажнение Состояние';Frm:SS;Ed:'%';TipSens:TipIzm;Min:0;Max:100;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+41;Mech:DZM511_INRH;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR)
+
 // 218
 //(Name:'Потребление СО2';Frm:SSSpS;Ed:'м3/ч/м2';TipSens:TipIzm;Min:0;Max:1000;Def:HIDE_MIN_MAX;
 //    Index:0;Mech:DZM511_SENS_HUM1;Tag:calcConsumCO2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),

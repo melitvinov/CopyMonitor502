@@ -800,8 +800,8 @@ begin
         if gRCS=0 then continue;
         if gRCS = 1 then
           begin
-            HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Отказ датчика',clNone,clNone,clRed);      // запись в журнал
-            alarmMessage := alFatal;
+            //HotMessage(ParentCtr.CtrName,ParentCtr.GetTextZona(x,y)+' '+ConstNames[y].Name+'-Отказ датчика',clNone,clNone,clRed);      // запись в журнал
+            //alarmMessage := alFatal;
             continue;
           end;
         if gRCS >= 32 then
