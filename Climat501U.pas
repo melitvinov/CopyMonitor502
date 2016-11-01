@@ -591,10 +591,35 @@ var gRCS:Byte;
     pascalSaveInterval:TDateTime;
     pascalNameContr:string;
     pascalCountZone:integer;
+    CountCO2:integer;
+    avCOruk:double;
+    avCO:double;
 
-function GetCO2Consum(vCO,vCOr,Speed:T2Byte):T2Byte;
+function GetCO2Consum(Task,vCO,vCOr,Speed:T2Byte):T2Byte;
+var
+tempCO:double;
+tempCOruk:double;
 begin
-    Result := (vCOr - vCO)*Speed;
+    {
+    if (Task > 0) then
+    begin
+      CountCO2 := CountCO2+1;
+      avCOruk := avCOruk + vCOr;
+      avCO := avCO + vCO;
+      tempCOruk := avCOruk / CountCO2;
+      tempCO := avCO / CountCO2;
+    end else
+    begin
+      CountCO2 := 0;
+      avCOruk := 0;
+      avCO := 0;
+      tempCOruk := 0;
+      tempCO := 0;
+    end;
+    Result := Round(tempCOruk - tempCO);
+    }
+    Result :=  vCOr - vCO;
+
     // разница между датчиком в теплице и датчиком в рукаве и умноженное на скорость вращения вентиляторов
 end;
 
@@ -643,6 +668,9 @@ procedure TFClimat501U.InitCtr(vIdentCtr:TIdentCtr);
 var i,nZone:integer;
 begin
      inherited;
+     CountCO2 := 0;
+     avCOruk := 0;
+     avCO := 0;
      Design:='Climat';
      NameIdent:=cNameIdent403;
      SumZone:=IdentCtr[idSubTip];
@@ -1372,19 +1400,18 @@ with ParentCtr as TFClimat501U do
   end;
 
   case ConstNames[ValY].Tag of
-  calcTrans: begin tIn:=GetMaxTrans(pHot^[DZ511_itTAir+tIndex]+pHot^[DZ511_itTAir+tIndex+1]*256,
+  calcTrans: begin
+
+                          tIn:=GetMaxTrans(pHot^[DZ511_itTAir+tIndex]+pHot^[DZ511_itTAir+tIndex+1]*256,
                           pHot^[DZ511_itRH+tIndex]+pHot^[DZ511_itRH+tIndex+1]*256,
                           pHot^[DZ511_itRH+42+tIndex]+pHot^[DZ511_itRH+42+tIndex+1]*256,
                           pHot^[DZ511_itRH+21+tIndex]+pHot^[DZ511_itRH+21+tIndex+1]*256,
                           Round(((pHot^[DZ511_iMechanic+25+tIndex]+pHot^[DZ511_iMechanic+25+tIndex+1]*256) *
                           Round(Settings_DZ.LoadXYvirt(cOutBlock,ValX,11,Txt)))/100) );
                           pt:=Addr(tIn);
-                          //txt := FloatToStr(tIn);
-                          //Result:=LoadXYvirt(cOutTxtBlock,ValX,ValY,txt);
-                          //Exit;
-                          end;
+             end;
    // транспирация
-  calcConsumCO2: begin tIn:=GetCO2Consum(pHot^[DZ511_itRH+15+tIndex]+pHot^[DZ511_itRH+15+tIndex+1]*256,
+  calcConsumCO2: begin tIn:=GetCO2Consum(pHot^[DZ511_itTaskT+14+tIndex]+pHot^[DZ511_itTaskT+14+tIndex+1]*256, pHot^[DZ511_itRH+15+tIndex]+pHot^[DZ511_itRH+15+tIndex+1]*256,
                           pHot^[DZ511_itRH+9+tIndex]+pHot^[DZ511_itRH+9+tIndex+1]*256,
                           Round(((pHot^[DZ511_iMechanic+25+tIndex]+pHot^[DZ511_iMechanic+25+tIndex+1]*256) *
                           Round(Settings_DZ.LoadXYvirt(cOutBlock,ValX,11,Txt)))/100) );
@@ -3772,7 +3799,7 @@ var NameNewAchivePC:array [1..cCountNameNewAchivePC] of TNameConst=(
       Index:112;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
     (Name:'Максимум потребления';Frm:ffff;Ed:'МВт';TipSens:TipCalc;Min:0;Max:0;
       Index:120;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
-    (Name:'Включено освещение';Frm:ffff;Ed:'мин';TipSens:TipCalc;Min:0;Max:0;
+    (Name:'Включено освещение';Frm:ffff;Ed:'мин';TipSens:TipCalc;Min:0;Max:2000;
       Index:128;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),
     (Name:'Закрыт экран';Frm:ffff;Ed:'мин';TipSens:TipCalc;Min:0;Max:0;
       Index:136;Mech:0;AccessR:RW_GUEST;AccessW:RW_USER),

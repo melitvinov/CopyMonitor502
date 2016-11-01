@@ -179,8 +179,10 @@ DZM511_SIO_PUMP    = 44;
 DZM511_SIO_VALVES  = 45;
 DZM511_AHU_VALVES  = 46;
 DZM511_ALARM       = 47;
-DZM511_EXTREG1     = 48;
-DZM511_EXTREG2     = 49;
+//DZM511_EXTREG1     = 48;
+//DZM511_EXTREG2     = 49;
+DZM511_LIGHT50     = 48;
+DZM511_LIGHT100    = 49;
 DZM511_EXTREG3     = 50;
 DZM511_EXTREG4     = 51;
 DZM511_EXTREG5     = 52;
@@ -5015,21 +5017,28 @@ DZ511_cDefineHot:array [1..DZ511_SumMesHot] of TNameConst=( //TDZ511DefineHot=(
     Index:DZ511_itOtherCalc+2;Mech:DZM511_VENT;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
 (Name:'Вентиляторы - Сейчас разница';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:0;Max:10;Def:HIDE_MIN_MAX;
     Index:DZ511_itOtherCalc+4;Mech:DZM511_VENT;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
-(Name:'Регулятор давления - ИЗМЕРЕНА разность';Frm:SSpSS;Ed:'Кг/см2';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
-    Index:DZ511_itOtherCalc+8;Mech:DZM511_PRES_REG;AccessR:RW_INVISIBLE;AccessW:RW_INVISIBLE),
-(Name:'Регулятор давления - ДЕРЖАТЬ разность';Frm:SSpSS;Ed:'Кг/см2';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
-    Index:DZ511_itClimTask+21;Mech:DZM511_PRES_REG;AccessR:RW_INVISIBLE;AccessW:RW_INVISIBLE),
+
+// досветка 50 режим это DZ511_iMechanic+74
+(Name:'Досветка 50%';Frm:SS;Ed:'';TipSens:TipCalc;Min:-1000;Max:1000;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+96;Mech:DZM511_LIGHT50;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+(Name:'Досветка 100%';Frm:SS;Ed:'';TipSens:TipCalc;Min:-1000;Max:1000;Def:HIDE_MIN_MAX;
+    Index:DZ511_iMechanic+97;Mech:DZM511_LIGHT50;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+
+//(Name:'Регулятор давления - ИЗМЕРЕНА разность';Frm:SSpSS;Ed:'Кг/см2';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
+//    Index:DZ511_itOtherCalc+8;Mech:DZM511_PRES_REG;AccessR:RW_INVISIBLE;AccessW:RW_INVISIBLE),
+//(Name:'Регулятор давления - ДЕРЖАТЬ разность';Frm:SSpSS;Ed:'Кг/см2';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
+//    Index:DZ511_itClimTask+21;Mech:DZM511_PRES_REG;AccessR:RW_INVISIBLE;AccessW:RW_INVISIBLE),
 // 144
 (Name:'Измерено для регулятора 1';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
-    Index:DZ511_itOtherCalc;Mech:DZM511_EXTREG1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
-(Name:'Измерено для регулятора 2';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
-    Index:DZ511_itClimTask;Mech:DZM511_EXTREG1+1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+    Index:DZ511_itOtherCalc;Mech:DZM511_LIGHT50;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),              // здесь и далее везде был DZM511_EXTREG1
+(Name:'Измерено для регулятора 2';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;    // теперь  DZM511_LIGHT50
+    Index:DZ511_itClimTask;Mech:DZM511_LIGHT50+1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
 (Name:'Измерено для регулятора 3';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
-    Index:DZ511_itOtherCalc;Mech:DZM511_EXTREG1+2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+    Index:DZ511_itOtherCalc;Mech:DZM511_LIGHT50+2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
 (Name:'Измерено для регулятора 4';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
-    Index:DZ511_itClimTask;Mech:DZM511_EXTREG1+3;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+    Index:DZ511_itClimTask;Mech:DZM511_LIGHT50+3;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
 (Name:'Измерено для регулятора 5';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
-    Index:DZ511_itOtherCalc;Mech:DZM511_EXTREG1+4;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+    Index:DZ511_itOtherCalc;Mech:DZM511_LIGHT50+4;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
 // 149
 (Name:'Запрос СО2 (разница зад и измер)';Frm:SSSpS;Ed:'ppm/10';TipSens:TipSun;Min:0;Max:1500;Def:HIDE_MIN_MAX;
     Index:DZ511_itRaisedCritery+14;Mech:DZM511_CO2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
