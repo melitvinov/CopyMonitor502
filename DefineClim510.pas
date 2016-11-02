@@ -4557,7 +4557,7 @@ const
              DZ511_StTeplCalc=      DZ511_EndTeplSens+1;                   //в ПК - номер начала расчета клим
              DZ511_EndTeplCalc=     DZ511_StTeplCalc+DZ511_SumTeplCalc-1;                  //в ПК - номер окончания расчета клим
 
-             DZ511_SumTeplWarm=     11+8*5;  //11+10*5;//51;    //13!!!
+             DZ511_SumTeplWarm=     13+8*5; //11+8*5;  //11+10*5;//51;    //13!!!
              DZ511_StTeplWarm=      DZ511_EndTeplCalc+1;       //в ПК - номер начала контуров обогрева
              DZ511_EndTeplWarm=     DZ511_StTeplWarm+DZ511_SumTeplWarm-1;       //в ПК - номер окончания контуров обогрева
 
@@ -4574,7 +4574,7 @@ const
              DZ511_EndTeplOther=   DZ511_StTeplOther+DZ511_SumTeplOther-1;
 
 
-             DZ511_SumTeplMecan=    66; //64;         // было 62 !!!!
+             DZ511_SumTeplMecan=    64; //66//64;         // было 62 !!!!
              DZ511_StTeplMecan=     DZ511_EndTeplOther+1;              //в ПК - номер начала положений механизмов
              DZ511_EndTeplMecan=    DZ511_StTeplMecan+DZ511_SumTeplMecan-1;
              DZ511_StTeplRez=       DZ511_EndTeplMecan+1;

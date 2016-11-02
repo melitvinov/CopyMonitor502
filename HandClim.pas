@@ -309,6 +309,7 @@ begin
   NowSetControl:=False;
 end;
 
+// реакция при изменении состояния компонента
 procedure TFHandClim.FLAutoHandClick(Sender: TObject);
 var ind,Y:integer;St:string;
 begin

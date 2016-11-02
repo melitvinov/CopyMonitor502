@@ -1,6 +1,6 @@
 object FHandClim: TFHandClim
-  Left = 2196
-  Top = 38
+  Left = 3088
+  Top = 104
   Width = 1088
   Height = 876
   Caption = #1056#1091#1095#1085#1086#1077' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1077
