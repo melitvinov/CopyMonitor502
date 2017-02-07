@@ -1052,7 +1052,7 @@ begin
  if (ParentCtr.DataPath<>'')
      or (PCTime<15)
      or (PCTime>(24*60-15))
-     or (((CtrlTime+15)>PCTime) and((CtrlTime-15)< PCTime)) then Exit;
+     or (((CtrlTime+3)>PCTime) and((CtrlTime-3)< PCTime)) then Exit;
  FormFalseTime:=True;
  if FMain.mnAutoSynxTime.Checked or (MessageDlg('Внимание! Время контроллера "'+ParentCtr.CtrName
      +'" отличается от ПК. Синхронизировать?'

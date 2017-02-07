@@ -205,7 +205,6 @@ end;
 procedure  TFHandClim.Exec(vCtr:TFController);
 var i:integer;
 begin
-   //Exit; // ручное управление отключено           NEW !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    if ListClimCtr.Tabs.Count = 0 then Exit;
    with ListClimCtr do
     for i:=0 to Tabs.Count-1 do

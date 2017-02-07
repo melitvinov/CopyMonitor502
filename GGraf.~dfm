@@ -1,8 +1,8 @@
 object FMain: TFMain
-  Left = 233
-  Top = 59
+  Left = 322
+  Top = 89
   Width = 1214
-  Height = 765
+  Height = 732
   HelpContext = 1
   HorzScrollBar.Range = 700
   VertScrollBar.Range = 428
@@ -71,7 +71,7 @@ object FMain: TFMain
     Left = 0
     Top = 43
     Width = 1198
-    Height = 644
+    Height = 611
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clFuchsia
@@ -98,7 +98,7 @@ object FMain: TFMain
   end
   object MainStatus: TStatusBar
     Left = 0
-    Top = 687
+    Top = 654
     Width = 1198
     Height = 19
     Panels = <
@@ -122,7 +122,7 @@ object FMain: TFMain
     Left = 0
     Top = 43
     Width = 1198
-    Height = 644
+    Height = 611
     Align = alClient
     Color = clSilver
     Font.Charset = DEFAULT_CHARSET
@@ -135,7 +135,7 @@ object FMain: TFMain
     object VSplitter: TSplitter
       Left = 1
       Top = 1
-      Height = 642
+      Height = 609
       Color = clHighlight
       MinSize = 1
       ParentColor = False
@@ -144,12 +144,12 @@ object FMain: TFMain
       Left = 153
       Top = 1
       Width = 1044
-      Height = 642
+      Height = 609
       Align = alClient
       TabOrder = 0
       object HSplitter: TSplitter
         Left = 1
-        Top = 623
+        Top = 590
         Width = 1042
         Height = 3
         Cursor = crVSplit
@@ -161,7 +161,7 @@ object FMain: TFMain
         Left = 1
         Top = 33
         Width = 1011
-        Height = 566
+        Height = 533
         BackWall.Brush.Color = clWhite
         BackWall.Brush.Style = bsClear
         BackWall.Color = 4194304
@@ -286,7 +286,7 @@ object FMain: TFMain
         OnMouseMove = GChartMouseMove
         DesignSize = (
           1011
-          566)
+          533)
         object Gor: TShape
           Left = 2
           Top = 272
@@ -809,7 +809,7 @@ object FMain: TFMain
       end
       object BottomPanel: TPanel
         Left = 1
-        Top = 626
+        Top = 593
         Width = 1042
         Height = 15
         Align = alBottom
@@ -820,7 +820,7 @@ object FMain: TFMain
       end
       object Track: TTrackBar
         Left = 1
-        Top = 599
+        Top = 566
         Width = 1042
         Height = 24
         Align = alBottom
@@ -840,7 +840,7 @@ object FMain: TFMain
         Left = 1012
         Top = 33
         Width = 31
-        Height = 566
+        Height = 533
         Align = alRight
         ButtonHeight = 32
         ButtonWidth = 31
@@ -1194,7 +1194,7 @@ object FMain: TFMain
       Left = 4
       Top = 1
       Width = 149
-      Height = 642
+      Height = 609
       Align = alLeft
       DockSite = True
       TabOrder = 1
@@ -1529,7 +1529,7 @@ object FMain: TFMain
     Left = 1198
     Top = 43
     Width = 0
-    Height = 644
+    Height = 611
     Align = alRight
     DockSite = True
     TabOrder = 9

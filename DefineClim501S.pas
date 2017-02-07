@@ -898,11 +898,11 @@ var NameInSensorsC510:array [1..DZ_SumVisibleInSens*DZ_SumParsSens] of TNameCons
     Index:3;Mech:DZM_SENS_TEMP1;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Температура воздуха 1 - Напряжение 1';Frm:SSSS;Ed:'мВ';TipSens:TipIzm;Min:0;Max:5000;
     Index:4;Mech:DZM_SENS_TEMP1;AccessR:R_CONFIG;AccessW:W_CONFIG),
-(Name:'Температура воздуха 1 - Эталон 1';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:0;Max:50;
+(Name:'Температура воздуха 1 - Эталон 1';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:0;Max:60;
     Index:6;Mech:DZM_SENS_TEMP1;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Температура воздуха 1 - Напряжение 2';Frm:SSSS;Ed:'мВ';TipSens:TipIzm;Min:0;Max:5000;
     Index:8;Mech:DZM_SENS_TEMP1;AccessR:R_CONFIG;AccessW:W_CONFIG),
-(Name:'Температура воздуха 1 - Эталон 2';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:1;Max:50;
+(Name:'Температура воздуха 1 - Эталон 2';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:1;Max:60;
     Index:10;Mech:DZM_SENS_TEMP1;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Температура воздуха 2 - Тип';Frm:ComboSS;Ed:'';TipSens:TipCombo;Min:561;Max:572;
     Index:12;Mech:DZM_SENS_TEMP2;AccessR:R_CONFIG;AccessW:W_CONFIG),
@@ -913,11 +913,11 @@ var NameInSensorsC510:array [1..DZ_SumVisibleInSens*DZ_SumParsSens] of TNameCons
 // 11
 (Name:'Температура воздуха 2 - Напряжение 1';Frm:SSSS;Ed:'мВ';TipSens:TipIzm;Min:0;Max:5000;
     Index:16;Mech:DZM_SENS_TEMP2;AccessR:R_CONFIG;AccessW:W_CONFIG),
-(Name:'Температура воздуха 2 - Эталон 1';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:0;Max:50;
+(Name:'Температура воздуха 2 - Эталон 1';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:0;Max:60;
     Index:18;Mech:DZM_SENS_TEMP2;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Температура воздуха 2 - Напряжение 2';Frm:SSSS;Ed:'мВ';TipSens:TipIzm;Min:0;Max:5000;
     Index:20;Mech:DZM_SENS_TEMP2;AccessR:R_CONFIG;AccessW:W_CONFIG),
-(Name:'Температура воздуха 2 - Эталон 2';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:1;Max:50;
+(Name:'Температура воздуха 2 - Эталон 2';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:1;Max:60;
     Index:22;Mech:DZM_SENS_TEMP2;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Температура воздуха 3 - Тип';Frm:ComboSS;Ed:'';TipSens:TipCombo;Min:561;Max:572;
     Index:24;Mech:DZM_SENS_TEMP3;AccessR:R_CONFIG;AccessW:W_CONFIG),
@@ -927,12 +927,12 @@ var NameInSensorsC510:array [1..DZ_SumVisibleInSens*DZ_SumParsSens] of TNameCons
     Index:27;Mech:DZM_SENS_TEMP3;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Температура воздуха 3 - Напряжение 1';Frm:SSSS;Ed:'мВ';TipSens:TipIzm;Min:0;Max:5000;
     Index:28;Mech:DZM_SENS_TEMP3;AccessR:R_CONFIG;AccessW:W_CONFIG),
-(Name:'Температура воздуха 3 - Эталон 1';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:0;Max:50;
+(Name:'Температура воздуха 3 - Эталон 1';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:0;Max:60;
     Index:30;Mech:DZM_SENS_TEMP3;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Температура воздуха 3 - Напряжение 2';Frm:SSSS;Ed:'мВ';TipSens:TipIzm;Min:0;Max:5000;
     Index:32;Mech:DZM_SENS_TEMP3;AccessR:R_CONFIG;AccessW:W_CONFIG),
 // 21
-(Name:'Температура воздуха 3 - Эталон 2';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:1;Max:50;
+(Name:'Температура воздуха 3 - Эталон 2';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:1;Max:60;
     Index:34;Mech:DZM_SENS_TEMP3;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Температура воздуха 4 - Тип';Frm:ComboSS;Ed:'';TipSens:TipCombo;Min:561;Max:572;
     Index:36;Mech:DZM_SENS_TEMP4;AccessR:R_CONFIG;AccessW:W_CONFIG),
@@ -942,11 +942,11 @@ var NameInSensorsC510:array [1..DZ_SumVisibleInSens*DZ_SumParsSens] of TNameCons
     Index:39;Mech:DZM_SENS_TEMP4;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Температура воздуха 4 - Напряжение 1';Frm:SSSS;Ed:'мВ';TipSens:TipIzm;Min:0;Max:5000;
     Index:40;Mech:DZM_SENS_TEMP4;AccessR:R_CONFIG;AccessW:W_CONFIG),
-(Name:'Температура воздуха 4 - Эталон 1';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:0;Max:50;
+(Name:'Температура воздуха 4 - Эталон 1';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:0;Max:60;
     Index:42;Mech:DZM_SENS_TEMP4;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Температура воздуха 4 - Напряжение 2';Frm:SSSS;Ed:'мВ';TipSens:TipIzm;Min:0;Max:5000;
     Index:44;Mech:DZM_SENS_TEMP4;AccessR:R_CONFIG;AccessW:W_CONFIG),
-(Name:'Температура воздуха 4 - Эталон 2';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:1;Max:50;
+(Name:'Температура воздуха 4 - Эталон 2';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:1;Max:60;
     Index:46;Mech:DZM_SENS_TEMP4;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Влажность воздуха 1 - Тип';Frm:ComboSS;Ed:'';TipSens:TipCombo;Min:561;Max:572;
     Index:48;Mech:DZM_SENS_HUM1;AccessR:R_CONFIG;AccessW:W_CONFIG),
@@ -1024,11 +1024,11 @@ var NameInSensorsC510:array [1..DZ_SumVisibleInSens*DZ_SumParsSens] of TNameCons
 (Name:'Температура шатра - Напряжение 1';Frm:SSSS;Ed:'мВ';TipSens:TipIzm;Min:0;Max:5000;
     Index:148;Mech:DZM_SENS_TOP;AccessR:R_CONFIG;AccessW:W_CONFIG),
 // 61
-(Name:'Температура шатра - Эталон 1';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:0;Max:50;
+(Name:'Температура шатра - Эталон 1';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:0;Max:60;
     Index:150;Mech:DZM_SENS_TOP;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Температура шатра - Напряжение 2';Frm:SSSS;Ed:'мВ';TipSens:TipIzm;Min:0;Max:5000;
     Index:152;Mech:DZM_SENS_TOP;AccessR:R_CONFIG;AccessW:W_CONFIG),
-(Name:'Температура шатра - Эталон 2';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:1;Max:50;
+(Name:'Температура шатра - Эталон 2';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:1;Max:60;
     Index:154;Mech:DZM_SENS_TOP;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Температура почвы - Тип';Frm:ComboSS;Ed:'';TipSens:TipCombo;Min:561;Max:572;
     Index:156;Mech:DZM_SENS_SOIL;AccessR:R_CONFIG;AccessW:W_CONFIG),
@@ -1038,11 +1038,11 @@ var NameInSensorsC510:array [1..DZ_SumVisibleInSens*DZ_SumParsSens] of TNameCons
     Index:159;Mech:DZM_SENS_SOIL;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Температура почвы - Напряжение 1';Frm:SSSS;Ed:'мВ';TipSens:TipIzm;Min:0;Max:5000;
     Index:160;Mech:DZM_SENS_SOIL;AccessR:R_CONFIG;AccessW:W_CONFIG),
-(Name:'Температура почвы - Эталон 1';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:0;Max:50;
+(Name:'Температура почвы - Эталон 1';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:0;Max:60;
     Index:162;Mech:DZM_SENS_SOIL;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Температура почвы - Напряжение 2';Frm:SSSS;Ed:'мВ';TipSens:TipIzm;Min:0;Max:5000;
     Index:164;Mech:DZM_SENS_SOIL;AccessR:R_CONFIG;AccessW:W_CONFIG),
-(Name:'Температура почвы - Эталон 2';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:1;Max:50;
+(Name:'Температура почвы - Эталон 2';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:1;Max:60;
     Index:166;Mech:DZM_SENS_SOIL;AccessR:R_CONFIG;AccessW:W_CONFIG),
 // 71
 (Name:'Температура стекла - Тип';Frm:ComboSS;Ed:'';TipSens:TipCombo;Min:561;Max:572;
@@ -1053,11 +1053,11 @@ var NameInSensorsC510:array [1..DZ_SumVisibleInSens*DZ_SumParsSens] of TNameCons
     Index:171;Mech:DZM_SENS_GLASS;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Температура стекла - Напряжение 1';Frm:SSSS;Ed:'мВ';TipSens:TipIzm;Min:0;Max:5000;
     Index:172;Mech:DZM_SENS_GLASS;AccessR:R_CONFIG;AccessW:W_CONFIG),
-(Name:'Температура стекла - Эталон 1';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:0;Max:50;
+(Name:'Температура стекла - Эталон 1';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:0;Max:60;
     Index:174;Mech:DZM_SENS_GLASS;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Температура стекла - Напряжение 2';Frm:SSSS;Ed:'мВ';TipSens:TipIzm;Min:0;Max:5000;
     Index:176;Mech:DZM_SENS_GLASS;AccessR:R_CONFIG;AccessW:W_CONFIG),
-(Name:'Температура стекла - Эталон 2';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:1;Max:50;
+(Name:'Температура стекла - Эталон 2';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:1;Max:60;
     Index:178;Mech:DZM_SENS_GLASS;AccessR:R_CONFIG;AccessW:W_CONFIG),
 //(Name:'Температура входа AHU';Frm:SSpS0;Ed:'°C';TipSens:TipIzm;Min:1;Max:50;
 //    Index:15;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
@@ -2606,7 +2606,7 @@ var DZ_NameParUpr:array [1..DZ_SumParUpr] of TNameConst=(
 (Name:'Т вентиляции - Коэф интегральной поправки';Frm:SSpSS;Ed:'';TipSens:TipCalc;Min:0.1;Max:20;Def:3.5;Index:DZ_iPID;Mech:DZM_SVENTILATION;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
 (Name:'Экран вертикальный - Начало реагирования стороны 1';Frm:SS;Ed:'°';TipSens:TipCalc;Min:0;Max:360;Def:0;Index:DZ_iVScr;Mech:DZM_SCREEN_TV1;AccessR:RW_GUEST;AccessW:RW_GUEST),
 (Name:'Экран вертикальный - Конец реагирования стороны 1';Frm:SS;Ed:'°';TipSens:TipCalc;Min:0;Max:360;Def:90;Index:DZ_iVScr+1;Mech:DZM_SCREEN_TV1;AccessR:RW_GUEST;AccessW:RW_GUEST),
-(Name:'Исполнитель дозации СО2 (0-задвижка,1-клапан,2-клапан+задвижка)';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:4;Def:HIDE_MIN_MAX;Index:DZ_iScr+4;Mech:DZM_CO2;AccessR:RW_GUEST;AccessW:RW_GUEST),
+(Name:'Исполнитель дозации СО2';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:10;Def:HIDE_MIN_MAX;Index:DZ_iScr+4;Mech:DZM_CO2;AccessR:RW_GUEST;AccessW:RW_GUEST),
 // 21
 (Name:'Количество клапанов CИО';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:8;Index:DZ_iScr+6;Mech:DZM_SIO_PUMP;AccessR:RW_GUEST;AccessW:RW_GUEST),
 (Name:'Кол-во градаций досветки';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:10;Index:DZ_iScr+8;Mech:DZM_LIGHT;AccessR:RW_GUEST;AccessW:RW_GUEST),
@@ -2916,7 +2916,7 @@ var DZ_NameTuneClimate:array [1..DZ_SumParTune] of TNameConst=(
          // 35
          (Name:'Насосы контуров - разрешать включение при (Тзад-Твнеш) больше';Frm:SSpS0;Ed:'°C';TipSens:TipCalc;Min:-2;Max:5;Def:2;Index:DZ_iCalcWater+18;Mech:DZM_SHEATING;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
          (Name:'Контур 1,2 - (RHизм-RHзад) начинает влиять на минимум при';Frm:SSpS0;Ed:'%';TipSens:TipCalc;Min:0;Max:20;Def:5;Index:DZ_iMinKontRH;Mech:DZM_VALVE1;AccessR:RW_GUESTI;AccessW:RW_USER),
-         (Name:'Контур 1,2 - (RHизм-RHзад) влияет на минимум до';Frm:SSpS0;Ed:'%';TipSens:TipCalc;Min:20;Max:60;Def:30;Index:DZ_iMinKontRH+2;Mech:DZM_VALVE1;AccessR:RW_GUESTI;AccessW:RW_USER),
+         (Name:'Контур 1,2 - (RHизм-RHзад) влияет на минимум до';Frm:SSpS0;Ed:'%';TipSens:TipCalc;Min:20;Max:60;Def:20;Index:DZ_iMinKontRH+2;Mech:DZM_VALVE1;AccessR:RW_GUESTI;AccessW:RW_USER),
          (Name:'Контур 1 - (RHизм-RHзад) увеличивает минимум на';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:50;Def:0;Index:DZ_iMinKontRH+4;Mech:DZM_VALVE1;AccessR:RW_GUESTI;AccessW:RW_USER),
          (Name:'Контур 2 - (RHизм-RHзад) увеличивает минимум на';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:50;Def:0;Index:DZ_iMinKontRH+6;Mech:DZM_VALVE2;AccessR:RW_GUESTI;AccessW:RW_USER),
          (Name:'Контур 5 - включить в минимум, если Тстекла меньше';Frm:SSpS0;Ed:'°C';TipSens:TipCalc;Min:-15;Max:10;Def:5;Index:DZ_iTask5Kon;Mech:DZM_VALVE5;AccessR:RW_GUESTI;AccessW:RW_USER),
@@ -3019,7 +3019,7 @@ var DZ_NameTuneClimate:array [1..DZ_SumParTune] of TNameConst=(
          (Name:'Воздушный обогрев - пауза между включениями';Frm:SSpS0;Ed:'мин';TipSens:TipCalc;Min:0;Max:5;Def:0;Index:DZ_iHeatMinPause;Mech:DZM_AIR_HEATS;AccessR:RW_GUESTI;AccessW:RW_USER),
          (Name:'Кондиционер - включать (фрамуги закрыть),если (Твнеш-Тзад) больше';Frm:SSpS0;Ed:'°C';TipSens:TipCalc;Min:0;Max:5;Def:0;Index:DZ_iSunToClim+8;Mech:DZM_VENT;AccessR:RW_GUESTI;AccessW:RW_USER),
           // 130
-         (Name:'Клапан СО2 - включать при CO2зад - СО2изм меньше';Frm:SSSS;Ed:'ppm';TipSens:TipCalc;Min:0;Max:1000;Def:400;Index:DZ_iCo2_1;Mech:DZM_CO2;AccessR:RW_GUESTI;AccessW:RW_USER),
+         (Name:'Клапан СО2 - включать при CO2зад - СО2изм больше';Frm:SSSS;Ed:'ppm';TipSens:TipCalc;Min:0;Max:1000;Def:400;Index:DZ_iCo2_1;Mech:DZM_CO2;AccessR:RW_GUESTI;AccessW:RW_USER),
          (Name:'Клапан СО2 - фрамуги влияют на СО2 при';Frm:SSSS;Ed:'%';TipSens:TipCalc;Min:0;Max:200;Def:0;Index:DZ_iCo2_2;Mech:DZM_CO2;AccessR:RW_GUESTI;AccessW:RW_USER),
          (Name:'Клапан СО2 - фрамуги влияют на СО2 до';Frm:SSSS;Ed:'%';TipSens:TipCalc;Min:0;Max:200;Def:0;Index:DZ_iCo2_3;Mech:DZM_CO2;AccessR:RW_GUESTI;AccessW:RW_USER),
          (Name:'Клапан СО2 - концентрация СО2 уменьшается на';Frm:SSSS;Ed:'ppm';TipSens:TipCalc;Min:0;Max:1000;Def:0;Index:DZ_iCo2_4;Mech:DZM_CO2;AccessR:RW_GUESTI;AccessW:RW_USER)
@@ -3560,8 +3560,11 @@ const DZ_cDefineHot:array [1..DZ_SumMesHot] of TNameConst=( //TDZDefineHot=(
     Index:DZ_itTAir+72;Mech:DZM_SENS_WATER5;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
 (Name:'Состояние досветки';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
     Index:DZ_itTeplDSens+1;Mech:DZM_LIGHT ;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
-(Name:'Состояние полива';Frm:ComboBit;Ed:'1';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
-    Index:DZ_itTeplDSens+1;AccessR:RW_INVISIBLE;AccessW:RW_SUPERVISOR),
+(Name:'События';Frm:SSSS;Ed:'';TipSens:TipBit;Min:0;Max:1500;Def:HIDE_MIN_MAX;      //
+    Index:DZ_iZoneMaxWater+2;AccessR:RW_GUEST;AccessW:RW_GUEST),
+
+//(Name:'Состояние полива';Frm:ComboBit;Ed:'1';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;      //
+//    Index:DZ_itTeplDSens+1;AccessR:RW_INVISIBLE;AccessW:RW_SUPERVISOR),
 (Name:'Температура воздуха - Задана';Frm:SSpS0;Ed:'°C';TipSens:TipTimer;Min:-1;Max:35;Def:FATAL_MIN_MAX;
     Index:DZ_itTaskT;Mech:DZM_SENS_TEMP1;AccessR:RW_GUESTI;AccessW:RW_SUPERVISOR),
 // 51
@@ -3748,7 +3751,7 @@ const DZ_cDefineHot:array [1..DZ_SumMesHot] of TNameConst=( //TDZDefineHot=(
 (Name:'Измерено для регулятора 5';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-3;Max:3;Def:HIDE_MIN_MAX;
     Index:DZ_itOtherCalc;Mech:DZM_EXTREG1+4;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
 (Name:'Запрос СО2 (разница зад и измер)';Frm:SSSpS;Ed:'ppm/10';TipSens:TipSun;Min:0;Max:1500;Def:HIDE_MIN_MAX;
-    Index:DZ_itRaisedCritery+14;Mech:DZM_CO2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+    Index:DZ_itRaisedCritery+12;Mech:DZM_CO2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),     // 14
 (Name:'Тепловая мощность';Frm:SSpS0;Ed:'Вт';TipSens:TipCalc;Min:0;Max:20;Def:NO_MIN_MAX;
     Index:0;Mech:0;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
 (Name:'Мощность теплосъема';Frm:SSpSS;Ed:'';TipSens:TipCalc;Min:0;Max:0;Def:HIDE_MIN_MAX;

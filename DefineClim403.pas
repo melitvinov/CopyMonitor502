@@ -268,7 +268,7 @@ var DZ_NameParUpr:array [1..DZ_SumParUpr] of TNameConst=(
 
 // ------- НАСТРОЙКА КЛИМАТА КОНТРОЛЛЕРА 403 ---------
 
-const        DZ_SumParTune=         116;//109;
+const        DZ_SumParTune=          120;//116;
              DZ_iSunToClim=          0;
              DZ_iSunToMinFram=       DZ_iSunToClim+24;
              DZ_iTfram=              DZ_iSunToClim+15*2;
@@ -462,7 +462,14 @@ var DZ_NameTuneClimate:array [1..DZ_SumParTune] of TNameConst=(
          (Name:'Воздушный обогрев - включать,если температура меньше на';Frm:SSpS0;Ed:'°C';TipSens:TipCalc;Min:0;Max:5;Def:0;Index:DZ_iCalorifer;Mech:DZM_VAG;AccessR:RW_GUESTI;AccessW:RW_USER),
          (Name:'Воздушный обогрев - выключать,если температура больше на';Frm:SSpS0;Ed:'°C';TipSens:TipCalc;Min:0;Max:5;Def:0;Index:DZ_iCalorifer+2;Mech:DZM_VAG;AccessR:RW_GUESTI;AccessW:RW_USER),
 
-         (Name:'Кондиционер - включать (фрамуги закрыть),если (Твнеш-Тзад) больше';Frm:SSpS0;Ed:'°C';TipSens:TipCalc;Min:0;Max:5;Def:0;Index:DZ_iSunToClim+8;Mech:DZM_VAG;AccessR:RW_GUESTI;AccessW:RW_USER)
+         (Name:'Кондиционер - включать (фрамуги закрыть),если (Твнеш-Тзад) больше';Frm:SSpS0;Ed:'°C';TipSens:TipCalc;Min:0;Max:5;Def:0;Index:DZ_iSunToClim+8;Mech:DZM_VAG;AccessR:RW_GUESTI;AccessW:RW_USER),
+
+         // new
+         (Name:'Клапан СО2 - включать при CO2зад - СО2изм больше';Frm:SSSS;Ed:'ppm';TipSens:TipCalc;Min:0;Max:1000;Def:400;Index:DZ_iParAirToWater+4;Mech:DZM_CO2;AccessR:RW_GUESTI;AccessW:RW_USER),
+         (Name:'Клапан СО2 - фрамуги влияют на СО2 при';Frm:SSSS;Ed:'%';TipSens:TipCalc;Min:0;Max:200;Def:0;Index:DZ_iParAirToWater+6;Mech:DZM_CO2;AccessR:RW_GUESTI;AccessW:RW_USER),
+         (Name:'Клапан СО2 - фрамуги влияют на СО2 до';Frm:SSSS;Ed:'%';TipSens:TipCalc;Min:0;Max:200;Def:0;Index:DZ_iParAirToWater+8;Mech:DZM_CO2;AccessR:RW_GUESTI;AccessW:RW_USER),
+         (Name:'Клапан СО2 - концентрация СО2 уменьшается на';Frm:SSSS;Ed:'ppm';TipSens:TipCalc;Min:0;Max:1000;Def:0;Index:DZ_iParAirToWater+10;Mech:DZM_CO2;AccessR:RW_GUESTI;AccessW:RW_USER)
+         // new
 
          );
 
@@ -756,8 +763,13 @@ DZ_cDefineHot:array [1..DZ_SumMesHot] of TNameConst=( //TDZDefineHot=(
 //36
 (Name:'Состояние досветки';Frm:ComboBit;Ed:'0';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
     Index:DZ_itTeplDSens+1;Mech:DZM_LIGHT ;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
-(Name:'Состояние полива';Frm:ComboBit;Ed:'1';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;
-    Index:DZ_itTeplDSens+1;AccessR:RW_INVISIBLE;AccessW:RW_SUPERVISOR),
+
+(Name:'CO2 клапан ДЕРЖАТЬ';Frm:SSSS;Ed:'ppm';TipSens:TipBit;Min:0;Max:1000;Def:HIDE_MIN_MAX;                   // new
+    Index:DZ_iZoneMaxWater+2;Mech:DZM_CO2;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+
+//(Name:'Состояние полива';Frm:ComboBit;Ed:'1';TipSens:TipBit;Min:comOnOff;Max:comOnOff+1;Def:HIDE_MIN_MAX;        // скрыт. Убрал
+//    Index:DZ_itTeplDSens+1;AccessR:RW_INVISIBLE;AccessW:RW_SUPERVISOR),
+
 // ------- РАСЧИТАННЫЕ ПАРАМЕТРЫ ТЕПЛИЦЫ ---------------------------
 (Name:'Температура воздуха - Задана';Frm:SSpS0;Ed:'°C';TipSens:TipTimer;Min:-1;Max:35;Def:FATAL_MIN_MAX;
     Index:DZ_itTaskT;Mech:-1;AccessR:RW_GUESTI;AccessW:RW_SUPERVISOR),

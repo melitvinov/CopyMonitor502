@@ -2805,7 +2805,7 @@ begin
   PCTime := MinuteOfTheDay(Now);
   CtrTime := pHot^[boil_iTimeBoil+1] * 256 + pHot^[boil_iTimeBoil];
   if (PCTime < 15) or (PCTime > (24 * 60 - 15))
-     or (((CtrTime + 15) > PCTime) and ((CtrTime - 15) < PCTime)) then Exit;
+     or (((CtrTime + 3) > PCTime) and ((CtrTime - 3) < PCTime)) then Exit;
   FormFalseTime := True;
   if FMain.mnAutoSynxTime.Checked or (MessageDlg('Внимание! Время контроллера "' + ParentCtr.CtrName
      +'" отличается от ПК. Синхронизировать?'

@@ -846,7 +846,7 @@ begin
  if (ParentCtr.DataPath <> '')
      or (PCTime<15)
      or (PCTime>(24*60-15))
-     or (((CtrlTime+10)>PCTime) and((CtrlTime-10)< PCTime)) then Exit;
+     or (((CtrlTime+3)>PCTime) and((CtrlTime-3)< PCTime)) then Exit;
  FormFalseTime:=True;
  //'Внимание! Время контроллера "%s" отличается от ПК. Синхронизировать?'
  if FMain.mnAutoSynxTime.Checked or (MessageDlg(Format(ProgMess[iAtten]+ProgMess[321]+ProgMess[322],[ParentCtr.CtrName]),mtWarning,[mbYes, mbNo],0)= mrYes) then
@@ -1310,7 +1310,7 @@ var NameConfigOutputs:array [1..DZ_SumConfig] of TNameConst=(
 (Name:'Дозатор СО2';Frm:SS;Ed:'';TipSens:TipIzm;Min:0;Max:MAX_NUM_RELAY_DZ;
     Index:13;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
 //20
-(Name:'Исполнитель дозации СО2 (0-задвижка, 1-клапан)';Frm:SS;Ed:'';TipSens:TipIzm;Min:0;Max:1;
+(Name:'Исполнитель дозации СО2';Frm:SS;Ed:'';TipSens:TipIzm;Min:0;Max:10;
     Def:HIDE_MIN_MAX;Index:33;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),
 (Name:'Вентиляторы';Frm:SS;Ed:'';TipSens:TipIzm;Min:0;Max:MAX_NUM_RELAY_DZ;
     Index:21;Mech:0;AccessR:R_CONFIG;AccessW:W_CONFIG),

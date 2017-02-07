@@ -1002,10 +1002,10 @@ begin
  if (ParentCtr.DataPath <> '')
      or (PCTime<15)
      or (PCTime>(24*60-15))
-     or (((CtrlTime+10)>PCTime) and((CtrlTime-10)< PCTime)) then Exit;
+     or (((CtrlTime+3)>PCTime) and((CtrlTime-3)< PCTime)) then Exit;   // коррекция времени NEW
  FormFalseTime:=True;
  //'Внимание! Время контроллера "%s" отличается от ПК. Синхронизировать?'
- if FMain.mnAutoSynxTime.Checked or (MessageDlg(Format(ProgMess[iAtten]+ProgMess[321]+ProgMess[322],[ParentCtr.CtrName]),mtWarning,[mbYes, mbNo],0)= mrYes) then
+ if FMain.mnAutoSynxTime.Checked or (MessageDlg(Format(ProgMess[iAtten]+ProgMess[321]+ProgMess[322],[ParentCtr.CtrName]),mtWarning,[mbYes, mbNo, mbCancel],0)= mrYes) then
      begin
      pHot^[0]:=$80;
      pHot^[DZ_iTime+4]:=YearOf(Now)-2000;

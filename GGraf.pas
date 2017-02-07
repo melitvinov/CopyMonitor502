@@ -11,7 +11,7 @@ uses
   TSGrid, BubbleCh, AppEvnts, GIFDef, GIFComponent,PaswordDlg, FPicLabel,
   CellChart;    //Port,SetGrid,
 
-const MesTest='M_01_00_22';
+const MesTest='M_01_00_39';
 type
   TFMain = class(TForm)
     MM1: TMainMenu;
@@ -952,6 +952,7 @@ begin
           with ActiveCtr do
           begin
           LoadExtView(IniFile);
+          ActiveCtr.Left := IniFile.ReadInteger(Section,'DataCtrPos'+IntToStr(i),0);
           IPAddress:=IniFile.ReadString(Section,'Ctr'+IntToStr(i)+'IP','');
           CtrAlias:=IniFile.ReadString(Section,'Ctr'+IntToStr(i)+'Alias','');
 //          if IPAddress<>'' then begin IsIPC:=True;  PortName:=''; end else IsIPC:=False; //UnitNum:=0;
@@ -1128,6 +1129,9 @@ begin
           begin
           IniFile.WriteString(Section,'Ctr'+IntToStr(i),
           ExtractFileName(CtrToFile));
+
+          IniFile.WriteInteger(Section,'DataCtrPos'+IntToStr(i), Left);      // new
+
           IniFile.WriteString(Section,'DataCtr'+IntToStr(i),DataPath);
           IniFile.WriteString(Section,'Ctr'+IntToStr(i)+'IP',IPAddress);   //if IPAddress<>'' then
           IniFile.WriteString(Section,'Ctr'+IntToStr(i)+'Alias',CtrAlias);

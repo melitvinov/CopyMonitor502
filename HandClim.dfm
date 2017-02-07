@@ -1,8 +1,8 @@
 object FHandClim: TFHandClim
-  Left = 3088
-  Top = 104
+  Left = 217
+  Top = 5
   Width = 1088
-  Height = 876
+  Height = 824
   Caption = #1056#1091#1095#1085#1086#1077' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1077
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,7 +17,7 @@ object FHandClim: TFHandClim
     Left = 0
     Top = 42
     Width = 1072
-    Height = 795
+    Height = 743
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
@@ -38,8 +38,8 @@ object FHandClim: TFHandClim
       Left = 4
       Top = 27
       Width = 437
-      Height = 764
-      ActivePage = TabSheet1
+      Height = 712
+      ActivePage = TabSheet2
       Align = alLeft
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clMaroon
@@ -2034,7 +2034,7 @@ object FHandClim: TFHandClim
       Left = 441
       Top = 27
       Width = 627
-      Height = 764
+      Height = 712
       Align = alClient
       CellSelectMode = cmNone
       CheckBoxStyle = stCheck
