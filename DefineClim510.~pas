@@ -2988,6 +2988,7 @@ var DZ511_NameParUpr:array [1..DZ511_SumParUpr] of TNameConst=(
          (Name:'Температура рукава выше температуры задания';Frm:SSSS;Ed:'°C';TipSens:TipCalc;Min:0;Max:20;Def:0;Index:DZ511_iScr+12;GridColor:$ffdf00;Mech:DZM_SHEATING;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
          (Name:'Внутреннее увлажнение - Максимальное открытие';Frm:SSSS;Ed:'°C';TipSens:TipCalc;Min:0;Max:100;Def:0;Index:DZ511_iScr+14;GridColor:$ffdf00;Mech:DZM511_INRH;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
          (Name:'Внутреннее увлажнение - Минимальное открытие';Frm:SSSS;Ed:'°C';TipSens:TipCalc;Min:0;Max:100;Def:0;Index:DZ511_iScr+16;GridColor:$ffdf00;Mech:DZM511_INRH;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR)
+
          );
 
 
@@ -3381,7 +3382,7 @@ var DZ_NameTuneClimate:array [1..DZ_SumParTune] of TNameConst=(
          (Name:'Насосы контуров - разрешать включение при (Тзад-Твнеш) больше';Frm:SSpS0;Ed:'°C';TipSens:TipCalc;Min:-2;Max:5;Def:2;Index:DZ_iCalcWater+18;Mech:DZM_SHEATING;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
 
          (Name:'Контур 1,2 - (RHизм-RHзад) начинает влиять на минимум при';Frm:SSpS0;Ed:'%';TipSens:TipCalc;Min:0;Max:20;Def:5;Index:DZ_iMinKontRH;Mech:DZM_VALVE1;AccessR:RW_GUESTI;AccessW:RW_USER),
-         (Name:'Контур 1,2 - (RHизм-RHзад) влияет на минимум до';Frm:SSpS0;Ed:'%';TipSens:TipCalc;Min:20;Max:60;Def:30;Index:DZ_iMinKontRH+2;Mech:DZM_VALVE1;AccessR:RW_GUESTI;AccessW:RW_USER),
+         (Name:'Контур 1,2 - (RHизм-RHзад) влияет на минимум до';Frm:SSpS0;Ed:'%';TipSens:TipCalc;Min:20;Max:60;Def:20;Index:DZ_iMinKontRH+2;Mech:DZM_VALVE1;AccessR:RW_GUESTI;AccessW:RW_USER),
          (Name:'Контур 1 - (RHизм-RHзад) увеличивает минимум на';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:50;Def:0;Index:DZ_iMinKontRH+4;Mech:DZM_VALVE1;AccessR:RW_GUESTI;AccessW:RW_USER),
          (Name:'Контур 2 - (RHизм-RHзад) увеличивает минимум на';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:50;Def:0;Index:DZ_iMinKontRH+6;Mech:DZM_VALVE2;AccessR:RW_GUESTI;AccessW:RW_USER),
 
@@ -3528,7 +3529,7 @@ var DZ_NameTuneClimate:array [1..DZ_SumParTune] of TNameConst=(
 // ------- НАСТРОЙКА КЛИМАТА КОНТРОЛЛЕРА 511 ---------
 //===============================================================================
 
-const        DZ511_SumParTune=          132;//129
+const        DZ511_SumParTune=          135;//134
              DZ511_iSunToClim=          0;
              DZ511_iSunToMinFram=       DZ511_iSunToClim+24;
              DZ511_iTfram=              DZ511_iSunToClim+15*2;
@@ -3627,6 +3628,9 @@ var DZ511_NameTuneClimate:array [1..DZ511_SumParTune] of TNameConst=(
 //         (Name:'Клапан UC - минимальный шаг на третьем уровне';Frm:SS;Ed:'%';TipSens:TipCalc;Min:1;Max:5;Def:4;Index:DZ511_iParFram+2;Mech:DZM511_FRAM_NORTH;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
 //         (Name:'Клапан UC - третий уровень до';Frm:SS;Ed:'%';TipSens:TipCalc;Min:50;Max:200;Def:100;Index:DZ511_iParFram+5;Mech:DZM511_FRAM_NORTH;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
 //         (Name:'Клапан UC - минимальный шаг далее до максимума';Frm:SS;Ed:'%';TipSens:TipCalc;Min:1;Max:10;Def:6;Index:DZ511_iParFram+4;Mech:DZM511_FRAM_NORTH;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+
+          // new
+         (Name:'Фрамуги - Минимальный ветер при расчете';Frm:SS;Ed:'м/с';TipSens:TipCalc;Min:1;Max:5;Def:1;Index:DZ_iFram+12;Mech:DZM511_FRAM_NORTH;AccessR:RW_USERI;AccessW:RW_USER),
 
          (Name:'Фрамуги - первый уровень до';Frm:SS;Ed:'%';TipSens:TipCalc;Min:0;Max:100;Def:20;Index:DZ511_iRezTune;Mech:DZM511_FRAM_NORTH;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
          (Name:'Фрамуги - второй уровень до';Frm:SS;Ed:'%';TipSens:TipCalc;Min:20;Max:100;Def:50;Index:DZ511_iRezTune+1;Mech:DZM511_FRAM_NORTH;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
@@ -3752,9 +3756,12 @@ var DZ511_NameTuneClimate:array [1..DZ511_SumParTune] of TNameConst=(
          (Name:'Клапан AHU - третий уровень до';Frm:SS;Ed:'%';TipSens:TipCalc;Min:50;Max:100;Def:100;Index:DZ511_EndTune-13;Mech:DZM511_FRAM_NORTH;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
          (Name:'Клапан AHU - минимальный шаг далее до максимума';Frm:SS;Ed:'%';TipSens:TipCalc;Min:2;Max:10;Def:6;Index:DZ511_EndTune-12;Mech:DZM511_FRAM_NORTH;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
 
-         (Name:'Скорость AHU - минимальная температура';Frm:SS;Ed:'°C';TipSens:TipCalc;Min:0;Max:100;Def:0;Index:DZ511_EndTune-11;Mech:DZM511_SPEED_AHU1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
-         (Name:'Скорость AHU - максимальная температура';Frm:SS;Ed:'°C';TipSens:TipCalc;Min:0;Max:100;Def:0;Index:DZ511_EndTune-10;Mech:DZM511_SPEED_AHU1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
-         (Name:'Цель изменить теплоноситель на. Ограничение';Frm:SS;Ed:'';TipSens:TipCalc;Min:0;Max:100;Def:10;Index:DZ511_EndTune-9;Mech:DZM_VALVE1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR)
+         (Name:'Скорость AHU - градиент температуры рукава, минимальная температура';Frm:SS;Ed:'°C';TipSens:TipCalc;Min:0;Max:100;Def:0;Index:DZ511_EndTune-11;Mech:DZM511_SPEED_AHU1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+         (Name:'Скорость AHU - градиент температуры рукава, максимальная температура';Frm:SS;Ed:'°C';TipSens:TipCalc;Min:0;Max:100;Def:0;Index:DZ511_EndTune-10;Mech:DZM511_SPEED_AHU1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+         (Name:'Цель изменить теплоноситель на. Ограничение';Frm:SS;Ed:'';TipSens:TipCalc;Min:0;Max:100;Def:10;Index:DZ511_EndTune-9;Mech:DZM_VALVE1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+         (Name:'Скорость AHU - при максимальном ветре увеличить на';Frm:SS;Ed:'%';TipSens:TipCalc;Min:0;Max:100;Def:0;Index:DZ511_EndTune-8;Mech:DZM511_SPEED_AHU1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+         (Name:'Скорость AHU - максимальный ветер';Frm:SS;Ed:'м/с';TipSens:TipCalc;Min:0;Max:100;Def:0;Index:DZ511_EndTune-7;Mech:DZM511_SPEED_AHU1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR)
+
 
          );
 //===============================================================================
