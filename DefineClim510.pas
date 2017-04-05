@@ -3759,8 +3759,8 @@ var DZ511_NameTuneClimate:array [1..DZ511_SumParTune] of TNameConst=(
          (Name:'Скорость AHU - градиент температуры рукава, минимальная температура';Frm:SS;Ed:'°C';TipSens:TipCalc;Min:0;Max:100;Def:0;Index:DZ511_EndTune-11;Mech:DZM511_SPEED_AHU1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
          (Name:'Скорость AHU - градиент температуры рукава, максимальная температура';Frm:SS;Ed:'°C';TipSens:TipCalc;Min:0;Max:100;Def:0;Index:DZ511_EndTune-10;Mech:DZM511_SPEED_AHU1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
          (Name:'Цель изменить теплоноситель на. Ограничение';Frm:SSpS0;Ed:'';TipSens:TipCalc;Min:0;Max:100;Def:2;Index:DZ511_EndTune-9;Mech:DZM_VALVE1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
-         (Name:'Скорость AHU - при максимальном ветре увеличить на';Frm:SS;Ed:'%';TipSens:TipCalc;Min:0;Max:100;Def:0;Index:DZ511_EndTune-7;Mech:DZM511_SPEED_AHU1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
-         (Name:'Скорость AHU - максимальный ветер';Frm:SS;Ed:'м/с';TipSens:TipCalc;Min:0;Max:100;Def:0;Index:DZ511_EndTune-6;Mech:DZM511_SPEED_AHU1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR)
+         (Name:'Скорость AHU - при максимальном ветре увеличить на';Frm:SS;Ed:'%';TipSens:TipCalc;Min:0;Max:100;Def:0;Index:DZ511_EndTune-8;Mech:DZM511_SPEED_AHU1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR),
+         (Name:'Скорость AHU - максимальный ветер';Frm:SS;Ed:'м/с';TipSens:TipCalc;Min:0;Max:100;Def:0;Index:DZ511_EndTune-7;Mech:DZM511_SPEED_AHU1;AccessR:RW_GUEST;AccessW:RW_SUPERVISOR)
 
 
          );
@@ -4854,7 +4854,7 @@ DZ511_cDefineHot:array [1..DZ511_SumMesHot] of TNameConst=( //TDZ511DefineHot=(
 (Name:'Т отопления - Досветка повышает на';Frm:SSpSS;Ed:'°C';TipSens:TipAdd;Min:0;Max:200;Def:HIDE_MIN_MAX;
     Index:DZ511_itRaisedCritery+8;Mech:DZM511_LIGHT;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
 (Name:'Т отопления - Экран повышает на';Frm:SSpSS;Ed:'°C';TipSens:TipAdd;Min:0;Max:20;Def:HIDE_MIN_MAX;
-    Index:DZ511_itRaisedCritery+16;Mech:DZM511_SCREEN_TG;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
+    Index:DZ511_itRaisedCritery+16;Mech:DZM511_SCREEN_TG;AccessR:RW_INVISIBLE;AccessW:RW_INVISIBLE),
 (Name:'Т отопления - Сумма внешних изменяет(х10)';Frm:SSpSS;Ed:'°C';TipSens:TipCalc;Min:-300;Max:300;Def:HIDE_MIN_MAX;
     Index:DZ511_itRaisedCritery+24;Mech:DZM511_SENS_TEMP1;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
 (Name:'Т вентиляции - Сумма внешних изменяет(х10)';Frm:SSpSS;Ed:'°C';TipSens:TipAdd;Min:-300;Max:300;Def:HIDE_MIN_MAX;

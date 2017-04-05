@@ -973,7 +973,7 @@ object FMain: TFMain
         TabOrder = 4
         object CtrCB: TComboBox
           Left = 0
-          Top = 3
+          Top = 0
           Width = 261
           Height = 24
           Style = csDropDownList
@@ -1037,7 +1037,7 @@ object FMain: TFMain
         end
         object CBShowAudit: TComboBox
           Left = 572
-          Top = 3
+          Top = 0
           Width = 110
           Height = 24
           Hint = 'Audit/Analyzer'
