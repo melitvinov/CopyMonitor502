@@ -1,4 +1,4 @@
-program Monitor502;
+waawwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwprogram Monitor502;
 {$DEFINE VOICESERVIS}
 
 uses
