@@ -645,7 +645,7 @@ try
   ioctlsocket(hSock,FIONBIO,NonBlockType);   //!!
  //------ посылка заголовка
  // стало так
-  temp := ActiveLine.lNumUnit;
+ { temp := ActiveLine.lNumUnit;
   if temp > 0 then
   temp := 1;
 
@@ -660,7 +660,7 @@ try
     else
       send(hSock,Head,cSizeHead,0);
   end else
-
+ }
  // было так
   send(hSock,Head,cSizeHead,0);
 
@@ -670,15 +670,15 @@ try
   if ActiveLine.lDir=IN_UNIT then
   begin
         // CRC вариант 1
-        if (ActiveLine.lSendSize <= 1000) then
-        begin
-          TempSizeSend:=ActiveLine.lSendSize+1;
-          crc := 55-CheckSum(ActiveLine.lBufSend,TempSizeSend-1);
-          ActiveLine.lBufSend[TempSizeSend-1]:=crc;
-        end else
-        begin
-          TempSizeSend:=ActiveLine.lSendSize;
-        end;
+        //if (ActiveLine.lSendSize <= 1000) then
+        //begin
+        //  TempSizeSend:=ActiveLine.lSendSize+1;
+        //  crc := 55-CheckSum(ActiveLine.lBufSend,TempSizeSend-1);
+        //  ActiveLine.lBufSend[TempSizeSend-1]:=crc;
+        //end else
+        //begin
+        //  TempSizeSend:=ActiveLine.lSendSize;
+        //end;
         // CRC вариант 2
         //TempSizeSend:=ActiveLine.lSendSize+2;
         //crc := CRC16(TempSizeSend-10, ActiveLine.lBufSend);
@@ -687,8 +687,8 @@ try
         //ActiveLine.lBufSend[TempSizeSend-2]:=Hi(crc);
 
 
-        //Result:=send(hSock,ActiveLine.lBufSend[0],ActiveLine.lSendSize,0)
-        Result:=send(hSock,ActiveLine.lBufSend[0],TempSizeSend,0)
+        Result:=send(hSock,ActiveLine.lBufSend[0],ActiveLine.lSendSize,0)
+//        Result:=send(hSock,ActiveLine.lBufSend[0],TempSizeSend,0)
   end
   else  begin
         RecvSize:=0;

@@ -2881,7 +2881,7 @@ var XNamesParsC510:array [1..1] of TXNames=(
 // Параметры упрравления
 var DZ_NameParUpr:array [1..DZ_SumParUpr] of TNameConst=(
 
-         (Name:'Контур 1 - Максимальная температура';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:40;Max:95;Def:0;Index:DZ_iMaxTPipe;Mech:DZM_VALVE1;Tag:RW501SHide;AccessR:RW_GUEST;AccessW:RW_GUEST),
+         (Name:'Контур 1 - Максимальная температура';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:95;Def:0;Index:DZ_iMaxTPipe;Mech:DZM_VALVE1;Tag:RW501SHide;AccessR:RW_GUEST;AccessW:RW_GUEST),
          (Name:'Контур 2 - Максимальная температура';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:130;Def:0;Index:DZ_iMaxTPipe+2;Mech:DZM_VALVE2;Tag:RW501SHide;AccessR:RW_GUEST;AccessW:RW_GUEST),
          (Name:'Контур 3 - Максимальная температура';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:130;Def:0;Index:DZ_iMaxTPipe+4;Mech:DZM_VALVE3;Tag:RW501SHide;AccessR:RW_GUEST;AccessW:RW_GUEST),
          (Name:'Контур 4 - Максимальная температура';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:90;Def:0;Index:DZ_iMaxTPipe+6;Mech:DZM_VALVE4;Tag:RW501SHide;AccessR:RW_GUEST;AccessW:RW_GUEST),
@@ -2930,7 +2930,7 @@ var XNamesParsC511:array [1..1] of TXNames=(
 
 var DZ511_NameParUpr:array [1..DZ511_SumParUpr] of TNameConst=(
 
-         (Name:'Контур 1 - Максимальная температура';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:40;Max:95;Def:0;Index:DZ511_iMaxTPipe;Mech:DZM511_VALVE1;AccessR:RW_GUEST;AccessW:RW_GUEST),
+         (Name:'Контур 1 - Максимальная температура';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:95;Def:0;Index:DZ511_iMaxTPipe;Mech:DZM511_VALVE1;AccessR:RW_GUEST;AccessW:RW_GUEST),
          (Name:'Контур 2 - Максимальная температура';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:130;Def:0;Index:DZ511_iMaxTPipe+2;Mech:DZM511_VALVE2;AccessR:RW_GUEST;AccessW:RW_GUEST),
          (Name:'Контур 3 - Максимальная температура';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:130;Def:0;Index:DZ511_iMaxTPipe+4;Mech:DZM511_VALVE3;AccessR:RW_GUEST;AccessW:RW_GUEST),
          (Name:'Контур 4 - Максимальная температура';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:90;Def:0;Index:DZ511_iMaxTPipe+6;Mech:DZM511_VALVE4;AccessR:RW_GUEST;AccessW:RW_GUEST),

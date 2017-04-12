@@ -2586,7 +2586,7 @@ var XNamesParsC510:array [1..1] of TXNames=(
 
 // Параметры упрравления
 var DZ_NameParUpr:array [1..DZ_SumParUpr] of TNameConst=(
-(Name:'Контур 1 - Максимальная температура';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:40;Max:95;Def:0;Index:DZ_iMaxTPipe;Mech:DZM_VALVE1;Tag:RW501SHide;AccessR:RW_GUEST;AccessW:RW_GUEST),
+(Name:'Контур 1 - Максимальная температура';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:95;Def:0;Index:DZ_iMaxTPipe;Mech:DZM_VALVE1;Tag:RW501SHide;AccessR:RW_GUEST;AccessW:RW_GUEST),
 (Name:'Контур 2 - Максимальная температура';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:130;Def:0;Index:DZ_iMaxTPipe+2;Mech:DZM_VALVE2;Tag:RW501SHide;AccessR:RW_GUEST;AccessW:RW_GUEST),
 (Name:'Контур 3 - Максимальная температура';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:130;Def:0;Index:DZ_iMaxTPipe+4;Mech:DZM_VALVE3;Tag:RW501SHide;AccessR:RW_GUEST;AccessW:RW_GUEST),
 (Name:'Контур 4 - Максимальная температура';Frm:SSSpS;Ed:'°C';TipSens:TipCalc;Min:0;Max:90;Def:0;Index:DZ_iMaxTPipe+6;Mech:DZM_VALVE4;Tag:RW501SHide;AccessR:RW_GUEST;AccessW:RW_GUEST),
@@ -2606,7 +2606,7 @@ var DZ_NameParUpr:array [1..DZ_SumParUpr] of TNameConst=(
 (Name:'Т вентиляции - Коэф интегральной поправки';Frm:SSpSS;Ed:'';TipSens:TipCalc;Min:0.1;Max:20;Def:3.5;Index:DZ_iPID;Mech:DZM_SVENTILATION;AccessR:RW_SUPERVISOR;AccessW:RW_SUPERVISOR),
 (Name:'Экран вертикальный - Начало реагирования стороны 1';Frm:SS;Ed:'°';TipSens:TipCalc;Min:0;Max:360;Def:0;Index:DZ_iVScr;Mech:DZM_SCREEN_TV1;AccessR:RW_GUEST;AccessW:RW_GUEST),
 (Name:'Экран вертикальный - Конец реагирования стороны 1';Frm:SS;Ed:'°';TipSens:TipCalc;Min:0;Max:360;Def:90;Index:DZ_iVScr+1;Mech:DZM_SCREEN_TV1;AccessR:RW_GUEST;AccessW:RW_GUEST),
-(Name:'Исполнитель дозации СО2 (0-задвижка,1-клапан,2-клапан+задвижка)';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:2;Def:HIDE_MIN_MAX;Index:DZ_iScr+4;Mech:DZM_CO2;AccessR:RW_GUEST;AccessW:RW_GUEST),
+(Name:'Исполнитель дозации СО2 (0-задвижка,1-клапан,2-КЗ,3-по фрамугам)';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:4;Def:HIDE_MIN_MAX;Index:DZ_iScr+4;Mech:DZM_CO2;AccessR:RW_GUEST;AccessW:RW_GUEST),
 // 21
 (Name:'Количество клапанов CИО';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:8;Index:DZ_iScr+6;Mech:DZM_SIO_PUMP;AccessR:RW_GUEST;AccessW:RW_GUEST),
 (Name:'Кол-во градаций досветки';Frm:SSSS;Ed:'';TipSens:TipIzm;Min:0;Max:10;Index:DZ_iScr+8;Mech:DZM_LIGHT;AccessR:RW_GUEST;AccessW:RW_GUEST),

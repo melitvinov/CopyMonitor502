@@ -10,7 +10,7 @@ uses
   FPanel,Translate502,MessageU, UnitPasw, FPicPanel,DateUtils, Grids_ts,
   TSGrid, BubbleCh, AppEvnts, GIFDef, GIFComponent,PaswordDlg, FPicLabel;    //Port,SetGrid,
 
-const MesTest='M 1.00.46';  // 14 - co2 теперь можно поставить 2
+const MesTest='M 1.00.47';  // 14 - co2 теперь можно поставить 2
 
 type
   TFMain = class(TForm)
